@@ -10,25 +10,25 @@ services:
   ########################################################
   # Reverse Proxy / Traefik
   ########################################################
-  #gateway:
-  #  image: "traefik:v2.10"
-  #  # Enables the web UI and tells Traefik to listen to docker
-  #  command:
-  #    --api.insecure=true
-  #    --providers.docker
-  #  ports:
-  #    # HTTP Port
-  #    - "80:80"
-  #    # WEB UI Port
-  #    - "8080:8080"
-#
-  #  volumes:
-  #    - "/var/run/docker.sock:/var/run/docker.sock:ro"
-  #    - "./config:/etc/traefik"
-  #  labels:
-  #    - "traefik.enable=true"
-  #    - "traefik.http.routers.dashboard.rule=PathPrefix(`/dashboard`)"
-  #    - "traefik.http.routers.dashboard.service=api@internal"
+  gateway:
+    image: "traefik:v2.10"
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+      --api.insecure=true
+      --providers.docker
+    ports:
+      # HTTP Port
+      - "80:80"
+      # WEB UI Port
+      - "8080:8080"
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./config:/etc/traefik"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=PathPrefix(`/dashboard`)"
+      - "traefik.http.routers.dashboard.service=api@internal"
 
 
   ########################################################
@@ -57,20 +57,20 @@ services:
   ########################################################
   # Customer Information API-Gateway
   ########################################################
-  #customer-information-service:
-  #  build:
-  #    context: ./customer-information-service
-  #    dockerfile: ./src/main/docker/Dockerfile.jvm
-  #  deploy:
-  #    replicas: 1
-  #  labels:
-  #    - "traefik.enable=true"
-  #    #      - "traefik.http.routers.catalog-service.rule=PathPrefix(`/customer-information`)"
-  #    - "traefik.http.services.customer-information.loadbalancer.server.port=8080"
-  #    - "traefik.http.routers.customer-information.entrypoints=web"
-  #  depends_on:
-  #    - gateway
-  #    - customer-information-service-db
+  customer-information-service:
+    build:
+      context: ./customer-information-service
+      dockerfile: ./src/main/docker/Dockerfile.jvm
+    deploy:
+      replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.catalog-service.rule=PathPrefix(`/customer-information`)"
+      - "traefik.http.services.customer-information.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.customer-information.entrypoints=web"
+    depends_on:
+      - gateway
+      - customer-information-service-db
 
 
   ########################################################
