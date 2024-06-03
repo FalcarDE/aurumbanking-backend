@@ -5,6 +5,7 @@ import lombok.Data
 import java.time.LocalDateTime
 import java.util.*
 
+
 @Data
 @Entity
 @Table(name = "CustomerInformation", schema = "public")
@@ -24,8 +25,12 @@ class CustomerInformationEntityModel() {
     lateinit var housenumber: String
     lateinit var city: String
     lateinit var country: String
+    lateinit var username: String
+    lateinit var email: String
+    lateinit var phoneNumber: String
+    lateinit var password: String
 
-    @Lob
-    lateinit var profileImage: ByteArray
-
+    var profileImage: ByteArray? = null
 }
+
+
