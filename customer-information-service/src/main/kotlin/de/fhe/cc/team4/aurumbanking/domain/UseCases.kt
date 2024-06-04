@@ -5,6 +5,6 @@ import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class GetCustomerInformationByIdUc(var customerInformationRepository: CustomerInformationInterfaceRepository) {
-    operator fun invoke(id: Long): Uni<CustomerInformation?> =
+    operator fun invoke(id: Long): Uni<CustomerInformationDomainModel?> =
         customerInformationRepository.findCustomerInformationById(id)
 }

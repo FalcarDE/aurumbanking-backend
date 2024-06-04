@@ -14,14 +14,13 @@ class DepotEntityModel() {
     @GeneratedValue
     var id: Long = 0
 
-    @Column(name = "customer_id")
-    var customerId: Long = 0
+    @OneToMany
+    @JoinColumn(name = "transaction_id", referencedColumnName = "id")
+    var transactions: MutableList<TransactionEntityModel> = mutableListOf()
+
 
     @Column(length = 2500)
-    lateinit var dateTime: Date
-    var flag: Boolean? = null
-    lateinit var moneyValue : BigDecimal
-    lateinit var iban: String
-    lateinit var bic: String
-    lateinit var type: String
+    lateinit var currencyArea: String
+    lateinit var depositAmount: BigDecimal
+    lateinit var fallbackDepositAmount: BigDecimal
 }

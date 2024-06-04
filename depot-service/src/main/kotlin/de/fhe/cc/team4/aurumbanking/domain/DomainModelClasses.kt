@@ -1,12 +1,12 @@
 package de.fhe.cc.team4.aurumbanking.domain
 
+import de.fhe.cc.team4.aurumbanking.data.entities.TransactionEntityModel
 import java.math.BigDecimal
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 
 import java.util.*
 
-data class Depot(
+data class TransactionDomainModel(
     var id: Long = 0,
     var customerId: Long = 0,
     var dateTime: Date,
@@ -15,16 +15,32 @@ data class Depot(
     var iban: String,
     var bic: String,
     var type: String
-){
-   constructor() : this(
-    id = 0,
-    customerId = 0,
-    dateTime = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse("2024-06-03T12:00:00Z"),
-    flag = true,
-    moneyValue = BigDecimal("1500.75"),
-    iban = "DE89370400440532013000",
-    bic = "COBADEFFXXX",
-    type = "Deposit"
+) {
+    constructor() : this(
+        id = 0,
+        customerId = 0,
+        dateTime = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse("2024-06-03T12:00:00Z"),
+        flag = true,
+        moneyValue = BigDecimal("1500.75"),
+        iban = "DE89370400440532013000",
+        bic = "COBADEFFXXX",
+        type = "Deposit"
+    )
+}
+
+data class DepositDomainModel(
+    var id: Long = 0,
+    var transactions: MutableList<TransactionEntityModel> = mutableListOf(),
+    var currencyArea: String,
+    var depositAmount: BigDecimal,
+    var fallbackDepositAmount: BigDecimal,
+) {
+    constructor() : this(
+        id = 0,
+        transactions = mutableListOf() ,
+        currencyArea = "",
+        depositAmount = BigDecimal(0.00),
+        fallbackDepositAmount = BigDecimal(1500.75),
     )
 }
 

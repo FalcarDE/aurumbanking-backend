@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat
 
 @ApplicationScoped
 class DatabaseInitBean {
+    /*
     @Inject
     private lateinit var depotRepositoryImp: DepotRepositoryImp
     val depot = Depot(
@@ -32,4 +33,6 @@ class DatabaseInitBean {
         Log.info("Test Depot Daten wurden angelegt")
     }
 
+
+     */
 }

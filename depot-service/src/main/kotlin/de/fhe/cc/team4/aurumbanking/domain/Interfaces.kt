@@ -4,18 +4,20 @@ import io.smallrye.mutiny.Uni
 
 interface DepotInterfaceRepository {
 
-    fun findDepotByCustomerId(id: Long): Uni<Depot>
-    fun findDepotById(id: Long): Uni<Depot?>
+    fun findDepotByCustomerId(id: Long): Uni<DepositDomainModel>
+    fun findDepotById(id: Long): Uni<DepositDomainModel?>
 
-    fun persistNewDepotInformation(depot: Depot): Uni<Depot>
+    fun persistNewDepotInformation(depot: DepositDomainModel): Uni<DepositDomainModel>
 
     fun deleteDepotById(id: Long): Uni<Void>
     fun deleteAllDepotInformation(): Uni<Void>
 }
 
-
-
 interface TransactionInterfaceRepository {
 
-    //TODO: add stuff
+    fun findTransactionByCustomerId(id: Long): Uni<TransactionDomainModel>
+    fun findTransactionByDepotId(id: Long): Uni<DepositDomainModel?>
+    fun findAllTransactions(): Uni<TransactionDomainModel>
+    fun persistTransactionByDepotId(depot: DepositDomainModel): Uni<DepositDomainModel>
+
 }

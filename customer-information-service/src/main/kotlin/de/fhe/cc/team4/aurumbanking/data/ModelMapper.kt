@@ -1,8 +1,8 @@
 package de.fhe.cc.team4.aurumbanking.data
 
-import de.fhe.cc.team4.aurumbanking.domain.CustomerInformation
+import de.fhe.cc.team4.aurumbanking.domain.CustomerInformationDomainModel
 
-fun CustomerInformation.toEntity() =
+fun CustomerInformationDomainModel.toEntity() =
     CustomerInformationEntityModel().apply {
         id = this@toEntity.id
         firstname = this@toEntity.firstname
@@ -22,7 +22,7 @@ fun CustomerInformation.toEntity() =
     }
 
 fun CustomerInformationEntityModel.toDomain() =
-    CustomerInformation().apply {
+    CustomerInformationDomainModel().apply {
         id = this@toDomain.id
         firstname = this@toDomain.firstname
         lastname = this@toDomain.lastname

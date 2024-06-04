@@ -1,7 +1,8 @@
 package de.fhe.cc.team4.aurumbanking.resources
 
 import de.fhe.cc.team4.aurumbanking.core.DatabaseInitBean
-import de.fhe.cc.team4.aurumbanking.domain.Depot
+import de.fhe.cc.team4.aurumbanking.data.entities.DepotEntityModel
+import de.fhe.cc.team4.aurumbanking.domain.DepositDomainModel
 import de.fhe.cc.team4.aurumbanking.domain.DepotInterfaceRepository
 import de.fhe.cc.team4.aurumbanking.domain.GetDepotByIdUc
 import io.quarkus.hibernate.reactive.panache.common.WithSession
@@ -51,11 +52,15 @@ class DepotResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @WithTransaction
-    fun insert(depot: Depot): Uni<RestResponse<Void>> {
-        return depotInterfaceRepository.persistNewDepotInformation(depot).map {
+    fun insert(depositDomainModel: DepositDomainModel): Uni<RestResponse<Void>> {
+        return depotInterfaceRepository.persistNewDepotInformation(depositDomainModel).map {
             RestResponse.created(URI("/depot/${it.id}"))
         }
     }
+
+    // TODO: GET and POST für Transaktionen + Erweiterungen der Usecases
+
+
 
 
 

@@ -5,13 +5,16 @@ import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class GetDepotByIdUc(var depotInterfaceRepository: DepotInterfaceRepository) {
-    operator fun invoke(id: Long): Uni<Depot?> =
+    operator fun invoke(id: Long): Uni<DepositDomainModel?> =
         depotInterfaceRepository.findDepotById(id)
 }
 
 
 @ApplicationScoped
 class GetDepotByCustomerIdUc(var depotInterfaceRepository: DepotInterfaceRepository) {
-    operator fun invoke(id: Long): Uni<Depot?> =
+    operator fun invoke(id: Long): Uni<DepositDomainModel?> =
         depotInterfaceRepository.findDepotById(id)
 }
+
+
+// TODO: GET and POST für Transaktionen + Erweiterungen der Usecases

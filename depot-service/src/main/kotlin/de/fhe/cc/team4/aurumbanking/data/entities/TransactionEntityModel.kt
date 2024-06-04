@@ -14,13 +14,16 @@ class TransactionEntityModel() {
     @GeneratedValue
     var id: Long = 0
 
-    @ManyToOne
-    @JoinColumn(name = "depot_id")
-    lateinit var depotId: DepotEntityModel
+    @Column(name = "customer_id")
+    var customerId: Long = 0
 
     @Column(length = 2500)
-    lateinit var currencyArea: Date
-    lateinit var depositAmount: BigDecimal
-    lateinit var fallbackDepositAmount: Date
+    lateinit var dateTime: Date
+    var flag: Boolean? = null
+    lateinit var moneyValue : BigDecimal
+    lateinit var iban: String
+    lateinit var bic: String
+    lateinit var type: String
+
 
 }

@@ -1,8 +1,7 @@
 package de.fhe.cc.team4.aurumbanking.resources
 
 import de.fhe.cc.team4.aurumbanking.core.DatabaseInitBean
-import de.fhe.cc.team4.aurumbanking.data.CustomerInformationEntityModel
-import de.fhe.cc.team4.aurumbanking.domain.CustomerInformation
+import de.fhe.cc.team4.aurumbanking.domain.CustomerInformationDomainModel
 import de.fhe.cc.team4.aurumbanking.domain.CustomerInformationInterfaceRepository
 import de.fhe.cc.team4.aurumbanking.domain.GetCustomerInformationByIdUc
 import io.quarkus.hibernate.reactive.panache.common.WithSession
@@ -12,7 +11,6 @@ import jakarta.enterprise.inject.Default
 import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
-import jakarta.ws.rs.core.Response
 import org.jboss.resteasy.reactive.RestResponse
 import java.net.URI
 
@@ -52,8 +50,8 @@ class CustomerInformationResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @WithTransaction
-    fun insert(customerInformation: CustomerInformation): Uni<RestResponse<Void>> {
-        return customerInformationRepo.persistCustomerInformation(customerInformation).map {
+    fun insert(customerInformationDomainModel: CustomerInformationDomainModel): Uni<RestResponse<Void>> {
+        return customerInformationRepo.persistCustomerInformation(customerInformationDomainModel).map {
             RestResponse.created(URI("/customers/${it.id}"))
         }
     }

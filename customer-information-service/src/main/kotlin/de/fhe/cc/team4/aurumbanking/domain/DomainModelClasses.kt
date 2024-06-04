@@ -3,7 +3,7 @@ import java.time.LocalDateTime
 import java.util.*
 
 
-data class CustomerInformation(
+data class CustomerInformationDomainModel(
     var id:          Long = 0,
     var firstname:   String,
     var lastname:    String,
