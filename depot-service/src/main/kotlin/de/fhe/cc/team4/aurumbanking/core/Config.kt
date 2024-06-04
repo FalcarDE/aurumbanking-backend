@@ -1,15 +1,6 @@
 package de.fhe.cc.team4.aurumbanking.core
 
-import de.fhe.cc.team4.aurumbanking.data.repostories.DepotRepositoryImp
-import de.fhe.cc.team4.aurumbanking.domain.Depot
-import io.quarkus.logging.Log
-import io.quarkus.runtime.StartupEvent
 import jakarta.enterprise.context.ApplicationScoped
-import jakarta.enterprise.event.Observes
-import jakarta.inject.Inject
-import jakarta.transaction.Transactional
-import java.math.BigDecimal
-import java.text.SimpleDateFormat
 
 @ApplicationScoped
 class DatabaseInitBean {
