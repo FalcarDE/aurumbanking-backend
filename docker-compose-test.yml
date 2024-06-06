@@ -97,20 +97,20 @@ services:
   ########################################################
   # Support Service Postgres DB
   ########################################################
-  #support-service-db:
-  #  image: postgres
-  #  restart: always
-  #  volumes:
-  #    # Use the named volume to store DB data
-  #    - support-service-db-data:/var/lib/postgresql/data
-  #  ports:
-  #    # We expose the port so that one can connect directly to this
-  #    # DB using `localhost:5432` from your IDE or some other tool
-  #    - "5442:5432"
-  #  environment:
-  #    # PostgreSQL settings - should be used in your database connection
-  #    # config in `application.properties` from Quarkus
-  #    POSTGRES_USER: admin
-  #    POSTGRES_PASSWORD: password
-  #    POSTGRES_DB: database
+  support-service-db:
+    image: postgres
+    restart: always
+    volumes:
+      # Use the named volume to store DB data
+      - support-service-db-data:/var/lib/postgresql/data
+    ports:
+      # We expose the port so that one can connect directly to this
+      # DB using `localhost:5432` from your IDE or some other tool
+      - "5442:5432"
+    environment:
+      # PostgreSQL settings - should be used in your database connection
+      # config in `application.properties` from Quarkus
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
 

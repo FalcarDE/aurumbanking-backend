@@ -13,6 +13,7 @@ class CustomerInformationEntityModel() {
 
     @Id
     @GeneratedValue
+    @Column(name = "customer_id")
     var id: Long = 0
 
     @Column(length = 2500)
