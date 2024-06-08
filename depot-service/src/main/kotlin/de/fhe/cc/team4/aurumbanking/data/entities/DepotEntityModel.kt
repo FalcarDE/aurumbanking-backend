@@ -12,10 +12,10 @@ class DepotEntityModel() {
 
     @Id
     @GeneratedValue
+    @Column(name = "depot_id", nullable = false)
     var id: Long = 0
 
-    @OneToMany
-    @JoinColumn(name = "transaction_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "depot", fetch = FetchType.EAGER, cascade = [CascadeType.ALL], orphanRemoval = true)
     var transactions: MutableList<TransactionEntityModel> = mutableListOf()
 
 

@@ -24,8 +24,15 @@ class TransactionRepositoryImp : PanacheRepository<TransactionEntityModel>, Tran
             .onItem().transform { transactionEntityListToDomain(it) }
     }
 
-    override fun insertNewTransactionByDepotId(
-        id: Long,
+    //override fun insertNewTransactionByDepotId(
+    //    id: Long,
+    //    transactionDomainModel: TransactionDomainModel
+    //): Uni<TransactionDomainModel> =
+    //    this.persistAndFlush(transactionDomainModel.toEntity())
+    //        .onItem().ifNotNull().transform { it.toDomain() }
+    //        .onItem().ifNull().fail()
+
+    override fun insertNewTransaction(
         transactionDomainModel: TransactionDomainModel
     ): Uni<TransactionDomainModel> =
         this.persistAndFlush(transactionDomainModel.toEntity())

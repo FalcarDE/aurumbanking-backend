@@ -56,8 +56,8 @@ class TransactionResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @WithTransaction
-    fun insert(id: Long, transactionDomainModel: TransactionDomainModel): Uni<RestResponse<Void>> {
-        return this.transactionInterfaceRepository.insertNewTransactionByDepotId(id, transactionDomainModel).map {
+    fun insert(transactionDomainModel: TransactionDomainModel): Uni<RestResponse<Void>> {
+        return this.transactionInterfaceRepository.insertNewTransaction(transactionDomainModel).map {
             RestResponse.created(URI("/depot/${it.id}"))
         }
     }
