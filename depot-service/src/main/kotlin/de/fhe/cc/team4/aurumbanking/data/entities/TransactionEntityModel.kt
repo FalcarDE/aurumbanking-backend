@@ -2,8 +2,6 @@ package de.fhe.cc.team4.aurumbanking.data.entities
 
 import jakarta.persistence.*
 import lombok.Data
-import java.math.BigDecimal
-import java.util.*
 
 @Data
 @Entity
@@ -20,7 +18,7 @@ class TransactionEntityModel() {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 2500)
-    lateinit var type: TransactionType
+    lateinit var transactionClassification: TransactionClassification
 
 
 }

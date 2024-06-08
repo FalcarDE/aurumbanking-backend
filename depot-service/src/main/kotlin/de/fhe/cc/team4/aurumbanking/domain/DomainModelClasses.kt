@@ -23,12 +23,12 @@ data class DepositDomainModel(
 data class TransactionDomainModel(
     var id: Long = 0,
     var depotId: Long = 0,
-    var type: String = ""
+    var transactionClassification: String = ""
 ){
     constructor() : this(
         id = 0,
         depotId = 0,
-        type= "",
+        transactionClassification= "",
     )
 }
 

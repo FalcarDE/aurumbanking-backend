@@ -2,7 +2,7 @@ package de.fhe.cc.team4.aurumbanking.data
 
 import de.fhe.cc.team4.aurumbanking.data.entities.DepotEntityModel
 import de.fhe.cc.team4.aurumbanking.data.entities.TransactionEntityModel
-import de.fhe.cc.team4.aurumbanking.data.entities.TransactionType
+import de.fhe.cc.team4.aurumbanking.data.entities.TransactionClassification
 import de.fhe.cc.team4.aurumbanking.domain.DepositDomainModel
 import de.fhe.cc.team4.aurumbanking.domain.TransactionDomainModel
 
@@ -32,15 +32,15 @@ fun TransactionDomainModel.toEntity(depot: DepotEntityModel) =
     TransactionEntityModel().apply {
         id = this@toEntity.id
         this.depot = depot
-        type = TransactionType.entries.find { it.displayName == this@toEntity.type }
-            ?: throw IllegalArgumentException("Unknown Transaction Type: ${this@toEntity.type}")
+        transactionClassification = TransactionClassification.entries.find { it.displayName == this@toEntity.transactionClassification }
+            ?: throw IllegalArgumentException("Unknown Transaction Type: ${this@toEntity.transactionClassification}")
     }
 
 fun TransactionEntityModel.toDomain() =
     TransactionDomainModel().apply {
         id = this@toDomain.id
         depotId = this@toDomain.depot.id
-        type = this@toDomain.type.displayName
+        transactionClassification = this@toDomain.transactionClassification.displayName
     }
 
 
