@@ -1,6 +1,6 @@
-package de.fhe.cc.team4.aurumbanking.data
+package de.fhe.cc.team4.aurumbanking.model
 
-import de.fhe.cc.team4.aurumbanking.data.entities.SupportEntityModel import de.fhe.cc.team4.aurumbanking.domain.SupportDomainModel
+import de.fhe.cc.team4.aurumbanking.domain.SupportDomainModel
 
 fun SupportDomainModel.toEntity() =
     SupportEntityModel().apply {

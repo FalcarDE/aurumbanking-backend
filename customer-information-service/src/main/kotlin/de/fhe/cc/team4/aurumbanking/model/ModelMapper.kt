@@ -1,4 +1,4 @@
-package de.fhe.cc.team4.aurumbanking.data
+package de.fhe.cc.team4.aurumbanking.model
 
 import de.fhe.cc.team4.aurumbanking.domain.CustomerInformationDomainModel
 

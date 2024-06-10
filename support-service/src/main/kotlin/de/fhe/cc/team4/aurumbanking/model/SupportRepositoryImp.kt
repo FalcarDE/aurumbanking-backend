@@ -1,8 +1,5 @@
-package de.fhe.cc.team4.aurumbanking.data.repostories
+package de.fhe.cc.team4.aurumbanking.model
 
-import de.fhe.cc.team4.aurumbanking.data.entities.SupportEntityModel
-import de.fhe.cc.team4.aurumbanking.data.toDomain
-import de.fhe.cc.team4.aurumbanking.data.toEntity
 import de.fhe.cc.team4.aurumbanking.domain.SupportDomainModel
 import de.fhe.cc.team4.aurumbanking.domain.SupportInterfaceRepository
 import io.quarkus.hibernate.reactive.panache.PanacheRepository

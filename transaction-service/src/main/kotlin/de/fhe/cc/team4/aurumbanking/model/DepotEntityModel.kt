@@ -1,14 +1,12 @@
-package de.fhe.cc.team4.aurumbanking.data.entities
+package de.fhe.cc.team4.aurumbanking.model
 
 import jakarta.persistence.*
-import lombok.Data
 import java.math.BigDecimal
-import java.util.*
+import de.fhe.cc.team4.aurumbanking.model.TransactionEntityModel
 
-@Data
 @Entity
 @Table(name = "Depot", schema = "public")
-class DepotEntityModel() {
+class DepotEntityModel {
 
     @Id
     @GeneratedValue
@@ -24,3 +22,8 @@ class DepotEntityModel() {
     lateinit var depositAmount: BigDecimal
     lateinit var fallbackDepositAmount: BigDecimal
 }
+
+@JvmRecord
+data class DepotDTO(val depositAmount: BigDecimal )
+
+

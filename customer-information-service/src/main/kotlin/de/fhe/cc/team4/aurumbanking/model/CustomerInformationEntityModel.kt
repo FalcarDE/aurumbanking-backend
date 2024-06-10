@@ -1,4 +1,4 @@
-package de.fhe.cc.team4.aurumbanking.data
+package de.fhe.cc.team4.aurumbanking.model
 
 import jakarta.persistence.*
 import lombok.Data

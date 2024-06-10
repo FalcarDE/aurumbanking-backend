@@ -1,7 +1,6 @@
 package de.fhe.cc.team4.aurumbanking.resources
 
 import de.fhe.cc.team4.aurumbanking.core.DatabaseInitBean
-import de.fhe.cc.team4.aurumbanking.data.entities.DepotEntityModel
 import de.fhe.cc.team4.aurumbanking.domain.DepositDomainModel
 import de.fhe.cc.team4.aurumbanking.domain.DepotInterfaceRepository
 import de.fhe.cc.team4.aurumbanking.domain.GetDepotByIdUc
