@@ -8,7 +8,8 @@ import java.math.BigDecimal
 @Data
 @Entity
 @Table(name = "Depot", schema = "public")
-@NamedQuery(name = "Deposit.findCurrentDepotValueById", query = "select depositAmount from DepotEntityModel p where p.id = :id")
+//@NamedQuery(name = "Deposit.findCurrentDepotValueById", query = "select depositAmount from DepotEntityModel p where p.id = :id")
+//@NamedQuery(name = "Deposit.findCurrentDepotValueById", query = "UPDATE DepotEntityModel p SET depositAmount = :moneyvalue where p.id = :id")
 class DepotEntityModel {
 
     @Id

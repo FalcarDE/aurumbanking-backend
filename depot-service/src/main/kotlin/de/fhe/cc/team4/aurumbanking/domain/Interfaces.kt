@@ -13,7 +13,7 @@ interface DepotInterfaceRepository {
 
     fun persistNewDepotInformation(depotDomainModel: DepositDomainModel): Uni<DepositDomainModel>
 
-    fun updateDepositValueByDepot(id:Long, value : BigDecimal): Uni<DepositDomainModel>
+    fun updateDepositValueByDepot(id:Long, value : BigDecimal): Uni<DepotDTO>
 
     fun deleteDepotById(id: Long): Uni<Void>
     fun deleteAllDepotInformation(): Uni<Void>

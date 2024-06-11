@@ -35,8 +35,9 @@ class DepotRepositoryImp : PanacheRepository<DepotEntityModel>, DepotInterfaceRe
             .onItem().ifNull().fail()
     }
 
-    override fun updateDepositValueByDepot(id: Long, value: BigDecimal): Uni<DepositDomainModel> {
-        TODO("Not yet implemented")
+    override fun updateDepositValueByDepot(id: Long, value: BigDecimal): Uni<DepotDTO> {
+        val result = update("UPDATE DepotEntityModel SET depositAmount = ?1 where id = '1'", value)
+        return findCurrentDepotValueById(id)
     }
 
     override fun deleteDepotById(id: Long): Uni<Void> {

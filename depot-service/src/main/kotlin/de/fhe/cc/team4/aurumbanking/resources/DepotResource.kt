@@ -12,6 +12,7 @@ import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
 import org.jboss.resteasy.reactive.RestResponse
+import java.math.BigDecimal
 import java.net.URI
 
 
@@ -65,6 +66,15 @@ class DepotResource {
             RestResponse.created(URI("/depot/${it.id}"))
         }
     }
+
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/insertNewDepositValueById/{id:\\d+}/{value:\\d+}")
+    @WithTransaction
+    fun insertNewDepositValueById(@PathParam("id") id: Long, @PathParam("value") value: BigDecimal) =
+        depotInterfaceRepository.updateDepositValueByDepot(id, value)
+
 
     // TODO: GET and POST für Transaktionen + Erweiterungen der Usecases
 
