@@ -14,10 +14,6 @@ import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class TransactionRepositoryImp : PanacheRepository<TransactionEntityModel>, TransactionInterfaceRepository {
-    override fun findAllTransactionByCustomerId(id: Long): Uni<List<TransactionDomainModel>> =
-        list("select * from transactions as t where t.customer_id = :id", Parameters.with("cid", "$id"))
-            .onItem().transform { transactionEntityListToDomain(it) }
-
 
     override fun findAllTransactionByDepotId(id: Long): Uni<List<TransactionDomainModel>> {
         return list("depot.id", id)
