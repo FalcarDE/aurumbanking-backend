@@ -1,8 +1,7 @@
-package de.fhe.cc.team4.aurumbanking.model
+package de.fhe.cc.team4.aurumbanking.data.entities
 
 import jakarta.persistence.*
 import java.math.BigDecimal
-import de.fhe.cc.team4.aurumbanking.model.TransactionEntityModel
 
 @Entity
 @Table(name = "Depot", schema = "public")

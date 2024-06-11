@@ -1,4 +1,4 @@
-package de.fhe.cc.team4.aurumbanking.model
+package de.fhe.cc.team4.aurumbanking.data.entities
 
 import de.fhe.cc.team4.aurumbanking.core.TransactionClassification
 import de.fhe.cc.team4.aurumbanking.core.TransactionType
@@ -9,8 +9,8 @@ import java.util.*
 
 @Entity
 @Table(name = "Transaction", schema = "public")
-@NamedQuery(name = "TransactionEntityModel.findAllTransactionByDepotId", query = "select TransactionEntityModel FROM TransactionEntityModel t where t.depot.id = ?1")
-@NamedQuery(name = "TransactionEntityModel.findTransactionById", query = "select TransactionEntityModel FROM TransactionEntityModel t where t.id = ?1")
+//@NamedQuery(name = "TransactionEntityModel.findAllTransactionByDepotId", query = "select TransactionEntityModel FROM TransactionEntityModel t where t.depot.id = ?1")
+//@NamedQuery(name = "TransactionEntityModel.findTransactionById", query = "select TransactionEntityModel FROM TransactionEntityModel t where t.id = ?1")
 class TransactionEntityModel{
 
     @Id
