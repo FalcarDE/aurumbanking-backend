@@ -10,11 +10,4 @@ class GetAllTransactionsByDepotIdUc(var transactionInterfaceRepository: Transact
 }
 
 
-@ApplicationScoped
-class GetAllTransactionsByCustomerIdUc(var transactionInterfaceRepository: TransactionInterfaceRepository) {
-    operator fun invoke(id: Long): Uni<List<TransactionDomainModel>> =
-        transactionInterfaceRepository.findAllTransactionByCustomerId(id)
-}
-
-
 // TODO: GET and POST für Transaktionen + Erweiterungen der Usecases

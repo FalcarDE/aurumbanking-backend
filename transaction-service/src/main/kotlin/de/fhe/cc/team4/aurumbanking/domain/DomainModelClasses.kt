@@ -1,14 +1,6 @@
 package de.fhe.cc.team4.aurumbanking.domain
 
-import de.fhe.cc.team4.aurumbanking.core.TransactionClassification
-import de.fhe.cc.team4.aurumbanking.core.TransactionType
-import de.fhe.cc.team4.aurumbanking.data.entities.DepotEntityModel
-import de.fhe.cc.team4.aurumbanking.data.entities.TransactionEntityModel
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
 import java.math.BigDecimal
-import java.text.SimpleDateFormat
-
 import java.util.*
 
 data class TransactionDomainModel(

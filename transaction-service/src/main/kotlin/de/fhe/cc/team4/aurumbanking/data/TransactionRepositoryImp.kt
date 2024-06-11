@@ -1,13 +1,10 @@
 package de.fhe.cc.team4.aurumbanking.data.repostories
 
 import de.fhe.cc.team4.aurumbanking.data.entities.TransactionEntityModel
-import de.fhe.cc.team4.aurumbanking.data.toDomain
-import de.fhe.cc.team4.aurumbanking.data.toEntity
 import de.fhe.cc.team4.aurumbanking.data.transactionEntityListToDomain
 import de.fhe.cc.team4.aurumbanking.domain.TransactionDomainModel
 import de.fhe.cc.team4.aurumbanking.domain.TransactionInterfaceRepository
 import io.quarkus.hibernate.reactive.panache.PanacheRepository
-import io.quarkus.panache.common.Parameters
 import io.smallrye.mutiny.Uni
 import jakarta.enterprise.context.ApplicationScoped
 
