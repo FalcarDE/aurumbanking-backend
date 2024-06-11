@@ -1,5 +1,6 @@
 package de.fhe.cc.team4.aurumbanking.model.entities
 
+import io.quarkus.runtime.annotations.RegisterForReflection
 import jakarta.persistence.*
 import lombok.Data
 import java.math.BigDecimal
@@ -7,6 +8,7 @@ import java.math.BigDecimal
 @Data
 @Entity
 @Table(name = "Depot", schema = "public")
+@NamedQuery(name = "Deposit.findCurrentDepotValueById", query = "select depositAmount from DepotEntityModel p where p.id = :id")
 class DepotEntityModel {
 
     @Id
@@ -24,7 +26,7 @@ class DepotEntityModel {
     lateinit var fallbackDepositAmount: BigDecimal
 }
 
-@JvmRecord
+@RegisterForReflection
 data class DepotDTO(val depositAmount: BigDecimal )
 
 

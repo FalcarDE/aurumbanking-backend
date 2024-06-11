@@ -47,6 +47,15 @@ class DepotResource {
         .onItem().ifNull().continueWith( RestResponse.notFound())
 
 
+    @GET
+    @Path("/findCurrentDepotValueById/{id:\\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WithSession
+    fun findCurrentDepotValueById(@PathParam("id") id: Long) =
+        depotInterfaceRepository.findCurrentDepotValueById(id)
+
+
+
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

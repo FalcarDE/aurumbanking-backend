@@ -9,6 +9,7 @@ import de.fhe.cc.team4.aurumbanking.domain.DepotInterfaceRepository
 import io.quarkus.hibernate.reactive.panache.PanacheRepository
 import io.smallrye.mutiny.Uni
 import jakarta.enterprise.context.ApplicationScoped
+import java.math.BigDecimal
 
 
 @ApplicationScoped
@@ -21,27 +22,21 @@ class DepotRepositoryImp : PanacheRepository<DepotEntityModel>, DepotInterfaceRe
         return this.findById(id).onItem().ifNotNull().transform { it.toDomain() }
     }
 
-    //override fun findCurrentDepotValueById(id: Long): Uni<DepotDTO> {
-    //    return find(
-    //        "select depositamount FROM depot WHERE depot_id=?1", id
-    //    )
-    //        .project(DepotDTO::class.java)
-    //        .firstResult()
-    //}
-
-
-    override fun findCurrentDepotValueById(id: Long): Uni<DepotDTO> = find("SELECT depositamount" +
-            "FROM Depot" +
-            "WHERE depot_id=?1", id)
-        .project(DepotDTO::class.java).firstResult()
-
-
+    // TODO: Implemtierung DTO-Mapper + Usecase
+    override fun findCurrentDepotValueById(id: Long): Uni<DepotDTO> {
+        return find("select depositAmount from DepotEntityModel p where p.id = ?1", id)
+            .project(DepotDTO::class.java).firstResult()
+    }
 
 
     override fun persistNewDepotInformation(depotDomainModel: DepositDomainModel): Uni<DepositDomainModel> {
         return this.persistAndFlush(depotDomainModel.toEntity())
             .onItem().ifNotNull().transform { it.toDomain() }
             .onItem().ifNull().fail()
+    }
+
+    override fun updateDepositValueByDepot(id: Long, value: BigDecimal): Uni<DepositDomainModel> {
+        TODO("Not yet implemented")
     }
 
     override fun deleteDepotById(id: Long): Uni<Void> {
