@@ -1,15 +1,16 @@
 package de.fhe.cc.team4.aurumbanking.model.repostories
 
+import de.fhe.cc.team4.aurumbanking.domain.DepositDomainModel
+import de.fhe.cc.team4.aurumbanking.domain.DepotInterfaceRepository
 import de.fhe.cc.team4.aurumbanking.model.entities.DepotDTO
 import de.fhe.cc.team4.aurumbanking.model.entities.DepotEntityModel
 import de.fhe.cc.team4.aurumbanking.model.toDomain
 import de.fhe.cc.team4.aurumbanking.model.toEntity
-import de.fhe.cc.team4.aurumbanking.domain.DepositDomainModel
-import de.fhe.cc.team4.aurumbanking.domain.DepotInterfaceRepository
 import io.quarkus.hibernate.reactive.panache.PanacheRepository
 import io.smallrye.mutiny.Uni
 import jakarta.enterprise.context.ApplicationScoped
 import java.math.BigDecimal
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 
 @ApplicationScoped
@@ -35,8 +36,14 @@ class DepotRepositoryImp : PanacheRepository<DepotEntityModel>, DepotInterfaceRe
             .onItem().ifNull().fail()
     }
 
+
+    // TODO: FIX UPDATE
     override fun updateDepositValueByDepot(id: Long, value: BigDecimal): Uni<DepotDTO> {
-        val result = update("UPDATE DepotEntityModel SET depositAmount = ?1 where id = '1'", value)
+        val params: MutableMap<String, Any> = HashMap()
+        params.put("id", id)
+        params.put("value,", value)
+
+        val result = update("UPDATE DepotEntityModel SET depositAmount = ?2 where id = ?1", params)
         return findCurrentDepotValueById(id)
     }
 
