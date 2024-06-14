@@ -1,0 +1,221 @@
+###
+POST http://localhost:8080/customers
+Accept: application/json
+Content-Type: application/json
+
+{
+  "firstname": "John",
+  "lastname": "Doe",
+  "birthDate": "1990-01-01T00:00:00",
+  "created": "2024-05-30T14:00:00",
+  "lastestLogin": "2024-05-30T14:00:00",
+  "streetName": "Main Street",
+  "housenumber": "123",
+  "city": "Sample City",
+  "country": "Sample Country",
+  "username": "johndoe",
+  "email": "johndoe@example.com",
+  "phoneNumber": "+1234567890",
+  "password": "securepassword",
+  "profileImage": "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="
+}
+
+###
+GET http://localhost:8080/customers/1
+
+
+
+
+
+###
+POST http://localhost:80/customer-information/customers
+Accept: application/json
+Content-Type: application/json
+
+{
+  "firstname": "John",
+  "lastname": "Doe",
+  "birthDate": "1990-01-01T00:00:00Z",
+  "created": "2024-05-30T14:00:00",
+  "lastestLogin": "2024-05-30T14:00:00",
+  "streetName": "Main Street",
+  "housenumber": "123",
+  "city": "Sample City",
+  "country": "Sample Country",
+  "profileImage": ""
+}
+
+###
+GET http://localhost:80/customer-information/customers/1
+
+
+###
+POST http://localhost:8080/support
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 0,
+  "customerId": 0,
+  "dateTime": "2024-06-06T00:00:00",
+  "type": "exampleType",
+  "message": "exampleMessage"
+}
+
+
+###
+GET http://localhost:8080/support/1
+Content-Type: application/json
+
+###
+POST http://localhost:8080/depot
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "customerId": 1,
+  "dateTime": "2024-06-03T12:00:00Z",
+  "flag": true,
+  "moneyValue": 1500.75,
+  "iban": "DE89370400440532013000",
+  "bic": "COBADEFFXXX",
+  "type": "Deposit"
+}
+
+###
+POST http://localhost:8080/transactions
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "customerId": 1,
+  "dateTime": "2024-06-07T12:00:00Z",
+  "flag": "true",
+  "moneyValue": "1500.75",
+  "iban": "DE12345678901234567890",
+  "bic": "DEUTDEFF",
+  "type": "transactionType"
+}
+
+###
+POST http://localhost:8080/depot
+Accept: application/json
+Content-Type: application/json
+
+{
+  "transactions": [
+    {
+      "depotId": 1,
+      "amount": 50.75,
+      "transactionClassification": "Dauerauftrag"
+    },
+    {
+      "depotId": 1,
+      "amount": 150.00,
+      "transactionClassification": "Internationale Überweisung"
+    }
+  ],
+  "currencyArea": "USD",
+  "depositAmount": 1000.50,
+  "fallbackDepositAmount": 950.00
+}
+
+
+###
+GET http://localhost:8080/depot/1
+
+###
+POST http://localhost:8080/depot
+Accept: application/json
+Content-Type: application/json
+
+{
+  "transactions": [
+    {
+      "country": "Germany",
+      "recipient": "John Doe",
+      "iban": "DE89370400440532013000",
+      "bic": "COBADEFFXXX",
+      "moneyValue": 1000.50,
+      "purposeOfUse": "Payment for services",
+      "dateTimeOfExecution": "2024-06-12T10:00:00Z",
+      "standingOrder": false,
+      "transactionType": "outcome",
+      "transactionClassification": "Standard Überweisung"
+    },
+    {
+      "country": "Germany",
+      "recipient": "Tester",
+      "iban": "DE89370400440532013000",
+      "bic": "COBADEFFXXX",
+      "moneyValue": 1000.50,
+      "purposeOfUse": "Payment for services",
+      "dateTimeOfExecution": "2024-06-12T10:00:00Z",
+      "standingOrder": false,
+      "transactionType": "outcome",
+      "transactionClassification": "Standard Überweisung"
+    }
+  ],
+  "currencyArea": "EUR",
+  "depositAmount": 5000.00,
+  "fallbackDepositAmount": 1000.00
+}
+
+<> 2024-06-13T175036.500.json
+<> 2024-06-13T174747.500.json
+
+###
+PUT http://localhost:8080/depot/insertNewDepotValueByIdinsertNewDepotValueById
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": "1",
+  "value": "6000"
+}
+
+###
+GET http://localhost:8080/depot-test/test/1
+
+###
+GET http://localhost:8080/depot/findCurrentDepotValueById/1
+
+<> 2024-06-12T020906.200.json
+<> 2024-06-12T005838.200.json
+
+###
+PUT http://localhost:8080/depot/insertNewDepositValueById/1/7000
+
+###
+GET http://localhost:8081/transaction/findAllTransactionByDepotId/1
+
+###
+GET http://localhost:8080/depot/1
+
+<> 2024-06-13T175404.200.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
