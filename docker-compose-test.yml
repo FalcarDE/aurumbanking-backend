@@ -5,74 +5,54 @@ volumes:
   customer-information-db-data:
   depot-service-db-data:
   support-service-db-data:
-  transactions-service-db-data:
+
 
 services:
   ########################################################
   # Reverse Proxy / Traefik
   ########################################################
-  #gateway:
-  #  image: "traefik:v2.10"
-  #  # Enables the web UI and tells Traefik to listen to docker
-  #  command:
-  #    --api.insecure=true
-  #    --providers.docker
-  #  ports:
-  #    # HTTP Port
-  #    - "80:80"
-  #    # WEB UI Port
-  #    - "8080:8080"
-#
-  #  volumes:
-  #    - "/var/run/docker.sock:/var/run/docker.sock:ro"
-  #    - "./config:/etc/traefik"
-  #  labels:
-  #    - "traefik.enable=true"
-  #    - "traefik.http.routers.dashboard.rule=PathPrefix(`/dashboard`)"
-  #    - "traefik.http.routers.dashboard.service=api@internal"
+  gateway:
+    image: "traefik:v2.10"
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+      --api.insecure=true
+      --providers.docker
+    ports:
+      # HTTP Port
+      - "80:80"
+      # WEB UI Port
+      - "8080:8080"
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./config:/etc/traefik"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=PathPrefix(`/dashboard`)"
+      - "traefik.http.routers.dashboard.service=api@internal"
 
 
   ########################################################
   #  Customer Information Postgres DB
   ########################################################
-  #customer-information-service-db:
-  #  image: postgres
-  #  restart: always
-  #  volumes:
-  #    # Use the named volume to store DB data
-  #    - customer-information-db-data:/var/lib/postgresql/data
-  #    # Init Database with Data when Docker started
-  #    #- /init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
-  #  ports:
-  #    # We expose the port so that one can connect directly to this
-  #    # DB using `localhost:5432` from your IDE or some other tool
-  #    - "5432:5432"
-  #  environment:
-  #    # PostgreSQL settings - should be used in your database connection
-  #    # config in `application.properties` from Quarkus
-  #    POSTGRES_USER: admin
-  #    POSTGRES_PASSWORD: password
-  #    POSTGRES_DB: database
-
-
-  ########################################################
-  # Customer Information API-Gateway
-  ########################################################
-  #customer-information-service:
-  #  build:
-  #    context: ./customer-information-service
-  #    dockerfile: ./src/main/docker/Dockerfile.jvm
-  #  deploy:
-  #    replicas: 1
-  #  labels:
-  #    - "traefik.enable=true"
-  #    - "traefik.http.routers.catalog-service.rule=PathPrefix(`/customer-information`)"
-  #    - "traefik.http.services.customer-information.loadbalancer.server.port=8080"
-  #    # - "traefik.http.routers.customer-information.entrypoints=web"
-  #  depends_on:
-  #    - gateway
-  #    - customer-information-service-db
-
+  customer-information-service-db:
+    image: postgres
+    restart: always
+    volumes:
+      # Use the named volume to store DB data
+      - customer-information-db-data:/var/lib/postgresql/data
+      # Init Database with Data when Docker started
+      #- /init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+    ports:
+      # We expose the port so that one can connect directly to this
+      # DB using `localhost:5432` from your IDE or some other tool
+      - "5432:5432"
+    environment:
+      # PostgreSQL settings - should be used in your database connection
+      # config in `application.properties` from Quarkus
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
 
   ########################################################
   # Depot Service Postgres DB
@@ -94,7 +74,6 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
 
-
   ########################################################
   # Support Service Postgres DB
   ########################################################
@@ -115,25 +94,79 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
 
+  ########################################################
+  # Customer Information API-Gateway
+  ########################################################
+  customer-information-service:
+    build:
+      context: ./customer-information-service
+      dockerfile: ./src/main/docker/Dockerfile.jvm
+    deploy:
+      replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.customer-information.rule=PathPrefix(`/customer-information`)"
+      - "traefik.http.services.customer-information.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.customer-information.entrypoints=web"
+    depends_on:
+      - gateway
+      - customer-information-service-db
+
 
   ########################################################
-  # Transactions Service Postgres DB
+  # Support Service API-Gateway
   ########################################################
-  #transactions-service-db:
-  #  image: postgres
-  #  restart: always
-  #  volumes:
-  #    # Use the named volume to store DB data
-  #    - transactions-service-db-data:/var/lib/postgresql/data
-  #  ports:
-  #    # We expose the port so that one can connect directly to this
-  #    # DB using `localhost:5432` from your IDE or some other tool
-  #    - "5443:5432"
-  #  environment:
-  #    # PostgreSQL settings - should be used in your database connection
-  #    # config in `application.properties` from Quarkus
-  #    POSTGRES_USER: admin
-  #    POSTGRES_PASSWORD: password
-  #    POSTGRES_DB: database
+  support-service:
+    build:
+      context: ./support-service
+      dockerfile: ./src/main/docker/Dockerfile.jvm
+    deploy:
+      replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.support-service.rule=PathPrefix(`/support`)"
+      - "traefik.http.services.support-service.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.support-service.entrypoints=web"
+    depends_on:
+      - gateway
+      - support-service-db
+
+  ########################################################
+  # Depot Service API-Gateway
+  ########################################################
+  #depot-service:
+  #  build:
+  #    context: ./depot-service
+  #    dockerfile: ./src/main/docker/Dockerfile.jvm
+  #  deploy:
+  #    replicas: 1
+  #  labels:
+  #    - "traefik.enable=true"
+  #    - "traefik.http.routers.depot-service.rule=PathPrefix(`/depot`)"
+  #    - "traefik.http.services.depot-service.loadbalancer.server.port=8080"
+  #    - "traefik.http.routers.depot-service.entrypoints=web"
+  #  depends_on:
+  #    - gateway
+  #    - depot-service-db
+
+
+  ########################################################
+  # Transaction Service API-Gateway
+  ########################################################
+  #transaction-service:
+  #  build:
+  #    context: ./transaction-service
+  #    dockerfile: ./src/main/docker/Dockerfile.jvm
+  #  deploy:
+  #    replicas: 1
+  #  labels:
+  #    - "traefik.enable=true"
+  #    - "traefik.http.routers.transaction-service.rule=PathPrefix(`/transaction`)"
+  #    - "traefik.http.services.transaction-service.loadbalancer.server.port=8080"
+  #    # - "traefik.http.routers.transaction-service.entrypoints=web"
+  #  depends_on:
+  #    - gateway
+  #    - depot-service-db
+
 
 
