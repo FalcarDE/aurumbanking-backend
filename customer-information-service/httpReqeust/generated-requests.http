@@ -1,0 +1,60 @@
+###
+POST http://localhost:8080/customers
+Accept: application/json
+Content-Type: application/json
+
+{
+  "firstname": "John",
+  "lastname": "Doe",
+  "birthDate": "1990-01-01T00:00:00Z",
+  "created": "2024-05-30T14:00:00",
+  "lastestLogin": "2024-05-30T14:00:00",
+  "streetName": "Main Street",
+  "housenumber": "123",
+  "city": "Sample City",
+  "country": "Sample Country",
+  "profileImage": ""
+}
+
+###
+GET http://localhost:8080/customers/1
+
+<> 2024-06-03T054844.200.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###
+POST http://localhost:8080/depot
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "customerId": 1,
+  "dateTime": "2024-06-03T12:00:00Z",
+  "flag": true,
+  "moneyValue": 1500.75,
+  "iban": "DE89370400440532013000",
+  "bic": "COBADEFFXXX",
+  "type": "Deposit"
+}
+
+<> 2024-06-03T054130.500.json
+<> 2024-06-03T052803.500.json
+
+
+
