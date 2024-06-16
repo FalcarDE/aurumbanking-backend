@@ -3,6 +3,7 @@ package de.fhe.cc.team4.aurumbanking.resources
 import de.fhe.cc.team4.aurumbanking.domain.GetAllTransactionsByDepotIdUc
 import de.fhe.cc.team4.aurumbanking.domain.TransactionInterfaceRepository
 import io.quarkus.hibernate.reactive.panache.common.WithSession
+import io.smallrye.mutiny.Uni
 import jakarta.enterprise.inject.Default
 import jakarta.inject.Inject
 import jakarta.ws.rs.*
@@ -32,6 +33,12 @@ class TransactionResource {
         .onItem().ifNotNull().transform { RestResponse.ok(it) }
         .onItem().ifNull().continueWith( RestResponse.notFound())
 
+
+    @GET
+    @Path("/test")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WithSession
+    fun test() = Uni.createFrom().item("testo, ok!")
 
 
     //@POST

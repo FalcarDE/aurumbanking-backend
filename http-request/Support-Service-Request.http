@@ -1,0 +1,38 @@
+POST http://localhost:8080/support
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 0,
+  "customerId": 0,
+  "dateTime": "2024-06-06T00:00:00",
+  "type": "exampleType",
+  "message": "exampleMessage"
+}
+
+
+###
+GET http://localhost:8080/support/1
+Content-Type: application/json
+
+###
+POST http://localhost:80/support-service/support
+Accept: application/json
+Content-Type: application/json
+
+{
+"id": 0,
+"customerId": 0,
+"dateTime": "2024-06-06T00:00:00",
+"type": "exampleType",
+"message": "exampleMessage"
+}
+
+
+###
+GET http://localhost:80/support-service/support/1
+Content-Type: application/json
+
+###
+GET http://localhost:80/support-service/support/test
+Content-Type: application/json

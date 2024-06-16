@@ -42,6 +42,11 @@ class SupportResource {
     lateinit var insertNewSupportRequest: InsertNewSupportRequest
 
 
+    @GET
+    @Path("/test")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WithSession
+    fun test() = Uni.createFrom().item("testo")
 
     @GET
     @Path("/{id:\\d+}")
@@ -58,7 +63,7 @@ class SupportResource {
     @WithTransaction
     fun insertNewSupportRequest(supportDomainModel: SupportDomainModel): Uni<RestResponse<Void>> {
         return supportInterfaceRepository.persistNewSupportInformation(supportDomainModel).map {
-            RestResponse.created(URI("/depot/${it.id}"))
+            RestResponse.created(URI("/support/${it.id}"))
         }
     }
 
