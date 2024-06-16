@@ -40,7 +40,7 @@ class TransactionEntityModel{
 
 }
 
-@RegisterForReflection
+@JvmRecord
 data class TransactionDTO(
     val id: Long,
     val customerId: Long,
