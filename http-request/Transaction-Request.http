@@ -1,0 +1,47 @@
+###
+POST http://localhost:8080/transactions
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "customerId": 1,
+  "dateTime": "2024-06-07T12:00:00Z",
+  "flag": "true",
+  "moneyValue": "1500.75",
+  "iban": "DE12345678901234567890",
+  "bic": "DEUTDEFF",
+  "type": "transactionType"
+}
+
+###
+GET http://localhost:80/transactions-service/transactions/getAllTransactionsByDepotId/1
+
+###
+GET http://localhost:80/transactions-service/transactions/test
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
