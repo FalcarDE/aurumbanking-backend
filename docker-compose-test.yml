@@ -104,7 +104,7 @@ services:
       replicas: 1
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.customer-information-service.rule=PathPrefix(`/customer-information`)"
+      - "traefik.http.routers.customer-information-service.rule=PathPrefix(`/customer-information-service`)"
       - "traefik.http.services.customer-information-service.loadbalancer.server.port=8080"
       # - "traefik.http.routers.customer-information-service.entrypoints=web"
     depends_on:
