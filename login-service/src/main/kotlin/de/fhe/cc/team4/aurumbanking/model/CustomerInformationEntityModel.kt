@@ -36,6 +36,6 @@ class CustomerInformationEntityModel() {
 
 
 @JvmRecord
-data class CustomerCredentials(val email: String, val password: String) {}
+data class CustomerIdDTO(val id: Long) {}
 
 

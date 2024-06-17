@@ -12,13 +12,13 @@ import jakarta.ws.rs.core.MediaType
 
 @ResourceProperties(hal = true, path = "login")
 interface CustomerCredentials : PanacheRepositoryResource<CustomerCredentialsRepository, CustomerInformationEntityModel, Long? > {
-    @GET
-    @Path("/{id}/{email}/{password}")
+    @POST
+    @Path("check-credentials/{email}/{password}")
     @Produces(MediaType.APPLICATION_JSON)
     fun checkCustomerCredentials(
-        @PathParam("id") id: Long, @PathParam("email") email: String, @PathParam("password") password: String)
+        @PathParam("email") email: String, @PathParam("password") password: String)
     = CDI.current().select(CustomerCredentialsRepository::class.java).get()
-        .checkCustomerCredentials(id, email, password)
+        .checkCustomerCredentials( email, password)
 
     @GET
     @Path("/test")
