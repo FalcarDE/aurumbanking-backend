@@ -167,4 +167,22 @@ services:
       - gateway
       - depot-service-db
 
+  ########################################################
+  # Transaction Service API-Gateway
+  ########################################################
+  login-service:
+    build:
+      context: ./login-service
+      dockerfile: ./src/main/docker/Dockerfile.jvm
+    deploy:
+      replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.login-service.rule=PathPrefix(`/login-service`)"
+      - "traefik.http.services.login-service.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.transaction-service.entrypoints=web"
+    depends_on:
+      - gateway
+      - customer-information-service-db
+
 
