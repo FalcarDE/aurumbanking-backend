@@ -32,6 +32,11 @@ class SupportRepositoryImp : PanacheRepository<SupportEntityModel>, SupportInter
     override fun deleteAllSupportRequestByCustomerId(): Uni<Void> {
         TODO("Not yet implemented")
     }
+
+    override fun findAllByType(type: String): Uni<List<SupportDomainModel>> {
+        return this.find("type", type).list<SupportEntityModel>()
+            .onItem().transform { entities -> entities.map { it.toDomain() } }
+    }
 }
 
 /**

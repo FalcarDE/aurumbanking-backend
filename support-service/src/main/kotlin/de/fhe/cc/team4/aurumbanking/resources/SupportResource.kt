@@ -41,6 +41,9 @@ class SupportResource {
     @Inject
     lateinit var insertNewSupportRequest: InsertNewSupportRequest
 
+    @Inject
+    lateinit var getSupportRequestsByType: GetSupportRequestsByType
+
 
     @GET
     @Path("/test")
@@ -65,6 +68,16 @@ class SupportResource {
         return supportInterfaceRepository.persistNewSupportInformation(supportDomainModel).map {
             RestResponse.created(URI("/support/${it.id}"))
         }
+    }
+
+    @GET
+    @Path("/type/{type}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WithSession
+    fun findAllSupportRequestByType(@PathParam("type") type: String): Uni<RestResponse<List<SupportDomainModel>>> {
+        return getSupportRequestsByType(type)
+            .onItem().transform { RestResponse.ok(it) }
+            .onFailure().recoverWithItem(RestResponse.serverError())
     }
 
     // TODO: GET and POST für Supportfunktionen + Erweiterungen der Usecases

@@ -23,5 +23,13 @@ class InsertNewSupportRequest(var supportInterfaceRepository: SupportInterfaceRe
         supportInterfaceRepository.findSupportRequestById(id)
 }
 
+@ApplicationScoped
+class GetSupportRequestsByType(
+    private val supportInterfaceRepository: SupportInterfaceRepository
+) {
+    operator fun invoke(type: String): Uni<List<SupportDomainModel>> =
+        supportInterfaceRepository.findAllByType(type)
+}
+
 
 // TODO: GET and POST für Supportfunktionen + Erweiterungen der Usecases
