@@ -71,11 +71,11 @@ class SupportResource {
     }
 
     @GET
-    @Path("/type/{type}")
+    @Path("/support-requests/type/{requestType}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
-    fun findAllSupportRequestByType(@PathParam("type") type: String): Uni<RestResponse<List<SupportDomainModel>>> {
-        return getSupportRequestsByType(type)
+    fun getAllSupportRequestsByType(@PathParam("requestType") requestType: String): Uni<RestResponse<List<SupportDomainModel>>> {
+        return getSupportRequestsByType(requestType)
             .onItem().transform { RestResponse.ok(it) }
             .onFailure().recoverWithItem(RestResponse.serverError())
     }

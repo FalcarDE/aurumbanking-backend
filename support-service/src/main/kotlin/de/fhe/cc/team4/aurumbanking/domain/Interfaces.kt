@@ -12,7 +12,6 @@ interface SupportInterfaceRepository {
     fun deleteSupportRequestById(id: Long): Uni<Void>
     fun deleteAllSupportRequestByCustomerId(): Uni<Void>
 
-    // neu versuch alle beim typen zu finden als liste
-    fun findAllByType(type: String): Uni<List<SupportDomainModel>>
+    fun getAllRequestsByType(type: String): Uni<List<SupportDomainModel>>
 
 }

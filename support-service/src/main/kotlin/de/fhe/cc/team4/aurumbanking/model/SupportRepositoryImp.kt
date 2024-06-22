@@ -33,7 +33,7 @@ class SupportRepositoryImp : PanacheRepository<SupportEntityModel>, SupportInter
         TODO("Not yet implemented")
     }
 
-    override fun findAllByType(type: String): Uni<List<SupportDomainModel>> {
+    override fun getAllRequestsByType(type: String): Uni<List<SupportDomainModel>> {
         return this.find("type", type).list<SupportEntityModel>()
             .onItem().transform { entities -> entities.map { it.toDomain() } }
     }

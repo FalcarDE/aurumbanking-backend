@@ -24,11 +24,9 @@ class InsertNewSupportRequest(var supportInterfaceRepository: SupportInterfaceRe
 }
 
 @ApplicationScoped
-class GetSupportRequestsByType(
-    private val supportInterfaceRepository: SupportInterfaceRepository
-) {
+class GetSupportRequestsByType(val supportInterfaceRepository: SupportInterfaceRepository) {
     operator fun invoke(type: String): Uni<List<SupportDomainModel>> =
-        supportInterfaceRepository.findAllByType(type)
+        supportInterfaceRepository.getAllRequestsByType(type)
 }
 
 
