@@ -19,12 +19,12 @@ class GetSupportRequestById(var supportInterfaceRepository: SupportInterfaceRepo
 
 @ApplicationScoped
 class InsertNewSupportRequest(var supportInterfaceRepository: SupportInterfaceRepository) {
-    operator fun invoke(id: Long): Uni<SupportDomainModel?> =
-        supportInterfaceRepository.findSupportRequestById(id)
+    operator fun invoke(supportDomainModel: SupportDomainModel): Uni<SupportDomainModel> =
+        supportInterfaceRepository.persistNewSupportInformation(supportDomainModel)
 }
 
 @ApplicationScoped
-class GetSupportRequestsByType(val supportInterfaceRepository: SupportInterfaceRepository) {
+class GetAllSupportRequestsByType(val supportInterfaceRepository: SupportInterfaceRepository) {
     operator fun invoke(type: String): Uni<List<SupportDomainModel>> =
         supportInterfaceRepository.getAllRequestsByType(type)
 }
