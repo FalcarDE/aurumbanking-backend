@@ -1,35 +1,10 @@
 ###
-POST http://localhost:8080/depot-service
+POST http://localhost:8080/depot
 Accept: application/json
 Content-Type: application/json
 
 {
-  "transactions": [
-    {
-      "country": "Germany",
-      "recipient": "John Doe",
-      "iban": "DE89370400440532013000",
-      "bic": "COBADEFFXXX",
-      "moneyValue": 1000.50,
-      "purposeOfUse": "Payment for services",
-      "dateTimeOfExecution": "2024-06-12T10:00:00Z",
-      "standingOrder": false,
-      "transactionType": "outcome",
-      "transactionClassification": "Standard Überweisung"
-    },
-    {
-      "country": "Germany",
-      "recipient": "Tester",
-      "iban": "DE89370400440532013000",
-      "bic": "COBADEFFXXX",
-      "moneyValue": 1000.50,
-      "purposeOfUse": "Payment for services",
-      "dateTimeOfExecution": "2024-06-12T10:00:00Z",
-      "standingOrder": false,
-      "transactionType": "outcome",
-      "transactionClassification": "Standard Überweisung"
-    }
-  ],
+  "customerId": 1,
   "currencyArea": "EUR",
   "depositAmount": 5000.00,
   "fallbackDepositAmount": 1000.00
@@ -60,32 +35,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "transactions": [
-    {
-      "country": "Germany",
-      "recipient": "John Doe",
-      "iban": "DE89370400440532013000",
-      "bic": "COBADEFFXXX",
-      "moneyValue": 1000.50,
-      "purposeOfUse": "Payment for services",
-      "dateTimeOfExecution": "2024-06-12T10:00:00Z",
-      "standingOrder": false,
-      "transactionType": "outcome",
-      "transactionClassification": "Standard Überweisung"
-    },
-    {
-      "country": "Germany",
-      "recipient": "Tester",
-      "iban": "DE89370400440532013000",
-      "bic": "COBADEFFXXX",
-      "moneyValue": 1000.50,
-      "purposeOfUse": "Payment for services",
-      "dateTimeOfExecution": "2024-06-12T10:00:00Z",
-      "standingOrder": false,
-      "transactionType": "outcome",
-      "transactionClassification": "Standard Überweisung"
-    }
-  ],
+  "customerId": 1,
   "currencyArea": "EUR",
   "depositAmount": 5000.00,
   "fallbackDepositAmount": 1000.00

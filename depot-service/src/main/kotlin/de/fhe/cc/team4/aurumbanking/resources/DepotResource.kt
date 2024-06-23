@@ -55,9 +55,6 @@ class DepotResource {
     fun findCurrentDepotValueById(@PathParam("id") id: Long) =
         depotInterfaceRepository.findCurrentDepotValueById(id)
 
-
-
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @WithTransaction
@@ -66,7 +63,6 @@ class DepotResource {
             RestResponse.created(URI("/depot/${it.id}"))
         }
     }
-
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
