@@ -64,7 +64,7 @@ class DepotResource {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/insertNewDepositValueById/{id:\\d+}/{value:\\d+}")
+    @Path("/insertNewDepositValueById/{id:\\d+}/{value:\\d+([,\\.]\\d+)}")
     @WithTransaction
     fun insertNewDepositValueById(
         @PathParam("id") id: Long,
