@@ -4,17 +4,20 @@ import de.fhe.cc.team4.aurumbanking.domain.DepositDomainModel
 import de.fhe.cc.team4.aurumbanking.domain.DepotInterfaceRepository
 import de.fhe.cc.team4.aurumbanking.model.entities.DepotDTO
 import de.fhe.cc.team4.aurumbanking.model.entities.DepotEntityModel
+import de.fhe.cc.team4.aurumbanking.model.entities.FallbackDepositAmountDTO
 import de.fhe.cc.team4.aurumbanking.model.toDomain
 import de.fhe.cc.team4.aurumbanking.model.toEntity
 import io.quarkus.hibernate.reactive.panache.PanacheRepository
+import io.quarkus.hibernate.reactive.panache.PanacheRepositoryBase
+import io.quarkus.panache.common.Parameters
 import io.smallrye.mutiny.Uni
 import jakarta.enterprise.context.ApplicationScoped
 import java.math.BigDecimal
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 
 @ApplicationScoped
-class DepotRepositoryImp : PanacheRepository<DepotEntityModel>, DepotInterfaceRepository {
+class DepotRepositoryImp : PanacheRepositoryBase<DepotEntityModel, Long>, DepotInterfaceRepository {
+
     override fun findDepotByCustomerId(id: Long): Uni<DepositDomainModel> {
         TODO("not implemented yet")
     }
@@ -23,12 +26,15 @@ class DepotRepositoryImp : PanacheRepository<DepotEntityModel>, DepotInterfaceRe
         return this.findById(id).onItem().ifNotNull().transform { it.toDomain() }
     }
 
-    // TODO: Implemtierung DTO-Mapper + Usecase
     override fun findCurrentDepotValueById(id: Long): Uni<DepotDTO> {
         return find("select depositAmount from DepotEntityModel p where p.id = ?1", id)
             .project(DepotDTO::class.java).firstResult()
     }
 
+    override fun findCurrentDepotFallBackValueById(id: Long): Uni<FallbackDepositAmountDTO> {
+        return find("select fallbackDepositAmount from DepotEntityModel p where p.id = ?1", id)
+            .project(FallbackDepositAmountDTO::class.java).firstResult()
+    }
 
     override fun persistNewDepotInformation(depotDomainModel: DepositDomainModel): Uni<DepositDomainModel> {
         return this.persistAndFlush(depotDomainModel.toEntity())
@@ -36,15 +42,19 @@ class DepotRepositoryImp : PanacheRepository<DepotEntityModel>, DepotInterfaceRe
             .onItem().ifNull().fail()
     }
 
-
-    // TODO: FIX UPDATE
     override fun updateDepositValueByDepot(id: Long, value: BigDecimal): Uni<DepotDTO> {
-        val params: MutableMap<String, Any> = HashMap()
-        params.put("id", id)
-        params.put("value,", value)
+        return this.update( "update DepotEntityModel set depositAmount = :depositAmount where id = :id",
+            Parameters.with("id", id).and("depositAmount", value)).flatMap {
+                findCurrentDepotValueById(id)
+        }
+     }
 
-        val result = update("UPDATE DepotEntityModel SET depositAmount = ?2 where id = ?1", params)
-        return findCurrentDepotValueById(id)
+    override fun updateFallbackDepositAmount(id: Long): Uni<FallbackDepositAmountDTO> {
+         val value = findCurrentDepotValueById(id)
+         return this.update("update DepotEntityModel set fallbackDepositAmount = :value where id = :id",
+             Parameters.with("id", id).and("value", value)).flatMap{
+                 findCurrentDepotFallBackValueById(id)
+         }
     }
 
     override fun deleteDepotById(id: Long): Uni<Void> {

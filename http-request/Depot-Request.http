@@ -62,18 +62,8 @@ Content-Type: application/json
 GET http://localhost:80/depot-service/depot/findCurrentDepotValueById/1
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+###
+PUT http://localhost:8080/depot/insertNewDepositValueById/1/7000
 
 
 
