@@ -49,6 +49,7 @@ class DepotRepositoryImp : PanacheRepositoryBase<DepotEntityModel, Long>, DepotI
         }
      }
 
+    // TODO: add logic for fallbackDepositAmount after updateDepositValueByDepot succeeded
     override fun updateFallbackDepositAmount(id: Long): Uni<FallbackDepositAmountDTO> {
          val value = findCurrentDepotValueById(id)
          return this.update("update DepotEntityModel set fallbackDepositAmount = :value where id = :id",
@@ -56,6 +57,7 @@ class DepotRepositoryImp : PanacheRepositoryBase<DepotEntityModel, Long>, DepotI
                  findCurrentDepotFallBackValueById(id)
          }
     }
+
 
     override fun deleteDepotById(id: Long): Uni<Void> {
         TODO("Not yet implemented")
