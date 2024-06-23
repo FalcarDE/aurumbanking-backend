@@ -35,6 +35,9 @@ class DepotResource {
     @Inject
     lateinit var updateDepositValueByIdUc: UpdateDepositValueByIdUc
 
+    @Inject
+    lateinit var deleteDepotById: DeleteDepotById
+
     @GET
     @Path("/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -74,8 +77,13 @@ class DepotResource {
             .onItem().ifNotNull().transform {RestResponse.ok(it)}
             .onItem().ifNull().continueWith(RestResponse.notFound())
     }
-}
 
-//= updateDepositValueByIdUc(id,value)
-//    .onItem().ifNotNull().transform { RestResponse.ok(it) }
-//    .onItem().ifNull().continueWith(RestResponse.notFound())
+    @DELETE
+    @Path("/deleteDepotBy/{id:\\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WithTransaction
+    fun deleteById(@PathParam("id") id: Long): Uni<RestResponse<Void>> {
+        return deleteDepotById(id).replaceWith{ RestResponse.ok()}
+    }
+
+}

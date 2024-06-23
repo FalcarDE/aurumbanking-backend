@@ -32,5 +32,12 @@ class UpdateDepositValueByIdUc(var depotInterfaceRepository: DepotInterfaceRepos
 }
 
 
+@ApplicationScoped
+class DeleteDepotById(var depotInterfaceRepository: DepotInterfaceRepository) {
+    operator fun invoke(id: Long ): Uni<Long> =
+        depotInterfaceRepository.deleteDepotById(id)
+}
+
+
 
 // TODO: GET and POST für Transaktionen + Erweiterungen der Usecases

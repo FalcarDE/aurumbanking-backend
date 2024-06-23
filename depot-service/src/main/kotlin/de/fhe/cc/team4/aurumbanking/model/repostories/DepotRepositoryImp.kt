@@ -59,9 +59,8 @@ class DepotRepositoryImp : PanacheRepositoryBase<DepotEntityModel, Long>, DepotI
     }
 
 
-    override fun deleteDepotById(id: Long): Uni<Void> {
-        TODO("Not yet implemented")
-    }
+    override fun deleteDepotById(id: Long): Uni<Long> =
+        this.delete("delete from DepotEntityModel p where p.id = ?1", id)
 
     override fun deleteAllDepotInformation(): Uni<Void> {
         TODO("Not yet implemented")

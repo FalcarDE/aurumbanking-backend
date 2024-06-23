@@ -20,7 +20,7 @@ interface DepotInterfaceRepository {
 
     fun updateFallbackDepositAmount(id:Long): Uni<FallbackDepositAmountDTO>
 
-    fun deleteDepotById(id: Long): Uni<Void>
+    fun deleteDepotById(id: Long): Uni<Long>
     fun deleteAllDepotInformation(): Uni<Void>
 
 
