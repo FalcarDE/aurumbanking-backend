@@ -2,14 +2,14 @@ package de.fhe.cc.team4.aurumbanking.data
 
 import de.fhe.cc.team4.aurumbanking.core.TransactionClassification
 import de.fhe.cc.team4.aurumbanking.core.TransactionType
-import de.fhe.cc.team4.aurumbanking.data.entities.DepotEntityModel
 import de.fhe.cc.team4.aurumbanking.data.entities.TransactionEntityModel
 import de.fhe.cc.team4.aurumbanking.domain.TransactionDomainModel
 
-fun TransactionDomainModel.toEntity(depot: DepotEntityModel) =
+
+fun TransactionDomainModel.toEntity() =
     TransactionEntityModel().apply {
         id = this@toEntity.id
-        this.depot = depot
+        depotId = this@toEntity.depotId
         country = this@toEntity.country
         recipient = this@toEntity.recipient
         iban = this@toEntity.iban
@@ -29,7 +29,7 @@ fun TransactionDomainModel.toEntity(depot: DepotEntityModel) =
 fun TransactionEntityModel.toDomain() =
     TransactionDomainModel().apply {
         id = this@toDomain.id
-        depotId = this@toDomain.depot.id
+        depotId = this@toDomain.depotId
         country = this@toDomain.country
         recipient = this@toDomain.recipient
         iban = this@toDomain.iban
@@ -45,5 +45,5 @@ fun TransactionEntityModel.toDomain() =
     }
 
 
-fun transactionEntityListToDomain(entityList: List<TransactionEntityModel>): List<TransactionDomainModel> =
-    entityList.map { it.toDomain() }.toList()
+fun transactionListToDomain(transactionList: List<TransactionEntityModel>): List<TransactionDomainModel> =
+    transactionList.map { it.toDomain() }.toList()

@@ -9,5 +9,9 @@ class GetAllTransactionsByDepotIdUc(var transactionInterfaceRepository: Transact
         transactionInterfaceRepository.findAllTransactionByDepotId(id)
 }
 
+@ApplicationScoped
+class InsertNewTransactionsUc(var transactionInterfaceRepository: TransactionInterfaceRepository) {
+    operator fun invoke(transactionDomainModel: TransactionDomainModel): Uni<TransactionDomainModel> =
+        transactionInterfaceRepository.insertNewTransaction(transactionDomainModel)
+}
 
-// TODO: GET and POST für Transaktionen + Erweiterungen der Usecases
