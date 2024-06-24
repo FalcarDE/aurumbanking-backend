@@ -15,3 +15,9 @@ class InsertNewTransactionsUc(var transactionInterfaceRepository: TransactionInt
         transactionInterfaceRepository.insertNewTransaction(transactionDomainModel)
 }
 
+@ApplicationScoped
+class GetThreeLastestTransactionByDepotIdUc(var transactionInterfaceRepository: TransactionInterfaceRepository) {
+    operator fun invoke(id: Long) =
+        transactionInterfaceRepository.getThreeLastestTransactionByDepotId(id)
+}
+
