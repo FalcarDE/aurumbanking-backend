@@ -24,6 +24,15 @@ Content-Type: application/json
 GET http://localhost:8080/customers/1
 
 ###
+PUT http://localhost:8080/customers/updateCustomerEmailBy/1/test@test.de
+
+###
+PUT http://localhost:8080/customers/updateCustomerPasswordBy/1/testpassword
+
+###
+DELETE http://localhost:8080/customers/deleteCustomerInformationBy/1
+
+###
 POST http://localhost:80/customer-information-service/customers
 Accept: application/json
 Content-Type: application/json

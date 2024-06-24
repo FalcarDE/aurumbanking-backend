@@ -1,7 +1,9 @@
 package de.fhe.cc.team4.aurumbanking.model
 
+import io.quarkus.runtime.annotations.RegisterForReflection
 import jakarta.persistence.*
 import lombok.Data
+import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.util.*
 
@@ -33,5 +35,8 @@ class CustomerInformationEntityModel() {
 
     var profileImage: ByteArray? = null
 }
+
+@RegisterForReflection
+data class CustomerLoginDTO(val email: String, val password: String)
 
 

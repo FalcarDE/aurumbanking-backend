@@ -38,6 +38,3 @@ class DeleteDepotById(var depotInterfaceRepository: DepotInterfaceRepository) {
         depotInterfaceRepository.deleteDepotById(id)
 }
 
-
-
-// TODO: GET and POST für Transaktionen + Erweiterungen der Usecases

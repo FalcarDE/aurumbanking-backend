@@ -2,7 +2,6 @@ package de.fhe.cc.team4.aurumbanking.resources
 
 import de.fhe.cc.team4.aurumbanking.domain.*
 import de.fhe.cc.team4.aurumbanking.model.entities.DepotDTO
-import de.fhe.cc.team4.aurumbanking.model.entities.DepotEntityModel
 import de.fhe.cc.team4.aurumbanking.model.repostories.DepotRepositoryImp
 import io.quarkus.hibernate.reactive.panache.common.WithSession
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction
@@ -42,7 +41,7 @@ class DepotResource {
     @Path("/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
-    fun getCustomerInformationById(@PathParam("id") id: Long) = getDepotByIdUc(id)
+    fun getDepotInformationById(@PathParam("id") id: Long) = getDepotByIdUc(id)
         .onItem().ifNotNull().transform { RestResponse.ok(it) }
         .onItem().ifNull().continueWith(RestResponse.notFound())
 
