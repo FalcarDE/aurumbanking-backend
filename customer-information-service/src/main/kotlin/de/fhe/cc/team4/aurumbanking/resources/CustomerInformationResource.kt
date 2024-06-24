@@ -1,13 +1,9 @@
 package de.fhe.cc.team4.aurumbanking.resources
 
-import de.fhe.cc.team4.aurumbanking.core.DatabaseInitBean
-import de.fhe.cc.team4.aurumbanking.domain.CustomerInformationDomainModel
-import de.fhe.cc.team4.aurumbanking.domain.CustomerInformationInterfaceRepository
-import de.fhe.cc.team4.aurumbanking.domain.GetCustomerInformationByIdUc
+import de.fhe.cc.team4.aurumbanking.domain.*
 import io.quarkus.hibernate.reactive.panache.common.WithSession
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction
 import io.smallrye.mutiny.Uni
-import jakarta.enterprise.inject.Default
 import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
@@ -20,23 +16,20 @@ import java.net.URI
 @Consumes(MediaType.APPLICATION_JSON)
 class CustomerInformationResource {
 
-
-    /**
-     * Represents the bean responsible for initializing the database with customer information.
-     */
-    @Inject
-    lateinit var initDatabase: DatabaseInitBean
-
-    /**
-     * Represents a repository for managing customer information.
-     */
-    @Inject
-    @Default
-    lateinit var customerInformationRepo: CustomerInformationInterfaceRepository
-
     @Inject
     lateinit var getCustomerInformationByIdUc: GetCustomerInformationByIdUc
 
+    @Inject
+    lateinit var addNewCustomerUc: AddNewCustomerUc
+
+    @Inject
+    lateinit var updateCustomerEmailUc: UpdateCustomerEmailUc
+
+    @Inject
+    lateinit var updateCustomerPasswordUc: UpdateCustomerPasswordUc
+
+    @Inject
+    lateinit var deleteCustomerInformationUc: DeleteCustomerInformationUc
 
     @GET
     @Path("/{id:\\d+}")
@@ -44,31 +37,40 @@ class CustomerInformationResource {
     @WithSession
     fun getCustomerInformationById(@PathParam("id") id: Long) = getCustomerInformationByIdUc(id)
         .onItem().ifNotNull().transform { RestResponse.ok(it) }
-        .onItem().ifNull().continueWith( RestResponse.notFound())
-
+        .onItem().ifNull().continueWith(RestResponse.notFound())
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @WithTransaction
     fun insert(customerInformationDomainModel: CustomerInformationDomainModel): Uni<RestResponse<Void>> {
-        return customerInformationRepo.persistCustomerInformation(customerInformationDomainModel).map {
+        return addNewCustomerUc(customerInformationDomainModel).map {
             RestResponse.created(URI("/customers/${it.id}"))
         }
     }
 
-    /*
     @PUT
-    @Path("/{id}")
-    fun update(@PathParam("id") id: Long, customer: CustomerInformationEntityModel): Response {
-        val existingCustomer = service.findById(id)
-        return if (existingCustomer != null) {
-            val updatedCustomer = service.update(customer)
-            Response.ok(updatedCustomer).build()
-        } else {
-            Response.status(Response.Status.NOT_FOUND).build()
-        }
-    }
-     */
+    @WithTransaction
+    @Path("/updateCustomerEmailBy/{id}/{email}")
+    fun updateCustomerEmailBy(@PathParam("id") id: Long, @PathParam("email") email: String) =
+        updateCustomerEmailUc(id, email)
+            .onItem().ifNotNull().transform { RestResponse.ok(it) }
+            .onItem().ifNull().continueWith(RestResponse.notFound())
+
+    @PUT
+    @WithTransaction
+    @Path("/updateCustomerPasswordBy/{id}/{password}")
+    fun updateCustomerPasswordBy(@PathParam("id") id: Long, @PathParam("password") password: String) =
+        updateCustomerPasswordUc(id, password)
+            .onItem().ifNotNull().transform { RestResponse.ok(it) }
+            .onItem().ifNull().continueWith(RestResponse.notFound())
 
 
+    @DELETE
+    @Path("/deleteCustomerInformationBy/{id:\\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WithTransaction
+    fun deleteCustomerInformationBy(@PathParam("id") id: Long) =
+        deleteCustomerInformationUc(id)
+            .onItem().ifNotNull().transform { RestResponse.ok(it) }
+            .onItem().ifNull().continueWith(RestResponse.notFound())
 }

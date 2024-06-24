@@ -8,20 +8,20 @@ import java.math.BigDecimal
 interface DepotInterfaceRepository {
 
     fun findDepotByCustomerId(id: Long): Uni<DepositDomainModel>
+
     fun findDepotById(id: Long): Uni<DepositDomainModel?>
 
-    fun findCurrentDepotValueById(id: Long):  Uni<DepotDTO>
+    fun findCurrentDepotValueById(id: Long): Uni<DepotDTO>
 
-    fun findCurrentDepotFallBackValueById(id: Long):  Uni<FallbackDepositAmountDTO>
+    fun findCurrentDepotFallBackValueById(id: Long): Uni<FallbackDepositAmountDTO>
 
     fun persistNewDepotInformation(depotDomainModel: DepositDomainModel): Uni<DepositDomainModel>
 
-    fun updateDepositValueByDepot(id:Long, value : BigDecimal): Uni<DepotDTO>
+    fun updateDepositValueByDepot(id: Long, value: BigDecimal): Uni<DepotDTO>
 
-    fun updateFallbackDepositAmount(id:Long): Uni<FallbackDepositAmountDTO>
+    fun updateFallbackDepositAmount(id: Long): Uni<FallbackDepositAmountDTO>
 
     fun deleteDepotById(id: Long): Uni<Long>
-    fun deleteAllDepotInformation(): Uni<Void>
 
 
 }
