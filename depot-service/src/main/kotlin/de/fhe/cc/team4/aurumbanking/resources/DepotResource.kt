@@ -2,7 +2,6 @@ package de.fhe.cc.team4.aurumbanking.resources
 
 import de.fhe.cc.team4.aurumbanking.domain.*
 import de.fhe.cc.team4.aurumbanking.model.entities.DepotDTO
-import de.fhe.cc.team4.aurumbanking.model.repostories.DepotRepositoryImp
 import io.quarkus.hibernate.reactive.panache.common.WithSession
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction
 import io.smallrye.mutiny.Uni
@@ -18,10 +17,6 @@ import java.net.URI
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 class DepotResource {
-
-    @Inject
-    lateinit var depotRepositoryImp: DepotRepositoryImp
-
     @Inject
     lateinit var getDepotByIdUc: GetDepotByIdUc
 
@@ -35,7 +30,7 @@ class DepotResource {
     lateinit var updateDepositValueByIdUc: UpdateDepositValueByIdUc
 
     @Inject
-    lateinit var deleteDepotById: DeleteDepotById
+    lateinit var deleteDepotByIdUc: DeleteDepotByIdUc
 
     @GET
     @Path("/{id:\\d+}")
@@ -82,7 +77,7 @@ class DepotResource {
     @Produces(MediaType.APPLICATION_JSON)
     @WithTransaction
     fun deleteById(@PathParam("id") id: Long): Uni<RestResponse<Void>> {
-        return deleteDepotById(id).replaceWith{ RestResponse.ok()}
+        return deleteDepotByIdUc(id).replaceWith{ RestResponse.ok()}
     }
 
 }
