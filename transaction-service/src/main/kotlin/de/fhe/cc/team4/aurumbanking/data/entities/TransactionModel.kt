@@ -2,13 +2,14 @@ package de.fhe.cc.team4.aurumbanking.data.entities
 
 import de.fhe.cc.team4.aurumbanking.core.TransactionClassification
 import de.fhe.cc.team4.aurumbanking.core.TransactionType
+import io.quarkus.hibernate.reactive.panache.PanacheEntityBase
 import jakarta.persistence.*
 import java.math.BigDecimal
 import java.util.*
 
 @Entity
 @Table(name = "Transaction", schema = "public")
-class TransactionEntityModel{
+class TransactionEntityModel : PanacheEntityBase (){
 
     @Id
     @GeneratedValue
@@ -35,7 +36,7 @@ class TransactionEntityModel{
 @JvmRecord
 data class TransactionDTO(
     val id: Long,
-    val depotid: Long,
+    val depotId: Long,
     val customerId: Long,
     val dateTime: Date,
     val flag: Boolean? = null,

@@ -1,6 +1,7 @@
 package de.fhe.cc.team4.aurumbanking.resources
 
 import de.fhe.cc.team4.aurumbanking.domain.GetAllTransactionsByDepotIdUc
+import de.fhe.cc.team4.aurumbanking.domain.GetThreeLastestTransactionByDepotIdUc
 import de.fhe.cc.team4.aurumbanking.domain.InsertNewTransactionsUc
 import de.fhe.cc.team4.aurumbanking.domain.TransactionDomainModel
 import io.quarkus.hibernate.reactive.panache.common.WithSession
@@ -24,6 +25,9 @@ class TransactionResource {
     @Inject
     lateinit var insertNewTransactionsUc : InsertNewTransactionsUc
 
+    @Inject
+    lateinit var getThreeLastestTransactionByDepotIdUc : GetThreeLastestTransactionByDepotIdUc
+
     @GET
     @Path("/test")
     @Produces(MediaType.APPLICATION_JSON)
@@ -35,6 +39,15 @@ class TransactionResource {
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
     fun getAllTransactionsByDepotId(@PathParam("id") id: Long) = getALlTransactionsByDepotIdUc(id)
+        .onItem().ifNotNull().transform { RestResponse.ok(it) }
+        .onItem().ifNull().continueWith(RestResponse.notFound())
+
+    @GET
+    @Path("/getThreeLastestTransactionByDepotId/{id:\\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WithSession
+    fun getThreeLastestTransactionByDepotId(@PathParam("id") id: Long)
+    = getThreeLastestTransactionByDepotIdUc(id)
         .onItem().ifNotNull().transform { RestResponse.ok(it) }
         .onItem().ifNull().continueWith(RestResponse.notFound())
 
