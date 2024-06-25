@@ -33,8 +33,7 @@ class UpdateDepositValueByIdUc(var depotInterfaceRepository: DepotInterfaceRepos
 
 
 @ApplicationScoped
-class DeleteDepotById(var depotInterfaceRepository: DepotInterfaceRepository) {
+class DeleteDepotByIdUc(var depotInterfaceRepository: DepotInterfaceRepository) {
     operator fun invoke(id: Long ): Uni<Long> =
         depotInterfaceRepository.deleteDepotById(id)
 }
-
