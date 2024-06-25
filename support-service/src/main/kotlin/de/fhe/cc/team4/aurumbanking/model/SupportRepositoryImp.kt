@@ -28,9 +28,9 @@ class SupportRepositoryImp : PanacheRepository<SupportEntityModel>, SupportInter
         TODO("Not yet implemented")
     }
 
-    override fun deleteAllSupportRequestByCustomerId(): Uni<Void> {
-        TODO("Not yet implemented")
-    }
+    override fun deleteAllSupportRequestByCustomerId(customerId: Long): Uni<Long> =
+        this.delete("delete from SupportEntityModel p where p.customerId = ?1", customerId)
+
 
     override fun getAllRequestsByType(type: String): Uni<List<SupportDomainModel>> {
         return this.find("type", type).list<SupportEntityModel>()
