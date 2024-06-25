@@ -1,13 +1,11 @@
 package de.fhe.cc.team4.aurumbanking.resources
 
-import de.fhe.cc.team4.aurumbanking.core.DatabaseInitBean
-import de.fhe.cc.team4.aurumbanking.domain.DepositDomainModel
-import de.fhe.cc.team4.aurumbanking.domain.DepotInterfaceRepository
-import de.fhe.cc.team4.aurumbanking.domain.GetDepotByIdUc
+import de.fhe.cc.team4.aurumbanking.domain.*
+import de.fhe.cc.team4.aurumbanking.model.entities.DepotDTO
+import de.fhe.cc.team4.aurumbanking.model.repostories.DepotRepositoryImp
 import io.quarkus.hibernate.reactive.panache.common.WithSession
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction
 import io.smallrye.mutiny.Uni
-import jakarta.enterprise.inject.Default
 import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
@@ -21,65 +19,70 @@ import java.net.URI
 @Consumes(MediaType.APPLICATION_JSON)
 class DepotResource {
 
-
-    /**
-     * Represents the bean responsible for initializing the database with customer information.
-     */
     @Inject
-    lateinit var initDatabase: DatabaseInitBean
-
-    /**
-     * Represents a repository for managing customer information.
-     */
-    @Inject
-    @Default
-    lateinit var depotInterfaceRepository: DepotInterfaceRepository
+    lateinit var depotRepositoryImp: DepotRepositoryImp
 
     @Inject
     lateinit var getDepotByIdUc: GetDepotByIdUc
 
+    @Inject
+    lateinit var getCurrentDepotByCustomerIdUc: GetCurrentDepotByCustomerIdUc
+
+    @Inject
+    lateinit var insertNewDepotUc: InsertNewDepotUc
+
+    @Inject
+    lateinit var updateDepositValueByIdUc: UpdateDepositValueByIdUc
+
+    @Inject
+    lateinit var deleteDepotById: DeleteDepotById
 
     @GET
     @Path("/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
-    fun getCustomerInformationById(@PathParam("id") id: Long) = getDepotByIdUc(id)
+    fun getDepotInformationById(@PathParam("id") id: Long) = getDepotByIdUc(id)
         .onItem().ifNotNull().transform { RestResponse.ok(it) }
-        .onItem().ifNull().continueWith( RestResponse.notFound())
+        .onItem().ifNull().continueWith(RestResponse.notFound())
 
 
     @GET
     @Path("/findCurrentDepotValueById/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
-    fun findCurrentDepotValueById(@PathParam("id") id: Long) =
-        depotInterfaceRepository.findCurrentDepotValueById(id)
-
-
+    fun findCurrentDepotValueById(@PathParam("id") id: Long) = getCurrentDepotByCustomerIdUc(id)
+        .onItem().ifNotNull().transform { RestResponse.ok(it) }
+        .onItem().ifNull().continueWith(RestResponse.notFound())
 
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @WithTransaction
     fun insert(depositDomainModel: DepositDomainModel): Uni<RestResponse<Void>> {
-        return depotInterfaceRepository.persistNewDepotInformation(depositDomainModel).map {
+        return insertNewDepotUc(depositDomainModel).map {
             RestResponse.created(URI("/depot/${it.id}"))
         }
     }
 
-
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/insertNewDepositValueById/{id:\\d+}/{value:\\d+}")
+    @Path("/insertNewDepositValueById/{id:\\d+}/{value:\\d+([,\\.]\\d+)}")
     @WithTransaction
-    fun insertNewDepositValueById(@PathParam("id") id: Long, @PathParam("value") value: BigDecimal) =
-        depotInterfaceRepository.updateDepositValueByDepot(id, value)
+    fun insertNewDepositValueById(
+        @PathParam("id") id: Long,
+        @PathParam("value") value: BigDecimal
+    ): Uni<RestResponse<DepotDTO>>? {
+       return updateDepositValueByIdUc(id,value)
+            .onItem().ifNotNull().transform {RestResponse.ok(it)}
+            .onItem().ifNull().continueWith(RestResponse.notFound())
+    }
 
-
-    // TODO: GET and POST für Transaktionen + Erweiterungen der Usecases
-
-
-
-
+    @DELETE
+    @Path("/deleteDepotBy/{id:\\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WithTransaction
+    fun deleteById(@PathParam("id") id: Long): Uni<RestResponse<Void>> {
+        return deleteDepotById(id).replaceWith{ RestResponse.ok()}
+    }
 
 }

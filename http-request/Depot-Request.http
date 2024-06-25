@@ -1,42 +1,14 @@
 ###
-POST http://localhost:8080/depot-service
+POST http://localhost:8080/depot
 Accept: application/json
 Content-Type: application/json
 
 {
-  "transactions": [
-    {
-      "country": "Germany",
-      "recipient": "John Doe",
-      "iban": "DE89370400440532013000",
-      "bic": "COBADEFFXXX",
-      "moneyValue": 1000.50,
-      "purposeOfUse": "Payment for services",
-      "dateTimeOfExecution": "2024-06-12T10:00:00Z",
-      "standingOrder": false,
-      "transactionType": "outcome",
-      "transactionClassification": "Standard Überweisung"
-    },
-    {
-      "country": "Germany",
-      "recipient": "Tester",
-      "iban": "DE89370400440532013000",
-      "bic": "COBADEFFXXX",
-      "moneyValue": 1000.50,
-      "purposeOfUse": "Payment for services",
-      "dateTimeOfExecution": "2024-06-12T10:00:00Z",
-      "standingOrder": false,
-      "transactionType": "outcome",
-      "transactionClassification": "Standard Überweisung"
-    }
-  ],
+  "customerId": 1,
   "currencyArea": "EUR",
   "depositAmount": 5000.00,
   "fallbackDepositAmount": 1000.00
 }
-
-###
-GET http://localhost:8080/depot/1
 
 ###
 GET http://localhost:8080/depot/findCurrentDepotValueById/1
@@ -45,14 +17,11 @@ GET http://localhost:8080/depot/findCurrentDepotValueById/1
 <> 2024-06-12T005838.200.json
 
 ###
-PUT http://localhost:8080/depot/insertNewDepotValueByIdinsertNewDepotValueById
-Accept: application/json
-Content-Type: application/json
+PUT http://localhost:8080/depot/insertNewDepositValueById/1/7000.45
 
-{
-  "id": "1",
-  "value": "6000"
-}
+###
+DELETE http://localhost:8080/depot/deleteDepotBy/1
+
 
 ###
 POST http://localhost:80/depot-service/depot
@@ -60,32 +29,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "transactions": [
-    {
-      "country": "Germany",
-      "recipient": "John Doe",
-      "iban": "DE89370400440532013000",
-      "bic": "COBADEFFXXX",
-      "moneyValue": 1000.50,
-      "purposeOfUse": "Payment for services",
-      "dateTimeOfExecution": "2024-06-12T10:00:00Z",
-      "standingOrder": false,
-      "transactionType": "outcome",
-      "transactionClassification": "Standard Überweisung"
-    },
-    {
-      "country": "Germany",
-      "recipient": "Tester",
-      "iban": "DE89370400440532013000",
-      "bic": "COBADEFFXXX",
-      "moneyValue": 1000.50,
-      "purposeOfUse": "Payment for services",
-      "dateTimeOfExecution": "2024-06-12T10:00:00Z",
-      "standingOrder": false,
-      "transactionType": "outcome",
-      "transactionClassification": "Standard Überweisung"
-    }
-  ],
+  "customerId": 1,
   "currencyArea": "EUR",
   "depositAmount": 5000.00,
   "fallbackDepositAmount": 1000.00
@@ -110,18 +54,6 @@ Content-Type: application/json
 
 ###
 GET http://localhost:80/depot-service/depot/findCurrentDepotValueById/1
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

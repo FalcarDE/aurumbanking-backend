@@ -5,6 +5,7 @@ volumes:
   customer-information-db-data:
   depot-service-db-data:
   support-service-db-data:
+  transaction-service-db-data:
 
 services:
   ########################################################
@@ -66,6 +67,26 @@ services:
       # We expose the port so that one can connect directly to this
       # DB using `localhost:5432` from your IDE or some other tool
       - "5433:5432"
+    environment:
+      # PostgreSQL settings - should be used in your database connection
+      # config in `application.properties` from Quarkus
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
+
+  ########################################################
+  # Transaction Service Postgres DB
+  ########################################################
+  transaction-service-db:
+    image: postgres
+    restart: always
+    volumes:
+      # Use the named volume to store DB data
+      - transaction-service-db-data:/var/lib/postgresql/data
+    ports:
+      # We expose the port so that one can connect directly to this
+      # DB using `localhost:5432` from your IDE or some other tool
+      - "5435:5432"
     environment:
       # PostgreSQL settings - should be used in your database connection
       # config in `application.properties` from Quarkus
@@ -165,7 +186,7 @@ services:
       # - "traefik.http.routers.transaction-service.entrypoints=web"
     depends_on:
       - gateway
-      - depot-service-db
+      - transaction-service-db
 
   ########################################################
   # Transaction Service API-Gateway
