@@ -39,7 +39,7 @@ GET http://localhost:8080/support/1
 Content-Type: application/json
 
 ###
-GET http://localhost:8080/support/type/exampleType1
+GET http://localhost:8080/support/get-all-support-reqeuests-by-type/exampleType1
 Accept: application/json
 
 ###

@@ -26,7 +26,7 @@ class SupportResource {
     lateinit var insertNewSupportRequestUc: InsertNewSupportRequest
 
     @Inject
-    lateinit var getSupportRequestsByType: GetAllSupportRequestsByType
+    lateinit var getSupportRequestsByTypeUc: GetAllSupportRequestsByType
 
 
     @GET
@@ -54,11 +54,11 @@ class SupportResource {
     }
 
     @GET
-    @Path("/support-requests/type/{requestType}")
+    @Path("/get-all-support-reqeuests-by-type/{requestType}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
     fun getAllSupportRequestsByType(@PathParam("requestType") requestType: String): Uni<RestResponse<List<SupportDomainModel>>> {
-        return getSupportRequestsByType(requestType)
+        return getSupportRequestsByTypeUc(requestType)
             .onItem().transform { RestResponse.ok(it) }
             .onFailure().recoverWithItem(RestResponse.serverError())
     }
