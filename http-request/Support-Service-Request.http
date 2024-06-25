@@ -41,7 +41,10 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/support/get-all-support-reqeuests-by-type/exampleType1
 Accept: application/json
+###
 
+GET http://localhost:8080/support/get-all-support-reqeuests-by-customer-id/0
+Accept: application/json
 ###
 POST http://localhost:80/support-service/support
 Accept: application/json

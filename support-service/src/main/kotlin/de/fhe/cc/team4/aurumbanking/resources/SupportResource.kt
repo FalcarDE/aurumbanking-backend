@@ -63,4 +63,14 @@ class SupportResource {
             .onFailure().recoverWithItem(RestResponse.serverError())
     }
 
+    @GET
+    @Path("/get-all-support-reqeuests-by-customer-id/{customerId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WithSession
+    fun getAllSupportRequestsByCustomerId(@PathParam("customerId") customerId: Long): Uni<RestResponse<List<SupportDomainModel>>> {
+        return getSupportRequestByCustomerIdUc(customerId)
+            .onItem().transform { RestResponse.ok(it) }
+            .onFailure().recoverWithItem(RestResponse.serverError())
+    }
+
 }

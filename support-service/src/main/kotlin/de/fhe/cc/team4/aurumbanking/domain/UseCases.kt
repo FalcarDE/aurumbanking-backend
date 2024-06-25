@@ -3,11 +3,7 @@ package de.fhe.cc.team4.aurumbanking.domain
 import io.smallrye.mutiny.Uni
 import jakarta.enterprise.context.ApplicationScoped
 
-@ApplicationScoped
-class GetSupportRequestByCustomerId(var supportInterfaceRepository: SupportInterfaceRepository) {
-    operator fun invoke(id: Long): Uni<SupportDomainModel> =
-        supportInterfaceRepository.findSupportRequestByCustomerId(id)
-}
+
 
 
 @ApplicationScoped
@@ -29,5 +25,9 @@ class GetAllSupportRequestsByType(val supportInterfaceRepository: SupportInterfa
         supportInterfaceRepository.getAllRequestsByType(type)
 }
 
-
+@ApplicationScoped
+class GetSupportRequestByCustomerId(var supportInterfaceRepository: SupportInterfaceRepository) {
+    operator fun invoke(customerId: Long): Uni<List<SupportDomainModel>> =
+        supportInterfaceRepository.findSupportRequestByCustomerId(customerId)
+}
 // TODO: GET and POST für Supportfunktionen + Erweiterungen der Usecases

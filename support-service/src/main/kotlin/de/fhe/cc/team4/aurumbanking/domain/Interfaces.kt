@@ -4,7 +4,7 @@ import io.smallrye.mutiny.Uni
 
 interface SupportInterfaceRepository {
 
-    fun findSupportRequestByCustomerId(id: Long): Uni<SupportDomainModel>
+    fun findSupportRequestByCustomerId(customerId: Long): Uni<List<SupportDomainModel>>
     fun findSupportRequestById(id: Long): Uni<SupportDomainModel?>
 
     fun persistNewSupportInformation(Support: SupportDomainModel): Uni<SupportDomainModel>
