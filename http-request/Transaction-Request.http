@@ -43,6 +43,31 @@ GET http://localhost:8080/transactions/getAllTransactionsByDepotId/1
 GET http://localhost:8080/transactions/getThreeLastestTransactionByDepotId/1
 
 ###
+POST http://localhost:8080/transactions/updateTransactionById
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "depotId": 456,
+  "country": "Germany",
+  "recipient": "John Doe",
+  "iban": "DE89370400440532013000",
+  "bic": "COBADEFFXXX",
+  "moneyValue": 2500.00,
+  "purposeOfUse": "Rent",
+  "dateTimeOfExecution": "2024-07-04T10:00:00",
+  "standingOrder": true,
+  "transactionType": "outcome",
+  "transactionClassification": "Standard Überweisung",
+  "dateTimeOfFirstExecution": "2024-01-01T10:00:00",
+  "dateTimeOfLastExecution": "2024-06-01T10:00:00"
+}
+
+###
+GET http://localhost:8080/transactions/getTransactionsId/1
+
+###
 GET http://localhost:80/transactions-service/transactions/getAllTransactionsByDepotId/1
 
 ###
