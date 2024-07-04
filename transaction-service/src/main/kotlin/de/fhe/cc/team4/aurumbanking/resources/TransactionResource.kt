@@ -4,6 +4,8 @@ import de.fhe.cc.team4.aurumbanking.domain.*
 import io.quarkus.hibernate.reactive.panache.common.WithSession
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction
 import io.smallrye.mutiny.Uni
+import io.smallrye.reactive.messaging.annotations.Channel
+import io.smallrye.reactive.messaging.annotations.Emitter
 import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
@@ -30,6 +32,9 @@ class TransactionResource {
 
     @Inject
     lateinit var getTransactionById: GetTransactionById
+
+    @Channel("update-depot-value")
+    lateinit var transactionKafkaDtoEmitter: Emitter<TransactinKafkaDTO>
 
     @GET
     @Path("/test")
@@ -68,6 +73,8 @@ class TransactionResource {
     fun insert(transactionDomainModel: TransactionDomainModel): Uni<RestResponse<Void>> {
         return insertNewTransactionsUc.invoke(transactionDomainModel).map {
             RestResponse.created(URI("/transactions/${it.id}"))
+            transactionKafkaDtoEmitter.send(TransactinKafkaDTO(transactionDomainModel.id, transactionDomainModel.moneyValue))
+            RestResponse.created(URI("/depot/${it.id}"))
         }
     }
 

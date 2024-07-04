@@ -27,3 +27,6 @@ data class DepotDTO(val depositAmount: BigDecimal )
 
 @RegisterForReflection
 data class FallbackDepositAmountDTO(val fallbackDepositAmount: BigDecimal )
+
+@RegisterForReflection
+data class DepotUpdateDTO(val id: Long, val depositAmount: BigDecimal )

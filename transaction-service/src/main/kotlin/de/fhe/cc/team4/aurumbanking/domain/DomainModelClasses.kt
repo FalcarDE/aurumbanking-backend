@@ -36,3 +36,6 @@ data class TransactionDomainModel(
         dateTimeOfLastExecution = Date()
     )
 }
+
+
+data class TransactinKafkaDTO(var depotId: Long, var moneyValue: BigDecimal)
