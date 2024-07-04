@@ -21,3 +21,20 @@ class GetThreeLastestTransactionByDepotIdUc(var transactionInterfaceRepository: 
         transactionInterfaceRepository.getThreeLastestTransactionByDepotId(id)
 }
 
+@ApplicationScoped
+class UpdateTransactionsByIdUc(var transactionInterfaceRepository: TransactionInterfaceRepository) {
+    operator fun invoke(transactionDomainModel: TransactionDomainModel): Uni<TransactionDomainModel>
+    = transactionInterfaceRepository.updateTransactionById(transactionDomainModel)
+}
+
+@ApplicationScoped
+class GetTransactionById(var transactionInterfaceRepository: TransactionInterfaceRepository) {
+    operator fun invoke(id: Long): Uni<TransactionDomainModel>
+            = transactionInterfaceRepository.getTransactionById(id)
+}
+
+@ApplicationScoped
+class GetTransactionsByIdUc(var transactionInterfaceRepository: TransactionInterfaceRepository) {
+    operator fun invoke(id: Long): Uni<TransactionDomainModel> =
+        transactionInterfaceRepository.getTransactionById(id)
+}
