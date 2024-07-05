@@ -41,23 +41,22 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/support/get-all-support-reqeuests-by-type/exampleType1
 Accept: application/json
-###
 
+###
 GET http://localhost:8080/support/get-all-support-reqeuests-by-customer-id/0
 Accept: application/json
+
 ###
 POST http://localhost:80/support-service/support
 Accept: application/json
 Content-Type: application/json
 
 {
-"id": 0,
-"customerId": 0,
+"customerId": 1,
 "dateTime": "2024-06-06T00:00:00",
 "type": "exampleType",
 "message": "exampleMessage"
 }
-
 
 ###
 GET http://localhost:80/support-service/support/1
@@ -66,3 +65,11 @@ Content-Type: application/json
 ###
 GET http://localhost:80/support-service/support/test
 Content-Type: application/json
+
+###
+GET http://localhost:80/support-service/support/get-all-support-reqeuests-by-type/exampleType
+Accept: application/json
+
+###
+GET http://localhost:80/support-service/support/get-all-support-reqeuests-by-customer-id/1
+Accept: application/json

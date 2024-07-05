@@ -38,19 +38,8 @@ Content-Type: application/json
 ###
 GET http://localhost:80/depot-service/depot/1
 
-### FIX ME
-PUT http://localhost:80/depot-service/depot/insertNewDepositValueById/1/6000
-
-
 ###
-PUT http://localhost:80/depot-service/depot/insertNewDepotValueByIdinsertNewDepotValueById
-Accept: application/json
-Content-Type: application/json
-
-{
-  "id": "1",
-  "value": "6000"
-}
+PUT http://localhost:80/depot-service/depot/insertNewDepositValueById/1/7000.45
 
 ###
 GET http://localhost:80/depot-service/depot/findCurrentDepotValueById/1

@@ -24,13 +24,10 @@ Content-Type: application/json
 GET http://localhost:8080/login/test
 
 ###
-GET http://localhost:8080/login/1/johndoe@example.com/securepassword
-
-###
 GET http://localhost:8080/login/check-credentials/johndoe@example.com/securepassword
 
 ###
-GET http://localhost:8080/login/check-credentials/test/test
+GET http://localhost:80/customer-information-service/customers/2
 
 ###
 POST http://localhost:80/login-service/login/check-credentials/johndoe@example.com/securepassword

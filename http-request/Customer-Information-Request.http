@@ -57,3 +57,12 @@ Content-Type: application/json
 
 ###
 GET http://localhost:80/customer-information-service/customers/1
+
+###
+PUT http://localhost:80/customer-information-service/customers/updateCustomerEmailBy/1/test@test.de
+
+###
+PUT http://localhost:80/customer-information-service/customers/updateCustomerPasswordBy/1/testpassword
+
+###
+DELETE http://localhost:80/customer-information-service/customers/deleteCustomerInformationBy/1
