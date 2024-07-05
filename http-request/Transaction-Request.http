@@ -80,6 +80,25 @@ Content-Type: application/json
 {
   "depotId": 1,
   "country": "Germany",
+  "recipient": "John Doe",
+  "iban": "DE89370400440532013000",
+  "bic": "COBADEFFXXX",
+  "moneyValue": 1000.00,
+  "purposeOfUse": "Payment for services",
+  "dateTimeOfExecution": "2024-06-12T10:04:00Z",
+  "standingOrder": false,
+  "transactionType": "outcome",
+  "transactionClassification": "Standard Überweisung"
+}
+
+###
+POST http://localhost:80/transactions-service/transactions
+Accept: application/json
+Content-Type: application/json
+
+{
+  "depotId": 1,
+  "country": "Germany",
   "recipient": "Master of Disaster",
   "iban": "DE89370400440532013XXX",
   "bic": "COBADEFFXXX",
@@ -93,24 +112,7 @@ Content-Type: application/json
   "dateTimeOfLastExecution": "2024-06-01T10:00:00"
 }
 
-###
-POST http://localhost:80/transactions-service/transactions
-Accept: application/json
-Content-Type: application/json
 
-{
-  "depotId": 1,
-  "country": "Germany",
-  "recipient": "John Doe",
-  "iban": "DE89370400440532013000",
-  "bic": "COBADEFFXXX",
-  "moneyValue": 1000.00,
-  "purposeOfUse": "Payment for services",
-  "dateTimeOfExecution": "2024-06-12T10:04:00Z",
-  "standingOrder": false,
-  "transactionType": "outcome",
-  "transactionClassification": "Standard Überweisung"
-}
 
 ###
 GET http://localhost:80/transactions-service/transactions/getAllTransactionsByDepotId/1
