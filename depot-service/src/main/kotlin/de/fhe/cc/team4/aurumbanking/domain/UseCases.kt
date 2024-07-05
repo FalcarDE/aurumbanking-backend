@@ -28,7 +28,7 @@ class InsertNewDepotUc(var depotInterfaceRepository: DepotInterfaceRepository) {
 @ApplicationScoped
 class UpdateDepositValueByIdUc(var depotInterfaceRepository: DepotInterfaceRepository) {
     operator fun invoke(id: Long, depositValue : BigDecimal ): Uni<DepotDTO> =
-        depotInterfaceRepository.updateDepositValueByDepot(id, depositValue)
+        depotInterfaceRepository.updateDepositValueByDepotById(id, depositValue)
 }
 
 

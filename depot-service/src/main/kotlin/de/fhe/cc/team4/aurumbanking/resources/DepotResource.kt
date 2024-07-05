@@ -8,6 +8,8 @@ import io.smallrye.mutiny.Uni
 import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
+import org.eclipse.microprofile.reactive.messaging.Acknowledgment
+import org.eclipse.microprofile.reactive.messaging.Incoming
 import org.jboss.resteasy.reactive.RestResponse
 import java.math.BigDecimal
 import java.net.URI
@@ -67,8 +69,8 @@ class DepotResource {
         @PathParam("id") id: Long,
         @PathParam("value") value: BigDecimal
     ): Uni<RestResponse<DepotDTO>>? {
-       return updateDepositValueByIdUc(id,value)
-            .onItem().ifNotNull().transform {RestResponse.ok(it)}
+        return updateDepositValueByIdUc(id, value)
+            .onItem().ifNotNull().transform { RestResponse.ok(it) }
             .onItem().ifNull().continueWith(RestResponse.notFound())
     }
 
@@ -77,7 +79,6 @@ class DepotResource {
     @Produces(MediaType.APPLICATION_JSON)
     @WithTransaction
     fun deleteById(@PathParam("id") id: Long): Uni<RestResponse<Void>> {
-        return deleteDepotByIdUc(id).replaceWith{ RestResponse.ok()}
+        return deleteDepotByIdUc(id).replaceWith { RestResponse.ok() }
     }
-
 }
