@@ -13,8 +13,6 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/depot/findCurrentDepotValueById/1
 
-<> 2024-06-12T020906.200.json
-<> 2024-06-12T005838.200.json
 
 ###
 PUT http://localhost:8080/depot/insertNewDepositValueById/1/7000.45

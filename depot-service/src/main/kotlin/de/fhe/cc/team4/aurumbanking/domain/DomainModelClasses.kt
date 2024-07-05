@@ -18,6 +18,6 @@ data class DepositDomainModel(
     )
 }
 
-data class IncomingTransactionDTO(val id: Long, val transactionValue: BigDecimal )
+data class IncomingTransactionDTO(val depotId: Long, val moneyValue: BigDecimal, var transactionType: String)
 
 

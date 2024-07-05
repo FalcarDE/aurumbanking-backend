@@ -13,13 +13,13 @@ class DepotEntityModel : PanacheEntityBase() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    public var id: Long = 0
+    var id: Long = 0
 
     @Column(length = 2500)
-    public var customerId : Long = 0
-    public lateinit var currencyArea: String
-    public lateinit var depositAmount: BigDecimal
-    public lateinit var fallbackDepositAmount: BigDecimal
+    var customerId : Long = 0
+    lateinit var currencyArea: String
+    lateinit var depositAmount: BigDecimal
+    lateinit var fallbackDepositAmount: BigDecimal
 }
 
 @RegisterForReflection
@@ -28,5 +28,5 @@ data class DepotDTO(val depositAmount: BigDecimal )
 @RegisterForReflection
 data class FallbackDepositAmountDTO(val fallbackDepositAmount: BigDecimal )
 
-@RegisterForReflection
-data class DepotUpdateDTO(val id: Long, val depositAmount: BigDecimal )
+
+

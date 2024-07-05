@@ -38,4 +38,3 @@ data class TransactionDomainModel(
 }
 
 
-data class TransactinKafkaDTO(var depotId: Long, var moneyValue: BigDecimal)
