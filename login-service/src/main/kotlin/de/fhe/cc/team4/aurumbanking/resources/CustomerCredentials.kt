@@ -8,6 +8,7 @@ import io.smallrye.mutiny.Uni
 import jakarta.enterprise.inject.spi.CDI
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
+import jakarta.ws.rs.core.Response
 
 
 @ResourceProperties(hal = true, path = "login")
@@ -16,9 +17,28 @@ interface CustomerCredentials : PanacheRepositoryResource<CustomerCredentialsRep
     @Path("check-credentials/{email}/{password}")
     @Produces(MediaType.APPLICATION_JSON)
     fun checkCustomerCredentials(
-        @PathParam("email") email: String, @PathParam("password") password: String)
-    = CDI.current().select(CustomerCredentialsRepository::class.java).get()
-        .checkCustomerCredentials( email, password)
+        @PathParam("email") email: String, @PathParam("password") password: String): Uni<Response> {
+        val credentialsRepository = CDI.current().select(CustomerCredentialsRepository::class.java).get()
+        return credentialsRepository.checkCustomerCredentials(email, password)
+            .map { customerIdDTO ->
+                if (customerIdDTO != null) {
+                    Response.ok(customerIdDTO).build()
+                } else {
+                    Response.status(Response.Status.NOT_FOUND).build()
+                }
+            }
+    }
+
+
+    /*
+        return if (customerIdDTO != null) {
+            Response.ok(customerIdDTO).build()
+        } else {
+            Response.status(Response.Status.METHOD_NOT_ALLOWED).build()
+        }
+    }
+
+     */
 
     @GET
     @Path("/test")
