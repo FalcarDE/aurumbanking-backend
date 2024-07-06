@@ -5,7 +5,7 @@ global:
     monitor: 'system-monitor'
 
 scrape_configs:
-  - job_name: 'shop-services'
+  - job_name: 'aurumbanking-services'
     metrics_path: '/metrics'
     static_configs:
       - targets: [
