@@ -29,17 +29,6 @@ interface CustomerCredentials : PanacheRepositoryResource<CustomerCredentialsRep
             }
     }
 
-
-    /*
-        return if (customerIdDTO != null) {
-            Response.ok(customerIdDTO).build()
-        } else {
-            Response.status(Response.Status.METHOD_NOT_ALLOWED).build()
-        }
-    }
-
-     */
-
     @GET
     @Path("/test")
     @Produces(MediaType.APPLICATION_JSON)
