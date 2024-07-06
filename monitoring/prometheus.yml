@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 5s
+
+  external_labels:
+    monitor: 'system-monitor'
+
+scrape_configs:
+  - job_name: 'shop-services'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: [
+        'customer-information-service:8080',
+        'transaction-service:8080',
+        'depot-service:8080',
+        'support-service:8080',
+        'login-service:8080'
+      ]
+  - job_name: 'infrastructure'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: [
+        'gateway:8080',
+        'tracing-service:14269'
+      ]

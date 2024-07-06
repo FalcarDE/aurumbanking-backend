@@ -30,4 +30,3 @@ class GetSupportRequestByCustomerId(var supportInterfaceRepository: SupportInter
     operator fun invoke(customerId: Long): Uni<List<SupportDomainModel>> =
         supportInterfaceRepository.findSupportRequestByCustomerId(customerId)
 }
-// TODO: GET and POST für Supportfunktionen + Erweiterungen der Usecases

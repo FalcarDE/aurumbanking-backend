@@ -2,7 +2,7 @@
 # Volume Definition
 ########################################################
 volumes:
-  customer-information-db-data:
+  customer-information-service-db-data:
   depot-service-db-data:
   support-service-db-data:
   transaction-service-db-data:
@@ -28,7 +28,7 @@ services:
       - "./config:/etc/traefik"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=PathPrefix(`/dashboard`)"
+      - "traefik.http.routers.dashboard.rule=Host(`localhost`) && (PathPrefix(`/api`, `/dashboard`))"
       - "traefik.http.routers.dashboard.service=api@internal"
 
   ########################################################
@@ -69,7 +69,7 @@ services:
     restart: always
     volumes:
       # Use the named volume to store DB data
-      - customer-information-db-data:/var/lib/postgresql/data
+      - customer-information-service-db-data:/var/lib/postgresql/data
       # Init Database with Data when Docker started
       #- /init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
     ports:
@@ -174,7 +174,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.support-service.rule=PathPrefix(`/support-service`)"
       - "traefik.http.services.support-service.loadbalancer.server.port=8080"
-      # - "traefik.http.routers.support-service.entrypoints=web"
     depends_on:
       - gateway
       - support-service-db

@@ -12,10 +12,6 @@ import jakarta.enterprise.context.ApplicationScoped
 class CustomerInformationRepositoryImpl : PanacheRepository<CustomerInformationEntityModel>,
     CustomerInformationInterfaceRepository {
 
-    override fun findAllCustomerInformation(): Uni<List<CustomerInformationDomainModel>> {
-        TODO("Not yet implemented")
-    }
-
     override fun findCustomerInformationById(id: Long): Uni<CustomerInformationDomainModel?> {
         return this.findById(id).onItem().ifNotNull().transform { it.toDomain() }
     }
