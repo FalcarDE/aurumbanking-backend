@@ -33,7 +33,7 @@ class TransactionRepositoryImp : PanacheRepositoryBase<TransactionEntityModel, L
 
     override fun getThreeLastestTransactionByDepotId(depotId: Long): Uni<List<TransactionDomainModel>> {
         val internalSortOrder = Direction.Descending
-        val sortColumn = "dateTimeOfExecution"
+        val sortColumn = "id"
         val internalSort = Sort.by(sortColumn, internalSortOrder)
 
         return list("depotId", internalSort, depotId)

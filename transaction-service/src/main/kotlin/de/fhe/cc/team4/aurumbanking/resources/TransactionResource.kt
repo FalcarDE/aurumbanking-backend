@@ -62,7 +62,7 @@ class TransactionResource {
             .onItem().ifNull().continueWith(RestResponse.notFound())
 
     @GET
-    @Path("/getThreeLastestTransactionByDepotId/{id:\\d+}")
+    @Path("/getThreeLatestTransactionByDepotId/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
     fun getThreeLastestTransactionByDepotId(@PathParam("id") id: Long) = getThreeLastestTransactionByDepotIdUc(id)
