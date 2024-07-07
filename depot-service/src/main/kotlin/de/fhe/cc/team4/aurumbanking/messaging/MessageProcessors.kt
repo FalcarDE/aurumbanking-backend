@@ -29,7 +29,7 @@ class TransactionMessageProcessor {
                     else -> throw IllegalArgumentException("Unknown transaction type: ${incomingTransactionDTO.transactionType}")
                 }
                 println("New Depot-Value: $calculatedDepotValue")
-                depotRepositoryImp.updateDepositValueByDepotById(
+                depotRepositoryImp.updateDepositValueByDepotId(
                     incomingTransactionDTO.depotId,
                     calculatedDepotValue
                 )

@@ -42,7 +42,7 @@ class DepotRepositoryImp : PanacheRepositoryBase<DepotEntityModel, Long>, DepotI
             .onItem().ifNull().fail()
     }
 
-    override fun updateDepositValueByDepotById(id: Long, value: BigDecimal): Uni<DepotDTO> {
+    override fun updateDepositValueByDepotId(id: Long, value: BigDecimal): Uni<DepotDTO> {
         return this.update( "update DepotEntityModel set depositAmount = :depositAmount where id = :id",
             Parameters.with("id", id).and("depositAmount", value)).flatMap {
                 findCurrentDepotValueById(id)
