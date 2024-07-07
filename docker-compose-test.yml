@@ -1,0 +1,204 @@
+version: '3.8'
+
+volumes:
+  customer-information-db-data:
+  depot-service-db-data:
+  support-service-db-data:
+  transaction-service-db-data:
+
+services:
+  gateway:
+    image: "traefik:v2.10"
+    command:
+      --api.insecure=true
+      --providers.docker
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./config:/etc/traefik"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=PathPrefix(`/dashboard`)"
+      - "traefik.http.routers.dashboard.service=api@internal"
+    networks:
+      - webnet
+
+  zookeeper:
+    image: quay.io/strimzi/kafka:0.23.0-kafka-2.8.0
+    command: [
+      "sh", "-c",
+      "bin/zookeeper-server-start.sh config/zookeeper.properties"
+    ]
+    ports:
+      - "2181:2181"
+    environment:
+      LOG_DIR: /tmp/logs
+    networks:
+      - webnet
+
+  kafka:
+    image: quay.io/strimzi/kafka:0.23.0-kafka-2.8.0
+    command: [
+      "sh", "-c",
+      "bin/kafka-server-start.sh config/server.properties --override listeners=$${KAFKA_LISTENERS} --override advertised.listeners=$${KAFKA_ADVERTISED_LISTENERS} --override zookeeper.connect=$${KAFKA_ZOOKEEPER_CONNECT}"
+    ]
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      LOG_DIR: "/tmp/logs"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    networks:
+      - webnet
+
+  customer-information-service-db:
+    image: postgres
+    restart: always
+    volumes:
+      - customer-information-db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
+    networks:
+      - webnet
+
+  depot-service-db:
+    image: postgres
+    restart: always
+    volumes:
+      - depot-service-db-data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
+    networks:
+      - webnet
+
+  transaction-service-db:
+    image: postgres
+    restart: always
+    volumes:
+      - transaction-service-db-data:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
+    networks:
+      - webnet
+
+  support-service-db:
+    image: postgres
+    restart: always
+    volumes:
+      - support-service-db-data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
+    networks:
+      - webnet
+
+  customer-information-service:
+    build:
+      context: ./customer-information-service
+      dockerfile: ./src/main/docker/Dockerfile.jvm
+    deploy:
+      replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.customer-information-service.rule=PathPrefix(`/customer-information-service`)"
+      - "traefik.http.services.customer-information-service.loadbalancer.server.port=8080"
+    depends_on:
+      - gateway
+      - customer-information-service-db
+    networks:
+      - webnet
+
+  support-service:
+    build:
+      context: ./support-service
+      dockerfile: ./src/main/docker/Dockerfile.jvm
+    deploy:
+      replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.support-service.rule=PathPrefix(`/support-service`)"
+      - "traefik.http.services.support-service.loadbalancer.server.port=8080"
+    depends_on:
+      - gateway
+      - support-service-db
+    networks:
+      - webnet
+
+  depot-service:
+    build:
+      context: ./depot-service
+      dockerfile: ./src/main/docker/Dockerfile.jvm
+    deploy:
+      replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.depot-service.rule=PathPrefix(`/depot-service`)"
+      - "traefik.http.services.depot-service.loadbalancer.server.port=8080"
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+    depends_on:
+      - gateway
+      - depot-service-db
+      - kafka
+      - transaction-service
+    networks:
+      - webnet
+
+  transaction-service:
+    build:
+      context: ./transaction-service
+      dockerfile: ./src/main/docker/Dockerfile.jvm
+    deploy:
+      replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.transaction-service.rule=PathPrefix(`/transactions-service`)"
+      - "traefik.http.services.transaction-service.loadbalancer.server.port=8080"
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+    depends_on:
+      - gateway
+      - transaction-service-db
+      - kafka
+    networks:
+      - webnet
+
+  login-service:
+    build:
+      context: ./login-service
+      dockerfile: ./src/main/docker/Dockerfile.jvm
+    deploy:
+      replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.login-service.rule=PathPrefix(`/login-service`)"
+      - "traefik.http.services.login-service.loadbalancer.server.port=8080"
+    depends_on:
+      - gateway
+      - customer-information-service-db
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
