@@ -28,6 +28,8 @@ class SupportResource {
     @Inject
     lateinit var getSupportRequestsByTypeUc: GetAllSupportRequestsByType
 
+    @Inject
+    lateinit var deleteRequestByCustomerIdUc: DeleteRequestByCustomerIdUc
 
     @GET
     @Path("/test")
@@ -71,6 +73,14 @@ class SupportResource {
         return getSupportRequestByCustomerIdUc(customerId)
             .onItem().transform { RestResponse.ok(it) }
             .onFailure().recoverWithItem(RestResponse.serverError())
+    }
+
+    @DELETE
+    @Path("/deleteRequestByCustomerId/{customerId:\\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WithTransaction
+    fun deleteRequestByCustomerId(@PathParam("customerId") customerId: Long): Uni<RestResponse<Void>> {
+        return deleteRequestByCustomerIdUc(customerId).replaceWith{ RestResponse.ok()}
     }
 
 }

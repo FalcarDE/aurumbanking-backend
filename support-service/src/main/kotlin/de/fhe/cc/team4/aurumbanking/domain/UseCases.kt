@@ -30,4 +30,10 @@ class GetSupportRequestByCustomerId(var supportInterfaceRepository: SupportInter
     operator fun invoke(customerId: Long): Uni<List<SupportDomainModel>> =
         supportInterfaceRepository.findSupportRequestByCustomerId(customerId)
 }
+
+@ApplicationScoped
+class DeleteRequestByCustomerIdUc(var depotInterfaceRepository: SupportInterfaceRepository) {
+    operator fun invoke(customerId: Long ): Uni<Long> =
+        depotInterfaceRepository.deleteAllSupportRequestByCustomerId(customerId)
+}
 // TODO: GET and POST für Supportfunktionen + Erweiterungen der Usecases
