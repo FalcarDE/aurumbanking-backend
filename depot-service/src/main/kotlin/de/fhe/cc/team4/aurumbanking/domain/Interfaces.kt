@@ -17,7 +17,7 @@ interface DepotInterfaceRepository {
 
     fun persistNewDepotInformation(depotDomainModel: DepositDomainModel): Uni<DepositDomainModel>
 
-    fun updateDepositValueByDepot(id: Long, value: BigDecimal): Uni<DepotDTO>
+    fun updateDepositValueByDepotById(id: Long, value: BigDecimal): Uni<DepotDTO>
 
     fun updateFallbackDepositAmount(id: Long): Uni<FallbackDepositAmountDTO>
 

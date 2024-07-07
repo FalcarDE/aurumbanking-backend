@@ -46,3 +46,11 @@ data class TransactionDTO(
     val type: String
 )
 
+
+@JvmRecord
+data class TransactionKafkaDTO(
+    val depotId: Long,
+    val moneyValue: BigDecimal,
+    val transactionType: String
+)
+
