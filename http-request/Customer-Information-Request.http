@@ -13,12 +13,14 @@ Content-Type: application/json
   "housenumber": "123",
   "city": "Sample City",
   "country": "Sample Country",
+  "zipcode": "DE176381",
   "username": "johndoe",
   "email": "johndoe@example.com",
   "phoneNumber": "+1234567890",
   "password": "securepassword",
   "profileImage": "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="
 }
+
 
 ###
 GET http://localhost:8080/customers/1
@@ -47,6 +49,7 @@ Content-Type: application/json
   "housenumber": "123",
   "city": "Sample City",
   "country": "Sample Country",
+  "zipCode": "DE176381",
   "username": "johndoe",
   "email": "johndoe@example.com",
   "phoneNumber": "+1234567890",
@@ -66,3 +69,58 @@ PUT http://localhost:80/customer-information-service/customers/updateCustomerPas
 
 ###
 DELETE http://localhost:80/customer-information-service/customers/deleteCustomerInformationBy/1
+
+###
+POST http://192.168.2.107:80/customer-information-service/customers
+Accept: application/json
+Content-Type: application/json
+
+{
+  "firstname": "John",
+  "lastname": "Doe",
+  "birthDate": "1990-01-01T00:00:00",
+  "created": "2024-05-30T14:00:00",
+  "lastestLogin": "2024-05-30T14:00:00",
+  "streetName": "Main Street",
+  "housenumber": "123",
+  "city": "Sample City",
+  "country": "Sample Country",
+  "username": "johndoe",
+  "email": "johndoe@example.com",
+  "phoneNumber": "+1234567890",
+  "password": "123",
+  "profileImage": "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="
+}
+
+###
+GET http://192.168.2.107:80/customer-information-service/customers/1
+
+###
+DELETE http://192.168.2.107:80//customer-information-service/customers/deleteCustomerInformationBy/1
+###
+POST http://192.168.2.123:80/customer-information-service/customers
+Accept: application/json
+Content-Type: application/json
+
+{
+  "firstname": "John",
+  "lastname": "Doe",
+  "birthDate": "1990-01-01T00:00:00",
+  "created": "2024-05-30T14:00:00",
+  "lastestLogin": "2024-05-30T14:00:00",
+  "streetName": "Main Street",
+  "housenumber": "123",
+  "city": "Sample City",
+  "country": "Sample Country",
+  "username": "johndoe",
+  "email": "johndoe@example.com",
+  "phoneNumber": "+1234567890",
+  "password": "123",
+  "profileImage": "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="
+}
+
+###
+GET http://192.168.2.107:80/customer-information-service/customers/1
+
+###
+DELETE http://192.168.2.107:80//customer-information-service/customers/deleteCustomerInformationBy/1

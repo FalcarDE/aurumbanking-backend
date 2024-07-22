@@ -8,8 +8,6 @@ import io.smallrye.mutiny.Uni
 import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
-import org.eclipse.microprofile.reactive.messaging.Acknowledgment
-import org.eclipse.microprofile.reactive.messaging.Incoming
 import org.jboss.resteasy.reactive.RestResponse
 import java.math.BigDecimal
 import java.net.URI
@@ -38,16 +36,16 @@ class DepotResource {
     @Path("/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
-    fun getDepotInformationById(@PathParam("id") id: Long) = getDepotByIdUc(id)
+    fun getDepotById(@PathParam("id") id: Long) = getDepotByIdUc(id)
         .onItem().ifNotNull().transform { RestResponse.ok(it) }
         .onItem().ifNull().continueWith(RestResponse.notFound())
 
 
     @GET
-    @Path("/findCurrentDepotValueById/{id:\\d+}")
+    @Path("/getCurrentDepotByCustomerId/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
-    fun findCurrentDepotValueById(@PathParam("id") id: Long) = getCurrentDepotByCustomerIdUc(id)
+    fun getCurrentDepotByCustomerId(@PathParam("id") id: Long) = getCurrentDepotByCustomerIdUc(id)
         .onItem().ifNotNull().transform { RestResponse.ok(it) }
         .onItem().ifNull().continueWith(RestResponse.notFound())
 

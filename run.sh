@@ -34,7 +34,7 @@ fi
 
 # Optionen für Docker Compose Setups
 options=(
-    "docker-compose-prod.yml"
+    "docker-compose-test.yml"
     "monitoring/docker-compose-metrics.yml"
     "monitoring/docker-compose-metrics-ui.yml"
     "monitoring/docker-compose-tracing.yml"
@@ -54,7 +54,7 @@ read -p "Your choices: " choices
 for choice in $choices; do
     case $choice in
         1)
-            start_docker_compose "docker-compose-prod.yml"
+            start_docker_compose "docker-compose-test.yml"
             ;;
         2)
             start_docker_compose "monitoring/docker-compose-metrics.yml"
