@@ -11,9 +11,8 @@ import jakarta.enterprise.context.ApplicationScoped
 class SupportRepositoryImp : PanacheRepository<SupportEntityModel>, SupportInterfaceRepository {
 
 
-    override fun findSupportRequestByCustomerId(id: Long): Uni<SupportDomainModel> {
-        TODO("Not yet implemented")
-    }
+
+
 
     override fun findSupportRequestById(id: Long): Uni<SupportDomainModel?> {
         return this.findById(id).onItem().ifNotNull().transform{ it.toDomain()}
@@ -29,8 +28,19 @@ class SupportRepositoryImp : PanacheRepository<SupportEntityModel>, SupportInter
         TODO("Not yet implemented")
     }
 
-    override fun deleteAllSupportRequestByCustomerId(): Uni<Void> {
-        TODO("Not yet implemented")
+    override fun deleteAllSupportRequestByCustomerId(customerId: Long): Uni<Long> =
+        this.delete("delete from SupportEntityModel p where p.customerId = ?1", customerId)
+
+
+    override fun getAllRequestsByType(type: String): Uni<List<SupportDomainModel>> {
+        return this.find("type", type).list<SupportEntityModel>()
+            .onItem().transform { entities -> entities.map { it.toDomain() } }
+    }
+
+    override fun findSupportRequestByCustomerId(customerId: Long): Uni<List<SupportDomainModel>> {
+        return this.find("customerId", customerId).list<SupportEntityModel>()
+            .onItem().transform { entities -> entities.map { it.toDomain() } }
+
     }
 }
 

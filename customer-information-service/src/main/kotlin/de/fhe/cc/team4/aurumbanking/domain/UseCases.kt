@@ -3,7 +3,6 @@ package de.fhe.cc.team4.aurumbanking.domain
 import de.fhe.cc.team4.aurumbanking.model.CustomerLoginDTO
 import io.smallrye.mutiny.Uni
 import jakarta.enterprise.context.ApplicationScoped
-import jakarta.validation.constraints.Email
 
 @ApplicationScoped
 class GetCustomerInformationByIdUc(var customerInformationRepository: CustomerInformationInterfaceRepository) {

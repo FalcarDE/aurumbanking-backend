@@ -1,9 +1,7 @@
 package de.fhe.cc.team4.aurumbanking.model
 
 import de.fhe.cc.team4.aurumbanking.domain.DepositDomainModel
-import de.fhe.cc.team4.aurumbanking.domain.DepotDTO
 import de.fhe.cc.team4.aurumbanking.model.entities.DepotEntityModel
-import io.quarkus.kafka.client.serialization.ObjectMapperDeserializer
 
 fun DepositDomainModel.toEntity() =
     DepotEntityModel().apply {
@@ -23,4 +21,3 @@ fun DepotEntityModel.toDomain() =
         fallbackDepositAmount = this@toDomain.fallbackDepositAmount
     }
 
-class ReviewAggregateDeserializer : ObjectMapperDeserializer<DepotDTO>(DepotDTO::class.java)

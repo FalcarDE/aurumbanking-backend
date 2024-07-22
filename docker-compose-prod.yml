@@ -1,5 +1,6 @@
-version: '3.8'
-
+########################################################
+# Volume Definition
+########################################################
 volumes:
   customer-information-db-data:
   depot-service-db-data:
@@ -7,14 +8,21 @@ volumes:
   transaction-service-db-data:
 
 services:
+  ########################################################
+  # Reverse Proxy / Traefik
+  ########################################################
   gateway:
     image: "traefik:v2.10"
+    # Enables the web UI and tells Traefik to listen to docker
     command:
       --api.insecure=true
       --providers.docker
     ports:
+      # HTTP Port
       - "80:80"
+      # WEB UI Port
       - "8080:8080"
+
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./config:/etc/traefik"
@@ -22,9 +30,10 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.dashboard.rule=PathPrefix(`/dashboard`)"
       - "traefik.http.routers.dashboard.service=api@internal"
-    networks:
-      - webnet
 
+  ########################################################
+  # Messaging/Kafka
+  ########################################################
   zookeeper:
     image: quay.io/strimzi/kafka:0.23.0-kafka-2.8.0
     command: [
@@ -35,8 +44,6 @@ services:
       - "2181:2181"
     environment:
       LOG_DIR: /tmp/logs
-    networks:
-      - webnet
 
   kafka:
     image: quay.io/strimzi/kafka:0.23.0-kafka-2.8.0
@@ -53,65 +60,92 @@ services:
       KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-    networks:
-      - webnet
 
+  ########################################################
+  #  Customer Information Postgres DB
+  ########################################################
   customer-information-service-db:
     image: postgres
     restart: always
     volumes:
+      # Use the named volume to store DB data
       - customer-information-db-data:/var/lib/postgresql/data
+      # Init Database with Data when Docker started
+      #- /init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
     ports:
+      # We expose the port so that one can connect directly to this
+      # DB using `localhost:5432` from your IDE or some other tool
       - "5432:5432"
     environment:
+      # PostgreSQL settings - should be used in your database connection
+      # config in `application.properties` from Quarkus
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
-    networks:
-      - webnet
 
+  ########################################################
+  # Depot Service Postgres DB
+  ########################################################
   depot-service-db:
     image: postgres
     restart: always
     volumes:
+      # Use the named volume to store DB data
       - depot-service-db-data:/var/lib/postgresql/data
     ports:
+      # We expose the port so that one can connect directly to this
+      # DB using `localhost:5432` from your IDE or some other tool
       - "5433:5432"
     environment:
+      # PostgreSQL settings - should be used in your database connection
+      # config in `application.properties` from Quarkus
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
-    networks:
-      - webnet
 
+  ########################################################
+  # Transaction Service Postgres DB
+  ########################################################
   transaction-service-db:
     image: postgres
     restart: always
     volumes:
+      # Use the named volume to store DB data
       - transaction-service-db-data:/var/lib/postgresql/data
     ports:
+      # We expose the port so that one can connect directly to this
+      # DB using `localhost:5432` from your IDE or some other tool
       - "5435:5432"
     environment:
+      # PostgreSQL settings - should be used in your database connection
+      # config in `application.properties` from Quarkus
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
-    networks:
-      - webnet
 
+  ########################################################
+  # Support Service Postgres DB
+  ########################################################
   support-service-db:
     image: postgres
     restart: always
     volumes:
+      # Use the named volume to store DB data
       - support-service-db-data:/var/lib/postgresql/data
     ports:
+      # We expose the port so that one can connect directly to this
+      # DB using `localhost:5433` from your IDE or some other tool
       - "5434:5432"
     environment:
+      # PostgreSQL settings - should be used in your database connection
+      # config in `application.properties` from Quarkus
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
-    networks:
-      - webnet
 
+  ########################################################
+  # Customer Information API-Gateway
+  ########################################################
   customer-information-service:
     build:
       context: ./customer-information-service
@@ -125,9 +159,11 @@ services:
     depends_on:
       - gateway
       - customer-information-service-db
-    networks:
-      - webnet
 
+
+  ########################################################
+  # Support Service API-Gateway
+  ########################################################
   support-service:
     build:
       context: ./support-service
@@ -138,12 +174,14 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.support-service.rule=PathPrefix(`/support-service`)"
       - "traefik.http.services.support-service.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.support-service.entrypoints=web"
     depends_on:
       - gateway
       - support-service-db
-    networks:
-      - webnet
 
+  ########################################################
+  # Depot Service API-Gateway
+  ########################################################
   depot-service:
     build:
       context: ./depot-service
@@ -161,9 +199,11 @@ services:
       - depot-service-db
       - kafka
       - transaction-service
-    networks:
-      - webnet
 
+
+  ########################################################
+  # Transaction Service API-Gateway
+  ########################################################
   transaction-service:
     build:
       context: ./transaction-service
@@ -180,9 +220,10 @@ services:
       - gateway
       - transaction-service-db
       - kafka
-    networks:
-      - webnet
 
+  ########################################################
+  # Login Service API-Gateway
+  ########################################################
   login-service:
     build:
       context: ./login-service
@@ -196,9 +237,5 @@ services:
     depends_on:
       - gateway
       - customer-information-service-db
-    networks:
-      - webnet
 
-networks:
-  webnet:
-    driver: bridge
+

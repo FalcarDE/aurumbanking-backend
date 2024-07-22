@@ -73,4 +73,6 @@ class CustomerInformationResource {
         deleteCustomerInformationUc(id)
             .onItem().ifNotNull().transform { RestResponse.ok(it) }
             .onItem().ifNull().continueWith(RestResponse.notFound())
+
+
 }

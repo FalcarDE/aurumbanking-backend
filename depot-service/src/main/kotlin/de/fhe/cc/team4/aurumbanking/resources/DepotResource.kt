@@ -2,7 +2,6 @@ package de.fhe.cc.team4.aurumbanking.resources
 
 import de.fhe.cc.team4.aurumbanking.domain.*
 import de.fhe.cc.team4.aurumbanking.model.entities.DepotDTO
-import de.fhe.cc.team4.aurumbanking.model.repostories.DepotRepositoryImp
 import io.quarkus.hibernate.reactive.panache.common.WithSession
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction
 import io.smallrye.mutiny.Uni
@@ -18,10 +17,6 @@ import java.net.URI
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 class DepotResource {
-
-    @Inject
-    lateinit var depotRepositoryImp: DepotRepositoryImp
-
     @Inject
     lateinit var getDepotByIdUc: GetDepotByIdUc
 
@@ -35,22 +30,22 @@ class DepotResource {
     lateinit var updateDepositValueByIdUc: UpdateDepositValueByIdUc
 
     @Inject
-    lateinit var deleteDepotById: DeleteDepotById
+    lateinit var deleteDepotByIdUc: DeleteDepotByIdUc
 
     @GET
     @Path("/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
-    fun getDepotInformationById(@PathParam("id") id: Long) = getDepotByIdUc(id)
+    fun getDepotById(@PathParam("id") id: Long) = getDepotByIdUc(id)
         .onItem().ifNotNull().transform { RestResponse.ok(it) }
         .onItem().ifNull().continueWith(RestResponse.notFound())
 
 
     @GET
-    @Path("/findCurrentDepotValueById/{id:\\d+}")
+    @Path("/getCurrentDepotByCustomerId/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
-    fun findCurrentDepotValueById(@PathParam("id") id: Long) = getCurrentDepotByCustomerIdUc(id)
+    fun getCurrentDepotByCustomerId(@PathParam("id") id: Long) = getCurrentDepotByCustomerIdUc(id)
         .onItem().ifNotNull().transform { RestResponse.ok(it) }
         .onItem().ifNull().continueWith(RestResponse.notFound())
 
@@ -72,8 +67,8 @@ class DepotResource {
         @PathParam("id") id: Long,
         @PathParam("value") value: BigDecimal
     ): Uni<RestResponse<DepotDTO>>? {
-       return updateDepositValueByIdUc(id,value)
-            .onItem().ifNotNull().transform {RestResponse.ok(it)}
+        return updateDepositValueByIdUc(id, value)
+            .onItem().ifNotNull().transform { RestResponse.ok(it) }
             .onItem().ifNull().continueWith(RestResponse.notFound())
     }
 
@@ -82,7 +77,6 @@ class DepotResource {
     @Produces(MediaType.APPLICATION_JSON)
     @WithTransaction
     fun deleteById(@PathParam("id") id: Long): Uni<RestResponse<Void>> {
-        return deleteDepotById(id).replaceWith{ RestResponse.ok()}
+        return deleteDepotByIdUc(id).replaceWith { RestResponse.ok() }
     }
-
 }

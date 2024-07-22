@@ -53,7 +53,7 @@ dependencies {
     implementation("io.quarkus:quarkus-smallrye-health")
 
     // Messaging/Kafka
-    implementation("io.quarkus:quarkus-smallrye-reactive-messaging-kafka")
+    // implementation("io.quarkus:quarkus-smallrye-reactive-messaging-kafka")
 
     // Test
     implementation("io.quarkus:quarkus-jacoco")
