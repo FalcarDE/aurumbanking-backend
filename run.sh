@@ -35,8 +35,8 @@ fi
 # Optionen für Docker Compose Setups
 options=(
     "docker-compose-test.yml"
-    "monitoring/docker-compose-metrics.yml"
-    "monitoring/docker-compose-metrics-ui.yml"
+    "monitoring/docker-compose-prometheus"
+    "monitoring/docker-compose-grafana.yml"
     "monitoring/docker-compose-tracing.yml"
 )
 

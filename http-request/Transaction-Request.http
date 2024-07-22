@@ -45,7 +45,7 @@ GET http://localhost:8081/transactions/getAllTransactionsByDepotId/1
 GET http://localhost:8081/transactions/getThreeLatestTransactionByDepotId/1
 
 ###
-POST http://localhost:8081/transactions/updateTransactionById
+POST http://localhost:8081/transactions/
 Accept: application/json
 Content-Type: application/json
 
@@ -68,12 +68,11 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8081/transactions/getTransactionsId/1
-
 ###
 GET http://localhost:80/transactions-service/transactions/test
 
 ###
-POST http://192.168.2.123:80/transactions-service/transactions
+POST localhost:80/transactions-service/transactions
 Accept: application/json
 Content-Type: application/json
 
@@ -92,7 +91,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://192.168.2.123:80/transactions-service/transactions
+POST localhost:80/transactions-service/transactions
 Accept: application/json
 Content-Type: application/json
 

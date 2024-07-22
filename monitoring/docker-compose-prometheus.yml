@@ -20,6 +20,7 @@ services:
       - metrics-service-data:/prometheus
     labels:
       - "traefik.enable=true"
-      # - "traefik.http.routers.prom.entrypoints=web"
       - "traefik.http.routers.prom.rule=PathPrefix(`/prometheus-service`)"
       - "traefik.http.services.prom.loadbalancer.server.port=9090"
+      # - "traefik.http.routers.prom.entrypoints=web"
+

@@ -33,30 +33,13 @@ Content-Type: application/json
   "fallbackDepositAmount": 1000.00
 }
 
-###
-GET http://localhost:80/depot-service/depot/1
+### Test after run POST http://localhost:80/depot-service/depot to create 2nd Depot
+DELETE http://localhost:80/depot-service/depot/deleteDepotBy/2
 
 ###
-PUT http://localhost:80/depot-service/depot/insertNewDepositValueById/1/7000.45
-
-###
-GET http://localhost:80/depot-service/depot/findCurrentDepotValueById/1
+GET http://localhost:80/depot-service/depot/getCurrentDepotByCustomerId/2
 
 
-###
-POST http://192.168.2.123:80/depot-service/depot
-Accept: application/json
-Content-Type: application/json
-
-{
-  "customerId": 1,
-  "currencyArea": "EUR",
-  "depositAmount": 5000.00,
-  "fallbackDepositAmount": 1000.00
-}
-
-###
-GET http://192.168.2.123:80/depot-service/depot/1
 
 
 

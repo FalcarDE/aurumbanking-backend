@@ -15,14 +15,9 @@ services:
     image: "traefik:v2.10"
     # Enables the web UI and tells Traefik to listen to docker
     command:
-      --api.insecure=true
-      --providers.docker
+      - --configFile=/etc/traefik/traefik-config.yml
     ports:
-      # HTTP Port
       - "80:80"
-      # WEB UI Port
-      - "8080:8080"
-
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./config:/etc/traefik"
@@ -154,8 +149,9 @@ services:
       replicas: 1
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.customer-information-service.rule=PathPrefix(`/customer-information-service`)"
+      # - "traefik.http.routers.customer-information-service.rule=PathPrefix(`/customer-information-service`)"
       - "traefik.http.services.customer-information-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.catalog-service.entrypoints=web"
     depends_on:
       - gateway
       - customer-information-service-db
@@ -174,6 +170,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.support-service.rule=PathPrefix(`/support-service`)"
       - "traefik.http.services.support-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.support-service.entrypoints=web"
     depends_on:
       - gateway
       - support-service-db
@@ -191,6 +188,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.depot-service.rule=PathPrefix(`/depot-service`)"
       - "traefik.http.services.depot-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.depot-service.entrypoints=web"
     environment:
       KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
     depends_on:
@@ -213,6 +211,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.transaction-service.rule=PathPrefix(`/transactions-service`)"
       - "traefik.http.services.transaction-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.transaction-service.entrypoints=web"
     environment:
       KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
     depends_on:
@@ -233,6 +232,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.login-service.rule=PathPrefix(`/login-service`)"
       - "traefik.http.services.login-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.transaction-service.entrypoints=web"
+
     depends_on:
       - gateway
       - customer-information-service-db

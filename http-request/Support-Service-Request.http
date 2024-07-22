@@ -74,3 +74,9 @@ Accept: application/json
 ###
 GET http://localhost:80/support-service/support/get-all-support-reqeuests-by-customer-id/1
 Accept: application/json
+
+###
+DELETE http://localhost:80/support-service/support/deleteRequestByCustomerId/1
+Accept: application/json
+
+

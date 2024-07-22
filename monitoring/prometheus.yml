@@ -5,7 +5,23 @@ global:
     monitor: 'system-monitor'
 
 scrape_configs:
-  - job_name: 'shop-services'
+  #- job_name: 'aurumbanking-services'
+  #  metrics_path: '/metrics'
+  #  static_configs:
+  #    - targets: [
+  #      '172.18.0.10:8080',   # support-service
+  #      '172.18.0.11:8080',   # customer-information-service
+  #      '172.18.0.13:8080',   # depot-service
+  #      '172.18.0.10:8080',   # support-service
+  #      '172.18.0.9:8080'     # login-service
+  #    ]
+  #- job_name: 'metrics-service'
+  #  metrics_path: '/metrics-service/metrics'
+  #  static_configs:
+  #    - targets: [
+  #      "172.28.0.2:9090"
+  #    ]
+  - job_name: 'aurumbanking-services'
     metrics_path: '/metrics'
     static_configs:
       - targets: [
@@ -14,6 +30,12 @@ scrape_configs:
         'depot-service:8080',
         'support-service:8080',
         'login-service:8080'
+      ]
+  - job_name: 'metrics-service'
+    metrics_path: '/metrics-service/metrics'
+    static_configs:
+      - targets: [
+        "metrics-service:9090"
       ]
   - job_name: 'infrastructure'
     metrics_path: '/metrics'
