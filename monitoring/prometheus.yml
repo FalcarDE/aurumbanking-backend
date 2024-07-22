@@ -5,20 +5,20 @@ global:
     monitor: 'system-monitor'
 
 scrape_configs:
-  - job_name: 'aurumbanking-services'
+  - job_name: 'shop-services'
     metrics_path: '/metrics'
     static_configs:
       - targets: [
-        'customer-information-service:80',
-        'transaction-service:80',
-        'depot-service:80',
-        'support-service:80',
-        'login-service:80'
+        'customer-information-service:8080',
+        'transaction-service:8080',
+        'depot-service:8080',
+        'support-service:8080',
+        'login-service:8080'
       ]
   - job_name: 'infrastructure'
     metrics_path: '/metrics'
     static_configs:
       - targets: [
-        'gateway:80',
+        'gateway:8080',
         'tracing-service:14269'
       ]
