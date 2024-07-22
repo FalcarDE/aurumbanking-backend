@@ -9,16 +9,16 @@ scrape_configs:
     metrics_path: '/metrics'
     static_configs:
       - targets: [
-        'customer-information-service:8080',
-        'transaction-service:8080',
-        'depot-service:8080',
-        'support-service:8080',
-        'login-service:8080'
+        'customer-information-service:80',
+        'transaction-service:80',
+        'depot-service:80',
+        'support-service:80',
+        'login-service:80'
       ]
   - job_name: 'infrastructure'
     metrics_path: '/metrics'
     static_configs:
       - targets: [
-        'gateway:8080',
+        'gateway:80',
         'tracing-service:14269'
       ]
