@@ -45,6 +45,11 @@ dependencies {
 
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
+
+    // Tracing
+    implementation("io.opentelemetry.instrumentation:opentelemetry-jdbc")
+    implementation("io.quarkus:quarkus-opentelemetry")
+    implementation("io.quarkus:quarkus-opentelemetry-exporter-otlp")
 }
 
 group = "de.fhe.ai.pmc.cc"

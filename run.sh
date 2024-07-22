@@ -10,14 +10,6 @@ build_service() {
     echo "Building $service_name... done."
 }
 
-# Funktion zum Starten eines Docker Compose Setups
-start_docker_compose() {
-    compose_file=$1
-    echo "Starting Docker Compose setup: $compose_file..."
-    docker-compose -f $compose_file up -d
-    echo "Starting Docker Compose setup: $compose_file... done."
-}
-
 # Frage, ob die Services gebaut werden sollen
 read -p "Do you want to build the service containers? (yes/y or no/n): " build_services_choice
 if [[ $build_services_choice == "yes" || $build_services_choice == "y" ]]; then
@@ -34,13 +26,13 @@ fi
 
 # Optionen für Docker Compose Setups
 options=(
-    "docker-compose-test.yml"
-    "monitoring/docker-compose-prometheus"
+    "monitoring/docker-compose-prometheus.yml"
     "monitoring/docker-compose-grafana.yml"
     "monitoring/docker-compose-tracing.yml"
 )
 
-echo "Which Docker Compose setups would you like to start?"
+echo "Docker Compose setup 'docker-compose-prod.yml' will always be started."
+echo "Which additional Docker Compose setups would you like to start?"
 echo "Enter the numbers corresponding to your choices, separated by spaces (e.g., 1 3):"
 for i in "${!options[@]}"; do
     echo "$((i+1)). ${options[$i]}"
@@ -50,30 +42,38 @@ echo "$(( ${#options[@]} + 1 )). All Docker Compose setups"
 # Benutzerauswahl einlesen
 read -p "Your choices: " choices
 
-# Auswahl ausführen
+# Initiales Docker Compose Kommando
+docker_compose_command="docker-compose -f docker-compose-prod.yml"
+
+# Auswahl ausführen und Kommandos hinzufügen
+all_selected=false
 for choice in $choices; do
     case $choice in
         1)
-            start_docker_compose "docker-compose-test.yml"
+            docker_compose_command+=" -f monitoring/docker-compose-prometheus.yml"
             ;;
         2)
-            start_docker_compose "monitoring/docker-compose-metrics.yml"
+            docker_compose_command+=" -f monitoring/docker-compose-grafana.yml"
             ;;
         3)
-            start_docker_compose "monitoring/docker-compose-metrics-ui.yml"
+            docker_compose_command+=" -f monitoring/docker-compose-tracing.yml"
             ;;
         4)
-            start_docker_compose "monitoring/docker-compose-tracing.yml"
-            ;;
-        5)
-            for i in "${!options[@]}"; do
-                start_docker_compose "${options[$i]}"
-            done
+            all_selected=true
+            break
             ;;
         *)
             echo "Invalid choice: $choice"
             ;;
     esac
 done
+
+# Wenn alle ausgewählt wurden, alle Docker Compose Dateien hinzufügen
+if [ "$all_selected" = true ]; then
+    docker_compose_command="docker-compose -f docker-compose-prod.yml -f monitoring/docker-compose-prometheus.yml -f monitoring/docker-compose-grafana.yml -f monitoring/docker-compose-tracing.yml"
+fi
+
+# Starte die Docker Compose Setups
+$docker_compose_command up -d
 
 echo "All selected services started successfully."

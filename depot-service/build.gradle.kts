@@ -65,6 +65,11 @@ dependencies {
 
     // Misc
     implementation("net.datafaker:datafaker:2.1.0")
+
+    // Tracing
+    implementation("io.opentelemetry.instrumentation:opentelemetry-jdbc")
+    implementation("io.quarkus:quarkus-opentelemetry")
+    implementation("io.quarkus:quarkus-opentelemetry-exporter-otlp")
 }
 
 group = "de.fhe.ai.pmc.cc"

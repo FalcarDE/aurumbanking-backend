@@ -33,11 +33,14 @@ Content-Type: application/json
   "fallbackDepositAmount": 1000.00
 }
 
+###
+PUT http://localhost:80/depot-service/depot/insertNewDepositValueById/1/7000.45
+
 ### Test after run POST http://localhost:80/depot-service/depot to create 2nd Depot
 DELETE http://localhost:80/depot-service/depot/deleteDepotBy/2
 
 ###
-GET http://localhost:80/depot-service/depot/getCurrentDepotByCustomerId/2
+GET http://localhost:80/depot-service/depot/getCurrentDepotByCustomerId/1
 
 
 

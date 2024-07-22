@@ -16,11 +16,11 @@ services:
       - --web.external-url=/metrics-service
       - --config.file=/etc/prometheus/prometheus.yml
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
       - metrics-service-data:/prometheus
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.prom.rule=PathPrefix(`/prometheus-service`)"
       - "traefik.http.services.prom.loadbalancer.server.port=9090"
-      # - "traefik.http.routers.prom.entrypoints=web"
+      - "traefik.http.routers.prom.entrypoints=web"
 
