@@ -13,12 +13,14 @@ Content-Type: application/json
   "housenumber": "123",
   "city": "Sample City",
   "country": "Sample Country",
+  "zipcode": "DE176381",
   "username": "johndoe",
   "email": "johndoe@example.com",
   "phoneNumber": "+1234567890",
   "password": "securepassword",
   "profileImage": "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="
 }
+
 
 ###
 GET http://localhost:8080/customers/1
@@ -47,6 +49,7 @@ Content-Type: application/json
   "housenumber": "123",
   "city": "Sample City",
   "country": "Sample Country",
+  "zipCode": "DE176381",
   "username": "johndoe",
   "email": "johndoe@example.com",
   "phoneNumber": "+1234567890",
