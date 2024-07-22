@@ -38,7 +38,7 @@ class CustomerInformationResourceTest {
 
 
     /**
-     * Test case for creating and retrieving a new customer.
+     * Test case for creating, update password, email and retrieving a new customer.
      *
      * This test case verifies that a new product can be created by sending a POST request to the server.
      * It uses the `Given`, `When`, and `Then` DSL (Domain-Specific Language) functions to execute a series
@@ -50,10 +50,12 @@ class CustomerInformationResourceTest {
 
         Given {
             contentType(ContentType.JSON)
-            body(customerInformationData)
             accept(ContentType.ANY)
+            body(customerInformationData)
         } When {
             post()
+            put("updateCustomerPasswordBy/1/password")
+            put("updateCustomerEmailBy/1/t@t.de")
             get("/1")
         } Then {
             //statusCode(201)
@@ -66,33 +68,10 @@ class CustomerInformationResourceTest {
             body("country", equalTo("Sample Country"))
             body("zipcode", equalTo("DE17538"))
             body("username", equalTo("johndoe"))
-            body("email", equalTo("johndoe@example.com"))
+            body("email", equalTo("t@t.de"))
             body("phoneNumber", equalTo("+1234567890"))
-            body("password", equalTo("securepassword"))
+            body("password", equalTo("password"))
             body("profileImage", equalTo("iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="))
-        }
-    }
-
-
-    /**
-     * Test case for updating password by id.
-     *
-     * This test case verifies that a new product can be created by sending a POST request to the server.
-     * It uses the `Given`, `When`, and `Then` DSL (Domain-Specific Language) functions to execute a series
-     * of HTTP requests and assertions.
-     */
-    @Test
-    fun `updating password by id`() {
-        val customerInformationData = createCustomerInformation()
-
-        Given {
-            body(customerInformationData)
-            accept(ContentType.ANY)
-        } When {
-            post()
-            put("updateCustomerPasswordBy/1/password")
-        } Then {
-            statusCode(200)
         }
     }
 
@@ -110,8 +89,8 @@ class CustomerInformationResourceTest {
 
         Given {
             contentType(ContentType.JSON)
-            body(customerInformationData)
             accept(ContentType.ANY)
+            body(customerInformationData)
         } When {
             post()
             delete("deleteCustomerInformationBy/1")
@@ -120,15 +99,6 @@ class CustomerInformationResourceTest {
             statusCode(404)
         }
     }
-
-
-
-
-
-
-
-
-
 }
 
 

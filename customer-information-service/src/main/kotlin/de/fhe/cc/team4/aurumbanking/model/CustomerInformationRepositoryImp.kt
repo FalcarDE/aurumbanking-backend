@@ -7,14 +7,15 @@ import io.quarkus.panache.common.Parameters
 import io.smallrye.mutiny.Uni
 import jakarta.enterprise.context.ApplicationScoped
 
-
+/**
+ * Repository class for managing customer information entities.
+ *
+ * This class provides the necessary operations for querying and manipulating customer information entities in the database.
+ */
 @ApplicationScoped
 class CustomerInformationRepositoryImpl : PanacheRepository<CustomerInformationEntityModel>,
     CustomerInformationInterfaceRepository {
 
-    override fun findAllCustomerInformation(): Uni<List<CustomerInformationDomainModel>> {
-        TODO("Not yet implemented")
-    }
 
     override fun findCustomerInformationById(id: Long): Uni<CustomerInformationDomainModel?> {
         return this.findById(id).onItem().ifNotNull().transform { it.toDomain() }
