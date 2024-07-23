@@ -1,14 +1,18 @@
 package de.fhe.cc.team4.aurumbanking.resources
 
+import de.fhe.cc.team4.aurumbanking.core.Application
 import de.fhe.cc.team4.aurumbanking.domain.*
 import io.quarkus.hibernate.reactive.panache.common.WithSession
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction
 import io.smallrye.mutiny.Uni
 import jakarta.inject.Inject
 import jakarta.ws.rs.*
+import jakarta.ws.rs.core.Context
+import jakarta.ws.rs.core.HttpHeaders
 import jakarta.ws.rs.core.MediaType
 import org.jboss.resteasy.reactive.RestResponse
 import java.net.URI
+import java.util.*
 
 
 @Path("/customers")
@@ -69,10 +73,24 @@ class CustomerInformationResource {
     @Path("/deleteCustomerInformationBy/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithTransaction
-    fun deleteCustomerInformationBy(@PathParam("id") id: Long) =
-        deleteCustomerInformationUc(id)
-            .onItem().ifNotNull().transform { RestResponse.ok(it) }
-            .onItem().ifNull().continueWith(RestResponse.notFound())
-
-
+    fun deleteCustomerInformationBy(
+        @PathParam("id") id: Long,
+        @Context headers: HttpHeaders
+    ): Uni<RestResponse<Long>>? {
+        val authHeaders = headers.getRequestHeader(HttpHeaders.AUTHORIZATION)
+        if (authHeaders.size == 1 && authHeaders[0].startsWith("Basic ")) {
+            val plainAuthHeader = Base64.getDecoder().decode(authHeaders[0].substringAfter(" "))
+            val authFields = String(plainAuthHeader).split(":")
+            val user = Application.findAuthUser(authFields[0])
+            user?.let {
+                val passwordOk = (authFields[1] == it.password)
+                if (passwordOk) {
+                    return deleteCustomerInformationUc(id)
+                        .onItem().ifNotNull().transform { RestResponse.ok(it) }
+                        .onItem().ifNull().continueWith(RestResponse.notFound())
+                }
+            }
+        }
+        return Uni.createFrom().item(RestResponse.status(RestResponse.Status.UNAUTHORIZED))
+    }
 }

@@ -31,8 +31,13 @@ PUT http://localhost:8080/customers/updateCustomerEmailBy/1/test@test.de
 ###
 PUT http://localhost:8080/customers/updateCustomerPasswordBy/1/testpassword
 
-###
+### 401 (Unauthorized)
 DELETE http://localhost:8080/customers/deleteCustomerInformationBy/1
+Authorization: Basic admin admin
+
+### 200 (ok)
+DELETE http://localhost:8080/customers/deleteCustomerInformationBy/1
+Authorization: Basic Hoang admin
 
 ###
 POST http://localhost:80/customer-information-service/customers
