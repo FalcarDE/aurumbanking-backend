@@ -10,11 +10,18 @@ import io.restassured.module.kotlin.extensions.When
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.util.Base64
 
 
 @QuarkusTest
 @TestHTTPEndpoint(CustomerInformationResource::class)
 class CustomerInformationResourceTest {
+
+    fun encodeCredentials(username: String, password: String): String {
+        val credentials = "$username:$password"
+        return Base64.getEncoder().encodeToString(credentials.toByteArray())
+    }
+
 
     /**
      * Clears the database by sending a DELETE request to the server.
@@ -27,8 +34,11 @@ class CustomerInformationResourceTest {
      */
     @BeforeEach
     fun clearDB() {
+        val encodedCredentials = encodeCredentials("Hoang", "admin")
+
         Given {
             accept(ContentType.JSON)
+            header("Authorization", "Basic $encodedCredentials")
         } When {
             delete("deleteCustomerInformationBy/1")
         } Then {
@@ -71,7 +81,10 @@ class CustomerInformationResourceTest {
             body("email", equalTo("t@t.de"))
             body("phoneNumber", equalTo("+1234567890"))
             body("password", equalTo("password"))
-            body("profileImage", equalTo("iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="))
+            body(
+                "profileImage",
+                equalTo("iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg==")
+            )
         }
     }
 
@@ -87,13 +100,33 @@ class CustomerInformationResourceTest {
     fun `create and delete a customer`() {
         val customerInformationData = createCustomerInformation()
 
+        val encodedCredentials = encodeCredentials("Hoang", "admin")
+
+        // Create Customer Information
         Given {
             contentType(ContentType.JSON)
             accept(ContentType.ANY)
             body(customerInformationData)
         } When {
             post()
+        } Then {
+            statusCode(201)
+        }
+
+        // Delete customer information
+        Given {
+            accept(ContentType.ANY)
+            header("Authorization", "Basic $encodedCredentials")
+        } When {
             delete("deleteCustomerInformationBy/1")
+        } Then {
+            statusCode(200)
+        }
+
+        // Check if customer information is deleted
+        Given {
+            accept(ContentType.ANY)
+        } When {
             get("/1")
         } Then {
             statusCode(404)
