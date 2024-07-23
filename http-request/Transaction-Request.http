@@ -73,20 +73,19 @@ GET http://localhost:8081/transactions/getTransactionsId/1
 GET http://localhost:80/transactions-service/transactions/test
 
 ### PROD
-POST http://localhost:80/transactions-service/transactions
+POST http://192.168.80.15:8080/transactions-service/transactions
 Accept: application/json
 Content-Type: application/json
 
 {
-  "id": 1,
-  "depotId": 456,
+  "depotId": 1,
   "country": "Germany",
-  "recipient": "John Doe",
-  "iban": "DE89370400440532013000",
+  "recipient": "Master of Disaster",
+  "iban": "DE89370400440532013XXX",
   "bic": "COBADEFFXXX",
   "moneyValue": 2500.00,
-  "purposeOfUse": "Rent",
-  "dateTimeOfExecution": "2024-07-04T10:00:00",
+  "purposeOfUse": "Stuff",
+  "dateTimeOfExecution": "2024-09-01T00:00:00",
   "standingOrder": true,
   "transactionType": "income",
   "transactionClassification": "Standard Überweisung",

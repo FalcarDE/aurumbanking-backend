@@ -3,9 +3,10 @@
 ########################################################
 volumes:
   customer-information-service-db-data:
+  transaction-service-db-data:
   depot-service-db-data:
   support-service-db-data:
-  transaction-service-db-data:
+
 
 services:
   ########################################################
@@ -175,28 +176,6 @@ services:
       - gateway
       - support-service-db
 
-  ########################################################
-  # Depot Service API-Gateway
-  ########################################################
-  depot-service:
-    build:
-      context: ./depot-service
-      dockerfile: ./src/main/docker/Dockerfile.jvm
-    deploy:
-      replicas: 1
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.depot-service.rule=PathPrefix(`/depot-service`)"
-      - "traefik.http.services.depot-service.loadbalancer.server.port=8080"
-      - "traefik.http.routers.depot-service.entrypoints=web"
-    environment:
-      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
-    depends_on:
-      - gateway
-      - depot-service-db
-      - kafka
-      - transaction-service
-
 
   ########################################################
   # Transaction Service API-Gateway
@@ -218,6 +197,28 @@ services:
       - gateway
       - transaction-service-db
       - kafka
+
+  ########################################################
+  # Depot Service API-Gateway
+  ########################################################
+  depot-service:
+    build:
+      context: ./depot-service
+      dockerfile: ./src/main/docker/Dockerfile.jvm
+    deploy:
+      replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.depot-service.rule=PathPrefix(`/depot-service`)"
+      - "traefik.http.services.depot-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.depot-service.entrypoints=web"
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+    depends_on:
+      - gateway
+      - depot-service-db
+      - kafka
+      - transaction-service
 
   ########################################################
   # Login Service API-Gateway
