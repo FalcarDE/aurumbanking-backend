@@ -3,17 +3,21 @@
     "ip": "localhost",
     "port": "8080",
     "customer-information-service-fullpath": "customers",
+    "customer-information-service-jwt-token-fullpath": "customers/createJwtToken",
     "login-service-fullpath": "login/check-credentials",
     "depot-service-fullpath": "depot",
-    "transaction-service-fullpath": "transactions"
+    "transaction-service-fullpath": "transactions",
+    "token": "xxx"
 
   },
   "prod": {
     "ip": "192.168.2.107",
     "port": "80",
     "customer-information-service-fullpath": "customer-information-service/customers",
+    "customer-information-service-jwt-token-fullpath": "customer-information-service/customers/createJwtToken",
     "login-service-fullpath": "login-service/login/check-credentials",
     "depot-service-fullpath": "depot-service/depot",
-    "transaction-service-fullpath": "transactions-service/transactions"
+    "transaction-service-fullpath": "transactions-service/transactions",
+    "token": "xxx"
   }
 }

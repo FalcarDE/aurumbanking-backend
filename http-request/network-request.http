@@ -1,8 +1,13 @@
+### generate token endpoint before create customer
+GET http://localhost:8080{{ip}}:{{port}}/{{customer-information-service-jwt-token-fullpath}}
+Authorization: Basic Hoang admin
+
 
 ### Customer-Information
 POST http://{{ip}}:{{port}}/{{customer-information-service-fullpath}}
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer {{token}} # fill token from request into http-client-env.json
 
 {
   "firstname": "John",
