@@ -188,9 +188,9 @@ services:
       replicas: 1
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.transaction-service.rule=PathPrefix(`/transactions-service`)"
-      - "traefik.http.services.transaction-service.loadbalancer.server.port=8080"
-      - "traefik.http.routers.transaction-service.entrypoints=web"
+      - "traefik.http.routers.transactions-service.rule=PathPrefix(`/transactions-service`)"
+      - "traefik.http.services.transactions-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.transactions-service.entrypoints=web"
     environment:
       KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
     depends_on:

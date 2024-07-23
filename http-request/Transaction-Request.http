@@ -72,7 +72,7 @@ GET http://localhost:8081/transactions/getTransactionsId/1
 ### PROD
 GET http://localhost:80/transactions-service/transactions/test
 
-### PROD
+### PROD WENN localhost nicht klappt
 POST http://192.168.80.15:8080/transactions-service/transactions
 Accept: application/json
 Content-Type: application/json
@@ -92,6 +92,28 @@ Content-Type: application/json
   "dateTimeOfFirstExecution": "2024-01-01T10:00:00",
   "dateTimeOfLastExecution": "2024-06-01T10:00:00"
 }
+
+### PROD WENN localhost nicht klappt
+POST http://localhost:80/transactions-service/transactions
+Accept: application/json
+Content-Type: application/json
+
+{
+  "depotId": 1,
+  "country": "Germany",
+  "recipient": "Master of Disaster",
+  "iban": "DE89370400440532013XXX",
+  "bic": "COBADEFFXXX",
+  "moneyValue": 2500.00,
+  "purposeOfUse": "Stuff",
+  "dateTimeOfExecution": "2024-09-01T00:00:00",
+  "standingOrder": true,
+  "transactionType": "income",
+  "transactionClassification": "Standard Überweisung",
+  "dateTimeOfFirstExecution": "2024-01-01T10:00:00",
+  "dateTimeOfLastExecution": "2024-06-01T10:00:00"
+}
+
 
 ### PROD
 GET http://localhost:80/transactions-service/transactions/getTransactionsId/1
