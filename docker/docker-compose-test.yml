@@ -114,8 +114,8 @@ services:
 
   customer-information-service:
     build:
-      context: ./customer-information-service
-      dockerfile: ./src/main/docker/Dockerfile.jvm
+      context: ../customer-information-service
+      dockerfile: ../customer-information-service/src/main/docker/Dockerfile.jvm
     deploy:
       replicas: 1
     labels:
@@ -130,8 +130,8 @@ services:
 
   support-service:
     build:
-      context: ./support-service
-      dockerfile: ./src/main/docker/Dockerfile.jvm
+      context: ../support-service
+      dockerfile: ../support-service/src/main/docker/Dockerfile.jvm
     deploy:
       replicas: 1
     labels:
@@ -146,8 +146,8 @@ services:
 
   depot-service:
     build:
-      context: ./depot-service
-      dockerfile: ./src/main/docker/Dockerfile.jvm
+      context: ../depot-service
+      dockerfile: ../depot-service/src/main/docker/Dockerfile.jvm
     deploy:
       replicas: 1
     labels:
@@ -166,8 +166,8 @@ services:
 
   transaction-service:
     build:
-      context: ./transaction-service
-      dockerfile: ./src/main/docker/Dockerfile.jvm
+      context: ../transaction-service
+      dockerfile: ../transaction-service/src/main/docker/Dockerfile.jvm
     deploy:
       replicas: 1
     labels:
@@ -185,8 +185,8 @@ services:
 
   login-service:
     build:
-      context: ./login-service
-      dockerfile: ./src/main/docker/Dockerfile.jvm
+      context: ../login-service
+      dockerfile: ../login-service/src/main/docker/Dockerfile.jvm
     deploy:
       replicas: 1
     labels:

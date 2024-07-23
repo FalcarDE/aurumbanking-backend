@@ -1,5 +1,5 @@
 ###
-POST http://localhost:8080/customers
+POST http://localhost:80/customer-information-service/customers
 Accept: application/json
 Content-Type: application/json
 
@@ -13,6 +13,7 @@ Content-Type: application/json
   "housenumber": "123",
   "city": "Sample City",
   "country": "Sample Country",
+  "zipCode": "DE176381",
   "username": "johndoe",
   "email": "johndoe@example.com",
   "phoneNumber": "+1234567890",
@@ -26,11 +27,12 @@ GET http://localhost:8080/login/test
 ###
 POST http://localhost:8080/login/check-credentials/test@test/
 
-###
-GET http://localhost:80/customer-information-service/customers/2
 
-###
+### PROD
 POST http://localhost:80/login-service/login/check-credentials/johndoe@example.com/securepassword
 
-###
+### PROD
+GET http://localhost:80/customer-information-service/customers/1
+
+### PROD
 GET http://localhost:80/login-service/login/test

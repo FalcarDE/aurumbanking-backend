@@ -1,0 +1,13 @@
+http:
+  routers:
+    services-weighted-router:
+      service: services_weighted
+      rule: "PathPrefix(`/customer-information`)"
+  services:
+    services_weighted:
+      weighted:
+        services:
+          - name: customer-information-service@docker
+            weight: 40
+          - name: customer-information-service@docker
+            weight: 10

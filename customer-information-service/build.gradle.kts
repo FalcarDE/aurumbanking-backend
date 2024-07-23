@@ -52,9 +52,6 @@ dependencies {
     implementation("io.quarkus:quarkus-micrometer")
     implementation("io.quarkus:quarkus-smallrye-health")
 
-    // Messaging/Kafka
-    // implementation("io.quarkus:quarkus-smallrye-reactive-messaging-kafka")
-
     // Test
     implementation("io.quarkus:quarkus-jacoco")
     testImplementation("io.quarkus:quarkus-junit5")
@@ -65,6 +62,11 @@ dependencies {
 
     // Misc
     implementation("net.datafaker:datafaker:2.1.0")
+
+    // Tracing
+    implementation("io.opentelemetry.instrumentation:opentelemetry-jdbc")
+    implementation("io.quarkus:quarkus-opentelemetry")
+    implementation("io.quarkus:quarkus-opentelemetry-exporter-otlp")
 }
 
 group = "de.fhe.ai.pmc.cc"
