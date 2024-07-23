@@ -7,7 +7,9 @@ providers:
   file:
     filename: /etc/traefik/traefik-providers.yml
 api:
+  insecure: false
   dashboard: true
+
 metrics:
   prometheus: {}
 tracing:
