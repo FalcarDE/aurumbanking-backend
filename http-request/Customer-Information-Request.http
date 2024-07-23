@@ -62,7 +62,6 @@ Content-Type: application/json
   "profileImage": "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="
 }
 
-
 ###
 GET http://localhost:80/customer-information-service/customers/1
 
@@ -72,8 +71,14 @@ PUT http://localhost:80/customer-information-service/customers/updateCustomerEma
 ###
 PUT http://localhost:80/customer-information-service/customers/updateCustomerPasswordBy/1/testpassword
 
-###
-DELETE http://localhost:80/customer-information-service/customers/deleteCustomerInformationBy/1
+### 401 (Unauthorized)
+DELETE http://localhost:80/customer-information-service/customers/deleteCustomerInformationBy/3
+Authorization: Basic admin admin
+
+### 200 (ok)
+DELETE http://localhost:80/customer-information-service/customers/deleteCustomerInformationBy/3
+Authorization: Basic Hoang admin
+
 
 ###
 POST http://192.168.2.107:80/customer-information-service/customers

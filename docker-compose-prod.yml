@@ -155,7 +155,9 @@ services:
       - "traefik.enable=true"
       # - "traefik.http.routers.customer-information-service.rule=PathPrefix(`/customer-information-service`)"
       - "traefik.http.services.customer-information-service.loadbalancer.server.port=8080"
-      - "traefik.http.routers.catalog-service.entrypoints=web"
+      - "traefik.http.routers.customer-information-service.entrypoints=web"
+      - "traefik.http.middlewares.customer-information-service-forward-auth.forwardauth.address=http://gateway/auth/login"
+      - "traefik.http.routers.customer-information-service.middlewares=customer-information-service-forward-auth@docker"
     depends_on:
       - gateway
       - customer-information-service-db
