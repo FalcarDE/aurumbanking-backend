@@ -26,7 +26,7 @@ class TransactionResource {
     lateinit var insertNewTransactionsUc: InsertNewTransactionsUc
 
     @Inject
-    lateinit var getThreeLastestTransactionByDepotIdUc: GetThreeLastestTransactionByDepotIdUc
+    lateinit var getThreeLatestTransactionByDepotIdUc: GetThreeLatestTransactionByDepotIdUc
 
     @Inject
     lateinit var updateTransactionsByIdUc: UpdateTransactionsByIdUc
@@ -65,7 +65,7 @@ class TransactionResource {
     @Path("/getThreeLatestTransactionByDepotId/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
-    fun getThreeLastestTransactionByDepotId(@PathParam("id") id: Long) = getThreeLastestTransactionByDepotIdUc(id)
+    fun getThreeLastestTransactionByDepotId(@PathParam("id") id: Long) = getThreeLatestTransactionByDepotIdUc(id)
         .onItem().ifNotNull().transform { RestResponse.ok(it) }
         .onItem().ifNull().continueWith(RestResponse.notFound())
 

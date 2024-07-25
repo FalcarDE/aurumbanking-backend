@@ -4,7 +4,9 @@ import de.fhe.cc.team4.aurumbanking.core.TransactionClassification
 import de.fhe.cc.team4.aurumbanking.core.TransactionType
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase
 import jakarta.persistence.*
+import org.hibernate.annotations.CreationTimestamp
 import java.math.BigDecimal
+import java.time.LocalDateTime
 import java.util.*
 
 @Entity
@@ -15,6 +17,9 @@ class TransactionEntityModel : PanacheEntityBase (){
     @GeneratedValue
     var id : Long = 0
 
+    @CreationTimestamp
+    var created: LocalDateTime = LocalDateTime.now()
+
     @Column(length = 2500)
     var depotId : Long = 0
     lateinit var country : String
@@ -23,7 +28,6 @@ class TransactionEntityModel : PanacheEntityBase (){
     lateinit var bic: String
     lateinit var moneyValue : BigDecimal
     lateinit var purposeOfUse : String
-    lateinit var dateTimeOfExecution: Date
     var standingOrder: Boolean? = null
     @Enumerated(EnumType.STRING)
     lateinit var transactionType: TransactionType
