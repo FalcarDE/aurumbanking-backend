@@ -62,7 +62,6 @@ Content-Type: application/json
   "bic": "COBADEFFXXX",
   "moneyValue": 1000.00,
   "purposeOfUse": "Payment for services777",
-  "dateTimeOfExecution": "2024-06-12T10:04:00Z",
   "standingOrder": false,
   "transactionType": "outcome",
   "transactionClassification": "Standard Überweisung"
