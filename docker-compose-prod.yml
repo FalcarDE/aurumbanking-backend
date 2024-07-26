@@ -29,7 +29,8 @@ services:
       # pwd: 123
       - "traefik.http.middlewares.dashboard-auth.basicauth.users=user:$$2y$$05$$oRaaVWedagrotfyrKJtvy.pnODYVnGkX127/d9.8N4unq5TaVkl4O"
       - "traefik.http.routers.dashboard.middlewares=dashboard-auth@docker"
-
+    networks:
+      - webnet
   ########################################################
   # Messaging/Kafka
   ########################################################
@@ -43,6 +44,8 @@ services:
       - "2181:2181"
     environment:
       LOG_DIR: /tmp/logs
+    networks:
+      - webnet
 
   kafka:
     image: quay.io/strimzi/kafka:0.23.0-kafka-2.8.0
@@ -59,6 +62,8 @@ services:
       KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    networks:
+      - webnet
 
   ########################################################
   #  Customer Information Postgres DB
@@ -81,6 +86,8 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
+    networks:
+      - webnet
 
   ########################################################
   # Depot Service Postgres DB
@@ -101,6 +108,8 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
+    networks:
+      - webnet
 
   ########################################################
   # Transaction Service Postgres DB
@@ -121,6 +130,8 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
+    networks:
+      - webnet
 
   ########################################################
   # Support Service Postgres DB
@@ -141,6 +152,8 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
+    networks:
+      - webnet
 
   ########################################################
   # Customer Information API-Gateway
@@ -161,6 +174,8 @@ services:
     depends_on:
       - gateway
       - customer-information-service-db
+    networks:
+      - webnet
 
 
   ########################################################
@@ -180,6 +195,8 @@ services:
     depends_on:
       - gateway
       - support-service-db
+    networks:
+      - webnet
 
 
   ########################################################
@@ -202,6 +219,8 @@ services:
       - gateway
       - transaction-service-db
       - kafka
+    networks:
+      - webnet
 
   ########################################################
   # Depot Service API-Gateway
@@ -224,6 +243,8 @@ services:
       - depot-service-db
       - kafka
       - transaction-service
+    networks:
+      - webnet
 
   ########################################################
   # Login Service API-Gateway
@@ -243,5 +264,11 @@ services:
     depends_on:
       - gateway
       - customer-information-service-db
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
 
 
