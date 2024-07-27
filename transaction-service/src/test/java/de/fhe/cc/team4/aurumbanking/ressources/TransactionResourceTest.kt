@@ -2,7 +2,7 @@ package de.fhe.cc.team4.aurumbanking.ressources
 
 import de.fhe.cc.team4.aurumbanking.domain.TransactionDomainModel
 import de.fhe.cc.team4.aurumbanking.resources.TransactionResource
-import de.fhe.cc.team4.aurumbanking.util.createTransaction
+import de.fhe.cc.team4.aurumbanking.util.createTransactions
 import io.quarkus.test.common.http.TestHTTPEndpoint
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.http.ContentType
@@ -26,7 +26,7 @@ class TransactionResourceTest {
      */
     @Test
     fun `create and retrieve a new transaction`() {
-        val testTransactionDataList = createTransaction()
+        val testTransactionDataList = createTransactions()
 
         // 1. create three new transactions with given test data
         Given {
@@ -71,7 +71,7 @@ class TransactionResourceTest {
      */
     @Test
     fun `create and retrieve three latest transactions`() {
-        val testTransactionDataList = createTransaction()
+        val testTransactionDataList = createTransactions()
 
         // create multiple new transactions with given test data
         testTransactionDataList.forEach { data ->
