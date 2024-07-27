@@ -1,5 +1,6 @@
 package de.fhe.cc.team4.aurumbanking.ressources
 
+import de.fhe.cc.team4.aurumbanking.domain.TransactionDomainModel
 import de.fhe.cc.team4.aurumbanking.resources.TransactionResource
 import de.fhe.cc.team4.aurumbanking.util.createTransaction
 import io.quarkus.test.common.http.TestHTTPEndpoint
@@ -17,9 +18,9 @@ import java.math.BigDecimal
 @TestHTTPEndpoint(TransactionResource::class)
 class TransactionResourceTest {
     /**
-     * Test case for creating, update password, email and retrieving a new customer.
+     * Test case for creating and retrieving a new transaction.
      *
-     * This test case verifies that a new product can be created by sending a POST request to the server.
+     * This test case verifies that a new transaction can be created by sending a POST request to the server.
      * It uses the `Given`, `When`, and `Then` DSL (Domain-Specific Language) functions to execute a series
      * of HTTP requests and assertions.
      */
@@ -37,27 +38,6 @@ class TransactionResourceTest {
         } Then {
             statusCode(201)
         }
-
-        Given {
-            contentType(ContentType.JSON)
-            accept(ContentType.ANY)
-            body(testTransactionDataList[1])
-        } When {
-            post()
-        } Then {
-            statusCode(201)
-        }
-
-        Given {
-            contentType(ContentType.JSON)
-            accept(ContentType.ANY)
-            body(testTransactionDataList[1])
-        } When {
-            post()
-        } Then {
-            statusCode(201)
-        }
-
 
         // 2. GET Request to retrieve the first transaction
         Given {
@@ -80,7 +60,68 @@ class TransactionResourceTest {
 
         }
     }
+
+    /**
+     * Test case for creating and retrieving three latest transaction .
+     *
+     * This test case verifies that  multiple transactions can be created by sending a POST request to the server
+     * and returns the three latest transaction as a list via the endpoint getThreeLatestTransactionByDepotId/1.
+     * It uses the `Given`, `When`, and `Then` DSL (Domain-Specific Language) functions to execute a series
+     * of HTTP requests and assertions.
+     */
+    @Test
+    fun `create and retrieve three latest transactions`() {
+        val testTransactionDataList = createTransaction()
+
+        // create multiple new transactions with given test data
+        testTransactionDataList.forEach { data ->
+            Given {
+                contentType(ContentType.JSON)
+                accept(ContentType.ANY)
+                body(data)
+            } When {
+                post()
+            } Then {
+                statusCode(201)
+            }
+        }
+
+        // Iterate through each test transaction and perform a GET request
+        testTransactionDataList.forEachIndexed { index, transaction ->
+            Given {
+                contentType(ContentType.JSON)
+                accept(ContentType.ANY)
+            } When {
+                get("getThreeLatestTransactionByDepotId/1")
+            } Then {
+                statusCode(200)
+
+                // Get the list of transactions from the response
+                val responseTransactions = extract().jsonPath().getList(".", TransactionDomainModel::class.java)
+
+                // Iterate through the response list and compare with the expected data
+                responseTransactions.forEachIndexed { responseIndex, responseTransaction ->
+                    val expectedTransaction = testTransactionDataList[testTransactionDataList.size - 1 - responseIndex]
+
+                    body("[$responseIndex].depotId", equalTo(expectedTransaction.depotId.toInt()))
+                    body("[$responseIndex].country", equalTo(expectedTransaction.country))
+                    body("[$responseIndex].recipient", equalTo(expectedTransaction.recipient))
+                    body("[$responseIndex].iban", equalTo(expectedTransaction.iban))
+                    body("[$responseIndex].bic", equalTo(expectedTransaction.bic))
+                    body("[$responseIndex].moneyValue", equalTo(expectedTransaction.moneyValue.toFloat()))
+                    body("[$responseIndex].purposeOfUse", equalTo(expectedTransaction.purposeOfUse))
+                    body("[$responseIndex].standingOrder", equalTo(expectedTransaction.standingOrder))
+                    body("[$responseIndex].transactionType", equalTo(expectedTransaction.transactionType))
+                    body(
+                        "[$responseIndex].transactionClassification",
+                        equalTo(expectedTransaction.transactionClassification)
+                    )
+                }
+            }
+        }
+    }
 }
+
 
 
 

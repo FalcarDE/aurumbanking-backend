@@ -81,7 +81,7 @@ services:
       # DB using `localhost:5432` from your IDE or some other tool
       - "5432:5432"
     environment:
-      # PostgreSQL settings - should be used in your database connection
+      # PostgresSQL settings - should be used in your database connection
       # config in `application.properties` from Quarkus
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
@@ -103,7 +103,7 @@ services:
       # DB using `localhost:5432` from your IDE or some other tool
       - "5433:5432"
     environment:
-      # PostgreSQL settings - should be used in your database connection
+      # PostgresSQL settings - should be used in your database connection
       # config in `application.properties` from Quarkus
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
@@ -125,7 +125,7 @@ services:
       # DB using `localhost:5432` from your IDE or some other tool
       - "5435:5432"
     environment:
-      # PostgreSQL settings - should be used in your database connection
+      # PostgresSQL settings - should be used in your database connection
       # config in `application.properties` from Quarkus
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
@@ -147,7 +147,7 @@ services:
       # DB using `localhost:5433` from your IDE or some other tool
       - "5434:5432"
     environment:
-      # PostgreSQL settings - should be used in your database connection
+      # PostgresSQL settings - should be used in your database connection
       # config in `application.properties` from Quarkus
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password

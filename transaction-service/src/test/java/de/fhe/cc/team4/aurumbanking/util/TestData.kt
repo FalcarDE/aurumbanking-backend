@@ -57,6 +57,21 @@ fun createTransaction(): List<TransactionDomainModel> {
     thirdTestTransaction.dateTimeOfFirstExecution = dateFormat.parse("2024-01-03T10:00:00")
     thirdTestTransaction.dateTimeOfLastExecution = dateFormat.parse("2024-01-03T10:00:00")
 
+    val furthTestTransaction = TransactionDomainModel()
+    furthTestTransaction.created = LocalDateTime.now()
+    furthTestTransaction.depotId = 1
+    furthTestTransaction.country = "Germany"
+    furthTestTransaction.recipient = "Payment for services"
+    furthTestTransaction.iban = "DE89370400440532013000"
+    furthTestTransaction.bic = "COBADEFFXXX"
+    furthTestTransaction.moneyValue = BigDecimal(4000.00)
+    furthTestTransaction.purposeOfUse = "GEHALT"
+    furthTestTransaction.standingOrder = false
+    furthTestTransaction.transactionType = "outcome"
+    furthTestTransaction.transactionClassification = "Standard Überweisung"
+    furthTestTransaction.dateTimeOfFirstExecution = dateFormat.parse("2024-01-04T10:00:00")
+    furthTestTransaction.dateTimeOfLastExecution = dateFormat.parse("2024-01-04T10:00:00")
+
     return listOf<TransactionDomainModel>(firstTestTransaction, secondTestTransaction, thirdTestTransaction)
 
 }
