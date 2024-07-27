@@ -13,7 +13,7 @@ services:
   metrics-service:
     image: prom/prometheus
     command:
-      - --web.external-url=/metrics-service
+      - --web.external-url=/prometheus
       - --config.file=/etc/prometheus/prometheus.yml
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
