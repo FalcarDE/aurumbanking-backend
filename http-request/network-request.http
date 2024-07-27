@@ -62,10 +62,12 @@ Content-Type: application/json
   "iban": "DE89370400440532013000",
   "bic": "COBADEFFXXX",
   "moneyValue": 1000.00,
-  "purposeOfUse": "Payment for services777",
+  "purposeOfUse": "Payment for services",
   "standingOrder": false,
   "transactionType": "outcome",
-  "transactionClassification": "Standard Überweisung"
+  "transactionClassification": "Standard Überweisung",
+  "dateTimeOfFirstExecution": "2024-01-01T10:00:00",
+  "dateTimeOfLastExecution": "2024-06-01T10:00:00"
 }
 
 ###
@@ -80,11 +82,11 @@ Content-Type: application/json
   "iban": "DE89370400440532013XXX",
   "bic": "COBADEFFXXX",
   "moneyValue": 2500.00,
-  "purposeOfUse": "Testo555",
+  "purposeOfUse": "Income42",
   "dateTimeOfExecution": "2024-09-01T00:00:00",
   "standingOrder": true,
   "transactionType": "income",
-  "transactionClassification": "Standard Überweisung",
+  "transactionClassification": "Dauerauftrag",
   "dateTimeOfFirstExecution": "2024-01-01T10:00:00",
   "dateTimeOfLastExecution": "2024-06-01T10:00:00"
 }
