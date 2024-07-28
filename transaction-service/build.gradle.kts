@@ -46,6 +46,14 @@ dependencies {
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
 
+    // Test
+    implementation("io.quarkus:quarkus-jacoco")
+    testImplementation("io.quarkus:quarkus-junit5")
+    testImplementation("io.rest-assured:rest-assured")
+    testImplementation("io.rest-assured:kotlin-extensions")
+    testImplementation("io.quarkus:quarkus-test-vertx")
+    testImplementation("io.quarkus:quarkus-test-hibernate-reactive-panache")
+
     // Tracing
     implementation("io.opentelemetry.instrumentation:opentelemetry-jdbc")
     implementation("io.quarkus:quarkus-opentelemetry")
