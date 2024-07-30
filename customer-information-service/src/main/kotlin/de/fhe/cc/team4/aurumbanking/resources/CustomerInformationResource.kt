@@ -89,7 +89,7 @@ class CustomerInformationResource {
         @HeaderParam("Authorization") authorizationHeader: String?
     ): Uni<RestResponse<Void>> {
         return addNewCustomerUc(customerInformationDomainModel).map {
-            RestResponse.created(URI("/customers/${it.id}"))
+            RestResponse.created(URI("${it.id}"))
         }
     }
 
