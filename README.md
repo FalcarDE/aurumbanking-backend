@@ -20,7 +20,7 @@ Backend for the Banking-App.
 ### Setup-Pipeline
 token: 
 - linux: glrt-xznuGhoqctjSmbVNxpm_
-- windows: xxx
+- windows: glrt-U2DizuAyRBK47bCsofwx
 
 docker run --rm -it -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner:latest register .\gitlab-runner.exe register --url https://git.ai.fh-erfurt.de --token $token
 - Enter the GitLab instance URL (for example, https://gitlab.com/): [https://git.ai.fh-erfurt.de]: [Enter]
