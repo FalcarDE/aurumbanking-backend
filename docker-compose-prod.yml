@@ -159,9 +159,10 @@ services:
   # Customer Information API-Gateway
   ########################################################
   customer-information-service:
-    build:
-      context: ./customer-information-service
-      dockerfile: ./src/main/docker/Dockerfile.jvm
+    image: {CUSTOMER_INFORMATION_SERVICE_IMAGE}
+    #build:
+    #  context: ./customer-information-service
+    #  dockerfile: ./src/main/docker/Dockerfile.jvm
     deploy:
       replicas: 1
     labels:

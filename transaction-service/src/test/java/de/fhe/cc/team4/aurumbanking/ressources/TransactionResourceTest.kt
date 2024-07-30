@@ -5,11 +5,15 @@ import de.fhe.cc.team4.aurumbanking.resources.TransactionResource
 import de.fhe.cc.team4.aurumbanking.util.createTransactions
 import io.quarkus.test.common.http.TestHTTPEndpoint
 import io.quarkus.test.junit.QuarkusTest
+import io.restassured.RestAssured
 import io.restassured.http.ContentType
+import io.restassured.module.kotlin.extensions.Extract
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
+import io.restassured.parsing.Parser
 import org.hamcrest.CoreMatchers.equalTo
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 
@@ -17,6 +21,13 @@ import java.math.BigDecimal
 @QuarkusTest
 @TestHTTPEndpoint(TransactionResource::class)
 class TransactionResourceTest {
+
+    @BeforeEach
+    fun setup() {
+        // set den standard parser to JSON
+        RestAssured.defaultParser = Parser.JSON
+    }
+
     /**
      * Test case for creating and retrieving a new transaction.
      *
@@ -29,22 +40,29 @@ class TransactionResourceTest {
         val testTransactionDataList = createTransactions()
 
         // 1. create three new transactions with given test data
-        Given {
+        val response = Given {
             contentType(ContentType.JSON)
-            accept(ContentType.ANY)
+            accept(ContentType.JSON)
             body(testTransactionDataList[0])
         } When {
             post()
         } Then {
             statusCode(201)
+        } Extract {
+            response()
         }
+
+
+        // extract Location-Header
+        val locationHeader = response.getHeader("Location")
+        val id = locationHeader.split("/").last()
 
         // 2. GET Request to retrieve the first transaction
         Given {
             contentType(ContentType.JSON)
-            accept(ContentType.ANY)
+            accept(ContentType.JSON)
         } When {
-            get("getTransactionsId/1")
+            get("getTransactionsId/$id")
         } Then {
             statusCode(200)
             body("depotId", equalTo(1))
@@ -77,22 +95,25 @@ class TransactionResourceTest {
         testTransactionDataList.forEach { data ->
             Given {
                 contentType(ContentType.JSON)
-                accept(ContentType.ANY)
+                accept(ContentType.JSON)
                 body(data)
             } When {
                 post()
             } Then {
                 statusCode(201)
+            } Extract {
+                response()
             }
         }
 
         // Iterate through each test transaction and perform a GET request
-        testTransactionDataList.forEachIndexed { index, transaction ->
+        testTransactionDataList.forEachIndexed { _, transaction ->
+            val depotId = transaction.depotId
             Given {
                 contentType(ContentType.JSON)
-                accept(ContentType.ANY)
+                accept(ContentType.JSON)
             } When {
-                get("getThreeLatestTransactionByDepotId/1")
+                get("getThreeLatestTransactionByDepotId/$depotId")
             } Then {
                 statusCode(200)
 
@@ -100,7 +121,8 @@ class TransactionResourceTest {
                 val responseTransactions = extract().jsonPath().getList(".", TransactionDomainModel::class.java)
 
                 // Iterate through the response list and compare with the expected data
-                responseTransactions.forEachIndexed { responseIndex, responseTransaction ->
+                responseTransactions.forEachIndexed { responseIndex, _ ->
+
                     val expectedTransaction = testTransactionDataList[testTransactionDataList.size - 1 - responseIndex]
 
                     body("[$responseIndex].depotId", equalTo(expectedTransaction.depotId.toInt()))
