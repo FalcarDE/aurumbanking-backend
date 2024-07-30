@@ -31,9 +31,9 @@ class TransactionRepositoryImp : PanacheRepositoryBase<TransactionEntityModel, L
             .onItem().ifNull().fail()
     }
 
-    override fun getThreeLastestTransactionByDepotId(depotId: Long): Uni<List<TransactionDomainModel>> {
+    override fun getThreeLatestTransactionByDepotId(depotId: Long): Uni<List<TransactionDomainModel>> {
         val internalSortOrder = Direction.Descending
-        val sortColumn = "id"
+        val sortColumn = "created"
         val internalSort = Sort.by(sortColumn, internalSortOrder)
 
         return list("depotId", internalSort, depotId)
@@ -54,7 +54,6 @@ class TransactionRepositoryImp : PanacheRepositoryBase<TransactionEntityModel, L
                  bic = :bic,
                  moneyValue = :moneyValue,
                  purposeOfUse = :purposeOfUse,
-                 dateTimeOfExecution = :dateTimeOfExecution,
                  standingOrder = :standingOrder,
                  transactionType = :transactionType,
                  transactionClassification = :transactionClassification,
@@ -70,7 +69,6 @@ class TransactionRepositoryImp : PanacheRepositoryBase<TransactionEntityModel, L
                 .and("bic", transactionDomainModel.bic)
                 .and("moneyValue", transactionDomainModel.moneyValue)
                 .and("purposeOfUse", transactionDomainModel.purposeOfUse)
-                .and("dateTimeOfExecution", transactionDomainModel.dateTimeOfExecution)
                 .and("standingOrder", transactionDomainModel.standingOrder)
                 .and("transactionType", classifyTransactionType(transactionDomainModel.transactionType))
                 .and("transactionClassification", classifyTransaction(transactionDomainModel.transactionClassification))

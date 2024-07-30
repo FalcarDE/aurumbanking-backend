@@ -70,6 +70,11 @@ dependencies {
     implementation("io.quarkus:quarkus-security-jpa")
     implementation("io.quarkus:quarkus-smallrye-jwt")
     implementation("io.quarkus:quarkus-smallrye-jwt-build")
+
+    // Tracing
+    implementation("io.opentelemetry.instrumentation:opentelemetry-jdbc")
+    implementation("io.quarkus:quarkus-opentelemetry")
+    implementation("io.quarkus:quarkus-opentelemetry-exporter-otlp")
 }
 
 group = "de.fhe.ai.pmc.cc"

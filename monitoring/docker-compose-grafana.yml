@@ -1,0 +1,33 @@
+version: "3.8"
+
+########################################################
+# Volume Definition
+########################################################
+volumes:
+  grafana-data:     # Volume to store metrics ui data
+
+services:
+  ########################################################
+  # Metrics UI Service / Grafana
+  ########################################################
+  metrics-ui-service:
+    image: grafana/grafana
+    volumes:
+      - "./monitoring/grafana.ini:/etc/grafana/grafana.ini"
+      - "grafana-data:/var/lib/grafana"
+    environment:
+      - GF_SERVER_ROOT_URL=https://localhost/metrics-ui-service
+      - GF_SERVER_DOMAIN=localhost
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=PathPrefix(`/metrics-ui-service`)"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+      - "traefik.http.routers.grafana.entrypoints=web"
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
+

@@ -1,0 +1,333 @@
+image: gradle:jdk17
+
+stages:
+  - prepare
+  - build
+  - test
+  - package
+
+services:
+  - name: docker:dind
+    command: [ "--tls=false" ]
+
+variables:
+  CUSTOMER_INFORMATION_SERVICE_IMAGE_NAME: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/customer-information-service:latest
+  DEPOT_SERVICE_IMAGE_NAME: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/depot-service:latest
+  LOGIN_SERVICE_IMAGE_NAME: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/login-service:latest
+  SUPPORT_SERVICE_IMAGE_NAME: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/support-service:latest
+  TRANSACTION_SERVICE_IMAGE_NAME: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/transaction-service:latest
+  CI_REGISTRY: "git.ai.fh-erfurt.de"
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  DOCKER_HOST: "tcp://docker:2375"  # Uses TCP connection to Docker Daemon
+  DOCKER_TLS_CERTDIR: ""  # Disables TLS certificate directory
+  DOCKER_DRIVER: overlay2
+
+before_script:
+  - GRADLE_USER_HOME="$(pwd)/.gradle"
+  - export GRADLE_USER_HOME
+
+##### Customer Information Service Start #####
+prepare-customer-information-service-build-cache:
+  stage: prepare
+  script:
+    - cd customer-information-service
+    - gradle --build-cache assemble
+  cache:
+    key: "customer-information-service-$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - customer-information-service/build
+      - .gradle
+
+build-customer-information-service:
+  stage: build
+  script:
+    - cd customer-information-service
+    - echo "testcontainers.reuse.enable=true" > /root/.testcontainers.properties
+    - gradle build
+  cache:
+    key: "customer-information-service-$CI_COMMIT_REF_NAME"
+    policy: pull-push
+    paths:
+      - customer-information-service/build
+      - .gradle
+  artifacts:
+    when: always
+    reports:
+      junit: customer-information-service/build/test-results/test/**/TEST-*.xml
+    paths:
+      - build
+  dependencies:
+    - prepare-customer-information-service-build-cache
+
+build-customer-information-service-image:
+  stage: package
+  image: docker:stable
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
+  script:
+    - cd customer-information-service
+    - docker build -f src/main/docker/Dockerfile.jvm -t $CUSTOMER_INFORMATION_SERVICE_IMAGE_NAME .
+    - docker images
+    # - docker push $CUSTOMER_INFORMATION_SERVICE_IMAGE_NAME
+  cache:
+    key: "customer-information-service-$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - customer-information-service/build
+      - .gradle
+  dependencies:
+    - build-customer-information-service
+##### Customer Information Service End #####
+
+##### Depot Service Start #####
+prepare-depot-service-build-cache:
+  stage: prepare
+  script:
+    - cd depot-service
+    - gradle --build-cache assemble
+  cache:
+    key: "depot-service-$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - depot-service/build
+      - .gradle
+
+build-depot-service:
+  stage: build
+  script:
+    - cd depot-service
+    - echo "testcontainers.reuse.enable=true" > /root/.testcontainers.properties
+    - gradle build
+  cache:
+    key: "depot-service-$CI_COMMIT_REF_NAME"
+    policy: pull-push
+    paths:
+      - depot-service/build
+      - .gradle
+  artifacts:
+    when: always
+    reports:
+      junit: depot-service/build/test-results/test/**/TEST-*.xml
+    paths:
+      - build
+  dependencies:
+    - prepare-depot-service-build-cache
+
+build-depot-service-image:
+  stage: package
+  image: docker:stable
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
+  script:
+    - cd depot-service
+    - docker build -f src/main/docker/Dockerfile.jvm -t $DEPOT_SERVICE_IMAGE_NAME .
+    - docker images
+    # - docker push $DEPOT_SERVICE_IMAGE_NAME
+  cache:
+    key: "depot-service-$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - depot-service/build
+      - .gradle
+  dependencies:
+    - build-depot-service
+##### Depot Service End #####
+
+##### Login Service Start #####
+prepare-login-service-build-cache:
+  stage: prepare
+  script:
+    - cd login-service
+    - gradle --build-cache assemble
+  cache:
+    key: "login-service-$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - login-service/build
+      - .gradle
+
+build-login-service:
+  stage: build
+  script:
+    - cd login-service
+    - echo "testcontainers.reuse.enable=true" > /root/.testcontainers.properties
+    - gradle build
+  cache:
+    key: "login-service-$CI_COMMIT_REF_NAME"
+    policy: pull-push
+    paths:
+      - login-service/build
+      - .gradle
+  artifacts:
+    when: always
+    reports:
+      junit: login-service/build/test-results/test/**/TEST-*.xml
+    paths:
+      - build
+  dependencies:
+    - prepare-login-service-build-cache
+
+build-login-service-image:
+  stage: package
+  image: docker:stable
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
+  script:
+    - cd login-service
+    - docker build -f src/main/docker/Dockerfile.jvm -t $LOGIN_SERVICE_IMAGE_NAME .
+    - docker images
+    # - docker push $LOGIN_SERVICE_IMAGE_NAME
+  cache:
+    key: "login-service-$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - login-service/build
+      - .gradle
+  dependencies:
+    - build-login-service
+##### Login Service End #####
+
+##### Support Service Start #####
+prepare-support-service-build-cache:
+  stage: prepare
+  script:
+    - cd support-service
+    - gradle --build-cache assemble
+  cache:
+    key: "support-service-$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - support-service/build
+      - .gradle
+
+build-support-service:
+  stage: build
+  script:
+    - cd support-service
+    - echo "testcontainers.reuse.enable=true" > /root/.testcontainers.properties
+    - gradle build
+  cache:
+    key: "support-service-$CI_COMMIT_REF_NAME"
+    policy: pull-push
+    paths:
+      - support-service/build
+      - .gradle
+  artifacts:
+    when: always
+    reports:
+      junit: support-service/build/test-results/test/**/TEST-*.xml
+    paths:
+      - build
+  dependencies:
+    - prepare-support-service-build-cache
+
+build-support-service-image:
+  stage: package
+  image: docker:stable
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
+  script:
+    - cd support-service
+    - docker build -f src/main/docker/Dockerfile.jvm -t $SUPPORT_SERVICE_IMAGE_NAME .
+    - docker images
+    # - docker push $SUPPORT_SERVICE_IMAGE_NAME
+  cache:
+    key: "support-service-$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - support-service/build
+      - .gradle
+  dependencies:
+    - build-support-service
+##### Support Service End #####
+
+##### Transaction Service Start #####
+prepare-transaction-service-build-cache:
+  stage: prepare
+  script:
+    - cd transaction-service
+    - gradle --build-cache assemble
+  cache:
+    key: "transaction-service-$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - transaction-service/build
+      - .gradle
+
+build-transaction-service:
+  stage: build
+  script:
+    - cd transaction-service
+    - echo "testcontainers.reuse.enable=true" > /root/.testcontainers.properties
+    - gradle build
+  cache:
+    key: "transaction-service-$CI_COMMIT_REF_NAME"
+    policy: pull-push
+    paths:
+      - transaction-service/build
+      - .gradle
+  artifacts:
+    when: always
+    reports:
+      junit: transaction-service/build/test-results/test/**/TEST-*.xml
+    paths:
+      - build
+  dependencies:
+    - prepare-transaction-service-build-cache
+
+build-transaction-service-image:
+  stage: package
+  image: docker:stable
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
+  script:
+    - cd transaction-service
+    - docker build -f src/main/docker/Dockerfile.jvm -t $TRANSACTION_SERVICE_IMAGE_NAME .
+    - docker images
+    # - docker push $TRANSACTION_SERVICE_IMAGE_NAME
+  cache:
+    key: "transaction-service-$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - transaction-service/build
+      - .gradle
+  dependencies:
+    - build-transaction-service
+##### Transaction Service End #####
+
+##### Documentation Start #####
+#prepare_doc_pages:
+#  stage: prepare
+#  script:
+#    - ./assemble-docs.sh
+#  artifacts:
+#    paths:
+#      - docs
+#
+#build_doc_pages:
+#  stage: build
+#  image: python:latest
+#  script:
+#    - pip install mkdocs-material
+#    - mkdocs build --site-dir public
+#  artifacts:
+#    paths:
+#      - public
+#  dependencies:
+#    - prepare_doc_pages
+#
+#deploy_doc_pages:
+#  image: node:14-buster
+#  stage: deploy
+#  script:
+#    - npm install
+#    - npm install -g netlify-cli --unsafe-perm=true
+#    - netlify link --id $NETLIFY_SITE_ID
+#    # - netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir public/ --prod
+#  dependencies:
+#    - build_doc_pages
+##### Documentation Start #####
+
+include:
+  - template: Jobs/Dependency-Scanning.gitlab-ci.yml

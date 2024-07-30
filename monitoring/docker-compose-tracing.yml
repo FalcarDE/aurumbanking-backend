@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  # Jaeger Tracing
+  tracing-service:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "4317:4317"
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+      QUERY_BASE_PATH: /tracing
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jaeger.entrypoints=web"
+      - "traefik.http.routers.jaeger.rule=PathPrefix(`/tracing`)"
+      - "traefik.http.services.jaeger.loadbalancer.server.port=16686"
+    networks:
+      - webnet
+
+  ########################################################
+  # Service Configs for Tracing/Jaeger
+  ########################################################
+  customer-information-service:
+    environment:
+      QUARKUS_OPENTELEMETRY_TRACER_EXPORTER_OTLP_ENDPOINT: "http://tracing-service:4317"
+
+  transaction-service:
+    environment:
+      QUARKUS_OPENTELEMETRY_TRACER_EXPORTER_OTLP_ENDPOINT: "http://tracing-service:4317"
+
+  depot-service:
+    environment:
+      QUARKUS_OPENTELEMETRY_TRACER_EXPORTER_OTLP_ENDPOINT: "http://tracing-service:4317"
+
+  support-service:
+    environment:
+      QUARKUS_OPENTELEMETRY_TRACER_EXPORTER_OTLP_ENDPOINT: "http://tracing-service:4317"
+
+  login-service:
+    environment:
+      QUARKUS_OPENTELEMETRY_TRACER_EXPORTER_OTLP_ENDPOINT: "http://tracing-service:4317"
+
+networks:
+  webnet:
+    driver: bridge

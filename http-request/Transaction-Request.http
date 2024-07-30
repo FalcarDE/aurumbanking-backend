@@ -11,10 +11,11 @@ Content-Type: application/json
   "bic": "COBADEFFXXX",
   "moneyValue": 2000.00,
   "purposeOfUse": "Payment for services",
-  "dateTimeOfExecution": "2024-06-12T10:04:00Z",
   "standingOrder": false,
   "transactionType": "outcome",
-  "transactionClassification": "Standard Überweisung"
+  "transactionClassification": "Standard Überweisung",
+  "dateTimeOfFirstExecution": "2024-01-01T10:00:00",
+  "dateTimeOfLastExecution": "2024-06-01T10:00:00"
 }
 
 ###
@@ -30,9 +31,28 @@ Content-Type: application/json
   "bic": "COBADEFFXXX",
   "moneyValue": 2500.00,
   "purposeOfUse": "Stuff",
-  "dateTimeOfExecution": "2024-09-01T00:00:00",
   "standingOrder": true,
   "transactionType": "income",
+  "transactionClassification": "Standard Überweisung",
+  "dateTimeOfFirstExecution": "2024-01-01T10:00:00",
+  "dateTimeOfLastExecution": "2024-06-01T10:00:00"
+}
+
+###
+POST http://localhost:8081/transactions/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "depotId": 1,
+  "country": "Germany",
+  "recipient": "John Doe",
+  "iban": "DE89370400440532013000",
+  "bic": "COBADEFFXXX",
+  "moneyValue": 2500.00,
+  "purposeOfUse": "Rent",
+  "standingOrder": true,
+  "transactionType": "outcome",
   "transactionClassification": "Standard Überweisung",
   "dateTimeOfFirstExecution": "2024-01-01T10:00:00",
   "dateTimeOfLastExecution": "2024-06-01T10:00:00"
@@ -45,54 +65,13 @@ GET http://localhost:8081/transactions/getAllTransactionsByDepotId/1
 GET http://localhost:8081/transactions/getThreeLatestTransactionByDepotId/1
 
 ###
-POST http://localhost:8081/transactions/updateTransactionById
-Accept: application/json
-Content-Type: application/json
-
-{
-  "id": 1,
-  "depotId": 456,
-  "country": "Germany",
-  "recipient": "John Doe",
-  "iban": "DE89370400440532013000",
-  "bic": "COBADEFFXXX",
-  "moneyValue": 2500.00,
-  "purposeOfUse": "Rent",
-  "dateTimeOfExecution": "2024-07-04T10:00:00",
-  "standingOrder": true,
-  "transactionType": "income",
-  "transactionClassification": "Standard Überweisung",
-  "dateTimeOfFirstExecution": "2024-01-01T10:00:00",
-  "dateTimeOfLastExecution": "2024-06-01T10:00:00"
-}
-
-###
 GET http://localhost:8081/transactions/getTransactionsId/1
 
-###
+### PROD
 GET http://localhost:80/transactions-service/transactions/test
 
-###
-POST http://192.168.2.123:80/transactions-service/transactions
-Accept: application/json
-Content-Type: application/json
-
-{
-  "depotId": 1,
-  "country": "Germany",
-  "recipient": "John Doe",
-  "iban": "DE89370400440532013000",
-  "bic": "COBADEFFXXX",
-  "moneyValue": 1000.00,
-  "purposeOfUse": "Payment for services",
-  "dateTimeOfExecution": "2024-06-12T10:04:00Z",
-  "standingOrder": false,
-  "transactionType": "outcome",
-  "transactionClassification": "Standard Überweisung"
-}
-
-###
-POST http://192.168.2.123:80/transactions-service/transactions
+### PROD WENN localhost nicht klappt
+POST http://192.168.80.15:8080/transactions-service/transactions
 Accept: application/json
 Content-Type: application/json
 
@@ -103,50 +82,40 @@ Content-Type: application/json
   "iban": "DE89370400440532013XXX",
   "bic": "COBADEFFXXX",
   "moneyValue": 2500.00,
-  "purposeOfUse": "Testo2",
-  "dateTimeOfExecution": "2024-09-01T00:00:00",
+  "purposeOfUse": "Stuff",
   "standingOrder": true,
-  "transactionType": "outcome",
+  "transactionType": "income",
   "transactionClassification": "Standard Überweisung",
   "dateTimeOfFirstExecution": "2024-01-01T10:00:00",
   "dateTimeOfLastExecution": "2024-06-01T10:00:00"
 }
 
-
-
-###
-GET http://192.168.2.123:80/transactions-service/transactions/getAllTransactionsByDepotId/1
-
-###
-GET http://localhost:80/transactions-service/transactions/getTransactionsId/1
-
-###
-GET http://localhost:80/transactions-service/transactions/getAllTransactionsByDepotId/1
-
-###
-GET http://192.168.2.123:80/transactions-service/transactions/getThreeLastestTransactionByDepotId/1
-
-###
-POST http://localhost:80/transactions-service/transactions/updateTransactionById
+### PROD WENN localhost nicht klappt
+POST http://localhost:80/transactions-service/transactions
 Accept: application/json
 Content-Type: application/json
 
 {
-  "id": 1,
-  "depotId": 456,
+  "depotId": 1,
   "country": "Germany",
-  "recipient": "John Doe",
-  "iban": "DE89370400440532013000",
+  "recipient": "Master of Disaster",
+  "iban": "DE89370400440532013XXX",
   "bic": "COBADEFFXXX",
   "moneyValue": 2500.00,
-  "purposeOfUse": "Rent",
-  "dateTimeOfExecution": "2024-07-04T10:00:00",
+  "purposeOfUse": "Stuff",
   "standingOrder": true,
-  "transactionType": "outcome",
+  "transactionType": "income",
   "transactionClassification": "Standard Überweisung",
   "dateTimeOfFirstExecution": "2024-01-01T10:00:00",
   "dateTimeOfLastExecution": "2024-06-01T10:00:00"
 }
+
+
+### PROD
+GET http://localhost:80/transactions-service/transactions/getTransactionsId/1
+
+### PROD
+GET http://localhost:80/transactions-service/transactions/getAllTransactionsByDepotId/1
 
 
 

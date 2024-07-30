@@ -34,40 +34,6 @@ class CustomerInformationEntityModel() {
     lateinit var password: String
 
     var profileImage: ByteArray? = null
-
-    constructor(
-        firstname: String,
-        lastname: String,
-        birthDate: Date,
-        created: LocalDateTime,
-        lastestLogin: LocalDateTime,
-        streetName: String,
-        housenumber: String,
-        city: String,
-        country: String,
-        zipcode: String,
-        username: String,
-        email: String,
-        phoneNumber: String,
-        password: String,
-        profileImage: ByteArray,
-    ) : this() {
-        this.firstname = firstname
-        this.lastname = lastname
-        this.birthDate = birthDate
-        this.created = created
-        this.lastestLogin = lastestLogin
-        this.streetName = streetName
-        this.housenumber = housenumber
-        this.city = city
-        this.country = country
-        this.zipcode = zipcode
-        this.username = username
-        this.email = email
-        this.phoneNumber = phoneNumber
-        this.password = password
-        this.profileImage = profileImage
-    }
 }
 
 @RegisterForReflection

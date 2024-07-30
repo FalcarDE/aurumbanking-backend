@@ -4,36 +4,31 @@ import de.fhe.cc.team4.aurumbanking.util.createCustomerInformation
 import io.quarkus.test.common.http.TestHTTPEndpoint
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.http.ContentType
+import io.restassured.module.kotlin.extensions.Extract
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
+import io.restassured.RestAssured
+import io.restassured.parsing.Parser
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.util.*
 
 
 @QuarkusTest
 @TestHTTPEndpoint(CustomerInformationResource::class)
 class CustomerInformationResourceTest {
 
-    /**
-     * Clears the database by sending a DELETE request to the server.
-     *
-     * This method is used to clear the database before each test case. It sends a DELETE request to the server
-     * with the appropriate Accept header set to JSON. The method expects a 200 status code as a response from the server.
-     * If the status code received is not 200, the test fails.
-     *
-     * @throws AssertionError If the status code received from the server is not 200.
-     */
+    fun encodeCredentials(username: String, password: String): String {
+        val credentials = "$username:$password"
+        return Base64.getEncoder().encodeToString(credentials.toByteArray())
+    }
+
     @BeforeEach
-    fun clearDB() {
-        Given {
-            accept(ContentType.JSON)
-        } When {
-            delete("deleteCustomerInformationBy/1")
-        } Then {
-            statusCode(200)
-        }
+    fun setup() {
+        // set den standard parser to JSON
+        RestAssured.defaultParser = Parser.JSON
     }
 
 
@@ -48,17 +43,65 @@ class CustomerInformationResourceTest {
     fun `create and retrieve a new customer`() {
         val customerInformationData = createCustomerInformation()
 
-        Given {
-            contentType(ContentType.JSON)
+        val encodedCredentials = encodeCredentials("Hoang", "admin")
+
+        // 1. Create JWT Token
+        val token = Given {
             accept(ContentType.ANY)
+            header("Authorization", "Basic $encodedCredentials")
+        } When {
+            get("/createJwtToken")
+        } Then {
+            statusCode(200)
+        } Extract {
+            asString() // Extract the token from the response
+        }
+
+        // 2. create new customer with auth token
+        val response = Given {
+            contentType(ContentType.JSON)
+            accept(ContentType.JSON)
+            header("Authorization", "Bearer $token")
             body(customerInformationData)
         } When {
             post()
-            put("updateCustomerPasswordBy/1/password")
-            put("updateCustomerEmailBy/1/t@t.de")
-            get("/1")
         } Then {
-            //statusCode(201)
+            statusCode(201)
+        } Extract {
+            response()
+        }
+
+        // Extract ID from location-header
+        val locationHeader = response.getHeader("Location")
+        val customerId = locationHeader?.split("/")?.last() ?: throw IllegalStateException("Location header is missing or does not contain an ID")
+
+        // 3. PUT Request to update password
+        Given {
+            contentType(ContentType.JSON)
+            accept(ContentType.ANY)
+        } When {
+            put("/updateCustomerPasswordBy/$customerId/password")
+        } Then {
+            statusCode(200)
+        }
+
+        // 4. PUT Request to update email
+        Given {
+            contentType(ContentType.JSON)
+            accept(ContentType.ANY)
+        } When {
+            put("/updateCustomerEmailBy/$customerId/t@t.de")
+        } Then {
+            statusCode(200)
+        }
+
+        // 5. GET Request to retrieve customer information
+        Given {
+            contentType(ContentType.JSON)
+            accept(ContentType.ANY)
+        } When {
+            get("/$customerId")
+        } Then {
             statusCode(200)
             body("firstname", equalTo("John"))
             body("lastname", equalTo("Doe"))
@@ -71,10 +114,8 @@ class CustomerInformationResourceTest {
             body("email", equalTo("t@t.de"))
             body("phoneNumber", equalTo("+1234567890"))
             body("password", equalTo("password"))
-            body("profileImage", equalTo("iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="))
         }
     }
-
 
     /**
      * Test case for creating and deleting a customer.
@@ -87,14 +128,55 @@ class CustomerInformationResourceTest {
     fun `create and delete a customer`() {
         val customerInformationData = createCustomerInformation()
 
-        Given {
-            contentType(ContentType.JSON)
+        val encodedCredentials = encodeCredentials("Hoang", "admin")
+
+
+        // 1. Create JWT Token
+        val token = Given {
             accept(ContentType.ANY)
+            header("Authorization", "Basic $encodedCredentials")
+        } When {
+            get("/createJwtToken")
+        } Then {
+            statusCode(200)
+        } Extract {
+            asString() // Extract the token from the response
+        }
+
+
+        // 2. create new customer with auth token
+        val response = Given {
+            contentType(ContentType.JSON)
+            accept(ContentType.JSON)
+            header("Authorization", "Bearer $token")
             body(customerInformationData)
         } When {
             post()
-            delete("deleteCustomerInformationBy/1")
-            get("/1")
+        } Then {
+            statusCode(201)
+        } Extract {
+            response()
+        }
+
+        // Extract ID from location-header
+        val locationHeader = response.getHeader("Location")
+        val customerId = locationHeader?.split("/")?.last() ?: throw IllegalStateException("Location header is missing or does not contain an ID")
+
+        // 3. Delete customer information
+        Given {
+            accept(ContentType.ANY)
+            header("Authorization", "Bearer $token")
+        } When {
+            delete("/deleteCustomerInformationBy/$customerId")
+        } Then {
+            statusCode(200)
+        }
+
+        // 4. Check if customer information is deleted
+        Given {
+            accept(ContentType.ANY)
+        } When {
+            get("/$customerId")
         } Then {
             statusCode(404)
         }

@@ -2,10 +2,11 @@
 # Volume Definition
 ########################################################
 volumes:
-  customer-information-db-data:
+  customer-information-service-db-data:
+  transaction-service-db-data:
   depot-service-db-data:
   support-service-db-data:
-  transaction-service-db-data:
+
 
 services:
   ########################################################
@@ -15,22 +16,21 @@ services:
     image: "traefik:v2.10"
     # Enables the web UI and tells Traefik to listen to docker
     command:
-      --api.insecure=true
-      --providers.docker
+      - --configFile=/etc/traefik/traefik-config.yml
     ports:
-      # HTTP Port
       - "80:80"
-      # WEB UI Port
-      - "8080:8080"
-
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./config:/etc/traefik"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=PathPrefix(`/dashboard`)"
+      - "traefik.http.routers.dashboard.rule=Host(`localhost`) && (PathPrefix(`/api`, `/dashboard`))"
       - "traefik.http.routers.dashboard.service=api@internal"
-
+      # pwd: 123
+      - "traefik.http.middlewares.dashboard-auth.basicauth.users=user:$$2y$$05$$oRaaVWedagrotfyrKJtvy.pnODYVnGkX127/d9.8N4unq5TaVkl4O"
+      - "traefik.http.routers.dashboard.middlewares=dashboard-auth@docker"
+    networks:
+      - webnet
   ########################################################
   # Messaging/Kafka
   ########################################################
@@ -44,6 +44,8 @@ services:
       - "2181:2181"
     environment:
       LOG_DIR: /tmp/logs
+    networks:
+      - webnet
 
   kafka:
     image: quay.io/strimzi/kafka:0.23.0-kafka-2.8.0
@@ -60,6 +62,8 @@ services:
       KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    networks:
+      - webnet
 
   ########################################################
   #  Customer Information Postgres DB
@@ -69,7 +73,7 @@ services:
     restart: always
     volumes:
       # Use the named volume to store DB data
-      - customer-information-db-data:/var/lib/postgresql/data
+      - customer-information-service-db-data:/var/lib/postgresql/data
       # Init Database with Data when Docker started
       #- /init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
     ports:
@@ -77,11 +81,13 @@ services:
       # DB using `localhost:5432` from your IDE or some other tool
       - "5432:5432"
     environment:
-      # PostgreSQL settings - should be used in your database connection
+      # PostgresSQL settings - should be used in your database connection
       # config in `application.properties` from Quarkus
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
+    networks:
+      - webnet
 
   ########################################################
   # Depot Service Postgres DB
@@ -97,11 +103,13 @@ services:
       # DB using `localhost:5432` from your IDE or some other tool
       - "5433:5432"
     environment:
-      # PostgreSQL settings - should be used in your database connection
+      # PostgresSQL settings - should be used in your database connection
       # config in `application.properties` from Quarkus
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
+    networks:
+      - webnet
 
   ########################################################
   # Transaction Service Postgres DB
@@ -117,11 +125,13 @@ services:
       # DB using `localhost:5432` from your IDE or some other tool
       - "5435:5432"
     environment:
-      # PostgreSQL settings - should be used in your database connection
+      # PostgresSQL settings - should be used in your database connection
       # config in `application.properties` from Quarkus
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
+    networks:
+      - webnet
 
   ########################################################
   # Support Service Postgres DB
@@ -137,28 +147,36 @@ services:
       # DB using `localhost:5433` from your IDE or some other tool
       - "5434:5432"
     environment:
-      # PostgreSQL settings - should be used in your database connection
+      # PostgresSQL settings - should be used in your database connection
       # config in `application.properties` from Quarkus
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
+    networks:
+      - webnet
 
   ########################################################
   # Customer Information API-Gateway
   ########################################################
   customer-information-service:
-    build:
-      context: ./customer-information-service
-      dockerfile: ./src/main/docker/Dockerfile.jvm
+    image: {CUSTOMER_INFORMATION_SERVICE_IMAGE}
+    #build:
+    #  context: ./customer-information-service
+    #  dockerfile: ./src/main/docker/Dockerfile.jvm
     deploy:
       replicas: 1
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.customer-information-service.rule=PathPrefix(`/customer-information-service`)"
+      # - "traefik.http.routers.customer-information-service.rule=PathPrefix(`/customer-information-service`)"
       - "traefik.http.services.customer-information-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.customer-information-service.entrypoints=web"
+      - "traefik.http.middlewares.customer-information-service-forward-auth.forwardauth.address=http://gateway/auth/login"
+      - "traefik.http.routers.customer-information-service.middlewares=customer-information-service-forward-auth@docker"
     depends_on:
       - gateway
       - customer-information-service-db
+    networks:
+      - webnet
 
 
   ########################################################
@@ -174,10 +192,36 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.support-service.rule=PathPrefix(`/support-service`)"
       - "traefik.http.services.support-service.loadbalancer.server.port=8080"
-      # - "traefik.http.routers.support-service.entrypoints=web"
+      - "traefik.http.routers.support-service.entrypoints=web"
     depends_on:
       - gateway
       - support-service-db
+    networks:
+      - webnet
+
+
+  ########################################################
+  # Transaction Service API-Gateway
+  ########################################################
+  transaction-service:
+    build:
+      context: ./transaction-service
+      dockerfile: ./src/main/docker/Dockerfile.jvm
+    deploy:
+      replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.transactions-service.rule=PathPrefix(`/transactions-service`)"
+      - "traefik.http.services.transactions-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.transactions-service.entrypoints=web"
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+    depends_on:
+      - gateway
+      - transaction-service-db
+      - kafka
+    networks:
+      - webnet
 
   ########################################################
   # Depot Service API-Gateway
@@ -192,6 +236,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.depot-service.rule=PathPrefix(`/depot-service`)"
       - "traefik.http.services.depot-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.depot-service.entrypoints=web"
     environment:
       KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
     depends_on:
@@ -199,27 +244,8 @@ services:
       - depot-service-db
       - kafka
       - transaction-service
-
-
-  ########################################################
-  # Transaction Service API-Gateway
-  ########################################################
-  transaction-service:
-    build:
-      context: ./transaction-service
-      dockerfile: ./src/main/docker/Dockerfile.jvm
-    deploy:
-      replicas: 1
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.transaction-service.rule=PathPrefix(`/transactions-service`)"
-      - "traefik.http.services.transaction-service.loadbalancer.server.port=8080"
-    environment:
-      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
-    depends_on:
-      - gateway
-      - transaction-service-db
-      - kafka
+    networks:
+      - webnet
 
   ########################################################
   # Login Service API-Gateway
@@ -234,8 +260,16 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.login-service.rule=PathPrefix(`/login-service`)"
       - "traefik.http.services.login-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.transaction-service.entrypoints=web"
+
     depends_on:
       - gateway
       - customer-information-service-db
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
 
 

@@ -1,0 +1,22 @@
+entryPoints:
+  web:
+    address: :80
+providers:
+  docker:
+    exposedByDefault: false
+  file:
+    filename: /etc/traefik/traefik-providers.yml
+api:
+  insecure: false
+  dashboard: true
+
+metrics:
+  prometheus: {}
+tracing:
+  serviceName: gateway
+  spanNameLimit: 150
+  jaeger:
+    samplingServerURL: http://tracing-service:5778/sampling
+    localAgentHostPort: tracing-service:6831
+    collector:
+      endpoint: http://tracing-service:14268/api/traces?format=jaeger.thrift

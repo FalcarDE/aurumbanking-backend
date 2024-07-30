@@ -1,7 +1,12 @@
-###
+### generate token endpoint before create customer
+GET http://localhost:8080/customers/createJwtToken
+Authorization: Basic Hoang admin
+
+### user generate token endpoint before run this
 POST http://localhost:8080/customers
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FpLmZoLWVyZnVydC5kZSIsInN1YiI6IkhvYW5nIiwiaWF0IjoxNzIxNzM4ODA3LCJleHAiOjE3MjE3NDI0MDcsImdyb3VwcyI6WyJhZG1pbiJdLCJsZXZlbC1vZi1uZXJkaW5lc3MiOjQyLCJqdGkiOiIzN2NkNWIzMy1iMGY2LTQ1NTAtODg0Ni04OGFhYWJjODllMmUifQ.IcZyjTPi8nvmbSRA1tKggnryL-2YFLMIaHwuNKphuyFinPLke0wte72rdr2kcCejYGPSSMQZTt7nNsWtHE0Q_kZkgoRF58dzT5K5ry6WHDhlBCVUKN2bwZ8tOygUwkHAS5L7l_Zt0KZ-NOCF18mzZOnrnnKHiin3ujNC2WmIqpxr8PxMHhokskSutrcxTqjij-hwp_T5lkrqUL0JAqfVV1KHYgAB21VQlyONWsEVPXhOY4ZjzE6IYDlxSyFCwoaCW6Y9QlHjqgNgMozUyt7LHkPS5AvUz2FdH2UF9PA4TUWEucEOgcoA0eeZgT8dviHtSPSGsVhKEM0k2Bj87p04ZA
 
 {
   "firstname": "John",
@@ -31,13 +36,32 @@ PUT http://localhost:8080/customers/updateCustomerEmailBy/1/test@test.de
 ###
 PUT http://localhost:8080/customers/updateCustomerPasswordBy/1/testpassword
 
-###
-DELETE http://localhost:8080/customers/deleteCustomerInformationBy/1
+### generate token endpoint before delete customer
+GET http://localhost:8080/customers/createJwtToken
+Authorization: Basic Hoang admin
 
-###
+
+### 401 (Unauthorized)
+DELETE http://localhost:8080/customers/deleteCustomerInformationBy/1
+Authorization: Basic admin admin
+
+### 200 (ok)
+DELETE http://localhost:8080/customers/deleteCustomerInformationBy/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FpLmZoLWVyZnVydC5kZSIsInN1YiI6IkhvYW5nIiwiaWF0IjoxNzIxNzM4ODA3LCJleHAiOjE3MjE3NDI0MDcsImdyb3VwcyI6WyJhZG1pbiJdLCJsZXZlbC1vZi1uZXJkaW5lc3MiOjQyLCJqdGkiOiIzN2NkNWIzMy1iMGY2LTQ1NTAtODg0Ni04OGFhYWJjODllMmUifQ.IcZyjTPi8nvmbSRA1tKggnryL-2YFLMIaHwuNKphuyFinPLke0wte72rdr2kcCejYGPSSMQZTt7nNsWtHE0Q_kZkgoRF58dzT5K5ry6WHDhlBCVUKN2bwZ8tOygUwkHAS5L7l_Zt0KZ-NOCF18mzZOnrnnKHiin3ujNC2WmIqpxr8PxMHhokskSutrcxTqjij-hwp_T5lkrqUL0JAqfVV1KHYgAB21VQlyONWsEVPXhOY4ZjzE6IYDlxSyFCwoaCW6Y9QlHjqgNgMozUyt7LHkPS5AvUz2FdH2UF9PA4TUWEucEOgcoA0eeZgT8dviHtSPSGsVhKEM0k2Bj87p04ZA
+
+############################################ PROD #######################################################
+
+
+### generate token endpoint before create customer
+GET http://localhost:80/customer-information-service/customers/createJwtToken
+Authorization: Basic Hoang admin
+
+### user generate token endpoint before run this
 POST http://localhost:80/customer-information-service/customers
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FpLmZoLWVyZnVydC5kZSIsInN1YiI6IkhvYW5nIiwiaWF0IjoxNzIxNzQwMDM4LCJleHAiOjE3MjE3NDM2MzgsImdyb3VwcyI6WyJhZG1pbiJdLCJsZXZlbC1vZi1uZXJkaW5lc3MiOjQyLCJqdGkiOiIyYjI5NjA4OS1hYTcyLTQ2MTAtODAxOC1jYjQyZDJlMmI2NWQifQ.LUkMqx0ZqGoLopntM0JRIVb-m6HhDT-vt-eKX5PkB4XWWE9QlgJlasqcUc7DGjYdeapREmPysiPBW5oUwi5QHIHJsLRHPnr-2hsJls-E5EGO5RgU755XwbN8SVWHIrj3586_eboPViaCC-lfS7YYdF3n2PzvZLN3jFct9Qu5v-BaNS4u6Zszbk62R-0xopHsd-_0mnTlZyIsYPOa5y1XDyRo4NEuf2UKB_B5XLubjBkp31irJ2hPWUFt3PqpiLP1uC4wbqOE1f3mzvcmMuFx_LGewEOEobwSojpIM14E6rQvFbslh_RmS0JYg14q9tekhTa_vTrx8_e0HxwDR6_h_w
+
 
 {
   "firstname": "John",
@@ -49,14 +73,13 @@ Content-Type: application/json
   "housenumber": "123",
   "city": "Sample City",
   "country": "Sample Country",
-  "zipCode": "DE176381",
+  "zipcode": "DE176381",
   "username": "johndoe",
   "email": "johndoe@example.com",
   "phoneNumber": "+1234567890",
   "password": "securepassword",
   "profileImage": "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="
 }
-
 
 ###
 GET http://localhost:80/customer-information-service/customers/1
@@ -67,60 +90,17 @@ PUT http://localhost:80/customer-information-service/customers/updateCustomerEma
 ###
 PUT http://localhost:80/customer-information-service/customers/updateCustomerPasswordBy/1/testpassword
 
-###
+### generate token endpoint before delete customer
+GET http://localhost:80/customer-information-service/customers/createJwtToken
+Authorization: Basic Hoang admin
+
+### 401 (Unauthorized)
 DELETE http://localhost:80/customer-information-service/customers/deleteCustomerInformationBy/1
+Authorization: basic test test
 
-###
-POST http://192.168.2.107:80/customer-information-service/customers
-Accept: application/json
-Content-Type: application/json
+### 200 (ok)
+DELETE http://localhost:80/customer-information-service/customers/deleteCustomerInformationBy/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FpLmZoLWVyZnVydC5kZSIsInN1YiI6IkhvYW5nIiwiaWF0IjoxNzIxNzQwMDM4LCJleHAiOjE3MjE3NDM2MzgsImdyb3VwcyI6WyJhZG1pbiJdLCJsZXZlbC1vZi1uZXJkaW5lc3MiOjQyLCJqdGkiOiIyYjI5NjA4OS1hYTcyLTQ2MTAtODAxOC1jYjQyZDJlMmI2NWQifQ.LUkMqx0ZqGoLopntM0JRIVb-m6HhDT-vt-eKX5PkB4XWWE9QlgJlasqcUc7DGjYdeapREmPysiPBW5oUwi5QHIHJsLRHPnr-2hsJls-E5EGO5RgU755XwbN8SVWHIrj3586_eboPViaCC-lfS7YYdF3n2PzvZLN3jFct9Qu5v-BaNS4u6Zszbk62R-0xopHsd-_0mnTlZyIsYPOa5y1XDyRo4NEuf2UKB_B5XLubjBkp31irJ2hPWUFt3PqpiLP1uC4wbqOE1f3mzvcmMuFx_LGewEOEobwSojpIM14E6rQvFbslh_RmS0JYg14q9tekhTa_vTrx8_e0HxwDR6_h_w
 
-{
-  "firstname": "John",
-  "lastname": "Doe",
-  "birthDate": "1990-01-01T00:00:00",
-  "created": "2024-05-30T14:00:00",
-  "lastestLogin": "2024-05-30T14:00:00",
-  "streetName": "Main Street",
-  "housenumber": "123",
-  "city": "Sample City",
-  "country": "Sample Country",
-  "username": "johndoe",
-  "email": "johndoe@example.com",
-  "phoneNumber": "+1234567890",
-  "password": "123",
-  "profileImage": "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="
-}
 
-###
-GET http://192.168.2.107:80/customer-information-service/customers/1
 
-###
-DELETE http://192.168.2.107:80//customer-information-service/customers/deleteCustomerInformationBy/1
-###
-POST http://192.168.2.123:80/customer-information-service/customers
-Accept: application/json
-Content-Type: application/json
-
-{
-  "firstname": "John",
-  "lastname": "Doe",
-  "birthDate": "1990-01-01T00:00:00",
-  "created": "2024-05-30T14:00:00",
-  "lastestLogin": "2024-05-30T14:00:00",
-  "streetName": "Main Street",
-  "housenumber": "123",
-  "city": "Sample City",
-  "country": "Sample Country",
-  "username": "johndoe",
-  "email": "johndoe@example.com",
-  "phoneNumber": "+1234567890",
-  "password": "123",
-  "profileImage": "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="
-}
-
-###
-GET http://192.168.2.107:80/customer-information-service/customers/1
-
-###
-DELETE http://192.168.2.107:80//customer-information-service/customers/deleteCustomerInformationBy/1
