@@ -1,0 +1,115 @@
+site_name: FHE AI PMC - Cloud Computing Demo
+
+site_url: https://fhe-cc-aurumbanking-backend-doc.netlify.app
+site_author: Steffen Avemarg
+site_description: >-
+  site_description: >-
+  The AurumBanking project consists of a backend and an app. 
+  This documentation focuses on the backend of the project. 
+  This project demonstrates the use of various frameworks and techniques for developing a microservice application. 
+  It is designed as an example for the Cloud Computing course at the University of Applied Sciences Erfurt.
+
+# Repository
+repo_name: AurumBanking-Backend
+repo_url: https://git.ai.fh-erfurt.de/ai/sose-2024/cloud-computing/team-04-aurumbanking/aurumbanking-backend
+edit_uri: ""
+
+use_directory_urls: false
+
+# Copyright
+copyright: Copyright &copy; 2024 Tran Anh Hoang @AurumBanking Team -
+  <a href="#__consent">Change cookie settings</a>
+
+theme:
+  name: material
+  font: false
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: light green
+      accent: lime
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  favicon: doc/images/favicon.png
+  icon:
+    logo: material/cloud
+    repo: fontawesome/brands/gitlab
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.instant.preview
+    - navigation.tracking
+    - navigation.expand
+    - navigation.path
+    - navigation.prune
+    - navigation.top
+    - toc.follow
+    - navigation.tabs
+    - navigation.tabs.sticky
+
+markdown_extensions:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Home: 'README.md'
+  - 'System Architecture': 'SYSTEM_ARCHITECTURE.md'
+  - 'Using the system': 'START_AND_USE_THE_SYSTEM.md'
+  - Services:
+      - 'Customer Information Service':
+          - Overview: 'customer-information-service/README.md'
+          - 'Code Doc': 'customer-information-service-dokka/index.html'
+      - 'Login Service':
+          - Overview: 'login-service/README.md'
+          - 'Code Doc': 'login-service-dokka/index.html'
+      - 'Depot Service':
+          - Overview: 'depot-service/README.md'
+          - 'Code Doc': 'depot-service-dokka/index.html'
+      - 'Transaction Service':
+          - Overview: 'transaction-service/README.md'
+          - 'Code Doc': 'transaction-service-dokka/index.html'
+      - 'Support Service':
+          - Overview: 'support-service/README.md'
+          - 'Code Doc': 'support-service-dokka/index.html'
+  - Documentation: 'DOCUMENTATION.md'
+  - 'API Gateway': 'API_GATEWAY.md'
+  - 'CI/CD': 'CICD.md'
+  - 'Service Development': 'SERVICE_DEVELOPMENT.md'
+  - References: 'REFERENCES.md'
+
+dev:
+  dev_addr: '--dev-addr=127.0.0.1:4242'
+
+plugins:
+  - privacy:
+      concurrency: 1
+
+extra:
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+    actions:
+      - accept
+      - reject
+      - manage

@@ -29,6 +29,11 @@ before_script:
 ##### Customer Information Service Start #####
 prepare-customer-information-service-build-cache:
   stage: prepare
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/customer-information-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   script:
     - cd customer-information-service
     - gradle --build-cache assemble
@@ -41,6 +46,11 @@ prepare-customer-information-service-build-cache:
 
 build-customer-information-service:
   stage: build
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/customer-information-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   script:
     - cd customer-information-service
     - echo "testcontainers.reuse.enable=true" > /root/.testcontainers.properties
@@ -52,7 +62,7 @@ build-customer-information-service:
       - customer-information-service/build
       - .gradle
   artifacts:
-    when: always
+
     reports:
       junit: customer-information-service/build/test-results/test/**/TEST-*.xml
     paths:
@@ -63,6 +73,11 @@ build-customer-information-service:
 build-customer-information-service-image:
   stage: package
   image: docker:stable
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/customer-information-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
   script:
@@ -83,6 +98,11 @@ build-customer-information-service-image:
 ##### Depot Service Start #####
 prepare-depot-service-build-cache:
   stage: prepare
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/depot-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   script:
     - cd depot-service
     - gradle --build-cache assemble
@@ -95,6 +115,11 @@ prepare-depot-service-build-cache:
 
 build-depot-service:
   stage: build
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/depot-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   script:
     - cd depot-service
     - echo "testcontainers.reuse.enable=true" > /root/.testcontainers.properties
@@ -106,7 +131,7 @@ build-depot-service:
       - depot-service/build
       - .gradle
   artifacts:
-    when: always
+
     reports:
       junit: depot-service/build/test-results/test/**/TEST-*.xml
     paths:
@@ -117,6 +142,11 @@ build-depot-service:
 build-depot-service-image:
   stage: package
   image: docker:stable
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/depot-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
   script:
@@ -137,6 +167,11 @@ build-depot-service-image:
 ##### Login Service Start #####
 prepare-login-service-build-cache:
   stage: prepare
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/login-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   script:
     - cd login-service
     - gradle --build-cache assemble
@@ -149,6 +184,11 @@ prepare-login-service-build-cache:
 
 build-login-service:
   stage: build
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/login-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   script:
     - cd login-service
     - echo "testcontainers.reuse.enable=true" > /root/.testcontainers.properties
@@ -160,7 +200,7 @@ build-login-service:
       - login-service/build
       - .gradle
   artifacts:
-    when: always
+
     reports:
       junit: login-service/build/test-results/test/**/TEST-*.xml
     paths:
@@ -171,6 +211,11 @@ build-login-service:
 build-login-service-image:
   stage: package
   image: docker:stable
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/login-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
   script:
@@ -191,6 +236,11 @@ build-login-service-image:
 ##### Support Service Start #####
 prepare-support-service-build-cache:
   stage: prepare
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/support-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   script:
     - cd support-service
     - gradle --build-cache assemble
@@ -203,6 +253,11 @@ prepare-support-service-build-cache:
 
 build-support-service:
   stage: build
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/support-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   script:
     - cd support-service
     - echo "testcontainers.reuse.enable=true" > /root/.testcontainers.properties
@@ -214,7 +269,7 @@ build-support-service:
       - support-service/build
       - .gradle
   artifacts:
-    when: always
+
     reports:
       junit: support-service/build/test-results/test/**/TEST-*.xml
     paths:
@@ -225,6 +280,11 @@ build-support-service:
 build-support-service-image:
   stage: package
   image: docker:stable
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/support-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
   script:
@@ -245,6 +305,11 @@ build-support-service-image:
 ##### Transaction Service Start #####
 prepare-transaction-service-build-cache:
   stage: prepare
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/transaction-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   script:
     - cd transaction-service
     - gradle --build-cache assemble
@@ -257,6 +322,11 @@ prepare-transaction-service-build-cache:
 
 build-transaction-service:
   stage: build
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/transaction-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   script:
     - cd transaction-service
     - echo "testcontainers.reuse.enable=true" > /root/.testcontainers.properties
@@ -268,7 +338,7 @@ build-transaction-service:
       - transaction-service/build
       - .gradle
   artifacts:
-    when: always
+
     reports:
       junit: transaction-service/build/test-results/test/**/TEST-*.xml
     paths:
@@ -279,6 +349,11 @@ build-transaction-service:
 build-transaction-service-image:
   stage: package
   image: docker:stable
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/transaction-service/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
   script:
@@ -296,38 +371,36 @@ build-transaction-service-image:
     - build-transaction-service
 ##### Transaction Service End #####
 
-##### Documentation Start #####
-#prepare_doc_pages:
-#  stage: prepare
-#  script:
-#    - ./assemble-docs.sh
-#  artifacts:
-#    paths:
-#      - docs
-#
-#build_doc_pages:
-#  stage: build
-#  image: python:latest
-#  script:
-#    - pip install mkdocs-material
-#    - mkdocs build --site-dir public
-#  artifacts:
-#    paths:
-#      - public
-#  dependencies:
-#    - prepare_doc_pages
-#
-#deploy_doc_pages:
-#  image: node:14-buster
-#  stage: deploy
-#  script:
-#    - npm install
-#    - npm install -g netlify-cli --unsafe-perm=true
-#    - netlify link --id $NETLIFY_SITE_ID
-#    # - netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir public/ --prod
-#  dependencies:
-#    - build_doc_pages
-##### Documentation Start #####
+#### Documentation Start #####
+prepare_doc_pages:
+  stage: prepare
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^docs/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
+
+  script:
+    - chmod +x ./assemble-docs.sh
+    - ./assemble-docs.sh
+  artifacts:
+    paths:
+      - docs
+
+build_doc_pages:
+  stage: build
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^docs/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+  image: python:latest
+  script:
+    - pip install mkdocs-material
+    - mkdocs build --site-dir public
+  artifacts:
+    paths:
+      - public
+  dependencies:
+    - prepare_doc_pages
+#### Documentation End #####
 
 include:
   - template: Jobs/Dependency-Scanning.gitlab-ci.yml
