@@ -19,10 +19,10 @@ Backend for the Banking-App.
 
 ## Setup-Pipeline
 **_token:_**
-- linux: **_glrt-xznuGhoqctjSmbVNxpm__**
-- windows-hoang: **_glrt-xznuGhoqctjSmbVNxpm__**
+- linux: **_glrt-xznuGhoqctjSmbVNxpm_**
+- windows-hoang: **_glrt-xznuGhoqctjSmbVNxpm_**
 - steffan-gitlab-runner: **_glrt-Fzfyj9euFsuo1f_szyUo_**
-- milena-gitlab-runner: **_glrt-j1Ug7pypo-vE3uJJw9k__**
+- milena-gitlab-runner: **_glrt-j1Ug7pypo-vE3uJJw9k_**
 - salma-gitlab-runner: **_glrt-sQu4HSKd7RgotJkPHwCn_**
 
 `docker run --rm -it -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner:latest register .\gitlab-runner.exe register --url https://git.ai.fh-erfurt.de --token [$token einfügen]`
