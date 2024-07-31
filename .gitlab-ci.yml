@@ -32,8 +32,7 @@ prepare-customer-information-service-build-cache:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/customer-information-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
-
+  
   script:
     - cd customer-information-service
     - gradle --build-cache assemble
@@ -49,8 +48,8 @@ build-customer-information-service:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/customer-information-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
-
+  
+  
   script:
     - cd customer-information-service
     - echo "testcontainers.reuse.enable=true" > /root/.testcontainers.properties
@@ -76,7 +75,6 @@ build-customer-information-service-image:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/customer-information-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
 
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
@@ -101,8 +99,8 @@ prepare-depot-service-build-cache:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/depot-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
-
+  
+  
   script:
     - cd depot-service
     - gradle --build-cache assemble
@@ -118,8 +116,8 @@ build-depot-service:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/depot-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
-
+  
+  
   script:
     - cd depot-service
     - echo "testcontainers.reuse.enable=true" > /root/.testcontainers.properties
@@ -145,8 +143,8 @@ build-depot-service-image:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/depot-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
-
+  
+  
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
   script:
@@ -170,7 +168,6 @@ prepare-login-service-build-cache:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/login-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
 
   script:
     - cd login-service
@@ -187,7 +184,6 @@ build-login-service:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/login-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
 
   script:
     - cd login-service
@@ -214,7 +210,6 @@ build-login-service-image:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/login-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
 
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
@@ -239,7 +234,6 @@ prepare-support-service-build-cache:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/support-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
 
   script:
     - cd support-service
@@ -256,7 +250,6 @@ build-support-service:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/support-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
 
   script:
     - cd support-service
@@ -283,7 +276,6 @@ build-support-service-image:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/support-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
 
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
@@ -308,7 +300,6 @@ prepare-transaction-service-build-cache:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/transaction-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
 
   script:
     - cd transaction-service
@@ -325,7 +316,6 @@ build-transaction-service:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/transaction-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
 
   script:
     - cd transaction-service
@@ -352,7 +342,6 @@ build-transaction-service-image:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\/transaction-service/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
 
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
@@ -377,7 +366,6 @@ prepare_doc_pages:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^docs/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
-    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == /main/
 
   script:
     - chmod +x ./assemble-docs.sh
@@ -391,6 +379,7 @@ build_doc_pages:
   rules:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^docs/
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^permanent\/test/
+  
   image: python:latest
   script:
     - pip install mkdocs-material
