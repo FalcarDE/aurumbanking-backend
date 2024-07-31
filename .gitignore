@@ -492,3 +492,15 @@ obj/
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,maven,java,kotlin,jetbrains+all,androidstudio,intellij+all,xcode,tower,git,visualstudiocode,swift,swiftpackagemanager,swiftpm
+
+# Mkdocs generated datas
+./docs/customer-information-service
+./docs/customer-information-service-dokka
+./docs/login-service
+./docs/login-service-dokka
+./docs/depot-service
+./docs/depot-service-dokka
+./docs/transaction-service
+./docs/transaction-service-dokka
+./docs/support-service
+./docs/support-service-dokka
