@@ -17,10 +17,15 @@ Backend for the Banking-App.
 - Grafana:  http://192.168.80.10:3000/login  (Overall execution of all Docker Compose)
 - *Only on overall execution of all docker compose file - Jeagger Tracing*: http://localhost/tracing/search
 
+### run mdkocs locally
+- python -m pip install mkdocs
+- python -m pip install mkdocs-material
+- python -m mkdocs serve --dev-addr 127.0.0.1:4242
+
 ## Setup-Pipeline
 **_token:_**
 - linux: **_glrt-xznuGhoqctjSmbVNxpm_**
-- windows-hoang: **_glrt-xznuGhoqctjSmbVNxpm_**
+- windows-hoang: **_glrt-xznuGhoqctjSmbVNxpm_** / **_glrt-aHawSL4WALWi1s6BXdVi_**
 - steffan-gitlab-runner: **_glrt-Fzfyj9euFsuo1f_szyUo_**
 - milena-gitlab-runner: **_glrt-j1Ug7pypo-vE3uJJw9k_**
 - salma-gitlab-runner: **_glrt-sQu4HSKd7RgotJkPHwCn_**

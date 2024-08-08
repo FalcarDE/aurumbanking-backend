@@ -20,6 +20,7 @@ Authorization: Bearer xyz
   "housenumber": "123",
   "city": "Sample City",
   "country": "Sample Country",
+  "zipcode": "DE176381",
   "username": "johndoe",
   "email": "johndoe@example.com",
   "phoneNumber": "+1234567890",
@@ -83,7 +84,6 @@ Content-Type: application/json
   "bic": "COBADEFFXXX",
   "moneyValue": 2500.00,
   "purposeOfUse": "Income42",
-  "dateTimeOfExecution": "2024-09-01T00:00:00",
   "standingOrder": true,
   "transactionType": "income",
   "transactionClassification": "Dauerauftrag",
@@ -92,7 +92,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://{{ip}}:{{port}}/{{transaction-service-fullpath}}/getThreeLastestTransactionByDepotId/1
+GET http://{{ip}}:{{port}}/{{transaction-service-fullpath}}/getTransactionById/1
+
+
+###
+GET http://{{ip}}:{{port}}/{{transaction-service-fullpath}}/getThreeLatestTransactionByDepotId/1
 
 
 

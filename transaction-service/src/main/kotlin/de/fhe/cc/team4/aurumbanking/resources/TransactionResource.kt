@@ -53,7 +53,7 @@ class TransactionResource {
             .onItem().ifNull().continueWith(RestResponse.notFound())
 
     @GET
-    @Path("/getTransactionsId/{id:\\d+}")
+    @Path("/getTransactionById/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
     fun getTransactionsById(@PathParam("id") id: Long): Uni<RestResponse<TransactionDomainModel>> =
@@ -102,6 +102,4 @@ class TransactionResource {
                 }
             }
     }
-
-
 }
