@@ -62,7 +62,7 @@ class TransactionResourceTest {
             contentType(ContentType.JSON)
             accept(ContentType.JSON)
         } When {
-            get("getTransactionsId/$id")
+            get("getTransactionById/$id")
         } Then {
             statusCode(200)
             body("depotId", equalTo(1))

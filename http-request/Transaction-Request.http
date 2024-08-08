@@ -112,7 +112,7 @@ Content-Type: application/json
 
 
 ### PROD
-GET http://localhost:80/transactions-service/transactions/getTransactionsId/1
+GET http://localhost:80/transactions-service/transactions/getTransactionById/1
 
 ### PROD
 GET http://localhost:80/transactions-service/transactions/getAllTransactionsByDepotId/1

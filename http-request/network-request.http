@@ -7,8 +7,8 @@ Authorization: Basic Hoang admin
 POST http://{{ip}}:{{port}}/{{customer-information-service-fullpath}}
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FpLmZoLWVyZnVydC5kZSIsInN1YiI6IkhvYW5nIiwiaWF0IjoxNzIxOTU4MzY1LCJleHAiOjE3MjE5NjE5NjUsImdyb3VwcyI6WyJhZG1pbiJdLCJsZXZlbC1vZi1uZXJkaW5lc3MiOjQyLCJqdGkiOiJmNTBlMzZiNi03N2YzLTQxZjUtODg2Zi00MmZjMWViZTJjOGIifQ.if7JF3Jkqa3hUwKV-YnG7TXyA2JmGRoXWrkBLRHLIvIFI5LFGUqzOOtz3UqlshTXG_b9poE29aG1Z5y_zyDBWG85niddj2GN-NNZkNviP0CP4uFiyBP8fGGMSlNQap6gDZ7HMgGuITcYQ5rKfDHbclUYnqQjVVvAAo6jKsTSRlDe4r1n2spCEpUcwO4c-bNXMywBXlMqfHLem3uGm2Vj4CstCmtQQdeaB1lU8fHefE9UMmzvXWLO5DETOQgT-ZVGRiVnstzWFqCic3aQhqei9pkLQV0SwE_3wq1_gx0L0y_4VpTJRncYHNL86Q7H3Sl5eXkA8_Ew4E7LYF5Hzc63AQ
-# fill token from request into http-client-env.json
+Authorization: Bearer xyz
+# fill token into Baerer xyz
 
 {
   "firstname": "John",
@@ -20,6 +20,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL
   "housenumber": "123",
   "city": "Sample City",
   "country": "Sample Country",
+  "zipcode": "DE176381",
   "username": "johndoe",
   "email": "johndoe@example.com",
   "phoneNumber": "+1234567890",
@@ -83,7 +84,6 @@ Content-Type: application/json
   "bic": "COBADEFFXXX",
   "moneyValue": 2500.00,
   "purposeOfUse": "Income42",
-  "dateTimeOfExecution": "2024-09-01T00:00:00",
   "standingOrder": true,
   "transactionType": "income",
   "transactionClassification": "Dauerauftrag",
@@ -92,7 +92,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://{{ip}}:{{port}}/{{transaction-service-fullpath}}/getThreeLastestTransactionByDepotId/1
+GET http://{{ip}}:{{port}}/{{transaction-service-fullpath}}/getTransactionById/1
+
+
+###
+GET http://{{ip}}:{{port}}/{{transaction-service-fullpath}}/getThreeLatestTransactionByDepotId/1
 
 
 

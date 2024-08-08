@@ -17,12 +17,20 @@ Backend for the Banking-App.
 - Grafana:  http://192.168.80.10:3000/login  (Overall execution of all Docker Compose)
 - *Only on overall execution of all docker compose file - Jeagger Tracing*: http://localhost/tracing/search
 
-## Setup-Pipeline
-token:
-- linux: **_glrt-xznuGhoqctjSmbVNxpm__**
-- windows: **_glrt-xznuGhoqctjSmbVNxpm__**
+### run mdkocs locally
+- python -m pip install mkdocs
+- python -m pip install mkdocs-material
+- python -m mkdocs serve --dev-addr 127.0.0.1:4242
 
-`docker run --rm -it -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner:latest register .\gitlab-runner.exe register --url https://git.ai.fh-erfurt.de --token $token`
+## Setup-Pipeline
+**_token:_**
+- linux: **_glrt-xznuGhoqctjSmbVNxpm_**
+- windows-hoang: **_glrt-xznuGhoqctjSmbVNxpm_** / **_glrt-aHawSL4WALWi1s6BXdVi_**
+- steffan-gitlab-runner: **_glrt-Fzfyj9euFsuo1f_szyUo_**
+- milena-gitlab-runner: **_glrt-j1Ug7pypo-vE3uJJw9k_**
+- salma-gitlab-runner: **_glrt-sQu4HSKd7RgotJkPHwCn_**
+
+`docker run --rm -it -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner:latest register .\gitlab-runner.exe register --url https://git.ai.fh-erfurt.de --token [$token einfügen]`
 - Enter the GitLab instance URL (for example, https://gitlab.com/): [https://git.ai.fh-erfurt.de]: **_[Enter]_**
 - Enter a name for the runner. This is stored only in the local config.toml file: _**aurumbanking-gitlab-runner**_
 - Enter an executor: parallels, virtualbox, docker, docker-autoscaler, instance, custom, shell, ssh, docker-windows, docker+machine, kubernetes: **_docker_**
