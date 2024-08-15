@@ -22,44 +22,40 @@ class SupportRepositoryTest {
     @Test
     @TestReactiveTransaction
     fun testCreateSupportRequest(asserter: UniAsserter) {
-        val supportRequest = createSupportEntry()
+        val newSupportRequest = createSupportEntry()
 
         asserter.assertThat(
             {
-                this.supportRepository.persist(supportRequest) //  this.supportRepository.persistNewSupportInformation(supportRequest)
-                    .replaceWith(this.supportRepository.findSupportRequestById(supportRequest.id))
+                this.supportRepository.persist(newSupportRequest)
+                    .flatMap { this.supportRepository.findSupportRequestById(newSupportRequest.id!!) }
             },
             { foundRequest ->
                 assertNotNull(foundRequest)
-
                 foundRequest?.let {
-                    assertEquals(12345, it.customerId)
-                    assertEquals("Konto", it.type)
-                    assertEquals( "Wie kann ich mein Konto erstellen?", it.message)
+                    assertEquals(newSupportRequest.id, it.id)
+                    assertEquals(newSupportRequest.customerId, it.customerId)
+                    assertEquals(newSupportRequest.type, it.type)
+                    assertEquals(newSupportRequest.message, it.message)
                 }
             }
         )
     }
 
-/*
+
     @Test
     @TestReactiveTransaction
     fun testDeleteSupportRequestsByCustomerId(asserter: UniAsserter) {
-        // Erstelle mehrere Support-Einträge mit der gleichen customerId
         val supportRequest1 = createSupportEntry1()
         val supportRequest2 = createSupportEntry2()
+
         asserter.assertThat(
             {
-                // Persistiere beide Support-Anfragen
-                this.supportRepository.persist(supportRequest1) // this.supportRepository.persistNewSupportInformation(supportRequest1)
+                this.supportRepository.persist(supportRequest1)
                     .replaceWith(this.supportRepository.persist(supportRequest2))
-                    // Lösche alle Support-Anfragen für diese customerId
                     .replaceWith(this.supportRepository.deleteAllSupportRequestByCustomerId(12345))
-                    // Überprüfe, ob alle Anfragen gelöscht wurden, indem du versuchst, sie zu finden
                     .replaceWith(this.supportRepository.findSupportRequestByCustomerId(12345))
             },
             { foundRequests ->
-                // Überprüfe, dass keine Anfragen mehr gefunden werden
                 assertTrue(foundRequests.isEmpty())
             }
         )
@@ -69,10 +65,7 @@ class SupportRepositoryTest {
     @Test
     @TestReactiveTransaction
     fun testFindSupportRequestsByType(asserter: UniAsserter) {
-        // Hole die Liste der Testdaten
         val supportEntries = createAllSupportEntries()
-
-        // Wähle die ersten beiden Support-Einträge aus der Liste aus
         val supportRequest1 = supportEntries[0].apply { type = "Technical Support" }
         val supportRequest2 = supportEntries[1].apply { type = "Customer Service" }
 
@@ -89,7 +82,4 @@ class SupportRepositoryTest {
             }
         )
     }
-
-
- */
 }

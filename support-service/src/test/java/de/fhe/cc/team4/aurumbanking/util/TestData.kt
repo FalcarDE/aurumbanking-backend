@@ -4,7 +4,7 @@ import de.fhe.cc.team4.aurumbanking.model.SupportEntityModel
 import java.time.LocalDateTime
 
 fun createSupportEntry(): SupportEntityModel {
-    val newSupportEntry = SupportEntityModel()
+    val newSupportEntry = SupportEntityModel() // Wenn Domain
     newSupportEntry.customerId = 12345
     newSupportEntry.dateTime = LocalDateTime.now()
     newSupportEntry.type = "Konto"
