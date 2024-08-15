@@ -31,6 +31,9 @@ class SupportResource {
     @Inject
     lateinit var deleteRequestByCustomerIdUc: DeleteRequestByCustomerIdUc
 
+    @Inject
+    lateinit var deleteRequestByIdUc: DeleteRequestByIdUc
+
     @GET
     @Path("/test")
     @Produces(MediaType.APPLICATION_JSON)
@@ -81,6 +84,15 @@ class SupportResource {
     @WithTransaction
     fun deleteRequestByCustomerId(@PathParam("customerId") customerId: Long): Uni<RestResponse<Void>> {
         return deleteRequestByCustomerIdUc(customerId).replaceWith{ RestResponse.ok()}
+    }
+
+
+    @DELETE
+    @Path("/deleteRequestById/{id:\\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WithTransaction
+    fun deleteRequestById(@PathParam("id") id: Long): Uni<RestResponse<Void>> {
+        return deleteRequestByIdUc(id).replaceWith{ RestResponse.ok()}
     }
 
 }
