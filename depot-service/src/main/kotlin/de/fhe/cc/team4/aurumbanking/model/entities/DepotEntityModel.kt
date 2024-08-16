@@ -16,17 +16,29 @@ class DepotEntityModel : PanacheEntityBase() {
     var id: Long = 0
 
     @Column(length = 2500)
-    var customerId : Long = 0
+    var customerId: Long = 0
     lateinit var currencyArea: String
     lateinit var depositAmount: BigDecimal
     lateinit var fallbackDepositAmount: BigDecimal
 }
 
 @RegisterForReflection
-data class DepotDTO(val depositAmount: BigDecimal )
+data class DepotDTO(val depositAmount: BigDecimal)
 
 @RegisterForReflection
-data class FallbackDepositAmountDTO(val fallbackDepositAmount: BigDecimal )
+data class FallbackDepositAmountDTO(val fallbackDepositAmount: BigDecimal)
+
+
+@RegisterForReflection
+data class DepotDomainModelDTO(
+    val id: Long,
+    val customerId: Long,
+    val currencyArea: String,
+    val depositAmount: BigDecimal,
+    val fallbackDepositAmount: BigDecimal
+)
+
+
 
 
 
