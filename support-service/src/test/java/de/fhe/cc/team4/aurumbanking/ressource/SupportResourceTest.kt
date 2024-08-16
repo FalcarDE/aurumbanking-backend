@@ -116,14 +116,13 @@ class SupportResourceTest {
         } When {
             get("/get-all-support-reqeuests-by-type/$requestType")
         } Then {
-            statusCode(200)  // Check for success response
+            statusCode(200)
         } Extract {
-            response()  // Extract the full response object
+            response()
         }
 
-        // Extract and log specific details from the response
         val jsonResponse = response.jsonPath()
-        val supportRequests = jsonResponse.getList<Map<String, Any>>("") // Extract the list of support requests
+        val supportRequests = jsonResponse.getList<Map<String, Any>>("")
 
         // Assertions based on the actual response
         assert(supportRequests.isNotEmpty()) { "No support requests found" }
@@ -146,12 +145,11 @@ class SupportResourceTest {
         } Then {
             statusCode(200)
         } Extract {
-            response()  // Extract the full response object
+            response()
         }
 
-        // Extract and log specific details from the response
         val jsonResponse = response.jsonPath()
-        val supportRequests = jsonResponse.getList<Map<String, Any>>("") // Extract the list of support requests
+        val supportRequests = jsonResponse.getList<Map<String, Any>>("")
 
         // Assertions based on the actual response
         assert(supportRequests.isNotEmpty()) { "No support requests found for customer with ID $customerId" }
@@ -178,7 +176,7 @@ class SupportResourceTest {
         } When {
             post()
         } Then {
-            statusCode(201) // Expecting HTTP 201 Created
+            statusCode(201)
         } Extract {
             response()
         }
@@ -194,7 +192,7 @@ class SupportResourceTest {
         } When {
             delete("/deleteRequestById/$requestId")
         } Then {
-            statusCode(200) // Expecting HTTP 200 OK
+            statusCode(200)
         }
 
         // 3. Check if the support request is deleted
@@ -203,11 +201,9 @@ class SupportResourceTest {
         } When {
             get("/$requestId")
         } Then {
-            statusCode(404) // Expecting HTTP 404 Not Found after deletion
+            statusCode(404)
         }
     }
-
-
 
 
     @Test
@@ -222,13 +218,12 @@ class SupportResourceTest {
             statusCode(200)
         }
 
-        // Verify the support request is no longer available
         Given {
             accept(ContentType.JSON)
         } When {
             get("/get-all-support-reqeuests-by-customer-id/$customerId")
         } Then {
-            statusCode(200)  // Expecting 404 Not Found after deletion
+            statusCode(200)
         } Extract {
             response()
         }
