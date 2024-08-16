@@ -82,4 +82,23 @@ class SupportRepositoryTest {
             }
         )
     }
+
+    @Test
+    @TestReactiveTransaction
+    fun testDeleteSupportRequestById(asserter: UniAsserter) {
+        val newSupportRequest = createSupportEntry()
+
+        asserter.assertThat(
+            {
+                this.supportRepository.persist(newSupportRequest)
+                    .flatMap { this.supportRepository.deleteSupportRequestById(newSupportRequest.id!!) }
+                    .flatMap { this.supportRepository.findSupportRequestById(newSupportRequest.id!!) }
+            },
+            { foundRequest ->
+                assertNull(foundRequest, "SupportRequest should be null after deletion")
+            }
+        )
+    }
+
+
 }
