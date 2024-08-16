@@ -14,7 +14,7 @@ class GetDepotByIdUc(var depotInterfaceRepository: DepotInterfaceRepository) {
 
 
 @ApplicationScoped
-class GetCurrentDepotValueByCustomerIdUc(var depotInterfaceRepository: DepotInterfaceRepository) {
+class GetCurrentDepotValueByIdUc(var depotInterfaceRepository: DepotInterfaceRepository) {
     operator fun invoke(id: Long): Uni<DepotDTO> =
         depotInterfaceRepository.findCurrentDepotValueById(id)
 }

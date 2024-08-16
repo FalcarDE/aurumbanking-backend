@@ -21,7 +21,7 @@ class DepotResource {
     lateinit var getDepotByIdUc: GetDepotByIdUc
 
     @Inject
-    lateinit var getCurrentDepotValueByCustomerIdUc: GetCurrentDepotValueByCustomerIdUc
+    lateinit var getCurrentDepotValueByIdUc: GetCurrentDepotValueByIdUc
 
     @Inject
     lateinit var getDepotByCustomerIdUc: GetDepotByCustomerIdUc
@@ -53,10 +53,10 @@ class DepotResource {
         .onItem().ifNull().continueWith(RestResponse.notFound())
 
     @GET
-    @Path("/getCurrentDepotValueByCustomerId/{id:\\d+}")
+    @Path("/getCurrentDepotValueById/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
-    fun getCurrentDepotByCustomerId(@PathParam("id") id: Long) = getCurrentDepotValueByCustomerIdUc(id)
+    fun getCurrentDepotById(@PathParam("id") id: Long) = getCurrentDepotValueByIdUc(id)
         .onItem().ifNotNull().transform { RestResponse.ok(it) }
         .onItem().ifNull().continueWith(RestResponse.notFound())
 
