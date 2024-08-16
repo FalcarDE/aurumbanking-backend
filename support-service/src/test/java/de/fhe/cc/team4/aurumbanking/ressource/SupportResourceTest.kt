@@ -206,6 +206,9 @@ class SupportResourceTest {
     }
 
 
+    /**
+     * Test for deleting all support requests by customer ID
+     */
     @Test
     fun `delete request by customer id`() {
         val customerId = 1L
