@@ -9,7 +9,7 @@ interface SupportInterfaceRepository {
 
     fun persistNewSupportInformation(Support: SupportDomainModel): Uni<SupportDomainModel>
 
-    fun deleteSupportRequestById(id: Long): Uni<Void>
+    fun deleteSupportRequestById(id: Long): Uni<Boolean>
     fun deleteAllSupportRequestByCustomerId(customerId: Long): Uni<Long>
 
     fun getAllRequestsByType(type: String): Uni<List<SupportDomainModel>>

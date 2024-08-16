@@ -36,4 +36,11 @@ class DeleteRequestByCustomerIdUc(var depotInterfaceRepository: SupportInterface
     operator fun invoke(customerId: Long ): Uni<Long> =
         depotInterfaceRepository.deleteAllSupportRequestByCustomerId(customerId)
 }
-// TODO: GET and POST für Supportfunktionen + Erweiterungen der Usecases
+
+
+
+@ApplicationScoped
+class DeleteRequestByIdUc(var depotInterfaceRepository: SupportInterfaceRepository) {
+    operator fun invoke(id: Long ): Uni<Boolean> =
+        depotInterfaceRepository.deleteSupportRequestById(id)
+}
