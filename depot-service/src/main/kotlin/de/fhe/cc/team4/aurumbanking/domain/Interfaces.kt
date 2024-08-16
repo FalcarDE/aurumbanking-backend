@@ -1,13 +1,14 @@
 package de.fhe.cc.team4.aurumbanking.domain
 
 import de.fhe.cc.team4.aurumbanking.model.entities.DepotDTO
+import de.fhe.cc.team4.aurumbanking.model.entities.DepotDomainModelDTO
 import de.fhe.cc.team4.aurumbanking.model.entities.FallbackDepositAmountDTO
 import io.smallrye.mutiny.Uni
 import java.math.BigDecimal
 
 interface DepotInterfaceRepository {
 
-    fun findDepotByCustomerId(id: Long): Uni<DepositDomainModel>
+    fun findDepotByCustomerId(id: Long): Uni<DepotDomainModelDTO>
 
     fun findDepotById(id: Long): Uni<DepositDomainModel?>
 
