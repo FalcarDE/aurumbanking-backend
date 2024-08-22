@@ -28,13 +28,13 @@ class UpdateTransactionsByIdUc(var transactionInterfaceRepository: TransactionIn
 }
 
 @ApplicationScoped
-class GetTransactionById(var transactionInterfaceRepository: TransactionInterfaceRepository) {
-    operator fun invoke(id: Long): Uni<TransactionDomainModel>
-            = transactionInterfaceRepository.getTransactionById(id)
-}
-
-@ApplicationScoped
 class GetTransactionsByIdUc(var transactionInterfaceRepository: TransactionInterfaceRepository) {
     operator fun invoke(id: Long): Uni<TransactionDomainModel> =
         transactionInterfaceRepository.getTransactionById(id)
+}
+
+@ApplicationScoped
+class DeleteTransactionByIdUc(var transactionInterfaceRepository: TransactionInterfaceRepository) {
+    operator fun invoke(id: Long): Uni<Long> =
+        transactionInterfaceRepository.deleteTransactionById(id)
 }
