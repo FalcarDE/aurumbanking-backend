@@ -8,4 +8,5 @@ interface TransactionInterfaceRepository {
     fun getThreeLatestTransactionByDepotId(depotId: Long): Uni<List<TransactionDomainModel>>
     fun updateTransactionById(transactionDomainModel: TransactionDomainModel): Uni<TransactionDomainModel>
     fun getTransactionById(id: Long): Uni<TransactionDomainModel>
+    fun deleteTransactionById(id: Long): Uni<Long>
 }

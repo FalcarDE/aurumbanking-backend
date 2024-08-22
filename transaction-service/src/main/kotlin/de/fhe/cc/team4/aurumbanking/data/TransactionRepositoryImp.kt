@@ -84,6 +84,10 @@ class TransactionRepositoryImp : PanacheRepositoryBase<TransactionEntityModel, L
         return this.findById(id).onItem().ifNotNull().transform { it.toDomain() }
     }
 
+    override fun deleteTransactionById(id: Long): Uni<Long> {
+        return this.delete("delete from TransactionEntityModel p where p.id = ?1", id)
+    }
+
     private fun classifyTransaction(name: String): TransactionClassification? {
         for (classification in TransactionClassification.entries) {
             if (classification.displayName == name) {
