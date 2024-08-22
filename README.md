@@ -1,23 +1,22 @@
 # AurumBanking-Backend
 Backend for the Banking-App.
 
-## Getting started
+# How to run stuff
 ## DEV-UI
 - http://localhost:8080/q/dev-ui/io.quarkus.quarkus-smallrye-openapi/swagger-ui
 - http://localhost:8080/q/dev-ui/io.quarkus.quarkus-kafka-client/topics
+- http://localhost:8080/dashboard/#/
 
 ## Quarkus-UI in PROD
-- http://localhost/dashboard/#/ (Overall execution of all Docker Compose)
-- http://localhost:8080/dashboard/#/ (Single execution of the Prod Docker Compose)
+- http://localhost/dashboard/#/ 
 
 ## Prometheus & Grafana in PROD
-- Prometheus: http://172.28.0.2:9090/metrics-service (Single execution of the Prod Docker Compose, look for IP address in Quarkus-UI)
-- Grafana: http://172.28.0.3:3000/login (Single execution of the Prod Docker Compose, look for IP in Quarkus-UI)
-- Prometheus: http://192.168.80.8:9090 (Overall execution of all Docker Compose)
-- Grafana:  http://192.168.80.10:3000/login  (Overall execution of all Docker Compose)
-- *Only on overall execution of all docker compose file - Jeagger Tracing*: http://localhost/tracing/search
+- Traefk-Dashboard: http://localhost/dashboard/
+- Prometheus: http://localhost/prometheus 
+- Grafana: http://localhost/metrics-ui-service/login
+- Jaeger-Tracing: http://localhost/tracing/search
 
-### run mdkocs locally
+## run mdkocs locally
 - python -m pip install mkdocs
 - python -m pip install mkdocs-material
 - python -m mkdocs serve --dev-addr 127.0.0.1:4242
@@ -44,7 +43,7 @@ Backend for the Banking-App.
 
 ## Pipeline Running Rules
 
-### Customer Information Service
+## Customer Information Service
 - **Prepare Build Cache**
     - Runs for branches matching: `feature/customer-information-service`
     - Also runs for the branch: `test/permant` and `main`
@@ -57,7 +56,7 @@ Backend for the Banking-App.
     - Runs for branches matching: `feature/customer-information-service`
     - Also runs for the branch: `test/permant` and `main`
 
-### Depot Service
+## Depot Service
 - **Prepare Build Cache**
     - Runs for branches matching: `feature/depot-service`
     - Also runs for the branch: `test/permant` and `main`
@@ -70,7 +69,7 @@ Backend for the Banking-App.
     - Runs for branches matching: `feature/depot-service`
     - Also runs for the branch: `test/permant` and `main`
 
-### Login Service
+## Login Service
 - **Prepare Build Cache**
     - Runs for branches matching: `feature/login-service`
     - Also runs for the branch: `test/permant` and `main`
@@ -83,7 +82,7 @@ Backend for the Banking-App.
     - Runs for branches matching: `feature/login-service`
     - Also runs for the branch: `test/permant` and `main`
 
-### Support Service
+## Support Service
 - **Prepare Build Cache**
     - Runs for branches matching: `feature/support-service`
     - Also runs for the branch: `test/permant` and `main`
@@ -96,7 +95,7 @@ Backend for the Banking-App.
     - Runs for branches matching: `feature/support-service`
     - Also runs for the branch: `test/permant` and `main`
 
-### Transaction Service
+## Transaction Service
 - **Prepare Build Cache**
     - Runs for branches matching: `feature/transaction-service`
     - Also runs for the branch: `test/permant` and `main`
@@ -109,7 +108,7 @@ Backend for the Banking-App.
     - Runs for branches matching: `feature/transaction-service`
     - Also runs for the branch: `test/permant` and `main`
 
-### Documentation
+## Documentation
 - **Prepare Documentation Pages**
     - Runs for branches matching: `docs/`
     - Also runs for the branch: `test/permant` and `main`
