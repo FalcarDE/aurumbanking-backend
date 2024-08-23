@@ -1,56 +1,50 @@
 # transaction-service
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+## Transaction Overview
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+### Overview
 
-## Running the application in dev mode
+The **Transaction Overview** screen in the AurumBanking app allows users to choose between different types of transactions. The screen is designed to provide a simple and clear interface for users to select the transaction they wish to perform.
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./gradlew quarkusDev
-```
+<div style="text-align: center;">
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+    <figure>
+        <img src="../images/transaction-option-view.png" width="40%">
+        <figcaption>Screenshot of the main transaction view</figcaption>
+    </figure>
 
-## Packaging and running the application
+</div>
 
-The application can be packaged using:
-```shell script
-./gradlew build
-```
-It produces the `quarkus-run.jar` file in the `build/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `build/quarkus-app/lib/` directory.
+#### Transaction Options:
 
-The application is now runnable using `java -jar build/quarkus-app/quarkus-run.jar`.
+On this screen, users can select from the following transaction types:
 
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./gradlew build -Dquarkus.package.jar.type=uber-jar
-```
+1. **Standard Transfer**:  
+   This option allows users to perform a regular domestic bank transfer.
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar build/*-runner.jar`.
+2. **International Transfer**:  
+   Users can choose this option to send money to an account in a different country.
 
-## Creating a native executable
+3. **Permanent Order**:  
+   This option lets users set up a permanent order, which will regularly send a specified amount of money to a designated account.
 
-You can create a native executable using: 
-```shell script
-./gradlew build -Dquarkus.native.enabled=true
-```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./gradlew build -Dquarkus.native.enabled=true -Dquarkus.native.container-build=true
-```
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
 
-You can then execute your native executable with: `./build/transaction-service-1.0.0-SNAPSHOT-runner`
+    <figure style="margin: 10px;">
+        <img src="../images/transaction-standart-transaction-screen.png" width="100%">
+        <figcaption>Screenshot of the standard transaction screen</figcaption>
+    </figure>
 
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling.
+    <figure style="margin: 10px;">
+        <img src="../images/transaction-international-transaction-screen.png" width="100%">
+        <figcaption>Screenshot of the international transaction screen</figcaption>
+    </figure>
 
-## Provided Code
+    <figure style="margin: 10px;">
+        <img src="../images/transaction-permanent-transaction.png" width="100%">
+        <figcaption>Screenshot of the permanent transaction screen</figcaption>
+    </figure>
 
-### REST
+</div>
 
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
