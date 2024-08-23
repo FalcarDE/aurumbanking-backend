@@ -1,6 +1,5 @@
 package de.fhe.cc.team4.aurumbanking.repositories
 
-import de.fhe.cc.team4.aurumbanking.data.entities.TransactionEntityModel
 import de.fhe.cc.team4.aurumbanking.data.repostories.TransactionRepositoryImp
 import de.fhe.cc.team4.aurumbanking.data.toDomain
 import de.fhe.cc.team4.aurumbanking.data.toEntity
@@ -10,7 +9,6 @@ import io.quarkus.test.TestReactiveTransaction
 import io.quarkus.test.junit.QuarkusTest
 import io.quarkus.test.vertx.UniAsserter
 import jakarta.inject.Inject
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
@@ -96,7 +94,6 @@ class TransactionsRepositoryTest {
     fun testUpdateTransactionById(asserter: UniAsserter) {
         val initialTransaction = createTransactions().first().toEntity()
 
-        // Persist the initial transaction
         asserter.assertThat(
             {
                 this.transactionRepositoryImp.persistAndFlush(initialTransaction)
@@ -117,7 +114,6 @@ class TransactionsRepositoryTest {
                         )
                     )
                     .replaceWith(
-                        // Retrieve the updated transaction
                         this.transactionRepositoryImp.getTransactionById(initialTransaction.id!!)
                     )
             },
@@ -177,22 +173,19 @@ class TransactionsRepositoryTest {
     @Test
     @TestReactiveTransaction
     fun testDeleteTransactionById(asserter: UniAsserter) {
-        val transaction = createTransactions().first() // Verwende nur die erste Transaktion aus der Liste
+        val transaction = createTransactions().first()
 
         asserter.assertThat(
             {
                 this.transactionRepositoryImp
                     .persistAndFlush(transaction.toEntity())
                     .flatMap { this.transactionRepositoryImp.deleteTransactionById(transaction.id!!) }
-                    .flatMap { this.transactionRepositoryImp.getTransactionById(transaction.id!!) } // Prüfen, ob die Transaktion nach dem Löschen existiert
+                    .flatMap { this.transactionRepositoryImp.getTransactionById(transaction.id!!) }
             },
             { transactionInformation ->
                 assertNull(transactionInformation, "Transaction should be null after deletion")
             }
         )
     }
-
-
-
 
 }

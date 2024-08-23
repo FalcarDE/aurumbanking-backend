@@ -1,10 +1,10 @@
-
-
 package de.fhe.cc.team4.aurumbanking.ressources
 
 import de.fhe.cc.team4.aurumbanking.domain.TransactionDomainModel
 import de.fhe.cc.team4.aurumbanking.resources.TransactionResource
 import de.fhe.cc.team4.aurumbanking.util.createTransactions
+import de.fhe.cc.team4.aurumbanking.util.createTransactionsforGetAllTransactionByDepotId
+
 import io.quarkus.test.common.http.TestHTTPEndpoint
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured
@@ -26,7 +26,6 @@ class TransactionResourceTest {
 
     @BeforeEach
     fun setup() {
-        // set den standard parser to JSON
         RestAssured.defaultParser = Parser.JSON
     }
 
@@ -41,7 +40,6 @@ class TransactionResourceTest {
     fun `create and retrieve a new transaction`() {
         val testTransactionDataList = createTransactions()
 
-        // 1. create three new transactions with given test data
         val response = Given {
             contentType(ContentType.JSON)
             accept(ContentType.JSON)
@@ -55,11 +53,9 @@ class TransactionResourceTest {
         }
 
 
-        // extract Location-Header
         val locationHeader = response.getHeader("Location")
         val id = locationHeader.split("/").last()
 
-        // 2. GET Request to retrieve the first transaction
         Given {
             contentType(ContentType.JSON)
             accept(ContentType.JSON)
@@ -93,7 +89,6 @@ class TransactionResourceTest {
     fun `create and retrieve three latest transactions`() {
         val testTransactionDataList = createTransactions()
 
-        // create multiple new transactions with given test data
         testTransactionDataList.forEach { data ->
             Given {
                 contentType(ContentType.JSON)
@@ -108,7 +103,6 @@ class TransactionResourceTest {
             }
         }
 
-        // Iterate through each test transaction and perform a GET request
         testTransactionDataList.forEachIndexed { _, transaction ->
             val depotId = transaction.depotId
             Given {
@@ -119,10 +113,8 @@ class TransactionResourceTest {
             } Then {
                 statusCode(200)
 
-                // Get the list of transactions from the response
                 val responseTransactions = extract().jsonPath().getList(".", TransactionDomainModel::class.java)
 
-                // Iterate through the response list and compare with the expected data
                 responseTransactions.forEachIndexed { responseIndex, _ ->
 
                     val expectedTransaction = testTransactionDataList[testTransactionDataList.size - 1 - responseIndex]
@@ -149,7 +141,6 @@ class TransactionResourceTest {
     fun `update an existing transaction by ID`() {
         val testTransactionDataList = createTransactions()
 
-        // Create a new transaction
         val createResponse = Given {
             contentType(ContentType.JSON)
             accept(ContentType.JSON)
@@ -162,11 +153,9 @@ class TransactionResourceTest {
             response()
         }
 
-        // Extract the Location header to get the ID of the created transaction
         val locationHeader = createResponse.getHeader("Location")
         val id = locationHeader.split("/").last()
 
-        // Update the transaction
         val updatedTransaction = testTransactionDataList[0].copy(
             id = id.toLong(),
             moneyValue = BigDecimal(2000.00),
@@ -185,7 +174,6 @@ class TransactionResourceTest {
             response()
         }
 
-        // Verify that the transaction was updated correctly
         Given {
             contentType(ContentType.JSON)
             accept(ContentType.JSON)
@@ -200,9 +188,8 @@ class TransactionResourceTest {
 
     @Test
     fun `create and retrieve all transactions by depot ID`() {
-        val testTransactionDataList = createTransactions()
+        val testTransactionDataList = createTransactionsforGetAllTransactionByDepotId()
 
-        // Create multiple new transactions with the same depotId
         testTransactionDataList.forEach { data ->
             Given {
                 contentType(ContentType.JSON)
@@ -217,8 +204,7 @@ class TransactionResourceTest {
             }
         }
 
-        // Get all transactions by depotId
-        val depotId = testTransactionDataList[0].depotId
+        val depotId = 2
         Given {
             contentType(ContentType.JSON)
             accept(ContentType.JSON)
@@ -227,10 +213,8 @@ class TransactionResourceTest {
         } Then {
             statusCode(200)
 
-            // Validate the size of the returned list matches the number of created transactions
             body("$.size()", equalTo(testTransactionDataList.size))
 
-            // Validate each transaction's details
             testTransactionDataList.forEachIndexed { index, expectedTransaction ->
                 body("[$index].depotId", equalTo(expectedTransaction.depotId.toInt()))
                 body("[$index].country", equalTo(expectedTransaction.country))
@@ -266,7 +250,6 @@ class TransactionResourceTest {
         }
         """.trimIndent()
 
-        // 1. Create a new transaction
         val createResponse = Given {
             contentType(ContentType.JSON)
             accept(ContentType.JSON)
@@ -279,12 +262,10 @@ class TransactionResourceTest {
             response()
         }
 
-        // 2. Extract ID from the Location header
         val locationHeader = createResponse.getHeader("Location")
         val transactionId = locationHeader?.split("/")?.last()?.toLong()
             ?: throw IllegalStateException("Location header is missing or does not contain an ID")
 
-        // 3. Delete the transaction by ID
         Given {
             accept(ContentType.ANY)
         } When {
@@ -293,18 +274,13 @@ class TransactionResourceTest {
             statusCode(200)
         }
 
-        // 4. Check if the transaction is deleted
         Given {
             accept(ContentType.ANY)
         } When {
             get("/getTransactionById/$transactionId")
         } Then {
-            statusCode(404) // Adjusted to expect 404 Not Found if the transaction was deleted
+            statusCode(404)
         }
     }
 
 }
-
-
-
-
