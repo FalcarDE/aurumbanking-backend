@@ -1,3 +1,5 @@
+
+
 package de.fhe.cc.team4.aurumbanking.ressources
 
 import de.fhe.cc.team4.aurumbanking.domain.TransactionDomainModel
@@ -142,6 +144,165 @@ class TransactionResourceTest {
             }
         }
     }
+
+    @Test
+    fun `update an existing transaction by ID`() {
+        val testTransactionDataList = createTransactions()
+
+        // Create a new transaction
+        val createResponse = Given {
+            contentType(ContentType.JSON)
+            accept(ContentType.JSON)
+            body(testTransactionDataList[0])
+        } When {
+            post()
+        } Then {
+            statusCode(201)
+        } Extract {
+            response()
+        }
+
+        // Extract the Location header to get the ID of the created transaction
+        val locationHeader = createResponse.getHeader("Location")
+        val id = locationHeader.split("/").last()
+
+        // Update the transaction
+        val updatedTransaction = testTransactionDataList[0].copy(
+            id = id.toLong(),
+            moneyValue = BigDecimal(2000.00),
+            purposeOfUse = "Updated payment for services"
+        )
+
+        Given {
+            contentType(ContentType.JSON)
+            accept(ContentType.JSON)
+            body(updatedTransaction)
+        } When {
+            post("/updateTransactionById")
+        } Then {
+            statusCode(201)
+        } Extract {
+            response()
+        }
+
+        // Verify that the transaction was updated correctly
+        Given {
+            contentType(ContentType.JSON)
+            accept(ContentType.JSON)
+        } When {
+            get("getTransactionById/$id")
+        } Then {
+            statusCode(200)
+            body("moneyValue", equalTo(BigDecimal(2000.00).toFloat()))
+            body("purposeOfUse", equalTo("Updated payment for services"))
+        }
+    }
+
+    @Test
+    fun `create and retrieve all transactions by depot ID`() {
+        val testTransactionDataList = createTransactions()
+
+        // Create multiple new transactions with the same depotId
+        testTransactionDataList.forEach { data ->
+            Given {
+                contentType(ContentType.JSON)
+                accept(ContentType.JSON)
+                body(data)
+            } When {
+                post()
+            } Then {
+                statusCode(201)
+            } Extract {
+                response()
+            }
+        }
+
+        // Get all transactions by depotId
+        val depotId = testTransactionDataList[0].depotId
+        Given {
+            contentType(ContentType.JSON)
+            accept(ContentType.JSON)
+        } When {
+            get("getAllTransactionsByDepotId/$depotId")
+        } Then {
+            statusCode(200)
+
+            // Validate the size of the returned list matches the number of created transactions
+            body("$.size()", equalTo(testTransactionDataList.size))
+
+            // Validate each transaction's details
+            testTransactionDataList.forEachIndexed { index, expectedTransaction ->
+                body("[$index].depotId", equalTo(expectedTransaction.depotId.toInt()))
+                body("[$index].country", equalTo(expectedTransaction.country))
+                body("[$index].recipient", equalTo(expectedTransaction.recipient))
+                body("[$index].iban", equalTo(expectedTransaction.iban))
+                body("[$index].bic", equalTo(expectedTransaction.bic))
+                body("[$index].moneyValue", equalTo(expectedTransaction.moneyValue.toFloat()))
+                body("[$index].purposeOfUse", equalTo(expectedTransaction.purposeOfUse))
+                body("[$index].standingOrder", equalTo(expectedTransaction.standingOrder))
+                body("[$index].transactionType", equalTo(expectedTransaction.transactionType))
+                body("[$index].transactionClassification", equalTo(expectedTransaction.transactionClassification))
+            }
+        }
+    }
+
+    /**
+     * Test for creating and deleting a transaction by ID.
+     */
+    @Test
+    fun `create and delete a transaction by id`() {
+        val newTransactionJson = """
+        {
+            "depotId": 1,
+            "country": "Germany",
+            "recipient": "John Doe",
+            "iban": "DE89370400440532013000",
+            "bic": "COBADEFFXXX",
+            "moneyValue": 1000.00,
+            "purposeOfUse": "Payment for services",
+            "standingOrder": false,
+            "transactionType": "outcome",
+            "transactionClassification": "Dauerauftrag"
+        }
+        """.trimIndent()
+
+        // 1. Create a new transaction
+        val createResponse = Given {
+            contentType(ContentType.JSON)
+            accept(ContentType.JSON)
+            body(newTransactionJson)
+        } When {
+            post()
+        } Then {
+            statusCode(201)
+        } Extract {
+            response()
+        }
+
+        // 2. Extract ID from the Location header
+        val locationHeader = createResponse.getHeader("Location")
+        val transactionId = locationHeader?.split("/")?.last()?.toLong()
+            ?: throw IllegalStateException("Location header is missing or does not contain an ID")
+
+        // 3. Delete the transaction by ID
+        Given {
+            accept(ContentType.ANY)
+        } When {
+            delete("/deleteTransactionBy/$transactionId")
+        } Then {
+            statusCode(200)
+        }
+
+        // 4. Check if the transaction is deleted
+        Given {
+            accept(ContentType.ANY)
+        } When {
+            get("/getTransactionById/$transactionId")
+        } Then {
+            statusCode(404) // Adjusted to expect 404 Not Found if the transaction was deleted
+        }
+    }
+
 }
 
 
