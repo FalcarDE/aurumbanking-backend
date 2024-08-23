@@ -1,5 +1,6 @@
 package de.fhe.cc.team4.aurumbanking.repositories
 
+import de.fhe.cc.team4.aurumbanking.core.TransactionClassification
 import de.fhe.cc.team4.aurumbanking.data.repostories.TransactionRepositoryImp
 import de.fhe.cc.team4.aurumbanking.data.toDomain
 import de.fhe.cc.team4.aurumbanking.data.toEntity
@@ -109,7 +110,7 @@ class TransactionsRepositoryTest {
                                 purposeOfUse = "Updated Purpose",
                                 standingOrder = true,
                                 transactionType = "income",
-                                transactionClassification = "Einmalzahlung"
+                                transactionClassification = "Standard Überweisung"
                             )
                         )
                     )
@@ -127,7 +128,7 @@ class TransactionsRepositoryTest {
                     assertEquals("Updated Purpose", it.purposeOfUse)
                     assertEquals(true, it.standingOrder)
                     assertEquals("income", it.transactionType)
-                    assertEquals("Einmalzahlung", it.transactionClassification)
+                    assertEquals("Standard Überweisung", it.transactionClassification)
                 }
             }
         )
