@@ -7,7 +7,8 @@ Authorization: Basic Hoang admin
 POST http://{{ip}}:{{port}}/{{customer-information-service-fullpath}}
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer xyz
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FpLmZoLWVyZnVydC5kZSIsInN1YiI6IkhvYW5nIiwiaWF0IjoxNzI0MzY4OTkxLCJleHAiOjE3MjQzNzI1OTEsImdyb3VwcyI6WyJhZG1pbiJdLCJsZXZlbC1vZi1uZXJkaW5lc3MiOjQyLCJqdGkiOiI4MjJlZWE0Yy1iMzkyLTRkMTQtODg5My1kOTQ0OGUxYTllNWUifQ.TNKz4fZy7CTrOhQqyxF74zcoX55VDHq56q1WgMOj5mkhUjPEiCQ9rZpHDonDeLuvpiBLRpq6rmLgMmSr1mh6z--GucACbJlGgn6IYEHxkr8rxKRI2LPQd--CPcAT__vIdtz9o5VSafo4EBLexnJouUw987hIregMThO8QMNNXq-AfaQ9ofCvLfb_7IAylcRhkfJg9BW9NKiEgPH3yx8UcmiwfOxIf88yru68sRRIdcmyjgg-ktymzhz-OHx0sgb8NLZjBckYYOxcgUqv9VDtOycsQnBWoV5iBmrQ5Fqc8zmLBADeQDl1oX_Nu2sp_zwvV3utFslQs9nAVVOWF8tvGw
+
 # fill token into Baerer xyz
 
 {
@@ -25,7 +26,7 @@ Authorization: Bearer xyz
   "email": "johndoe@example.com",
   "phoneNumber": "+1234567890",
   "password": "123",
-  "profileImage": "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAEklEQVR4nO3BMQEAAADCoPdPbQ43oAAAAABJRU5ErkJggg=="
+  "profileImage": "{{profilImage}}"
 }
 
 ###
