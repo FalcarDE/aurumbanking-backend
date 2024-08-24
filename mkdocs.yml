@@ -89,6 +89,8 @@ nav:
           - Overview: 'support-service/README.md'
           - 'Code Doc': 'support-service-dokka/index.html'
   - 'Prometheus-Grafana' : 'PROMETHEUS_AND_GRAFANA.md'
+  - 'Jaeger-Tracing': 'JAEGER_TRACING.md'
+  - 'Kafka-Integration': 'KAFKA.md'
   - Testing: 'TESTING.md'
   - 'App-Documentation': 'APP.md'
   - Documentation: 'MKDocs.md'

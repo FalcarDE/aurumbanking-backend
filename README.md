@@ -19,9 +19,9 @@ Backend for the AurumBanking-Banking App.
 1. run on on root path of this project:
    - linux, mac: `sh assemble-docs.sh`
    - windows: `./assemble-docs.sh`
-- `python -m pip install mkdocs`
-- `python -m pip install mkdocs-material`
-- `python -m mkdocs serve --dev-addr 127.0.0.1:4242`
+2. `python -m pip install mkdocs`
+3. `python -m pip install mkdocs-material`
+4. `python -m mkdocs serve --dev-addr 127.0.0.1:4242`
 
 ## How to run stuff
 

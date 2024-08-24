@@ -18,9 +18,14 @@ The `depot-service` and `transaction-service` share a Kafka topic named `update-
 
 ## Database Management
 
-PostgreSQL is used as the database management system. Specifically:
+PostgreSQL is used as the database management system. 
+
+Specifically:
+
 - The `login-service` and `customer-information-service` access the `customer-information-service-db`.
-- The `depot-service` and `transaction-service` use the `depot-service-db`.
+
+- The `depot-service` and `transaction-service` use the `depot-service-db`. 
+
 - The `support-service` utilizes the `support-service-db`.
 
 Here are the database-model of our databases:

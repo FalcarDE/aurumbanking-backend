@@ -1,14 +1,13 @@
 ## Jaeger UI / Tracing
 
-If started with the **_-t_** flag, have a look at the Jaeger UI.
-
+Use this path to call the Jaeger UI on the web-browser.
 > **Path:** [http://localhost/tracing](http://localhost/tracing)
 
 Jaeger is our OpenTelemetry compliant service that collects tracing information from all services comprising our system.
 With that data, one is able to examine how requests _move_ through the system, gather insights about processing times as
 well as errors that happen along the way.
 
-Here is an example of the 
+Here is an example of the jaeger-tracing on the transaction-service.
 <div style="text-align: center;">
 
 <figure>
