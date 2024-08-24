@@ -1,9 +1,14 @@
-# Prometheus - Metrics 
+# Metrics - Service  
 
-If started with the **_-m_** flag, have a look at Prometheus, the system that aggregates metric data from all services (
-e.g. our own Quarkus services, databases, Traefik and, yes, Prometheus itself).
 
-> **Path on PROD:** [http://localhost/prometheus](http://localhost/prometheus)
+## Prometheus 
+<details>
+<summary> Prometheus </summary>
+
+<p> Traefik provides metrics that are collected by a Prometheus server and visualized through Grafana dashboards. Follow this Link on PROD to Web-UI of Prometheus: </p>
+
+<code> <a href="http://localhost/prometheus" target="_blank"> http://localhost/prometheus </a> </code>
+
 
 <div style="text-align: center;">
     <figure>
@@ -30,32 +35,72 @@ Here are some examples which metrics can be provided by Prometheus and can be sh
     </figure>
 </div>
 
+</details>
 
-# Grafana - Monitoring
 
-For monitoring purposes, Traefik provides metrics that are collected by a Prometheus server and visualized through Grafana dashboards.
+## Grafana - Monitoring
 
-> **Path on PROD:** [http://localhost/metrics-ui-service/login](http://localhost/prometheus)
+<details>
+<summary> Grafana </summary>
 
-> username: admin
+<p> For monitoring purposes, Traefik provides metrics that are collected by a Prometheus server and visualized through Grafana dashboards. Follow this Link on PROD to Web-UI of Grafana: </p>
 
-> password: admin
+<code> <a href="http://localhost/metrics-ui-service/login" target="_blank"> http://localhost/metrics-ui-service/login </a> </code>
 
-We have for each of our services a monitoring dashboards. In the following section, we will have a closer look on those dashboards.
+<code> username: admin </code>
 
-## Login-Service
+<code>  password: admin </code>
 
-## Customer-Information-Service
+<p> We have for each of our services a monitoring dashboards. In the following section, we will have a closer look on those dashboards. </p>
 
-## Depot-Service
+<h3> Connect Prometheus with Grafana </h3>
 
-## Transaction-Service
+<p>To enable Grafana to capture metrics from Prometheus, Prometheus first needs to be connected. To achieve this, we need to run all Docker containers in the PROD environment. </p>
 
-## Support-Service
 
-This dashboard provides a clear visualization of key performance metrics related to the support service, using Prometheus as the data source. Each panel is designed to monitor a specific aspect of the service, helping ensure reliability and performance optimization.
 
-### Panel 1: Successful Support Requests (Max Duration)
+
+</details>
+
+
+### Login-Service
+
+<details>
+<summary> Login-Service </summary>
+
+</details>
+
+### Customer-Information-Service
+
+<details>
+<summary> Customer-Information-Service </summary>
+
+</details>
+
+### Depot-Service
+
+<details>
+<summary> Depot-Service </summary>
+
+</details>
+
+### Transaction-Service
+
+<details>
+<summary> Transaction-Service </summary>
+
+</details>
+
+### Support-Service
+
+<details>
+<summary> Support-Service </summary>
+
+<p> This dashboard provides a clear visualization of key performance metrics related to the support service, 
+using Prometheus as the data source. 
+Each panel is designed to monitor a specific aspect of the service, helping ensure reliability and performance optimization. </p>
+
+<h3> Panel 1: Successful Support Requests (Max Duration) </h3>
 
 This gauge panel shows the maximum processing time for successful support requests (HTTP 200 status). It helps in understanding the performance of the support service, particularly in measuring the longest request times. If the max duration consistently exceeds a certain threshold, this could indicate a performance bottleneck.
 
@@ -68,7 +113,7 @@ This gauge panel shows the maximum processing time for successful support reques
 
 </div>
 
-### Panel 2: Sum of Support Requests Over Time (Timeseries)
+<h3> Panel 2: Sum of Support Requests Over Time (Timeseries) </h3>
 
 This timeseries panel visualizes the total number of support requests handled by the service over time. Monitoring this data helps detect spikes in request volume, which could indicate periods of high load or unusual activity that might need investigation.
 
@@ -81,7 +126,7 @@ This timeseries panel visualizes the total number of support requests handled by
 
 </div>
 
-### Panel 3: Max Request Time for Status 200 (Timeseries)
+<h3> Panel 3: Max Request Time for Status 200 (Timeseries) </h3>
 
 This timeseries panel tracks the maximum duration of HTTP 200 status requests over time. By monitoring this metric, you can identify trends in performance for successful requests and potentially spot periods of degraded performance before they escalate into more significant issues.
 
@@ -94,7 +139,7 @@ This timeseries panel tracks the maximum duration of HTTP 200 status requests ov
 
 </div>
 
-### Panel 4: Max Request Time for Status 200
+<h3> Panel 4: Max Request Time for Status 200 </h3>
 
 This panel measures the maximum request time for HTTP 200 status requests. It provides immediate insight into how quickly requests are being processed and can alert the team to performance issues that may require tuning or scaling.
 
@@ -107,7 +152,7 @@ This panel measures the maximum request time for HTTP 200 status requests. It pr
 
 </div>
 
-### Panel 5: Duration of Server Connections in Seconds
+<h3> Panel 5: Duration of Server Connections in Seconds </h3>
 
 This gauge panel tracks the duration of server connections in seconds. It is useful for identifying potential issues with connection handling in the support service, particularly if connection times begin to increase unexpectedly, potentially leading to timeouts or degraded service quality.
 
@@ -120,9 +165,12 @@ This gauge panel tracks the duration of server connections in seconds. It is use
 
 </div>
 
-### Conclusion
-
+<h3> Conclusion </h3>
 This dashboard offers essential metrics to monitor the performance and reliability of the support service. By keeping track of request times, connection durations, and overall service load, you can ensure that the support service remains responsive and scalable, identifying and addressing potential bottlenecks or performance degradations in a timely manner.
+
+</details>
+
+
 
 
 

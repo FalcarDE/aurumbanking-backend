@@ -1,64 +1,120 @@
-# How to start and use the system 
-
-## How to run stuff
-
-## Run mdkocs locally
-1. run on on root path of this project:
-- linux, mac: `sh assemble-docs.sh`
-  - windows: `./assemble-docs.sh`
-2. `python -m pip install mkdocs`
-3. `python -m pip install mkdocs-material`
-4. `python -m mkdocs serve --dev-addr 127.0.0.1:4242`
+# How to start and use the system
 
 ## Run Backend on PROD
 
-- start in the root dir of this project
-- run this shell scrip:
-    - linix/mac: `sh run.sh`
-    - windows: `./run.sh`
-- press y/yes to build the entire project:
+<details>
+<summary>Run Backend on PROD </summary>
 
-![build-image](images/deployment/run-sh-1.png)
+<ul>
+  <li>Start in the root directory of this project.</li>
+  <li>Run this shell script:
+    <ul>
+      <li>Linux/Mac: 
+        <pre><code>sh run.sh</code></pre>
+      </li>
+      <li>Windows: 
+        <pre><code>./run.sh</code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>Press `y/yes` to build the entire project:</li>
+</ul>
 
-- after build finish, press number 5 to run all docker-compose files:
+<figure>
+    <img src="images/deployment/run-sh-1.png" width="80%">
+</figure>
 
-![build-docker](images/deployment/run-sh-2.png)
+<ul>
+  <li>After the build finishes, press `5` to run all docker-compose files:</li>
+</ul>
 
-- now we can see the services running
+<figure>
+    <img src="images/deployment/run-sh-2.png" width="80%">
+</figure>
 
-![running-docker](images/deployment/docker-services.png)
+<ul>
+  <li>Now we can see the services running:</li>
+</ul>
 
-- go to browser: `http://localhost/dashboard/`
+<figure>
+    <img src="images/deployment/docker-services.png" width="80%">
+</figure>
 
-- insert this credetials:
-    - `user`
-    - `123`
+<ul>
+  <li>Go to the browser: <a href="http://localhost/dashboard/" target="_blank">http://localhost/dashboard/</a></li>
+</ul>
 
-- Here is the dashboard on prod:
+<ul>
+  <li>Insert these credentials:
+    <ul>
+      <pre><code>user</code></pre>
+      <pre><code>123</code></pre>
+    </ul>
+  </li>
+  <li>Here is the dashboard on PROD:</li>
+</ul>
 
-![traefik-dashboard](images/deployment/traefik-dashboard.png)
+<figure>
+    <img src="images/deployment/traefik-dashboard.png" width="80%">
+</figure>
 
-- to initialize the database with data which will be needed in the app, run:
-    - linix/mac: `sh rproject-script.sh`
-    - windows: `./project-script.sh`
+<ul>
+  <li>To initialize the database with data needed in the app, run:
+    <ul>
+      <li>Linux/Mac: 
+        <pre><code>sh project-script.sh</code></pre>
+      </li>
+      <li>Windows: 
+        <pre><code>./project-script.sh</code></pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+</details>
 
 ## DEV-UI
 
-- `http://localhost:8080/q/dev-ui/io.quarkus.quarkus-smallrye-openapi/swagger-ui`
-- `http://localhost:8080/q/dev-ui/io.quarkus.quarkus-kafka-client/topics`
-- `http://localhost:8080/dashboard/#/`
+<details>
+<summary> DEV-UI </summary>
 
+
+<ul>
+  <li><pre><code>http://localhost:8080/q/dev-ui/io.quarkus.quarkus-smallrye-openapi/swagger-ui</code></pre></li>
+  <li><pre><code>http://localhost:8080/q/dev-ui/io.quarkus.quarkus-kafka-client/topics</code></pre></li>
+  <li><pre><code>http://localhost:8080/dashboard/#/</code></pre></li>
+</ul>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+</details>
 
 ## Quarkus-UI in PROD
 
-- http://localhost/dashboard/#/
+<details>
+<summary> Quarkus-UI in PROD </summary>
 
-Prometheus & Grafana in PROD
+<ul>
+  <li><pre><code>http://localhost/dashboard/#/</code></pre></li>
+</ul>
 
-- Traefk-Dashboard: http://localhost/dashboard/
-- Prometheus: http://localhost/prometheus
-- Grafana: http://localhost/metrics-ui-service/login
-- Jaeger-Tracing: http://localhost/tracing/search
+<p align="right">(<a href="#top">back to top</a>)</p>
+</details>
+
+## Prometheus & Grafana in PROD
+
+<details>
+<summary> Prometheus & Grafana in PROD </summary>
+
+<ul>
+  <li>Traefik-Dashboard: <pre><code>http://localhost/dashboard/</code></pre></li>
+  <li>Prometheus: <pre><code>http://localhost/prometheus</code></pre></li>
+  <li>Grafana: <pre><code>http://localhost/metrics-ui-service/login</code></pre></li>
+  <li>Jaeger-Tracing: <pre><code>http://localhost/tracing/search</code></pre></li>
+</ul>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+</details>
 
 
 
