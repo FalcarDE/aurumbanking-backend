@@ -45,6 +45,44 @@ We have for each of our services a monitoring dashboards. In the following secti
 
 ## Login-Service
 
+This dashboard provides a clear visualization of key performance metrics related to the login service, using Prometheus as the data source. Each panel is designed to monitor a specific aspect of the service, helping ensure reliability and performance optimization.
+
+### Panel 1: Sum Server Request By Second
+
+This line chart tracks the total number of GET requests per second on the login service. It helps monitor traffic patterns and identify potential issues, such as increased load that may require resource scaling.
+
+<div style="text-align: center;">
+<figure>
+    <img src="images/grafana-dashboards/login-service/grafana-sum-of-request-second.png" width="70%">
+    <figcaption>Screenshot showing the total number of login requests per second</figcaption>
+</figure>
+
+</div>
+
+### Panel 2: Count of Server Requests Per Second
+
+This gauge displays the current number of server requests per second, helping to quickly assess the real-time load on the service.
+
+<div style="text-align: center;">
+<figure>
+    <img src="images/grafana-dashboards/login-service/grafana-count-of-request-second.png" width="70%">
+    <figcaption>Screenshot showing the real-time count of server requests per second for the login service.</figcaption>
+</figure>
+
+</div>
+
+### Panel 3: Max of Server Requests by Second
+
+This line chart visualizes the maximum number of server requests per second over time for the login service. It helps identify peak request rates, enabling the monitoring of potential performance bottlenecks and ensuring that the service can handle traffic spikes effectively.
+
+<div style="text-align: center;">
+<figure>
+    <img src="images/grafana-dashboards/login-service/grafana-max-of-request-second.png" width="70%">
+    <figcaption>Screenshot showing the maximum number of server requests per second for the login service.</figcaption>
+</figure>
+
+</div>
+
 ## Customer-Information-Service
 
 ## Depot-Service
