@@ -49,7 +49,44 @@ The <strong>Login Screen </strong> in the <strong> AurumBanking-App </strong> pr
 </details>
 
 
-## Customer-Information-Screen
+## Overview-Screen
+
+<details>
+<summary> Overview-Screen </summary>
+
+<p> In the following GIF, you can see the functional elements of the Overview Screen. It consists of the app scaffold with some shortcut icons below, which allow the user to quickly access certain pages. </p>
+
+<figure>
+    <img src="images/app/overview-screen/Overview-Darkmode.gif" width="40%">
+    <figcaption>Overview-Screen in Dark-Mode</figcaption>
+</figure>
+
+<p> Below that is the Depot segment, which displays the current depot value. This value is fetched and updated every 3 seconds. </p>
+
+<p> Next are the recent transactions that the user has either received or executed. The three most recent transactions are shown. </p>
+
+<p> Finally, there is the Chart Segment, which accumulates all transactions for a given day and displays them as a bar chart. 
+It shows the current day, 2 days in the past, and 2 days in the future, as there may already be transactions scheduled for those days. 
+Transactions for the current day are always displayed in the center. </p>
+
+<p> When you tap approximately in the middle of the chart, a red marker appears to indicate that it is the current day. </p>
+
+<p> In the following, you can see the Overview Screen in White Mode. </p>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+
+<figure>
+    <img src="images/app/overview-screen/Overview-Whitemode-1.png" width="80%">
+    <figcaption>Overview-Screen in White-Mode</figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/overview-screen/Overview-Whitemode-2.png" width="80%">
+    <figcaption>Overview-Screen in White-Mode</figcaption>
+</figure>
+</div>
+
+</details>
 
 ## Depot-Screen
 

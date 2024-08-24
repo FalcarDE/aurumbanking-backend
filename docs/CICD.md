@@ -1,5 +1,5 @@
 # Pipeline
-The configuration file for the pipeline can be found on:
+The configuration pipeline-file for the backand as well as for app can be found on on the root-project folder in:
 > Path: .gitlab-ci.yml
 
 Our has 3 stages: 
@@ -27,13 +27,24 @@ and optimized for faster and more precise execution of our development and opera
 ![test-pipeline](images/pipeline/pipeline-3.png)
 *Figure 3: This is the pipeline diagram illustrating only one workflow with the branch-name matching rule.*
 
+Here you can see the pipeline of the app-frontend:
+
+![app-pipeline](images/pipeline/pipeline-app.png)
+*Figure 4: App-Pipeline*
+
 
 ## Setup-Pipeline
 
 <details>
 <summary>Setup-Pipeline</summary>
 
-<p><strong>_token:_</strong></p>
+<p>The only two different things about the app-gitlab-runner and backend-gitlab-runner are:</p>
+<ul>
+  <li>app-gitlab-token: <strong>glrt-gzH2v-od7U2MxFuhypb7 </strong> </li>
+  <li>app-gitlab runner only runs on protected branches</li>
+</ul>
+
+<p><strong> token: </strong></p>
 <ul>
   <li>linux: <strong>_glrt-xznuGhoqctjSmbVNxpm_</strong></li>
   <li>windows-hoang: <strong>_glrt-xznuGhoqctjSmbVNxpm_</strong> / <strong>_glrt-aHawSL4WALWi1s6BXdVi_</strong></li>
@@ -214,7 +225,6 @@ docker exec -it gitlab-runner /bin/bash
         </ul>
     </li>
 </ul>
-
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 </details>

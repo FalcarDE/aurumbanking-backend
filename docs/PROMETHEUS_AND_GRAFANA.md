@@ -55,10 +55,56 @@ Here are some examples which metrics can be provided by Prometheus and can be sh
 
 <h3> Connect Prometheus with Grafana </h3>
 
-<p>To enable Grafana to capture metrics from Prometheus, Prometheus first needs to be connected. To achieve this, we need to run all Docker containers in the PROD environment. </p>
+<p> To enable Grafana to capture metrics from Prometheus, Prometheus first needs to be connected. To achieve this, we need to run all Docker containers in the PROD environment. </p>
+
+<p> After executing this, you need to access <a href="localhost/dashboards/ " target="_blank">localhost/dashboards/ </a> to retrieve the IP address of the <strong<metrics-service@docker</strong> service. </p>
+
+<div style="text-align: center;">
+<figure>
+    <img src="images/prometheus/connect-grafa-prom.png" width="80%">
+    <figcaption>IP-Address of smetrics-service@docker </figcaption>
+</figure>
+</div>
+
+<p> Now, we need to connect the data source in Grafana by creating a new Prometheus connection and linking it using the retrieved IP address. </p>
+
+<div style="text-align: center;">
+<figure>
+    <img src="images/prometheus/connect-grafa-prom-1.png" width="80%">
+    <figcaption>Using the IP-Address for the Prometheus Backend Connection </figcaption>
+</figure>
+</div>
+
+<div style="text-align: center;">
+<figure>
+    <img src="images/prometheus/connect-grafa-prom-3.png" width="80%">
+    <figcaption>Successful Connection </figcaption>
+</figure>
+</div>
+
+<p> Now, we are able to create dashboards by using the provided metrics from the prometheus server. </p>
 
 
+<div style="text-align: center;">
+<figure>
+    <img src="images/prometheus/connect-grafa-prom-4.png" width="80%">
+    <figcaption>Add new Dashbaord </figcaption>
+</figure>
+</div>
 
+<div style="text-align: center;">
+<figure>
+    <img src="images/prometheus/connect-grafa-prom-5.png" width="80%">
+    <figcaption> Connect to the establish prometheus server </figcaption>
+</figure>
+</div>
+
+<div style="text-align: center;">
+<figure>
+    <img src="images/prometheus/connect-grafa-prom-6.png" width="80%">
+    <figcaption> Using services metrics from Prometheus Server </figcaption>
+</figure>
+</div>
 
 </details>
 

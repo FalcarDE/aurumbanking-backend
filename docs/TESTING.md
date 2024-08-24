@@ -54,11 +54,22 @@ In our project, we place a strong emphasis on ensuring the reliability and stabi
 <details>
 <summary> UI Monkey Tests </summary>
 
-
 <p> To Ensure a UI-Test we perform an UI monkey testing, which randomly interacts with the user interface to catch unexpected crashes or issues. 
 This test simulates a wide range of user interactions to ensure the robustness of our UI. 
 These UI tests are also integrated into our pipeline, providing a broader validation of the system's stability.
 </p>
+
+<p>To run the Monkey Test, go to the root folder of the app project and execute the following command:</p>
+
+<pre><code> adb shell monkey -p de.fhe.ai.mc --throttle 50 -v 500 </code></pre>
+
+<p>Below is a brief excerpt from the Monkey Test in our app: </p>
+
+<figure>
+    <img src="images/testing/MonkeyTest.gif" width="100%">
+    <figcaption> Monkey-Test Example in the AurumBanking-App </figcaption>
+</figure>
+
 
 </details>
 
