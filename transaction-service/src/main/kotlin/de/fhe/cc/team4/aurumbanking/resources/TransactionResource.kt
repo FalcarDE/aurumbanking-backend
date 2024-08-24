@@ -32,7 +32,10 @@ class TransactionResource {
     lateinit var updateTransactionsByIdUc: UpdateTransactionsByIdUc
 
     @Inject
-    lateinit var getTransactionById: GetTransactionById
+    lateinit var getTransactionByIdUc: GetTransactionsByIdUc
+
+    @Inject
+    lateinit var deleteTransactionByIdUc: DeleteTransactionByIdUc
 
     @Channel("update-depot-value")
     lateinit var transactionKafkaDtoEmitter: Emitter<TransactionKafkaDTO>
@@ -57,7 +60,7 @@ class TransactionResource {
     @Produces(MediaType.APPLICATION_JSON)
     @WithSession
     fun getTransactionsById(@PathParam("id") id: Long): Uni<RestResponse<TransactionDomainModel>> =
-        getTransactionById(id)
+        getTransactionByIdUc(id)
             .onItem().ifNotNull().transform { RestResponse.ok(it) }
             .onItem().ifNull().continueWith(RestResponse.notFound())
 
@@ -90,16 +93,25 @@ class TransactionResource {
     @Path("/updateTransactionById")
     @WithTransaction
     fun updateTransactionById(transactionDomainModel: TransactionDomainModel): Uni<RestResponse<Void>> {
-        return getTransactionById.invoke(transactionDomainModel.id)
+        return getTransactionByIdUc.invoke(transactionDomainModel.id)
             .flatMap { transaction ->
                 if (transaction != null) {
                     updateTransactionsByIdUc.invoke(transactionDomainModel)
                         .map { updatedTransaction ->
-                            RestResponse.created<Void>(URI("/transactions/${updatedTransaction.id}"))
+                            RestResponse.created(URI("/transactions/${updatedTransaction.id}"))
                         }
                 } else {
-                    Uni.createFrom().failure<RestResponse<Void>>(IllegalStateException("Transaction not found"))
+                    Uni.createFrom().failure(IllegalStateException("Transaction not found"))
                 }
             }
     }
+
+    @DELETE
+    @Path("/deleteTransactionBy/{id:\\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WithTransaction
+    fun deleteById(@PathParam("id") id: Long): Uni<RestResponse<Void>> {
+        return deleteTransactionByIdUc(id).replaceWith{ RestResponse.ok()}
+    }
+
 }

@@ -20,14 +20,13 @@ services:
       - metrics-service-data:/prometheus
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.prom.rule=PathPrefix(`/prometheus`)"
-      - "traefik.http.services.prom.loadbalancer.server.port=9090"
-      - "traefik.http.routers.prom.entrypoints=web"
+      - "traefik.http.routers.metrics-service.rule=PathPrefix(`/prometheus`)"
+      - "traefik.http.services.metrics-service.loadbalancer.server.port=9090"
+      - "traefik.http.routers.metrics-service.entrypoints=web"
     networks:
       - webnet
 
 networks:
   webnet:
     driver: bridge
-
 

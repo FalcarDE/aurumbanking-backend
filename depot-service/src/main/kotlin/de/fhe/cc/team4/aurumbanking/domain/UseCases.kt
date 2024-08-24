@@ -1,6 +1,7 @@
 package de.fhe.cc.team4.aurumbanking.domain
 
 import de.fhe.cc.team4.aurumbanking.model.entities.DepotDTO
+import de.fhe.cc.team4.aurumbanking.model.entities.DepotDomainModelDTO
 import io.smallrye.mutiny.Uni
 import jakarta.enterprise.context.ApplicationScoped
 import java.math.BigDecimal
@@ -13,7 +14,7 @@ class GetDepotByIdUc(var depotInterfaceRepository: DepotInterfaceRepository) {
 
 
 @ApplicationScoped
-class GetCurrentDepotByCustomerIdUc(var depotInterfaceRepository: DepotInterfaceRepository) {
+class GetCurrentDepotValueByIdUc(var depotInterfaceRepository: DepotInterfaceRepository) {
     operator fun invoke(id: Long): Uni<DepotDTO> =
         depotInterfaceRepository.findCurrentDepotValueById(id)
 }
@@ -36,4 +37,10 @@ class UpdateDepositValueByIdUc(var depotInterfaceRepository: DepotInterfaceRepos
 class DeleteDepotByIdUc(var depotInterfaceRepository: DepotInterfaceRepository) {
     operator fun invoke(id: Long ): Uni<Long> =
         depotInterfaceRepository.deleteDepotById(id)
+}
+
+@ApplicationScoped
+class GetDepotByCustomerIdUc(var depotInterfaceRepository: DepotInterfaceRepository) {
+    operator fun invoke(id: Long): Uni<DepotDomainModelDTO> =
+        depotInterfaceRepository.findDepotByCustomerId(id)
 }

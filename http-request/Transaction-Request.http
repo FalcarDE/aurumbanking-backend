@@ -1,4 +1,4 @@
-###
+### DEV
 POST http://localhost:8081/transactions
 Accept: application/json
 Content-Type: application/json
@@ -18,7 +18,7 @@ Content-Type: application/json
   "dateTimeOfLastExecution": "2024-06-01T10:00:00"
 }
 
-###
+### DEV
 POST http://localhost:8081/transactions
 Accept: application/json
 Content-Type: application/json
@@ -38,7 +38,7 @@ Content-Type: application/json
   "dateTimeOfLastExecution": "2024-06-01T10:00:00"
 }
 
-###
+### DEV
 POST http://localhost:8081/transactions/
 Accept: application/json
 Content-Type: application/json
@@ -58,14 +58,18 @@ Content-Type: application/json
   "dateTimeOfLastExecution": "2024-06-01T10:00:00"
 }
 
-###
+### DEV
 GET http://localhost:8081/transactions/getAllTransactionsByDepotId/1
 
-###
+### DEV
 GET http://localhost:8081/transactions/getThreeLatestTransactionByDepotId/1
 
-###
+### DEV
 GET http://localhost:8081/transactions/getTransactionsId/1
+
+### DEV
+DELETE http://localhost:8081/transactions/deleteTransactionBy/1
+
 
 ### PROD
 GET http://localhost:80/transactions-service/transactions/test
@@ -117,7 +121,8 @@ GET http://localhost:80/transactions-service/transactions/getTransactionById/1
 ### PROD
 GET http://localhost:80/transactions-service/transactions/getAllTransactionsByDepotId/1
 
-
+### PROD
+DELETE http://localhost:80/transactions-service/transactions/deleteTransactionBy/1
 
 
 
