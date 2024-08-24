@@ -89,9 +89,7 @@ nav:
           - Overview: 'support-service/README.md'
           - 'Code Doc': 'support-service-dokka/index.html'
   - Documentation: 'DOCUMENTATION.md'
-  - 'API Gateway': 'API_GATEWAY.md'
   - 'CI/CD': 'CICD.md'
-  - 'Service Development': 'SERVICE_DEVELOPMENT.md'
   - References: 'REFERENCES.md'
 
 dev:

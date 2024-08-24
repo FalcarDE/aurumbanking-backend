@@ -22,69 +22,8 @@ To start the system run the run.sh file on:
 
 After the Docker-Compose runs you can move on to step 1.
 
-## 1. Traefik API Gateway
 
-Take a look at the Traefik dashboard.
 
-> **Path:** [http://localhost/dashboard/](http://localhost/dashboard/)
-
-Traefik acts as API gateway and load balancer.
-It's configured in the _docker-compose-prod.yml_ and picks up running containers automatically.
-Thus, it will recognize containers that are started or stopped while the system is already running.
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/Treaffik-UI-Ziwschenstand.png" width="80%">
-    <figcaption>Traefik Dashboard</figcaption>
-</figure>
-</div>
-
-## 2. Endpoints with Swagger-UI
-
-### Swagger UI with Traefik in Dev Mode
-
-Traefik is a powerful reverse proxy and load balancer that can automatically discover and manage services. 
-In development mode, Traefik comes with built-in support for Swagger UI, a popular tool for visualizing and interacting with APIs.
-Once Traefik is running in dev-mode, you can access the Swagger UI by navigating to the following URL in your web browser:
-
-> **Path:**  http://localhost:8080/q/dev-ui/io.quarkus.quarkus-smallrye-openapi/swagger-ui
-
-In the following you can see all the endpoints of our services:
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/login-service.png" width="80%">
-    <figcaption>Endpoints of Login-Service</figcaption>
-</figure>
-</div>
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/Depot-Service.png" width="80%">
-    <figcaption>Endpoints of Depot-Service</figcaption>
-</figure>
-</div>
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/transaction-service.png" width="80%">
-    <figcaption>Endpoints of Transaction-Service</figcaption>
-</figure>
-</div>
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/customer-infomation-service.png" width="80%">
-    <figcaption>Endpoints of Customer-Information-Service</figcaption>
-</figure>
-</div>
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/support-service.png" width="80%">
-    <figcaption>Endpoints of Support-Service</figcaption>
-</figure>
-</div>
 
 
 ### 2. Jaeger UI / Tracing
