@@ -16,7 +16,7 @@
 <div style="text-align: center;">
 
 <figure>
-    <img src="./images/app/support-service/support_main_view.png" width="40%">
+    <img src="images/app/support-screen/support_main_view.png" width="40%">
     <figcaption>Screenshot of the main support view</figcaption>
 </figure>
 
@@ -42,17 +42,17 @@ The **Support Option View** in the AurumBanking app is designed to provide users
 <div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
 
     <figure style="margin: 10px;">
-        <img src="../images/support-service/support-request-view.png" width="100%">
+        <img src="images/app/support-screen/support-request-view.png" width="100%">
         <figcaption>Screenshot of the support request screen</figcaption>
     </figure>
 
     <figure style="margin: 10px;">
-        <img src="../images/support-service/support-request-view-success.png" width="100%">
+        <img src="images/app/support-screen/support-request-view-success.png" width="100%">
         <figcaption>Screenshot of the error message</figcaption>
     </figure>
 
     <figure style="margin: 10px;">
-        <img src="../images/support-service/suppot-request-view-fail.png" width="100%">
+        <img src="images/app/support-screen/suppot-request-view-fail.png" width="100%">
         <figcaption>Screenshot of the success message</figcaption>
     </figure>
 
@@ -94,17 +94,17 @@ The user can tap **OK** to dismiss the error and return to the form to correct t
 <div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
 
     <figure style="margin: 10px;">
-        <img src="../images/support-service/FAQ-Screen.png" width="100%">
+        <img src="images/app/support-screen/FAQ-Screen.png" width="100%">
         <figcaption>Screenshot of the FAQ screen</figcaption>
     </figure>
 
     <figure style="margin: 10px;">
-        <img src="../images/support-service/telephone-support-screen.png" width="100%">
+        <img src="images/app/support-screen/telephone-support-screen.png" width="100%">
         <figcaption>Screenshot of the telephone support</figcaption>
     </figure>
 
     <figure style="margin: 10px;">
-        <img src="../images/support-service/telephone-app-screen.png" width="100%">
+        <img src="images/app/support-screen/telephone-app-screen.png" width="100%">
         <figcaption>Screenshot of telephone app screen</figcaption>
     </figure>
 

@@ -62,7 +62,7 @@ This gauge panel shows the maximum processing time for successful support reques
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/support-service/grafana-successfull-requests-max.png" width="70%">
+    <img src="images/grafana-dashboards/support-service/grafana-successfull-requests-max.png" width="70%">
     <figcaption>Screenshot of the max duration for successful support requests</figcaption>
 </figure>
 
@@ -75,7 +75,7 @@ This timeseries panel visualizes the total number of support requests handled by
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/support-service/grafana-sum-of-requests-timeseries.png" width="70%">
+    <img src="images/grafana-dashboards/support-service/grafana-sum-of-requests-timeseries.png" width="70%">
     <figcaption>Screenshot of the sum of support requests over time</figcaption>
 </figure>
 
@@ -88,7 +88,7 @@ This timeseries panel tracks the maximum duration of HTTP 200 status requests ov
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/support-service/grafana-messaurement-of-max-request-time-200-timeseries.png" width="70%">
+    <img src="images/grafana-dashboards/support-service/grafana-messaurement-of-max-request-time-200-timeseries.png" width="70%">
     <figcaption>Screenshot of the max request time for HTTP 200 status requests</figcaption>
 </figure>
 
@@ -101,7 +101,7 @@ This panel measures the maximum request time for HTTP 200 status requests. It pr
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/support-service/grafana-messaurement-of-max-request-time-200.png" width="70%">
+    <img src="images/grafana-dashboards/support-service/grafana-messaurement-of-max-request-time-200.png" width="70%">
     <figcaption>Screenshot of the max request time for HTTP 200 status requests</figcaption>
 </figure>
 
@@ -114,7 +114,7 @@ This gauge panel tracks the duration of server connections in seconds. It is use
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/support-service/grafana-duration-of-server-connections-in-seconds.png" width="70%">
+    <img src="images/grafana-dashboards/support-service/grafana-duration-of-server-connections-in-seconds.png" width="70%">
     <figcaption>Screenshot of the duration of server connections</figcaption>
 </figure>
 
