@@ -1,6 +1,6 @@
 # Architecture Design Overview
 
-![Microservice Architecture](docs/diagrams/software-archicture/Micro-Service-Architektur-Final.png)
+![Microservice Architecture](diagrams/software-archicture/Micro-Service-Architektur-Final.png)
 
 Our architecture design follows a microservices approach, with Traefik and Zookeeper serving as load balancers. The system comprises the following microservices:
 
@@ -25,7 +25,7 @@ PostgreSQL is used as the database management system. Specifically:
 
 ## Monitoring
 
-
+For monitoring purposes, Traefik provides metrics that are collected by a Prometheus server and visualized through Grafana dashboards.
 
 
 ## Traefik API Gateway
@@ -61,7 +61,7 @@ In the following you can see all the endpoints of our services:
 
 <div style="text-align: center;">
 <figure>
-    <img src="images/service-endpoints/login-service.png" width="80%">
+    <img src="images/backend-services/service-endpoints/login-service.png" width="80%">
     <figcaption>Endpoints of Login-Service</figcaption>
 </figure>
 </div>

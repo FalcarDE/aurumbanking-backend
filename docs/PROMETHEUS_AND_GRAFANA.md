@@ -3,7 +3,7 @@
 If started with the **_-m_** flag, have a look at Prometheus, the system that aggregates metric data from all services (
 e.g. our own Quarkus services, databases, Traefik and, yes, Prometheus itself).
 
-> **Path:** [http://localhost/prometheus](http://localhost/prometheus)
+> **Path on PROD:** [http://localhost/prometheus](http://localhost/prometheus)
 
 <div style="text-align: center;">
     <figure>
@@ -11,9 +11,6 @@ e.g. our own Quarkus services, databases, Traefik and, yes, Prometheus itself).
         <figcaption>Prometheus entry by given path.</figcaption>
     </figure>
 </div>
-
-
-For monitoring purposes, Traefik provides metrics that are collected by a Prometheus server and visualized through Grafana dashboards.
 
 Here are some examples which metrics can be provided by Prometheus and can be shown on the Prometheus-Graphs.
 
@@ -34,7 +31,27 @@ Here are some examples which metrics can be provided by Prometheus and can be sh
 </div>
 
 
-# Prometheus - Metrics 
+# Grafana - Monitoring
+
+For monitoring purposes, Traefik provides metrics that are collected by a Prometheus server and visualized through Grafana dashboards.
+
+> **Path on PROD:** [http://localhost/metrics-ui-service/login](http://localhost/prometheus)
+
+> username: admin
+
+> password: admin
+
+We have for each of our services a monitoring dashboards. In the following section, we will have a closer look on those dashboards.
+
+## Login-Service
+
+## Customer-Information-Service
+
+## Depot-Service
+
+## Transaction-Service
+
+## Support-Service
 
 
 

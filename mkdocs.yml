@@ -88,7 +88,8 @@ nav:
       - 'Support Service':
           - Overview: 'support-service/README.md'
           - 'Code Doc': 'support-service-dokka/index.html'
-  - Documentation: 'DOCUMENTATION.md'
+  - 'Prometheus-Grafana' : 'PROMETHEUS_AND_GRAFANA.md'
+  - Documentation: 'MKDocs.md'
   - 'CI/CD': 'CICD.md'
   - References: 'REFERENCES.md'
 
