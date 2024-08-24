@@ -49,6 +49,63 @@ We have for each of our services a monitoring dashboards. In the following secti
 
 ## Depot-Service
 
+### Panel 1: Successful Support Requests Per Request Type (Max Duration)
+
+This gauge panel shows the maximum processing time for successful support requests (HTTP 200 status). 
+It helps in understanding the performance of the support service, particularly in measuring the longest request times. 
+If the max duration consistently exceeds a certain threshold, this could indicate a performance bottleneck.
+
+<div style="text-align: center;">
+
+<figure>
+    <img src="images/grafana-dashboards/" width="70%">
+    <figcaption>Screenshot of the max duration for successful depot requests</figcaption>
+</figure>
+
+</div>
+
+### Panel 2: Sum of Server Errors last 24h
+
+This bar chart  visualizes the total number of depot request errors handled by the service over time. 
+It helps troubleshooting in case of system damages be visualizing timezones with a high increase of error requests.
+
+<div style="text-align: center;">
+
+<figure>
+    <img src="images/grafana-dashboards/" width="70%">
+    <figcaption>Screenshot of the sum of server errors last 24h</figcaption>
+</figure>
+
+</div>
+
+### Panel 3: Sum of Requests per Hour last 24h
+
+The bar chart diagram displays the sum of server requests per request type per hour. It helps to determine high frequent
+interactions in order to have an indicator for improvement areas in case of performance issues.
+
+<div style="text-align: center;">
+
+<figure>
+    <img src="images/grafana-dashboards/" width="70%">
+    <figcaption>Screenshot sum of requests per request type per hour last 24h</figcaption>
+</figure>
+
+</div>
+
+### Panel 4: Sum of Connection Seconds per Half Hour last 24h
+
+This bar chart displays the count of connention seconds per half hour for the depot service. It helps to define time
+zones with high server activity for load handling purposes.
+
+<div style="text-align: center;">
+
+<figure>
+    <img src="images/grafana-dashboards/" width="70%">
+    <figcaption>Screenshot sum of connection seconds per half hour last 24h</figcaption>
+</figure>
+
+</div>
+
 ## Transaction-Service
 
 ## Support-Service
