@@ -30,7 +30,6 @@ Backend for the Banking-App.
 - milena-gitlab-runner: **_glrt-pzYxkWTn55mxxy4S4hXA_**
 - salma-gitlab-runner: **_glrt-sQu4HSKd7RgotJkPHwCn_**
 
-`docker run --rm -it -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner:latest register .\gitlab-runner.exe register --url https://git.ai.fh-erfurt.de --token [$token einfügen]`
 - Enter the GitLab instance URL (for example, https://gitlab.com/): [https://git.ai.fh-erfurt.de]: **_[Enter]_**
 - Enter a name for the runner. This is stored only in the local config.toml file: _**aurumbanking-gitlab-runner**_
 - Enter an executor: parallels, virtualbox, docker, docker-autoscaler, instance, custom, shell, ssh, docker-windows, docker+machine, kubernetes: **_docker_**
