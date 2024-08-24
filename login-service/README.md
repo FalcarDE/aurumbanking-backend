@@ -7,12 +7,12 @@
 <div style="display: flex; justify-content: center; align-items: center;">
 
     <figure style="margin: 0 20px; text-align: center;">
-        <img src="../images/login-screen.png" width="40%">
+        <img src="../images/login-service/login-screen.png" width="40%">
         <figcaption>Screenshot of the main support view</figcaption>
     </figure>
 
     <figure style="margin: 0 20px; text-align: center;">
-        <img src="../images/login-screen-wrong-credentials.png" width="40%">
+        <img src="../images/login-service/login-screen-wrong-credentials.png" width="40%">
         <figcaption>Screenshot of the main support view</figcaption>
     </figure>
 

@@ -6,7 +6,7 @@
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/settings-option-screen.png" width="40%">
+    <img src="../images/customer-information-service/settings-option-screen.png" width="40%">
     <figcaption>Screenshot of the main support view</figcaption>
 </figure>
 
@@ -36,7 +36,7 @@ Upon accessing the settings screen, the user is greeted by the app's mascot and 
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/settings-whitemode-screen-record.gif" width="40%">
+    <img src="../images/customer-information-service/settings-whitemode-screen-record.gif" width="40%">
     <figcaption>Screenshot of the main support view</figcaption>
 </figure>
 
@@ -56,7 +56,7 @@ By selecting the **Möchten Sie auf White-Mode/Dark-Mode wechseln** option, the 
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/settings-new-password-screen.png" width="40%">
+    <img src="../images/customer-information-service/settings-new-password-screen.png" width="40%">
     <figcaption>Screenshot of the main support view</figcaption>
 </figure>
 </div>
@@ -89,7 +89,7 @@ At the bottom, the user can tap the **"Bestätigen"** (Confirm) button to comple
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/settings-personal-data-screen.png" width="40%">
+    <img src="../images/customer-information-service/settings-personal-data-screen.png" width="40%">
     <figcaption>Screenshot of the main support view</figcaption>
 </figure>
 
