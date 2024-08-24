@@ -410,7 +410,7 @@ The `SupportViewModel` manages communication between the UI and backend services
 
 ### Functions
 
-#### 1. `getCustomerInformationByCustomerId`
+#### 1. getCustomerInformationByCustomerId
 
 **Purpose:**
 
@@ -425,7 +425,7 @@ This function retrieves customer information from the backend based on a provide
 
 This function is executed within a coroutine on the `Dispatchers.IO` context to ensure the network operation runs in the background. It uses Retrofit's `enqueue()` method to handle the asynchronous API response. On a successful HTTP response (status `200`), the customer information is mapped to a `SimpleCustomerInfo` object containing the customer's name and email. If the response is unsuccessful (non-200 status or null body), an error is logged, and the callback is invoked with `null`.
 
-#### 2. `submitSupportRequest`
+#### 2. submitSupportRequest
 
 **Purpose:**
 
