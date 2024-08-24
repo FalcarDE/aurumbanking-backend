@@ -1,15 +1,51 @@
 # App Frontend
 
 
-## Login-Service
+## Login Screen
 
-## Customer-Information-Service
 
-## Depot-Service
+<div style="display: flex; justify-content: center; align-items: center;">
 
-## Transaction-Service
+    <figure style="margin: 0 20px; text-align: center;">
+        <img src="images/app/login-screen/login-screen.png" width="60%">
+        <figcaption>Screenshot of the main support view</figcaption>
+    </figure>
 
-## Support Service
+    <figure style="margin: 0 20px; text-align: center;">
+        <img src="images/app/login-screen/login-screen-wrong-credentials.png" width="60%">
+        <figcaption>Screenshot of the main support view</figcaption>
+    </figure>
+
+</div>
+
+The **Login Screen** in the **AurumBanking** app provides users with a simple interface to enter their email and password for authentication.
+
+### Screen Elements
+
+- **Penguin Mascot**: A friendly penguin mascot is displayed prominently at the top of the screen, providing a welcoming visual.
+- **Email Field**: A text input field where the user can enter their email address.
+- **Password Field**: A password input field where the user can enter their account password. The password is masked for security.
+- **Login Button**: A button labeled "Login" that submits the email and password for authentication.
+
+
+### Behavior
+
+- **Successful Login**: If the user enters the correct email and password, they are authenticated and redirected to the app's main screen.
+
+- **Failed Login**: If the user enters incorrect login credentials, a small error message is displayed at the bottom of the screen, informing the user that their credentials are incorrect. The message helps guide the user to try again with the correct information.
+
+### Error Handling
+
+- **Incorrect Credentials**: When the login attempt fails due to incorrect email or password, a small, clear error message is shown to the user below the login fields, helping them understand the issue and try again.
+
+
+## Customer-Information Screen
+
+## Depot-Service Screen
+
+## Transaction-Service Screen
+
+## Support Service Screen
 ### Support Option View
 
 
@@ -301,40 +337,3 @@ On this screen, the user can see their information displayed clearly under the f
 - All the data shown here is private and secure, ensuring that only the account holder has access to their personal details.
 
 
-
-## Login Screen
-
-
-<div style="display: flex; justify-content: center; align-items: center;">
-
-    <figure style="margin: 0 20px; text-align: center;">
-        <img src="images/app/login-screen/login-screen.png" width="60%">
-        <figcaption>Screenshot of the main support view</figcaption>
-    </figure>
-
-    <figure style="margin: 0 20px; text-align: center;">
-        <img src="images/app/login-screen/login-screen-wrong-credentials.png" width="60%">
-        <figcaption>Screenshot of the main support view</figcaption>
-    </figure>
-
-</div>
-
-The **Login Screen** in the **AurumBanking** app provides users with a simple interface to enter their email and password for authentication.
-
-### Screen Elements
-
-- **Penguin Mascot**: A friendly penguin mascot is displayed prominently at the top of the screen, providing a welcoming visual.
-- **Email Field**: A text input field where the user can enter their email address.
-- **Password Field**: A password input field where the user can enter their account password. The password is masked for security.
-- **Login Button**: A button labeled "Login" that submits the email and password for authentication.
-
-
-### Behavior
-
-- **Successful Login**: If the user enters the correct email and password, they are authenticated and redirected to the app's main screen.
-
-- **Failed Login**: If the user enters incorrect login credentials, a small error message is displayed at the bottom of the screen, informing the user that their credentials are incorrect. The message helps guide the user to try again with the correct information.
-
-### Error Handling
-
-- **Incorrect Credentials**: When the login attempt fails due to incorrect email or password, a small, clear error message is shown to the user below the login fields, helping them understand the issue and try again.
