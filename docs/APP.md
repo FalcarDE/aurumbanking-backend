@@ -7,6 +7,99 @@
 
 ## Depot-Service
 
+<div style="text-align: center;">
+<figure>
+    <img src="./images/app/depot-screen/DepotScreen_DepotOverviewBox.png" width="40%">
+    <figcaption>Screenshot of Depot Screen</figcaption>
+</figure>
+</div>
+
++ The **Depot Screen** is desinged to give a basic overview over all relevant depot activities (transactions) and key figures. It
+  also allows a search function across all transactions and can switch between displaying transactions from the past and
+  planned transactions in the future
+
++ **Key Elements:**
+
+    - **Depot Overview Box:** Depot Value highlighted on top of the screen
+    - **Search Box:** Element to filter transactions
+    - **Time Choice Button**: Element to switch transactions from past and for future
+    - **Transaction List**: All Transactions that match the chosen attributes
+
+#### Depot Overview Box
+
+<div style="text-align: center;">
+<figure>
+    <img src="./images//app/depot-screen/DepotScreen_DepotOverviewBox.png" width="40%">
+    <figcaption>Screenshot of Depot Screen with depot overview Box</figcaption>
+</figure>
+</div>
+
++ The Depot Overview Box is the same element as the once used at the **Overview Screen**. It is used to display the current
+  Deposit Value and the uses currency area.
+
+#### Search Box
+
+<div style="text-align: center;">
+<figure>
+    <img src="./images//app/depot-screen/DepotScreen_SearchBox.png" width="40%">
+    <figcaption>Screenshot of Search Box Element at Depot Screen</figcaption>
+</figure>
+</div>
+
++ The Search Box Element allows a selection of the displayed transactions for a given text value. It will than filter the
+  transaction list for transactions, that contain the given text in the recipient-attribute.
+
+#### Time Choice Button
+
+<div style="text-align: center;">
+<figure>
+    <img src="./images//app/depot-screen/DepotScreen_TimeChoiceButton.png" width="40%">
+    <figcaption>Screenshot of Time Choice Button</figcaption>
+</figure>
+</div>
+
++ With the Time Choice Button Element, the user can switch between displaying transactions from the past or future.
+  By default, the button is set to "Vergangen" and will diplay past transactions. The text in the Search Box acts in addition
+  to this. So the transaction list will only display transactions in the chosen time frame with the given search text.
+
+#### Transaction List
+
+<div style="text-align: center;">
+<figure>
+    <img src="./images//app/depot-screen/DepotScreen_TransactionList.png" width="40%">
+    <figcaption>Screenshot of Trnasaction List</figcaption>
+</figure>
+</div>
+
++ The Transaction List displays all transactions, that fit in the given parameters out of Search Box and Time Choice Button.
+  It is managed via a LazyColumn and sorted descending via the initial transaction date (dateTimeOfFirstExecutionLocalDate).
+  The list elements are also TransactionCard-elements such as used on the **Overview Screen**. Cash receipts will be
+  displayed green, cash outflows red.  By clicking at the  3-point-button at the element, the user switches to the
+  **TransactionDetailScreen** as subview of the DepotScreen.
+
+    - **Error Message**: "Keine Daten vorhanden:" — indicates that the loading process was not able to find transactions for
+      the current depot or there have been no transactions for the depot until now.
+
+
+<p style="text-align: center">
+<img src="./images//app/depot-screen/DepotScreen_handling.gif" alt="DepotScreen handling">
+</p>
+
+
+### Transaction Detail Screen
+
+<div style="text-align: center;">
+<figure>
+    <img src="./images//app/depot-screen/TransactionDetailScreen.png" width="40%">
+    <figcaption>Screenshot of Trnasaction List</figcaption>
+</figure>
+</div>
+
++ The TransactionDetailScreen gives the user a more detailed view of a specific transaction. It also displayed the detailed
+  Bank connection (IBAN and BIC) and the detailed date and time of the transaction.
+
+
+
 ## Transaction-Service
 
 ## Support Service
