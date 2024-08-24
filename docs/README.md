@@ -13,4 +13,10 @@
 
 Backend for the AurumBanking-Banking App.
 
-ere, you can find detailed information about our project, covering both the app and its backend components.
+Here, you can find detailed information about our project, covering both the app and its backend components.
+
+# Note of Thanks
+
+**We would like to express my heartfelt thanks to you, Professor Avemarg, 
+for your help, support, and the time you dedicated to me during the development of our project. 
+Your expert advice and suggestions have significantly contributed to the success of this work.**

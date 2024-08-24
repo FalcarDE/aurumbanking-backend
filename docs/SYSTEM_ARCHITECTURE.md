@@ -23,6 +23,46 @@ PostgreSQL is used as the database management system. Specifically:
 - The `depot-service` and `transaction-service` use the `depot-service-db`.
 - The `support-service` utilizes the `support-service-db`.
 
+Here are the database-model of our databases:
+
+<div style="display: flex; justify-content: center; gap: 20px;">
+
+<div style="text-align: center; width: 40%;">
+<figure>
+    <img src="images/datanbase-model/customer-information-database-entity.png" style="width: 100%;">
+    <figcaption>Customer-Information-Database Entity</figcaption>
+</figure>
+</div>
+
+<div style="text-align: center; width: 40%;">
+<figure>
+    <img src="images/datanbase-model/depot-database-entity.png" style="width: 100%;">
+    <figcaption>Depot-Database Entity</figcaption>
+</figure>
+</div>
+
+</div>
+
+
+<div style="display: flex; justify-content: center; gap: 20px;">
+
+<div style="text-align: center; width: 40%;">
+<figure>
+    <img src="images/datanbase-model/transaction-database-entity.png" style="width: 100%;">
+    <figcaption>Transaction-Database Entity</figcaption>
+</figure>
+</div>
+
+<div style="text-align: center; width: 40%;">
+<figure>
+    <img src="images/datanbase-model/support-database-entity.png" style="width: 100%;">
+    <figcaption>Support-Database Entity</figcaption>
+</figure>
+</div>
+
+</div>
+
+
 ## Monitoring
 
 For monitoring purposes, Traefik provides metrics that are collected by a Prometheus server and visualized through Grafana dashboards.
@@ -61,35 +101,36 @@ In the following you can see all the endpoints of our services:
 
 <div style="text-align: center;">
 <figure>
-    <img src="images/backend-services/service-endpoints/login-service.png" width="80%">
+    <img src="images/backend-services/login-service/login-service.png" width="80%">
     <figcaption>Endpoints of Login-Service</figcaption>
 </figure>
 </div>
 
-<div style="text-align: center;">
-<figure>
-    <img src="images/abschlusspraesentation/Depot-Service.png" width="80%">
-    <figcaption>Endpoints of Depot-Service</figcaption>
-</figure>
-</div>
 
 <div style="text-align: center;">
 <figure>
-    <img src="images/abschlusspraesentation/transaction-service.png" width="80%">
-    <figcaption>Endpoints of Transaction-Service</figcaption>
-</figure>
-</div>
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/abschlusspraesentation/customer-infomation-service.png" width="80%">
+    <img src="images/backend-services/customer-information-service/endpoints-customer-information-service.png" width="80%">
     <figcaption>Endpoints of Customer-Information-Service</figcaption>
 </figure>
 </div>
 
 <div style="text-align: center;">
 <figure>
-    <img src="images/abschlusspraesentation/support-service.png" width="80%">
+    <img src="images/backend-services/depot-service/endpoints-depot-service.png" width="80%">
+    <figcaption>Endpoints of Depot-Service</figcaption>
+</figure>
+</div>
+
+<div style="text-align: center;">
+<figure>
+    <img src="images/backend-services/transaction-service/endpoint-transaction-service.png" width="80%">
+    <figcaption>Endpoints of Transaction-Service</figcaption>
+</figure>
+</div>
+
+<div style="text-align: center;">
+<figure>
+    <img src="images/backend-services/support-service/endpoint-support-service.png" width="80%">
     <figcaption>Endpoints of Support-Service</figcaption>
 </figure>
 </div>

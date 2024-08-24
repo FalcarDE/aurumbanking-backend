@@ -5,9 +5,9 @@ site_author: Steffen Avemarg
 site_description: >-
   site_description: >-
   The AurumBanking project consists of a backend and an app. 
-  This documentation focuses on the backend of the project. 
+  This documentation focuses on the app and backend of the project. 
   This project demonstrates the use of various frameworks and techniques for developing a microservice application. 
-  It is designed as an example for the Cloud Computing course at the University of Applied Sciences Erfurt.
+  It is designed as an example for the 'Cloud Computing' and 'Mobile Computing' courses at the University of Applied Sciences Erfurt.
 
 # Repository
 repo_name: AurumBanking-Backend
@@ -89,6 +89,8 @@ nav:
           - Overview: 'support-service/README.md'
           - 'Code Doc': 'support-service-dokka/index.html'
   - 'Prometheus-Grafana' : 'PROMETHEUS_AND_GRAFANA.md'
+  - Testing: 'TESTING.md'
+  - 'App-Documentation': 'APP.md'
   - Documentation: 'MKDocs.md'
   - 'CI/CD': 'CICD.md'
   - References: 'REFERENCES.md'
