@@ -1,43 +1,5 @@
 # Login Service
 
-## Frontentd
-
-
-### Login Screen in AurumBanking App
-<div style="display: flex; justify-content: center; align-items: center;">
-
-    <figure style="margin: 0 20px; text-align: center;">
-        <img src="../images/login-service/login-screen.png" width="40%">
-        <figcaption>Screenshot of the main support view</figcaption>
-    </figure>
-
-    <figure style="margin: 0 20px; text-align: center;">
-        <img src="../images/login-service/login-screen-wrong-credentials.png" width="40%">
-        <figcaption>Screenshot of the main support view</figcaption>
-    </figure>
-
-</div>
-
-The **Login Screen** in the **AurumBanking** app provides users with a simple interface to enter their email and password for authentication.
-
-#### Screen Elements
-
-- **Penguin Mascot**: A friendly penguin mascot is displayed prominently at the top of the screen, providing a welcoming visual.
-- **Email Field**: A text input field where the user can enter their email address.
-- **Password Field**: A password input field where the user can enter their account password. The password is masked for security.
-- **Login Button**: A button labeled "Login" that submits the email and password for authentication.
-
-
-#### Behavior
-
-- **Successful Login**: If the user enters the correct email and password, they are authenticated and redirected to the app's main screen.
-
-- **Failed Login**: If the user enters incorrect login credentials, a small error message is displayed at the bottom of the screen, informing the user that their credentials are incorrect. The message helps guide the user to try again with the correct information.
-
-#### Error Handling
-
-- **Incorrect Credentials**: When the login attempt fails due to incorrect email or password, a small, clear error message is shown to the user below the login fields, helping them understand the issue and try again.
-
 ## Backend
 
 ### CustomerInformationEntityModel - AurumBanking Model
