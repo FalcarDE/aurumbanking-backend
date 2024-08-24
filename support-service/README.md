@@ -322,8 +322,8 @@ This method retrieves all support requests that match a specific request type.
 
 - **Method Signature**: `getAllRequestsByType(type: String): Uni<List<SupportDomainModel>>`
 - **Implementation**:
-   - Finds all support requests in the database where the `type` matches the provided value.
-   - Transforms the resulting list of `SupportEntityModel` into a list of `SupportDomainModel` using the `toDomain()` conversion function.
+  - Finds all support requests in the database where the `type` matches the provided value.
+  - Transforms the resulting list of `SupportEntityModel` into a list of `SupportDomainModel` using the `toDomain()` conversion function.
 - **Return Type**: Returns a `Uni<List<SupportDomainModel>>`, a list of domain models for further business logic use.
 - **Usage**: Employed when filtering support requests by a particular type (e.g., technical issues or inquiries).
 
@@ -333,8 +333,8 @@ This method retrieves all support requests associated with a specific customer I
 
 - **Method Signature**: `findSupportRequestByCustomerId(customerId: Long): Uni<List<SupportDomainModel>>`
 - **Implementation**:
-   - Finds all support requests where the `customerId` matches the provided value.
-   - Transforms the resulting list of `SupportEntityModel` into a list of `SupportDomainModel` using the `toDomain()` conversion function.
+  - Finds all support requests where the `customerId` matches the provided value.
+  - Transforms the resulting list of `SupportEntityModel` into a list of `SupportDomainModel` using the `toDomain()` conversion function.
 - **Return Type**: Returns a `Uni<List<SupportDomainModel>>`, allowing for further processing or display in the application.
 - **Usage**: Useful for fetching all support inquiries made by a specific customer.
 
@@ -378,7 +378,7 @@ The following REST endpoints provide functionality for managing support requests
 - **Produces**: `application/json`
 - **Functionality**: Retrieves all support requests that match the specified request type.
 - **Path Parameter**:
-   - `requestType` (String): The type of support requests to retrieve (e.g., "technical", "account").
+  - `requestType` (String): The type of support requests to retrieve (e.g., "technical", "account").
 - **Return Type**: Returns a `Uni<RestResponse<List<SupportDomainModel>>>`, which is a list of support requests in JSON format.
 - **Error Handling**: If the retrieval fails, the method recovers by returning a server error response.
 
@@ -388,7 +388,7 @@ The following REST endpoints provide functionality for managing support requests
 - **Produces**: `application/json`
 - **Functionality**: Retrieves all support requests associated with a specific customer ID.
 - **Path Parameter**:
-   - `customerId` (Long): The ID of the customer whose support requests are being retrieved.
+  - `customerId` (Long): The ID of the customer whose support requests are being retrieved.
 - **Return Type**: Returns a `Uni<RestResponse<List<SupportDomainModel>>>`, which is a list of support requests for the specified customer in JSON format.
 - **Error Handling**: If the retrieval fails, the method recovers by returning a server error response.
 
@@ -398,7 +398,7 @@ The following REST endpoints provide functionality for managing support requests
 - **Produces**: `application/json`
 - **Functionality**: Deletes all support requests associated with the specified customer ID.
 - **Path Parameter**:
-   - `customerId` (Long): The ID of the customer whose support requests are being deleted.
+  - `customerId` (Long): The ID of the customer whose support requests are being deleted.
 - **Return Type**: Returns a `Uni<RestResponse<Void>>`, indicating the success of the operation.
 - **Error Handling**: If the deletion fails, the method recovers by returning a server error response.
 - **Notes**: The path parameter is validated to ensure it is a numeric value using the regex pattern `\d+`.
@@ -412,26 +412,32 @@ The `SupportViewModel` manages communication between the UI and backend services
 
 #### 1. `getCustomerInformationByCustomerId`
 
-**Purpose:**  
+**Purpose:**
+
 This function retrieves customer information from the backend based on a provided customer ID.
 
 **Parameters:**
+
 - `customerId: Long`: The ID of the customer whose information needs to be fetched.
 - `callback: (SimpleCustomerInfo?) -> Unit`: A callback function that processes the result of the customer information fetch. It returns a `SimpleCustomerInfo` object on success or `null` on failure.
 
-**Implementation:**  
+**Implementation:**
+
 This function is executed within a coroutine on the `Dispatchers.IO` context to ensure the network operation runs in the background. It uses Retrofit's `enqueue()` method to handle the asynchronous API response. On a successful HTTP response (status `200`), the customer information is mapped to a `SimpleCustomerInfo` object containing the customer's name and email. If the response is unsuccessful (non-200 status or null body), an error is logged, and the callback is invoked with `null`.
 
 #### 2. `submitSupportRequest`
 
-**Purpose:**  
+**Purpose:**
+
 This function submits a support request to the backend.
 
 **Parameters:**
+
 - `request: SupportRequestSendToBackend`: The support request data that is sent to the backend.
 - `callback: (Boolean) -> Unit`: A callback function that processes the result of the submission. It returns `true` on success or `false` on failure.
 
-**Implementation:**  
+**Implementation:**
+
 This function is executed within a coroutine and uses Retrofit's `enqueue()` method to handle the asynchronous submission of the support request. If the backend responds with HTTP status `201 Created`, the callback is triggered with `true`. If the submission fails (due to network issues or a non-successful response code), the callback is triggered with `false`, and an error is logged.
 
 ### Error Handling
@@ -454,36 +460,44 @@ The ViewModel uses `viewModelScope` to manage coroutines, ensuring that ongoing 
 
 ### 1. **Fetching Customer Information**
 
-- **Functionality:**  
+- **Functionality:**
+
   When the screen is loaded, it automatically fetches the customer's information (name and email) from the backend based on the `customerId` stored in the session (`SessionManager.customerId`).
 
-- **Backend Call:**  
+- **Backend Call:**
+
   The function `getCustomerInformationByCustomerId(customerId)` from the `SupportViewModel` is used to make this call to the backend. This function retrieves customer data via an asynchronous API call, which populates the `legalFullName` and `email` fields of the form.
 
-- **Trigger:**  
+- **Trigger:**
+
   This backend call is triggered within a `LaunchedEffect` block when the composable is first rendered.
 
 ### 2. **Submitting a Support Request**
 
-- **Functionality:**  
+- **Functionality:**
+
   After the user fills out the form, the support request is submitted to the backend. The data sent includes the `customerId`, the `type` of the support request, and the user's `message`.
 
-- **Backend Call:**  
+- **Backend Call:**
+
   The function `submitSupportRequest` from the `SupportViewModel` is responsible for sending the support request to the backend. It makes an asynchronous API call, encapsulating the request data in a `SupportRequestSendToBackend` object.
 
-- **Trigger:**  
+- **Trigger:**
+
   The submission is triggered by a button click, where the form data (customer ID, type, and message) is gathered and sent to the backend.
 
 ### Data Model: `SupportRequestSendToBackend`
 
-- **Purpose:**  
+- **Purpose:**
+
   This data class represents the payload sent to the backend when submitting a support request.
 
 - **Fields:**
-    - `customerId`: The ID of the customer sending the request.
-    - `dateTime`: The timestamp of when the request is made.
-    - `type`: The type of the support request (e.g., "Überweisung", "Benutzerdaten").
-    - `message`: The message content provided by the user.
+
+  - `customerId`: The ID of the customer sending the request.
+  - `dateTime`: The timestamp of when the request is made.
+  - `type`: The type of the support request (e.g., "Überweisung", "Benutzerdaten").
+  - `message`: The message content provided by the user.
 
 ### Error Handling and Callbacks
 
@@ -500,7 +514,7 @@ This gauge panel shows the maximum processing time for successful support reques
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/support-service/grafana-successfull-requests-max.png" width="40%">
+    <img src="../images/support-service/grafana-successfull-requests-max.png" width="70%">
     <figcaption>Screenshot of the max duration for successful support requests</figcaption>
 </figure>
 
@@ -513,7 +527,7 @@ This timeseries panel visualizes the total number of support requests handled by
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/support-service/grafana-sum-of-requests-timeseries.png" width="40%">
+    <img src="../images/support-service/grafana-sum-of-requests-timeseries.png" width="70%">
     <figcaption>Screenshot of the sum of support requests over time</figcaption>
 </figure>
 
@@ -526,7 +540,7 @@ This timeseries panel tracks the maximum duration of HTTP 200 status requests ov
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/support-service/grafana-messaurement-of-max-request-time-200-timeseries.png" width="40%">
+    <img src="../images/support-service/grafana-messaurement-of-max-request-time-200-timeseries.png" width="70%">
     <figcaption>Screenshot of the max request time for HTTP 200 status requests</figcaption>
 </figure>
 
@@ -539,7 +553,7 @@ This panel measures the maximum request time for HTTP 200 status requests. It pr
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/support-service/grafana-messaurement-of-max-request-time-200.png" width="40%">
+    <img src="../images/support-service/grafana-messaurement-of-max-request-time-200.png" width="70%">
     <figcaption>Screenshot of the max request time for HTTP 200 status requests</figcaption>
 </figure>
 
@@ -552,12 +566,12 @@ This gauge panel tracks the duration of server connections in seconds. It is use
 <div style="text-align: center;">
 
 <figure>
-    <img src="../images/support-service/grafana-duration-of-server-connections-in-seconds.png" width="40%">
+    <img src="../images/support-service/grafana-duration-of-server-connections-in-seconds.png" width="70%">
     <figcaption>Screenshot of the duration of server connections</figcaption>
 </figure>
 
 </div>
 
-## Conclusion
+### Conclusion
 
 This dashboard offers essential metrics to monitor the performance and reliability of the support service. By keeping track of request times, connection durations, and overall service load, you can ensure that the support service remains responsive and scalable, identifying and addressing potential bottlenecks or performance degradations in a timely manner.
