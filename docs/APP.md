@@ -1,15 +1,51 @@
 # App Frontend
 
 
-## Login-Service
+## Login Screen
 
-## Customer-Information-Service
 
-## Depot-Service
+<div style="display: flex; justify-content: center; align-items: center;">
 
-## Transaction-Service
+    <figure style="margin: 0 20px; text-align: center;">
+        <img src="images/app/login-screen/login-screen.png" width="60%">
+        <figcaption>Screenshot of login screen</figcaption>
+    </figure>
 
-## Support Service
+    <figure style="margin: 0 20px; text-align: center;">
+        <img src="images/app/login-screen/login-screen-wrong-credentials.png" width="60%">
+        <figcaption>Screenshot of failed login</figcaption>
+    </figure>
+
+</div>
+
+The **Login Screen** in the **AurumBanking** app provides users with a simple interface to enter their email and password for authentication.
+
+### Screen Elements
+
+- **Penguin Mascot**: A friendly penguin mascot is displayed prominently at the top of the screen, providing a welcoming visual.
+- **Email Field**: A text input field where the user can enter their email address.
+- **Password Field**: A password input field where the user can enter their account password. The password is masked for security.
+- **Login Button**: A button labeled "Login" that submits the email and password for authentication.
+
+
+### Behavior
+
+- **Successful Login**: If the user enters the correct email and password, they are authenticated and redirected to the app's main screen.
+
+- **Failed Login**: If the user enters incorrect login credentials, a small error message is displayed at the bottom of the screen, informing the user that their credentials are incorrect. The message helps guide the user to try again with the correct information.
+
+### Error Handling
+
+- **Incorrect Credentials**: When the login attempt fails due to incorrect email or password, a small, clear error message is shown to the user below the login fields, helping them understand the issue and try again.
+
+
+## Customer-Information Screen
+
+## Depot-Service Screen
+
+## Transaction-Service Screen
+
+## Support Service Screen
 ### Support Option View
 
 
@@ -146,20 +182,47 @@ This screen shows the user's telephone dialer with the AurumBanking support numb
 
 - **Dial Pad:** The dialer pad with the pre-filled AurumBanking support number.
 - **Options Menu:** Additional options to create a new contact, add to an existing contact, or send an SMS.
-# App Frontend
+
+### Screens in White Mode
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+
+     <figure style="margin: 10px;">
+        <img src="images/app/support-screen/support_main_view-whitemode.png" width="100%">
+        <figcaption>Screenshot the support main view in whitemode</figcaption>
+    </figure>
+
+    <figure style="margin: 10px;">
+        <img src="images/app/support-screen/support-request-view-whitemode.png" width="100%">
+        <figcaption>Screenshot of the support request screen in whitemode</figcaption>
+    </figure>   
+
+    <figure style="margin: 10px;">
+        <img src="images/app/support-screen/telephone-support-screen-whitemode.png" width="100%">
+        <figcaption>Screenshot of the telephone support in whitemode</figcaption>
+    </figure>
+
+</div>
+
+
+
 
 ## Settings Screen
 
 ### Settings Option Screen in AurumBanking App
-<div style="text-align: center;">
+
+<div style="display: flex; justify-content: center;">
+
+<figure style="margin-right: 20px;">
+    <img src="images/app/settings-screen/settings-option-screen.png" width="60%">
+    <figcaption>Screenshot of the settings option screen</figcaption>
+</figure>
 
 <figure>
-    <img src="images/app/settings-screen/settings-option-screen.png" width="40%">
-    <figcaption>Screenshot of the main support view</figcaption>
+    <img src="images/app/settings-screen/settings-option-screen-whitemode.png" width="60%">
+    <figcaption>Screenshot of the settings option screen in white mode</figcaption>
 </figure>
 
 </div>
-
 
 
 The **Settings Option Screen** in the **AurumBanking** app serves as the main hub for users to manage their personal settings. From this screen, the user can access various important functions related to their account and the app's appearance.
@@ -184,10 +247,11 @@ Upon accessing the settings screen, the user is greeted by the app's mascot and 
 
 <figure>
     <img src="images/app/settings-screen/settings-whitemode-screen-record.gif" width="40%">
-    <figcaption>Screenshot of the main support view</figcaption>
+    <figcaption>gif of changing to whitemode</figcaption>
 </figure>
 
 </div>
+
 
 
 The **AurumBanking** app provides a setting option to change the visual design of the app. This allows the user to switch between different themes, such as a light or dark mode, depending on their preference.
@@ -200,13 +264,19 @@ By selecting the **Möchten Sie auf White-Mode/Dark-Mode wechseln** option, the 
 
 ### Change Password Screen in AurumBanking App
 
-<div style="text-align: center;">
-
-<figure>
-    <img src="images/app/settings-screen/settings-new-password-screen.png" width="40%">
-    <figcaption>Screenshot of the main support view</figcaption>
-</figure>
-</div>
+    <div style="display: flex; justify-content: center;">
+    
+    <figure style="margin-right: 20px;">
+        <img src="images/app/settings-screen/settings-new-password-screen.png" width="60%">
+        <figcaption>Screenshot of the new password screen</figcaption>
+    </figure>
+    
+    <figure>
+        <img src="images/app/settings-screen/settings-new-password-screen-whitemode.png" width="60%">
+        <figcaption>Screenshot of the new password screen in white mode</figcaption>
+    </figure>
+    
+    </div>
 
 #### Change Password Screen in AurumBanking App
 
@@ -233,14 +303,19 @@ At the bottom, the user can tap the **"Bestätigen"** (Confirm) button to comple
 
 ### Personal Data Screen in AurumBanking App
 
-<div style="text-align: center;">
-
-<figure>
-    <img src="images/app/settings-screen/settings-personal-data-screen.png" width="40%">
-    <figcaption>Screenshot of the main support view</figcaption>
-</figure>
-
-</div>
+    <div style="display: flex; justify-content: center;">
+    
+    <figure style="margin-right: 20px;">
+        <img src="images/app/settings-screen/settings-personal-data-screen.png" width="60%">
+        <figcaption>Screenshot of settings personal data</figcaption>
+    </figure>
+    
+    <figure>
+        <img src="images/app/settings-screen/settings-personal-data-screen-whitemode.png" width="60%">
+        <figcaption>Screenshot of settings personal data in whitemode</figcaption>
+    </figure>
+    
+    </div>
 
 
 
@@ -262,40 +337,3 @@ On this screen, the user can see their information displayed clearly under the f
 - All the data shown here is private and secure, ensuring that only the account holder has access to their personal details.
 
 
-
-## Login Screen
-
-
-<div style="display: flex; justify-content: center; align-items: center;">
-
-    <figure style="margin: 0 20px; text-align: center;">
-        <img src="images/app/login-screen/login-screen.png" width="60%">
-        <figcaption>Screenshot of the main support view</figcaption>
-    </figure>
-
-    <figure style="margin: 0 20px; text-align: center;">
-        <img src="images/app/login-screen/login-screen-wrong-credentials.png" width="60%">
-        <figcaption>Screenshot of the main support view</figcaption>
-    </figure>
-
-</div>
-
-The **Login Screen** in the **AurumBanking** app provides users with a simple interface to enter their email and password for authentication.
-
-### Screen Elements
-
-- **Penguin Mascot**: A friendly penguin mascot is displayed prominently at the top of the screen, providing a welcoming visual.
-- **Email Field**: A text input field where the user can enter their email address.
-- **Password Field**: A password input field where the user can enter their account password. The password is masked for security.
-- **Login Button**: A button labeled "Login" that submits the email and password for authentication.
-
-
-### Behavior
-
-- **Successful Login**: If the user enters the correct email and password, they are authenticated and redirected to the app's main screen.
-
-- **Failed Login**: If the user enters incorrect login credentials, a small error message is displayed at the bottom of the screen, informing the user that their credentials are incorrect. The message helps guide the user to try again with the correct information.
-
-### Error Handling
-
-- **Incorrect Credentials**: When the login attempt fails due to incorrect email or password, a small, clear error message is shown to the user below the login fields, helping them understand the issue and try again.
