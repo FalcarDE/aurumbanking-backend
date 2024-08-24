@@ -58,7 +58,7 @@ If the max duration consistently exceeds a certain threshold, this could indicat
 <div style="text-align: center;">
 
 <figure>
-    <img src="images/grafana-dashboards/" width="70%">
+    <img src="images/grafana-dashboards/depot-service/grafana_depot_service_max_request_time.png" width="70%">
     <figcaption>Screenshot of the max duration for successful depot requests</figcaption>
 </figure>
 
@@ -72,7 +72,7 @@ It helps troubleshooting in case of system damages be visualizing timezones with
 <div style="text-align: center;">
 
 <figure>
-    <img src="images/grafana-dashboards/" width="70%">
+    <img src="images/grafana-dashboards/depot-service/grafana_depot_service_count_server_errors.png" width="70%">
     <figcaption>Screenshot of the sum of server errors last 24h</figcaption>
 </figure>
 
@@ -86,7 +86,7 @@ interactions in order to have an indicator for improvement areas in case of perf
 <div style="text-align: center;">
 
 <figure>
-    <img src="images/grafana-dashboards/" width="70%">
+    <img src="images/grafana-dashboards/depot-service/grafana_depot_service_count_server_requ_per_h.png" width="70%">
     <figcaption>Screenshot sum of requests per request type per hour last 24h</figcaption>
 </figure>
 
@@ -100,7 +100,7 @@ zones with high server activity for load handling purposes.
 <div style="text-align: center;">
 
 <figure>
-    <img src="images/grafana-dashboards/" width="70%">
+    <img src="images/grafana-dashboards/depot-service/grafana_depot_service_sum_connection_seconds_last_24h.png" width="70%">
     <figcaption>Screenshot sum of connection seconds per half hour last 24h</figcaption>
 </figure>
 
