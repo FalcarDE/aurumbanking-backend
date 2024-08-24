@@ -8,12 +8,12 @@
 
     <figure style="margin: 0 20px; text-align: center;">
         <img src="images/app/login-screen/login-screen.png" width="60%">
-        <figcaption>Screenshot of the main support view</figcaption>
+        <figcaption>Screenshot of login screen</figcaption>
     </figure>
 
     <figure style="margin: 0 20px; text-align: center;">
         <img src="images/app/login-screen/login-screen-wrong-credentials.png" width="60%">
-        <figcaption>Screenshot of the main support view</figcaption>
+        <figcaption>Screenshot of failed login</figcaption>
     </figure>
 
 </div>
@@ -188,17 +188,17 @@ This screen shows the user's telephone dialer with the AurumBanking support numb
 
      <figure style="margin: 10px;">
         <img src="images/app/support-screen/support_main_view-whitemode.png" width="100%">
-        <figcaption>Screenshot of the error message</figcaption>
+        <figcaption>Screenshot the support main view in whitemode</figcaption>
     </figure>
 
     <figure style="margin: 10px;">
         <img src="images/app/support-screen/support-request-view-whitemode.png" width="100%">
-        <figcaption>Screenshot of the support request screen</figcaption>
+        <figcaption>Screenshot of the support request screen in whitemode</figcaption>
     </figure>   
 
     <figure style="margin: 10px;">
         <img src="images/app/support-screen/telephone-support-screen-whitemode.png" width="100%">
-        <figcaption>Screenshot of the success message</figcaption>
+        <figcaption>Screenshot of the telephone support in whitemode</figcaption>
     </figure>
 
 </div>
@@ -247,7 +247,7 @@ Upon accessing the settings screen, the user is greeted by the app's mascot and 
 
 <figure>
     <img src="images/app/settings-screen/settings-whitemode-screen-record.gif" width="40%">
-    <figcaption>Screenshot of the main support view</figcaption>
+    <figcaption>gif of changing to whitemode</figcaption>
 </figure>
 
 </div>
@@ -307,12 +307,12 @@ At the bottom, the user can tap the **"Bestätigen"** (Confirm) button to comple
     
     <figure style="margin-right: 20px;">
         <img src="images/app/settings-screen/settings-personal-data-screen.png" width="60%">
-        <figcaption>Screenshot of the main support view</figcaption>
+        <figcaption>Screenshot of settings personal data</figcaption>
     </figure>
     
     <figure>
         <img src="images/app/settings-screen/settings-personal-data-screen-whitemode.png" width="60%">
-        <figcaption>Screenshot of the main support view</figcaption>
+        <figcaption>Screenshot of settings personal data in whitemode</figcaption>
     </figure>
     
     </div>
