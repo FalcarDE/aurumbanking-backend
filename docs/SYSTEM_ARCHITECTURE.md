@@ -25,7 +25,7 @@ PostgreSQL is used as the database management system. Specifically:
 
 ## Monitoring
 
-For monitoring purposes, Traefik provides metrics that are collected by a Prometheus server and visualized through Grafana dashboards.
+
 
 
 ## Traefik API Gateway
@@ -40,7 +40,7 @@ Thus, it will recognize containers that are started or stopped while the system 
 
 <div style="text-align: center;">
 <figure>
-    <img src="images/Treaffik-UI-Ziwschenstand.png" width="80%">
+    <img src="images/abschlusspraesentation/Treaffik-UI-Ziwschenstand.png" width="80%">
     <figcaption>Traefik Dashboard</figcaption>
 </figure>
 </div>
@@ -61,81 +61,39 @@ In the following you can see all the endpoints of our services:
 
 <div style="text-align: center;">
 <figure>
-    <img src="images/login-service.png" width="80%">
+    <img src="images/service-endpoints/login-service.png" width="80%">
     <figcaption>Endpoints of Login-Service</figcaption>
 </figure>
 </div>
 
 <div style="text-align: center;">
 <figure>
-    <img src="images/Depot-Service.png" width="80%">
+    <img src="images/abschlusspraesentation/Depot-Service.png" width="80%">
     <figcaption>Endpoints of Depot-Service</figcaption>
 </figure>
 </div>
 
 <div style="text-align: center;">
 <figure>
-    <img src="images/transaction-service.png" width="80%">
+    <img src="images/abschlusspraesentation/transaction-service.png" width="80%">
     <figcaption>Endpoints of Transaction-Service</figcaption>
 </figure>
 </div>
 
 <div style="text-align: center;">
 <figure>
-    <img src="images/customer-infomation-service.png" width="80%">
+    <img src="images/abschlusspraesentation/customer-infomation-service.png" width="80%">
     <figcaption>Endpoints of Customer-Information-Service</figcaption>
 </figure>
 </div>
 
 <div style="text-align: center;">
 <figure>
-    <img src="images/support-service.png" width="80%">
+    <img src="images/abschlusspraesentation/support-service.png" width="80%">
     <figcaption>Endpoints of Support-Service</figcaption>
 </figure>
 </div>
 
 
-## Jaeger UI / Tracing
 
-If started with the **_-t_** flag, have a look at the Jaeger UI.
-
-> **Path:** [http://localhost/tracing](http://localhost/tracing)
-
-Jaeger is our OpenTelemetry compliant service that collects tracing information from all services comprising our system.
-With that data, one is able to examine how requests _move_ through the system, gather insights about processing times as
-well as errors that happen along the way.
-
-<div style="text-align: center;">
-
-<figure>
-    <img src="assets/images/screen_jaeger_trace_list.png" width="80%">
-    <figcaption>Jaeger main screen showing captured traces</figcaption>
-</figure>
-
-<figure>
-    <img src="assets/images/screen_jaeger_trace_graph.png" width="80%">
-    <figcaption>Jaeger showing a trace graph, e.g. the dependencies between different spans</figcaption>
-</figure>
-
-<figure>
-    <img src="assets/images/screen_jaeger_span_info.png" width="80%">
-    <figcaption>Jaeger showing detail of a trace & its spans</figcaption>
-</figure>
-
-</div>
-
-
-## Prometheus / Metrics
-
-If started with the **_-m_** flag, have a look at Prometheus, the system that aggregates metric data from all services (
-e.g. our own Quarkus services, databases, Traefik and, yes, Prometheus itself).
-
-> **Path:** [http://localhost/prometheus](http://localhost/prometheus)
-
-<div style="text-align: center;">
-    <figure>
-        <img src="assets/images/screen_prometheus_graph.png" width="80%">
-        <figcaption>Prometheus showing bytes used by the JVM</figcaption>
-    </figure>
-</div>
 
