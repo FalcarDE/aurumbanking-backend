@@ -74,6 +74,96 @@
 <p align="right">(<a href="#top">back to top</a>)</p>
 </details>
 
+## Connection-Backend-App
+
+<details>
+<summary>Connection-Backend-App</summary>
+
+<h3> Local Network-Design </h3>
+
+<p>To get the project running, you will need two devices:</p>
+<ul>
+    <li>A computer where the backend runs.</li>
+    <li>A computer or smartphone where the app runs.</li>
+</ul>
+<p> 
+The app connects to the backend via our Wi-Fi router using the IPv4 address assigned by the router to the server PC running the backend. 
+The backend operates within a Docker container on the host server computer. 
+This is further illustrated in the diagram below: 
+</p>
+
+<figure>
+    <img src="images/deployment/Network-Design.png" width="80%">
+    <figcaption>Local Network-Design to connect the App with the Backend </figcaption>
+</figure>
+
+<h3> Establish App and Backend Connection </h3>
+
+<ol>
+    <li>Run the Backend on PROD, use the previous instructions.</li>
+    <li>After this, we need to enable port 80 on our host pc, where the backend runs :
+    <ul>
+      <li>Linux: 
+        <pre><code> sudo ufw allow 80/tcp</code></pre> 
+        or
+        <pre><code> sudo firewall-cmd --permanent --add-port=80/tcp </code></pre> 
+        <pre><code> sudo firewall-cmd --reload </code></pre> 
+      </li>
+      <li>Windows: 
+       <figure>
+            <img src="images/deployment/freigabe-port-80-windows-1.png" width="80%">
+            <figcaption> Use <code>Win + R</code> to open this windows </figcaption>
+        </figure>
+         <figure>
+            <img src="images/deployment/freigabe-port-80-windows-2.png" width="80%">
+            <figcaption> Click on <code>Eingehende Regel</code> and click on the left tab <code>Neue Regel</code></figcaption>
+        </figure>
+         <figure>
+            <img src="images/deployment/freigabe-port-80-windows-3.png" width="80%">
+            <figcaption> Follow the Port-Assistent </figcaption>
+        </figure>
+         <figure>
+            <img src="images/deployment/freigabe-port-80-windows-4.png" width="80%">
+            <figcaption> Now you can find your new rule and the port is available </figcaption>
+        </figure>
+      </li>
+    </ul>
+  </li>
+  <li>Now look for the IP-Address of the WLAN or LAN Adapter of your pc and remember it.:</li>
+    <ul>
+        <li>Linux: 
+            <pre><code> ifconfig </code></pre>
+        </li>
+        <li>Windows: 
+            <pre><code> ipconfig </code></pre>
+        </li>
+   </ul>
+   <li>Now we take the IP-Address from the instruction before and insert into our App-Files:</li>
+    <ul>
+        <figure>
+            <img src="images/deployment/android-manifest.png" width="80%">
+            <figcaption> Enable Internet Connection in the File <code>app/src/main/AndroidManifest.xml</code> </figcaption>
+        </figure>
+        <figure>
+            <img src="images/deployment/network-file.png" width="80%">
+            <figcaption> Insert the IP-Address in <code>res/xml/network_security_config.xml</code> </figcaption>
+        </figure>
+        <figure>
+            <img src="images/deployment/app-network.png" width="80%">
+            <figcaption> Insert the IP-Address in <code>app/src/main/java/de/fhe/ai/mc/app/di/Modules.kt</code></figcaption>
+        </figure>
+   </ul>
+    <li>Now go into the root folder of the Backend-Project and run (linux terminal required):
+    <ul>
+        <pre><code> sh project-script.sh </code></pre>
+        <p> This will create http-request and fill the database with data. So you can login the app and use the functionality of the app. </p>
+    </ul>
+</ol>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+</details>
+
+
 ## DEV-UI
 
 <details>
