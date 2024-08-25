@@ -88,8 +88,6 @@ Transactions for the current day are always displayed in the center. </p>
 
 </details>
 
-
-
 ## Depot-Screen
 <details>
 
@@ -408,6 +406,216 @@ Transactions for the current day are always displayed in the center. </p>
 
 </details>
 
+
+## Document-Screen
+
+<details>
+<summary> Document-Screen </summary>
+
+
+<h3> Document-Overview-Screen </h3>
+
+<p>
+When you click on <strong>Dokumente</strong> in the navigation bar of the app, you are taken to the overview page of the Documents screen. 
+Here, you can choose between <strong>Posteingang</strong>, <strong>Dokumente abfotografieren</strong> , <strong>Dokumente Scann</strong> und <strong>Kontoauszug.</strong> 
+</p>
+
+
+<figure>
+    <img src="images/app/documentation-screen/documents-screen-main-screen.png" width="40%">
+    <figcaption>Document-Overview-Screen</figcaption>
+</figure>
+
+
+<h3> Document-Inbox-Screen </h3>
+
+<p>
+When you then press <strong>Inbox</strong>,
+you are taken to the Inbox screen, where incoming messages are displayed. 
+The data shown are local data generated during the runtime of the app. 
+This simply returns a list of inbox data to the screen.
+If you click on the Inbox-Icon the app will navigate you to the <strong>Inbox-Detail-Screen</strong> 
+</p>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+
+<figure>
+    <img src="images/app/documentation-screen/inbox.png" width="80%">
+    <figcaption>Inbox-Screen</figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/inbox-1.png" width="80%">
+    <figcaption>Inbox-Detail-Screen</figcaption>
+</figure>
+
+</div>
+
+<p>
+When you then press <strong>Inbox</strong>,
+you are taken to the Inbox screen, where incoming messages are displayed. 
+The data shown are local data generated during the runtime of the app. 
+This simply returns a list of inbox data to the screen.
+When you click on the Inbox-Icon the app will navigate you to the <strong>Inbox-Detail-Screen</strong> 
+</p>
+
+<h3> Document-Photograph-Screen </h3>
+
+<p>
+When you want to navigate to the <strong>Dokumente abfotografieren</strong> section. This will open a new pop-up which ask you the permission to use the camera. 
+</p>
+
+<p>
+After you give the app the permission to use the camera, the app will show a windows where you can use the camera to capture an image. 
+The image will be stored in on the device media in the directory <strong>AurumBanking.</strong> 
+</p>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+<figure>
+    <img src="images/app/documentation-screen/dokumente-abfotografieren-1.png" width="80%">
+    <figcaption>Camera Permission-Request</figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-abfotografieren-2.png" width="80%">
+    <figcaption>Camera View</figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-abfotografieren-3.png" width="80%">
+    <figcaption>Device Storage <strong>AurumBanking</strong> </figcaption>
+</figure>
+
+</div>
+
+<p>
+If you denied the permission for the camera the following screen will appear. And you can't use the camera until you give the app the permission to use the camera. 
+</p>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-abfotografieren-4.png" width="40%">
+    <figcaption> Camera Permission Denied </figcaption>
+</figure>
+
+<h3> Document-Scan-Screen </h3>
+
+<p>
+If you click on the <strong>Dokumente scannen</strong> section. This will open a scan utilities. 
+The tool will automatically scan documents for you. 
+After you scan the object it will save the file on the local device storage in the folder <strong>AurumBanking</strong> as PDF-File.
+Besides that you have many option to edit your taken file.
+</p>
+
+<p>
+This scan utilities is provided by google for android apps. For more information you can read the following <a href="https://developers.google.com/ml-kit/vision/doc-scanner?hl=de">ML Kit official documentation</a>.
+</p>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+<figure>
+    <img src="images/app/documentation-screen/dokumente-scannen-1.png" width="80%">
+    <figcaption> Scanning - Process </figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-scannen-2.png" width="80%">
+    <figcaption> Scan-Result </figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-scannen-3.png" width="80%">
+    <figcaption> File save on local storage </figcaption>
+</figure>
+</div>
+
+
+<h3> Document-Export-Screen </h3>
+
+<p> The last functionality of the Document-View of the App is the document export. </p>
+
+<p> The <strong>Document-Export-Screen</strong> consist of 3 Textfield, option-field and one export-button.</p>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-1.png" width="40%">
+    <figcaption> Document-Export-Screen </figcaption>
+</figure>
+
+<p> 
+The user must fill in all fields and confirm the option in order to perform an export. 
+When they click on the <strong>Erste Transaktionsdatum</strong> or <strong>Letzte Transaktionsdatum</strong> fields, a DateTimePicker is triggered, allowing them to select the date and time.
+</p>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-9.png" width="80%">
+    <figcaption> DateTimePicker </figcaption>
+</figure>
+
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-10.png" width="80%">
+    <figcaption> DateTimePicker </figcaption>
+</figure>
+</div>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-11.png" width="80%">
+    <figcaption> Shorted DateTimePicker </figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-12.png" width="80%">
+    <figcaption> Shorted DateTimePicker </figcaption>
+</figure>
+</div>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-2.png" width="40%">
+    <figcaption> Completed Export Form </figcaption>
+</figure>
+
+<p>
+If not all fields are filled in, the user will receive an error notification, and the missing field will be highlighted in red.
+</p>
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-4.png" width="80%">
+    <figcaption> Error Missing Check Option-Field </figcaption>
+</figure>
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-5.png" width="80%">
+    <figcaption> Error Missing Required Field </figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-6.png" width="80%">
+    <figcaption> UI Error Missing Required Field </figcaption>
+</figure>
+</div>
+
+<p>
+If the export is successfully completed, the user will be informed, and the export will create a PDF file, which will be saved locally.
+</p>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-3.png" width="80%">
+    <figcaption> Successful Export </figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-7.png" width="80%">
+    <figcaption> Local Export Storage </figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-8.png" width="80%">
+    <figcaption> The PDF-Result of the Export </figcaption>
+</figure>
+</div>
+
+</details>
 
 ## Support-Screen
 
