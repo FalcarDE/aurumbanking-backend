@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# Begin Copy Main Readme
-echo "Begin copying main README.md"
-cp -R README.md docs/README.md
-echo "End copying main README.md"
-
-sleep 5
-
 # Begin Copy Customer Information Service Doc
 echo "Begin copying Customer Information Service README.md"
 mkdir -p docs/customer-information-service

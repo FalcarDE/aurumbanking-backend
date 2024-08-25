@@ -103,17 +103,53 @@ Backend for the AurumBanking-Banking App.
 <details>
 <summary>Setup-Pipeline</summary>
 
-**_token:_**
-- linux: **_glrt-xznuGhoqctjSmbVNxpm_**
-- windows-hoang: **_glrt-xznuGhoqctjSmbVNxpm_** / **_glrt-aHawSL4WALWi1s6BXdVi_**
-- steffan-gitlab-runner: **_glrt-Fzfyj9euFsuo1f_szyUo_**
-- milena-gitlab-runner: **_glrt-pzYxkWTn55mxxy4S4hXA_**
-- salma-gitlab-runner: **_glrt-sQu4HSKd7RgotJkPHwCn_**
+<p><strong>_token:_</strong></p>
+<ul>
+  <li>linux: <strong>_glrt-xznuGhoqctjSmbVNxpm_</strong></li>
+  <li>windows-hoang: <strong>_glrt-xznuGhoqctjSmbVNxpm_</strong> / <strong>_glrt-aHawSL4WALWi1s6BXdVi_</strong></li>
+  <li>steffan-gitlab-runner: <strong>_glrt-Fzfyj9euFsuo1f_szyUo_</strong></li>
+  <li>milena-gitlab-runner: <strong>_glrt-pzYxkWTn55mxxy4S4hXA_</strong></li>
+  <li>salma-gitlab-runner: <strong>_glrt-sQu4HSKd7RgotJkPHwCn_</strong></li>
+</ul>
+
 
 ```bash
-docker run --rm -it -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner:latest register
-.\gitlab-runner.exe register --url https://git.ai.fh-erfurt.de --token [$token einfügen]
+docker run --rm -it -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner:latest register .\gitlab-runner.exe register --url https://git.ai.fh-erfurt.de --token [$token einfügen]
 ```
+<ul>
+  <li>
+    Enter the GitLab instance URL (for example, https://gitlab.com/): 
+    <strong>[https://git.ai.fh-erfurt.de]: [Enter]</strong>
+  </li>
+  <li>
+    Enter a name for the runner. This is stored only in the local config.toml file: 
+    <strong>aurumbanking-gitlab-runner</strong>
+  </li>
+  <li>
+    Enter an executor: parallels, virtualbox, docker, docker-autoscaler, instance, custom, shell, ssh, docker-windows, docker+machine, kubernetes: 
+    <strong>docker</strong>
+  </li>
+  <li>
+    Enter the default Docker image (for example, ruby:2.7): 
+    <strong>jdk:17</strong>
+  </li>
+</ul>
+
+
+```bash
+docker run -d --name gitlab-runner --restart always -v /var/run/docker.sock:/var/run/docker.sock -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner:latest
+```
+
+```bash
+docker exec -it gitlab-runner /bin/bash
+```
+
+<ul>
+  <li>apt update</li>
+  <li>apt install nano</li>
+  <li>nano /etc/gitlab-runner/config.toml --> set: privileged = true</li>
+</ul>
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 </details>
 <details>
