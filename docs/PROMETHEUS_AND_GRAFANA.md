@@ -167,9 +167,28 @@ Here are some examples which metrics can be provided by Prometheus and can be sh
 
 </details>
 
-## Transaction-Service
+### Transaction-Service
 <details>
 <summary> Transaction-Service </summary>
+
+<p> This dashboard provides a clear visualization of key performance metrics related to the transaction service, 
+using Prometheus as the data source. 
+Each panel is designed to monitor a specific aspect of the service, helping ensure reliability and performance optimization.
+</p>
+
+<p>
+This dashboard captures various operational data from the Transaction Service. 
+It primarily monitors the metrics of the service's endpoints. 
+These metrics are provided by Quarkus and stored in a Prometheus server. 
+The data is then retrieved and displayed here.
+</p>
+
+<div style="text-align: center;">
+    <figure>
+        <img src="images/grafana-dashboards/transaction-service/transaction-dashboard.png" width="70%">
+        <figcaption>Dashboard of the Transaction-Service </figcaption>
+    </figure>
+</div>
 
 </details>
 

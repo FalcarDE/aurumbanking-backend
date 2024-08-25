@@ -54,12 +54,11 @@ The <strong>Login Screen </strong> in the <strong> AurumBanking-App </strong> pr
 <details>
 <summary> Overview-Screen </summary>
 
+<h3> Overview-Screen </h3>
+
 <p> In the following GIF, you can see the functional elements of the Overview Screen. It consists of the app scaffold with some shortcut icons below, which allow the user to quickly access certain pages. </p>
 
-<figure>
-    <img src="images/app/overview-screen/Overview-Darkmode.gif" width="40%">
-    <figcaption>Overview-Screen in Dark-Mode</figcaption>
-</figure>
+
 
 <p> Below that is the Depot segment, which displays the current depot value. This value is fetched and updated every 3 seconds. </p>
 
@@ -73,37 +72,65 @@ Transactions for the current day are always displayed in the center. </p>
 
 <p> In the following, you can see the Overview Screen in White Mode. </p>
 
-<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
-
 <figure>
     <img src="images/app/overview-screen/Overview-Whitemode-1.png" width="80%">
     <figcaption>Overview-Screen in White-Mode</figcaption>
 </figure>
 
-<figure>
-    <img src="images/app/overview-screen/Overview-Whitemode-2.png" width="80%">
-    <figcaption>Overview-Screen in White-Mode</figcaption>
-</figure>
-</div>
+<h3> Backend-Connection </h3>
+
+<p>The <strong>Overview-Screen</strong> use the code in 
+<code>OverviewViewModel</code> to connect to the backend services. 
+Here's a summary of what the methods do and how they interact with the backend:
+</p>
+
+    <h4>Methods</h4>
+    <ul>
+        <li>
+            <strong>getCurrentDepotValue</strong>: 
+            <p>Retrieves the current depot value for a given customer ID by making an API call through <code>DepotService</code>. The response is handled asynchronously. If successful, it returns the depot value to the UI; otherwise, it logs an error. This function is used by the Depot-Display section.</p>
+        </li>
+        <li>
+            <strong>getThreeLatestTransaction</strong>:
+            <p>Fetches the three most recent transactions for a specified depot ID using <code>TransactionService</code>. The method asynchronously processes the response, returning the transactions to the UI or logging an error if the request fails. This is used by the section <strong>Letzte Transaktionen</strong> in the Overview-Screen.</p>
+        </li>
+        <li>
+            <strong>getAllTransactionByDepotId</strong>:
+            <p>Retrieves all transactions for a given depot ID. It then filters these transactions to include only those within the last three days and the next three days. After filtering, it calculates daily totals from these transactions and sends the data back to the UI. This method utilizes <code>getThreeLastDaysAndFutureDays</code> to filter the transactions and <code>calculateDailyTotals</code> to compute the totals used in diagrams.</p>
+        </li>
+        <li>
+            <strong>calculateDailyTotals</strong>:
+            <p>Takes a list of transactions and groups them by date. For each date, it calculates the net total by adding or subtracting amounts based on the transaction type (income or outcome). It is used for generating the data needed for diagrams.</p>
+        </li>
+        <li>
+            <strong>getThreeLastDaysAndFutureDays</strong>:
+            <p>Filters transactions to include only those that occurred within the last three days and the next three days from the current date. This filtered list is then used in <code>getAllTransactionByDepotId</code>.</p>
+        </li>
+    </ul>
 
 </details>
-
-
 
 ## Depot-Screen
 <details>
 
 <summary> Depot-Screen </summary>
 
-<div style="text-align: center;">
+<h3> Depot-Screen Overview </h3>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
 <figure>
-    <img src="./images/app/depot-screen/DepotScreen_DepotOverviewBox.png" width="60%">
-    <figcaption>Screenshot of Depot Screen</figcaption>
+    <img src="./images/app/depot-screen/search-1.png" width="90%">
+    <figcaption> Depot Screen Darkmode</figcaption>
+</figure>
+
+<figure>
+    <img src="./images/app/depot-screen/Depot-Screen-Whitemode.png" width="90%">
+    <figcaption>Depot Screen Whitemode</figcaption>
 </figure>
 </div>
 
 <p>
-  The Depot Screen is desinged to give a basic overview over all relevant depot activities (transactions) and key figures. It
+  The Depot Screen is designed to give a basic overview over all relevant depot activities (transactions) and key figures. It
   also allows a search function across all transactions and can switch between displaying transactions from the past and
   planned transactions in the future
 </p>
@@ -121,7 +148,7 @@ Transactions for the current day are always displayed in the center. </p>
 
 <div style="text-align: center;">
 <figure>
-    <img src="./images//app/depot-screen/DepotScreen_DepotOverviewBox.png" width="60%">
+    <img src="./images/app/depot-screen/depot-screen-value.png" width="40%">
     <figcaption>Screenshot of Depot Screen with depot overview Box</figcaption>
 </figure>
 </div>
@@ -135,7 +162,7 @@ Transactions for the current day are always displayed in the center. </p>
 
 <div style="text-align: center;">
 <figure>
-    <img src="./images//app/depot-screen/DepotScreen_SearchBox.png" width="60%">
+    <img src="./images/app/depot-screen/depot-screen-overview-suche.png" width="40%">
     <figcaption>Screenshot of Search Box Element at Depot Screen</figcaption>
 </figure>
 </div>
@@ -145,18 +172,67 @@ Transactions for the current day are always displayed in the center. </p>
   transaction list for transactions, that contain the given text in the recipient-attribute.
 </p>
 
+
+<p>
+    The user can enter strings in the search field and search either by clicking the <strong>Search</strong> button or by using the <strong>Vergangene</strong> or <strong>Zukünftig</strong> toggle switch.
+</p>
+
+<p>You can filter by the following elements:</p>
+<ul>
+  <li><strong>Recipient</strong></li>
+  <li><strong>IBAN</strong></li>
+  <li><strong>Purpose of Use</strong></li>
+  <li><strong>Date and Time of First Execution</strong></li>
+  <li><strong>Money Value</strong></li>
+</ul>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+
+<figure style="margin: 10px;">
+    <img src="images/app/depot-screen/search-1.png" width="80%">
+    <figcaption> Filtering via switch <strong>Vergangen</strong> </figcaption>
+</figure>
+
+<figure style="margin: 10px;">
+    <img src="images/app/depot-screen/search-2.png" width="80%">
+    <figcaption> Filtering via switch <strong>Zukünftig</strong> </figcaption>
+</figure>
+
+</div>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+
+<figure style="margin: 10px;">
+    <img src="images/app/depot-screen/search-5.png" width="80%">
+    <figcaption> Filtering via switch Search-String and <strong>Vergangen</strong></figcaption>
+</figure>
+
+<figure style="margin: 10px;">
+    <img src="images/app/depot-screen/search-3.png" width="80%">
+    <figcaption> Filtering via switch Search-String and <strong>Zukünftig</strong> </figcaption>
+</figure>
+
+</div>
+
+<figure style="margin: 10px;">
+    <img src="images/app/depot-screen/search-4.png" width="40%">
+    <figcaption> Filtering via switch Search-String and <strong>Zukünftig</strong> with no matching result </figcaption>
+</figure>
+
+
+
 <h3>Time Choice Button:</h3>
 
 <div style="text-align: center;">
 <figure>
-    <img src="./images//app/depot-screen/DepotScreen_TimeChoiceButton.png" width="60%">
+    <img src="./images/app/depot-screen/depot-screen-overview-suche.png" width="40%">
     <figcaption>Screenshot of Time Choice Button</figcaption>
 </figure>
 </div>
 
 <p>
   With the Time Choice Button Element, the user can switch between displaying transactions from the past or future.
-  By default, the button is set to "Vergangen" and will diplay past transactions. The text in the Search Box acts in addition
+  By default, the button is set to "Vergangen" and will display past transactions. The text in the Search Box acts in addition
   to this. So the transaction list will only display transactions in the chosen time frame with the given search text.
 </p>
 
@@ -164,48 +240,67 @@ Transactions for the current day are always displayed in the center. </p>
 
 <div style="text-align: center;">
 <figure>
-    <img src="./images//app/depot-screen/DepotScreen_TransactionList.png" width="60%">
-    <figcaption>Screenshot of Trnasaction List</figcaption>
+    <img src="./images/app/depot-screen/depot-screen-overview-three-dots.png" width="40%">
+    <figcaption>Screenshot of Transaction List</figcaption>
 </figure>
 </div>
 
 <p>
   The Transaction List displays all transactions, that fit in the given parameters out of Search Box and Time Choice Button.
   It is managed via a LazyColumn and sorted descending via the initial transaction date (dateTimeOfFirstExecutionLocalDate).
-  The list elements are also TransactionCard-elements such as used on the **Overview Screen**. Cash receipts will be
-  displayed green, cash outflows red.  By clicking at the  3-point-button at the element, the user switches to the
+</p>
+
+<p>
+  The list elements are also TransactionCard-elements such as used on the <strong>Overview Screen</strong>. Cash income will be
+  displayed green, cash outflows red. By clicking at the 3-point-button at the element, the user switches to the
   TransactionDetailScreen as subview of the DepotScreen.
 </p>
 
-<ul>
-    <li>Error Message: Keine Daten vorhanden: — indicates that the loading process was not able to find transactions for
-      the current depot or there have been no transactions for the depot until now</li>
-</ul>
-
-<p style="text-align: center">
-<img src="./images//app/depot-screen/DepotScreen_handling.gif" alt="DepotScreen handling" width="50%">
-</p>
-
-
-
 <h3>Transaction Detail Screen:</h3>
 
-<div style="text-align: center;">
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
 <figure>
-    <img src="./images//app/depot-screen/TransactionDetailScreen_new.png" width="60%">
-    <figcaption>Screenshot of Trnasaction List</figcaption>
+    <img src="images/app/depot-screen/Transaction-Details-Screen.png" width="80%">
+    <figcaption> Transaction-Detail-Screen</figcaption>
 </figure>
+
+<figure>
+    <img src="./images/app/depot-screen/Transaction-Details-Screen-Whitemode.png" width="80%">
+    <figcaption> Transaction-Detail-Screen Whitemode </figcaption>
+</figure>
+
 </div>
 
 <p>
-  The TransactionDetailScreen gives the user a more detailed view of a specific transaction. It also displayed the detailed
+  The Transaction-Detail-Screen gives the user a more detailed view of a specific transaction. It also displayed the detailed
   Bank connection (IBAN and BIC) and the detailed date and time of the transaction.
 </p>
 
-</details>
+<h3>Backend-Connection</h3>
 
-<details>
-<summary>Depot-Screen</summary>
+<p>The <code>DepotViewModel</code> for a Depot-Screen is uses to load data from a server. It has two main functions:</p>
+
+<ul>
+    <li>
+        <p><strong><code>getTransactionById(callback: (TransactionResponse?) -> Unit)</code></strong>:</p>
+        <ul>
+            <li>Fetches a specific transaction based on the <code>transactionId</code> stored in the <code>SessionManager</code>.</li>
+            <li>Performs the network call on a background thread.</li>
+            <li>If successful, the result is returned via a callback; otherwise, an error is logged.</li>
+        </ul>
+    </li>
+    <li>
+        <p><strong><code>getAllTransactionByDepotId(depotId: Long, callback: (List&lt;TransactionResponse&gt;) -> Unit)</code></strong>:</p>
+        <ul>
+            <li>Retrieves all transactions for a specific depot based on the given <code>depotId</code>.</li>
+            <li>The network call is also made asynchronously.</li>
+            <li>Results are returned via the callback, or an empty list is returned in case of errors.</li>
+        </ul>
+    </li>
+</ul>
+
+<p>Both methods use <code>Retrofit</code> for network calls and <code>viewModelScope</code> to ensure execution on the correct thread. Errors are logged using <code>Log.e</code>.</p>
+
 </details>
 
 ## Transaction-Screen
@@ -408,6 +503,216 @@ Transactions for the current day are always displayed in the center. </p>
 
 </details>
 
+
+## Document-Screen
+
+<details>
+<summary> Document-Screen </summary>
+
+
+<h3> Document-Overview-Screen </h3>
+
+<p>
+When you click on <strong>Dokumente</strong> in the navigation bar of the app, you are taken to the overview page of the Documents screen. 
+Here, you can choose between <strong>Posteingang</strong>, <strong>Dokumente abfotografieren</strong> , <strong>Dokumente Scann</strong> und <strong>Kontoauszug.</strong> 
+</p>
+
+
+<figure>
+    <img src="images/app/documentation-screen/documents-screen-main-screen.png" width="40%">
+    <figcaption>Document-Overview-Screen</figcaption>
+</figure>
+
+
+<h3> Document-Inbox-Screen </h3>
+
+<p>
+When you then press <strong>Inbox</strong>,
+you are taken to the Inbox screen, where incoming messages are displayed. 
+The data shown are local data generated during the runtime of the app. 
+This simply returns a list of inbox data to the screen.
+If you click on the Inbox-Icon the app will navigate you to the <strong>Inbox-Detail-Screen</strong> 
+</p>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+
+<figure>
+    <img src="images/app/documentation-screen/inbox.png" width="80%">
+    <figcaption>Inbox-Screen</figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/inbox-1.png" width="80%">
+    <figcaption>Inbox-Detail-Screen</figcaption>
+</figure>
+
+</div>
+
+<p>
+When you then press <strong>Inbox</strong>,
+you are taken to the Inbox screen, where incoming messages are displayed. 
+The data shown are local data generated during the runtime of the app. 
+This simply returns a list of inbox data to the screen.
+When you click on the Inbox-Icon the app will navigate you to the <strong>Inbox-Detail-Screen</strong> 
+</p>
+
+<h3> Document-Photograph-Screen </h3>
+
+<p>
+When you want to navigate to the <strong>Dokumente abfotografieren</strong> section. This will open a new pop-up which ask you the permission to use the camera. 
+</p>
+
+<p>
+After you give the app the permission to use the camera, the app will show a windows where you can use the camera to capture an image. 
+The image will be stored in on the device media in the directory <strong>AurumBanking.</strong> 
+</p>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+<figure>
+    <img src="images/app/documentation-screen/dokumente-abfotografieren-1.png" width="80%">
+    <figcaption>Camera Permission-Request</figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-abfotografieren-2.png" width="80%">
+    <figcaption>Camera View</figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-abfotografieren-3.png" width="80%">
+    <figcaption>Device Storage <strong>AurumBanking</strong> </figcaption>
+</figure>
+
+</div>
+
+<p>
+If you denied the permission for the camera the following screen will appear. And you can't use the camera until you give the app the permission to use the camera. 
+</p>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-abfotografieren-4.png" width="40%">
+    <figcaption> Camera Permission Denied </figcaption>
+</figure>
+
+<h3> Document-Scan-Screen </h3>
+
+<p>
+If you click on the <strong>Dokumente scannen</strong> section. This will open a scan utilities. 
+The tool will automatically scan documents for you. 
+After you scan the object it will save the file on the local device storage in the folder <strong>AurumBanking</strong> as PDF-File.
+Besides that you have many option to edit your taken file.
+</p>
+
+<p>
+This scan utilities is provided by google for android apps. For more information you can read the following <a href="https://developers.google.com/ml-kit/vision/doc-scanner?hl=de">ML Kit official documentation</a>.
+</p>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+<figure>
+    <img src="images/app/documentation-screen/dokumente-scannen-1.png" width="80%">
+    <figcaption> Scanning - Process </figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-scannen-2.png" width="80%">
+    <figcaption> Scan-Result </figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-scannen-3.png" width="80%">
+    <figcaption> File save on local storage </figcaption>
+</figure>
+</div>
+
+
+<h3> Document-Export-Screen </h3>
+
+<p> The last functionality of the Document-View of the App is the document export. </p>
+
+<p> The <strong>Document-Export-Screen</strong> consist of 3 Textfield, option-field and one export-button.</p>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-1.png" width="40%">
+    <figcaption> Document-Export-Screen </figcaption>
+</figure>
+
+<p> 
+The user must fill in all fields and confirm the option in order to perform an export. 
+When they click on the <strong>Erste Transaktionsdatum</strong> or <strong>Letzte Transaktionsdatum</strong> fields, a DateTimePicker is triggered, allowing them to select the date and time.
+</p>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-9.png" width="80%">
+    <figcaption> DateTimePicker </figcaption>
+</figure>
+
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-10.png" width="80%">
+    <figcaption> DateTimePicker </figcaption>
+</figure>
+</div>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-11.png" width="80%">
+    <figcaption> Shorted DateTimePicker </figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-12.png" width="80%">
+    <figcaption> Shorted DateTimePicker </figcaption>
+</figure>
+</div>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-2.png" width="40%">
+    <figcaption> Completed Export Form </figcaption>
+</figure>
+
+<p>
+If not all fields are filled in, the user will receive an error notification, and the missing field will be highlighted in red.
+</p>
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-4.png" width="80%">
+    <figcaption> Error Missing Check Option-Field </figcaption>
+</figure>
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-5.png" width="80%">
+    <figcaption> Error Missing Required Field </figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-6.png" width="80%">
+    <figcaption> UI Error Missing Required Field </figcaption>
+</figure>
+</div>
+
+<p>
+If the export is successfully completed, the user will be informed, and the export will create a PDF file, which will be saved locally.
+</p>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-3.png" width="80%">
+    <figcaption> Successful Export </figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-7.png" width="80%">
+    <figcaption> Local Export Storage </figcaption>
+</figure>
+
+<figure>
+    <img src="images/app/documentation-screen/dokumente-kontoauszug-8.png" width="80%">
+    <figcaption> The PDF-Result of the Export </figcaption>
+</figure>
+</div>
+
+</details>
 
 ## Support-Screen
 
