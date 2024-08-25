@@ -157,13 +157,113 @@ Here are some examples which metrics can be provided by Prometheus and can be sh
 
 <details>
 <summary> Customer-Information-Service </summary>
+### Panel 1: Successful Support Requests Per Request Type (Max Duration)
 
+This gauge panel shows the maximum processing time for successful support requests (HTTP 200 status).
+It helps in understanding the performance of the customer information service, particularly in measuring the longest request times.
+If the max duration consistently exceeds a certain threshold, this could indicate a performance bottleneck.
+
+<div style="text-align: center;">
+
+<figure>
+    <img src="images/grafana-dashboards/customer-service/grafana_cust_inf_service_max_request_time.png" width="70%">
+    <figcaption>Screenshot of the max duration for successful customer information requests</figcaption>
+</figure>
+
+</div>
+
+### Panel 2: Sum of Server Errors last 24h
+
+This bar chart  visualizes the total number of customer information request errors handled by the service over time.
+It helps troubleshooting in case of system damages be visualizing timezones with a high increase of error requests.
+
+<div style="text-align: center;">
+
+<figure>
+    <img src="images/grafana-dashboards/customer-service/grafana_cust_inf_service_count_server_errors.png" width="70%">
+    <figcaption>Screenshot of the sum of server errors last 24h</figcaption>
+</figure>
+
+</div>
+
+### Panel 3: Sum of Requests per Hour last 24h
+
+The bar chart diagram displays the sum of server requests per request type per hour. It helps to determine high frequent
+interactions in order to have an indicator for improvement areas in case of performance issues.
+
+<div style="text-align: center;">
+
+<figure>
+    <img src="images/grafana-dashboards/customer-service/grafana_cust_inf_service_count_server_requ_per_h.png" width="70%">
+    <figcaption>Screenshot sum of requests per request type per hour last 24h</figcaption>
+</figure>
+
+</div>
+
+### Panel 4: Sum of Connection Seconds per Half Hour last 24h
+
+This bar chart displays the count of connection seconds per half hour for the depot service. It helps to define time
+zones with high server activity for load handling purposes.
+
+<div style="text-align: center;">
+
+<figure>
+    <img src="images/grafana-dashboards/customer-service/grafana_cust_inf_service_sum_connection_seconds_last_24h.png" width="70%">
+    <figcaption>Screenshot sum of connection seconds per half hour last 24h</figcaption>
+</figure>
+
+</div>
 </details>
 
 ### Depot-Service
 
 <details>
 <summary> Depot-Service </summary>
+
+
+### Panel 1: Successful Support Requests Per Request Type (Max Duration)
+
+This gauge panel shows the maximum processing time for successful depot requests (HTTP 200 status).
+It helps in understanding the performance of the depot service, particularly in measuring the longest request times.
+If the max duration consistently exceeds a certain threshold, this could indicate a performance bottleneck.
+
+<div style="text-align: center;">
+
+<figure>
+    <img src="images/grafana-dashboards/depot-service/grafana_depot_service_max_request_time.png" width="70%">
+    <figcaption>Screenshot of the max duration for successful depot requests</figcaption>
+</figure>
+
+</div>
+
+### Panel 2: Sum of Server Errors last 24h
+
+This bar chart  visualizes the total number of depot request errors handled by the service over time.
+It helps troubleshooting in case of system damages be visualizing timezones with a high increase of error requests.
+
+<div style="text-align: center;">
+
+<figure>
+    <img src="images/grafana-dashboards/depot-service/grafana_depot_service_count_server_errors.png" width="70%">
+    <figcaption>Screenshot of the sum of server errors last 24h</figcaption>
+</figure>
+
+</div>
+
+### Panel 3: Sum of Requests per Hour last 24h
+
+The bar chart diagram displays the sum of server requests per request type per hour. It helps to determine high frequent
+interactions in order to have an indicator for improvement areas in case of performance issues.
+
+<div style="text-align: center;">
+
+<figure>
+    <img src="images/grafana-dashboards/depot-service/grafana_depot_service_count_server_requ_per_h.png" width="70%">
+    <figcaption>Screenshot sum of requests per request type per hour last 24h</figcaption>
+</figure>
+
+</div>
+
 
 </details>
 
