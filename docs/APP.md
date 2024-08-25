@@ -187,7 +187,7 @@ Transactions for the current day are always displayed in the center. </p>
 <div style="text-align: center;">
 
     <figure>
-        <img src="images/app/transaction-screen/Standard-Ueberweisung.gif" width="40%">
+        <img src="images/app/transaction-screen/Standard-Ueberweisung-small.gif" width="40%">
         <figcaption>Visual demo of the standard transaction view</figcaption>
     </figure>
 
@@ -228,7 +228,7 @@ Transactions for the current day are always displayed in the center. </p>
 <div style="text-align: center;">
 
     <figure>
-        <img src="images/app/transaction-screen/Internationale-Ueberweisung.gif" width="40%">
+        <img src="images/app/transaction-screen/Internationale-Ueberweisung-small.gif" width="40%">
         <figcaption>Visual demo of the international transaction view</figcaption>
     </figure>
 
@@ -276,7 +276,7 @@ Transactions for the current day are always displayed in the center. </p>
 <div style="text-align: center;">
 
     <figure>
-        <img src="images/app/transaction-screen/Dauerauftrag.gif" width="40%">
+        <img src="images/app/transaction-screen/Dauerauftrag-small.gif" width="40%">
         <figcaption>Visual demo of the Dauerauftrag view</figcaption>
     </figure>
 
@@ -297,7 +297,7 @@ Transactions for the current day are always displayed in the center. </p>
 <div style="text-align: center;">
 
     <figure>
-        <img src="images/app/transaction-screen/Standard-Ueberweisung-fehler.gif" width="40%">
+        <img src="images/app/transaction-screen/Standard-Ueberweisung-fehler-small.gif" width="40%">
         <figcaption>Visual demo of handling incomplete or invalid form inputs</figcaption>
     </figure>
 
