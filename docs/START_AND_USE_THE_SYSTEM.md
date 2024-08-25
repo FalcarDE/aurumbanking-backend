@@ -59,7 +59,7 @@
 </figure>
 
 <ul>
-  <li>To initialize the database with data needed in the app, run:
+  <li>To initialize the database with data needed in the app, run (linux wsl oder terminal required) :
     <ul>
       <li>Linux/Mac: 
         <pre><code>sh project-script.sh</code></pre>
