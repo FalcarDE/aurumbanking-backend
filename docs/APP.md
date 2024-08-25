@@ -184,14 +184,6 @@ Transactions for the current day are always displayed in the center. </p>
     <li> Allows users to review and edit input details before final submission.</li>
 </ul>
 
-<div style="text-align: center;">
-
-    <figure>
-        <img src="images/app/transaction-screen/Standard-Ueberweisung-small.gif" width="40%">
-        <figcaption>Visual demo of the standard transaction view</figcaption>
-    </figure>
-
-</div>
 
 <h3>International Transfer</h3>
 
@@ -225,14 +217,6 @@ Transactions for the current day are always displayed in the center. </p>
     <li><strong>Navigation</strong>: Upon successful validation and submission, the screen navigates the user to the <code>SuccessfulTransaction</code> route.</li>
 </ul>
 
-<div style="text-align: center;">
-
-    <figure>
-        <img src="images/app/transaction-screen/Internationale-Ueberweisung-small.gif" width="40%">
-        <figcaption>Visual demo of the international transaction view</figcaption>
-    </figure>
-
-</div>
 
 <h3>Permanent Order Transfer</h3>
 
@@ -273,14 +257,6 @@ Transactions for the current day are always displayed in the center. </p>
     <li><strong>CreateConfirmSendButton</strong>: A button that confirms the transaction and sends the data to the ViewModel for processing.</li>
 </ul>
 
-<div style="text-align: center;">
-
-    <figure>
-        <img src="images/app/transaction-screen/Dauerauftrag-small.gif" width="40%">
-        <figcaption>Visual demo of the Dauerauftrag view</figcaption>
-    </figure>
-
-</div>
 
 <h3>Handling Incomplete or Invalid Form Inputs</h3>
 
@@ -294,14 +270,6 @@ Transactions for the current day are always displayed in the center. </p>
     <li>UI Feedback: The interface provides visual feedback to guide the user in correcting the errors. This often involves highlighting the problematic fields or displaying specific error messages.</li>
 </ul>
 
-<div style="text-align: center;">
-
-    <figure>
-        <img src="images/app/transaction-screen/Standard-Ueberweisung-fehler-small.gif" width="40%">
-        <figcaption>Visual demo of handling incomplete or invalid form inputs</figcaption>
-    </figure>
-
-</div>
 
 <h3>Screens in White Mode</h3>
 
