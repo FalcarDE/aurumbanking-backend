@@ -190,7 +190,7 @@ Transactions for the current day are always displayed in the center. </p>
 
 <div style="text-align: center;">
 <figure>
-    <img src="./images//app/depot-screen/TransactionDetailScreen.png" width="60%">
+    <img src="./images//app/depot-screen/TransactionDetailScreen_new.png" width="60%">
     <figcaption>Screenshot of Trnasaction List</figcaption>
 </figure>
 </div>
