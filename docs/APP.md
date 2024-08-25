@@ -66,9 +66,10 @@ The <strong>Login Screen </strong> in the <strong> AurumBanking-App </strong> pr
 </figure>
 
 <figure>
-    <img src="images/app/overview-screen/shorcut-overview.gif" width="80%">
+    <img src="https://drive.google.com/uc?export=view&id=1xM_ptE4kPqgtDr1v0-ssB6kWvqkzev4J" width="80%">
     <figcaption>Using the shortcut</figcaption>
 </figure>
+
 
 </div>
 
