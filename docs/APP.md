@@ -126,7 +126,7 @@ The `StandardTransferScreen` is specifically designed for domestic transfers. It
 
 </div>
 
-## International Transfer
+### International Transfer
 
 The `International Transfer` screen is tailored for cross-border transactions, requiring additional input:
 
@@ -162,10 +162,9 @@ The `International Transfer` screen is tailored for cross-border transactions, r
 </div>
 
 
-## Permanentorder Transfer
+### Permanentorder Transfer
 
-
-## Function Definition
+### Function Definition
 
 The `Permanent Order` screen allows users to set up recurring transactions. Key features include:
 
@@ -209,6 +208,58 @@ The `Permanent Order` screen allows users to set up recurring transactions. Key 
     <figure>
         <img src="images/app/transaction-screen/Dauerauftrag.gif" width="40%">
         <figcaption>Visual demo of the Dauerauftrag view</figcaption>
+    </figure>
+
+</div>
+
+### Handling Incomplete or Invalid Form Inputs
+
+In the transfer interaction screen, proper validation of user inputs is crucial to ensure that all required fields are completed and valid before proceeding. When a user attempts to submit the form with incomplete or invalid information, the system performs a series of checks.
+
+If the form fields are not fully filled out or contain invalid entries, the following actions are taken:
+
+1. Validation Check: The system checks all required fields to verify their completeness. This includes fields such as country, recipient, IBAN, BIC, amount, purpose, and execution dates.
+2. Error Notification: If any fields are empty or invalid, the user is notified through a snackbar message. This message typically prompts the user to correct the missing or incorrect information.
+3. UI Feedback: The interface provides visual feedback to guide the user in correcting the errors. This often involves highlighting the problematic fields or displaying specific error messages.
+
+To better illustrate this process, here is a GIF showing the form's behavior when incomplete or invalid information is provided. In the GIF, you will observe the following:
+
+- The form submission button is disabled or inactive until all fields are correctly filled.
+- Upon an attempt to submit with missing or invalid data, a snackbar message appears, alerting the user to complete or correct the required fields.
+
+### GIF Example
+
+This GIF demonstrates how the application handles form validation and provides feedback to ensure a smooth user experience.
+
+
+<div style="text-align: center;">
+
+    <figure>
+        <img src="images/app/transaction-screen/Standard-Ueberweisung-fehler.gif" width="40%">
+        <figcaption>Visual demo of handling incomplete or invalid form inputs</figcaption>
+    </figure>
+
+</div>
+
+### Screens in White Mode
+
+The app offers the option to switch to White Mode, providing a bright and clear user interface.
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+
+    <figure style="margin: 10px;">
+        <img src="images/app/transaction-screen/transaction-standard-transaction-screen-whitemode.png" width="100%">
+        <figcaption>Screenshot of the standard transaction screen in Whitemode</figcaption>
+    </figure>
+
+    <figure style="margin: 10px;">
+        <img src="images/app/transaction-screen/transaction-international-transaction-screen-check-entries-whitemode.png" width="100%">
+        <figcaption>Screenshot of the international transaction screen in Whitemode</figcaption>
+    </figure>
+
+    <figure style="margin: 10px;">
+        <img src="images/app/transaction-screen/transaction-permanent-transaction-screen-with-calendar-whitemode.png" width="100%">
+        <figcaption>Screenshot of the permanent transaction screen in Whitemode</figcaption>
     </figure>
 
 </div>
