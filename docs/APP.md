@@ -89,6 +89,118 @@ Transactions for the current day are always displayed in the center. </p>
 </details>
 
 ## Depot-Screen
+<details>
+
+<summary> Depot-Screen </summary>
+
+<div style="text-align: center;">
+<figure>
+    <img src="./images/app/depot-screen/DepotScreen_DepotOverviewBox.png" width="60%">
+    <figcaption>Screenshot of Depot Screen</figcaption>
+</figure>
+</div>
+
+<p>
+  The Depot Screen is desinged to give a basic overview over all relevant depot activities (transactions) and key figures. It
+  also allows a search function across all transactions and can switch between displaying transactions from the past and
+  planned transactions in the future
+</p>
+
+<h3>Key Elements:</h3>
+
+<ul>
+    <li>Depot Overview Box: Depot Value highlighted on top of the screen</li>
+    <li>Search Box: Element to filter transactions</li>
+    <li>Time Choice Button: Element to switch transactions from past and for future</li>
+    <li>Transaction List: All Transactions that match the chosen attributes</li>
+</ul>
+
+<h3>Depot Overview Box:</h3>
+
+<div style="text-align: center;">
+<figure>
+    <img src="./images//app/depot-screen/DepotScreen_DepotOverviewBox.png" width="60%">
+    <figcaption>Screenshot of Depot Screen with depot overview Box</figcaption>
+</figure>
+</div>
+
+<p>
+  The Depot Overview Box is the same element as the once used at the **Overview Screen**. It is used to display the current
+  Deposit Value and the uses currency area.
+</p>
+
+<h3>Search Box</h3>
+
+<div style="text-align: center;">
+<figure>
+    <img src="./images//app/depot-screen/DepotScreen_SearchBox.png" width="60%">
+    <figcaption>Screenshot of Search Box Element at Depot Screen</figcaption>
+</figure>
+</div>
+
+<p>
+  The Search Box Element allows a selection of the displayed transactions for a given text value. It will than filter the
+  transaction list for transactions, that contain the given text in the recipient-attribute.
+</p>
+
+<h3>Time Choice Button:</h3>
+
+<div style="text-align: center;">
+<figure>
+    <img src="./images//app/depot-screen/DepotScreen_TimeChoiceButton.png" width="60%">
+    <figcaption>Screenshot of Time Choice Button</figcaption>
+</figure>
+</div>
+
+<p>
+  With the Time Choice Button Element, the user can switch between displaying transactions from the past or future.
+  By default, the button is set to "Vergangen" and will diplay past transactions. The text in the Search Box acts in addition
+  to this. So the transaction list will only display transactions in the chosen time frame with the given search text.
+</p>
+
+<h3>Transaction List:</h3>
+
+<div style="text-align: center;">
+<figure>
+    <img src="./images//app/depot-screen/DepotScreen_TransactionList.png" width="60%">
+    <figcaption>Screenshot of Trnasaction List</figcaption>
+</figure>
+</div>
+
+<p>
+  The Transaction List displays all transactions, that fit in the given parameters out of Search Box and Time Choice Button.
+  It is managed via a LazyColumn and sorted descending via the initial transaction date (dateTimeOfFirstExecutionLocalDate).
+  The list elements are also TransactionCard-elements such as used on the **Overview Screen**. Cash receipts will be
+  displayed green, cash outflows red.  By clicking at the  3-point-button at the element, the user switches to the
+  TransactionDetailScreen as subview of the DepotScreen.
+</p>
+
+<ul>
+    <li>Error Message: Keine Daten vorhanden: — indicates that the loading process was not able to find transactions for
+      the current depot or there have been no transactions for the depot until now</li>
+</ul>
+
+<p style="text-align: center">
+<img src="./images//app/depot-screen/DepotScreen_handling.gif" alt="DepotScreen handling" width="50%">
+</p>
+
+
+
+<h3>Transaction Detail Screen:</h3>
+
+<div style="text-align: center;">
+<figure>
+    <img src="./images//app/depot-screen/TransactionDetailScreen.png" width="60%">
+    <figcaption>Screenshot of Trnasaction List</figcaption>
+</figure>
+</div>
+
+<p>
+  The TransactionDetailScreen gives the user a more detailed view of a specific transaction. It also displayed the detailed
+  Bank connection (IBAN and BIC) and the detailed date and time of the transaction.
+</p>
+
+</details>
 
 ## Transaction-Screen
 
