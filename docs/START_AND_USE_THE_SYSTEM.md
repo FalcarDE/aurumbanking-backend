@@ -1,194 +1,216 @@
 # How to start and use the system
 
-## How to run
+## Run Backend on PROD
 
-To start the system run the run.sh file on:
+<details>
+<summary>Run Backend on PROD </summary>
 
-- windows: ./run.sh
-- linux: sh ./run.sh
-
-<div style="text-align: center;">
-
-<figure>
-    <img src="./images/run-sh-1%20(1).png" width="80%">
-    <figcaption>First Question of the run.sh</figcaption>
-</figure>
-
-
-<figure>
-    <img src="./images/run-sh-1%20(2).png" width="80%">
-    <figcaption>Second Question of the run.sh</figcaption>
-</figure>
-
-After the Docker-Compose runs you can move on to step 1.
-
-## 1. Traefik API Gateway
-
-Take a look at the Traefik dashboard.
-
-> **Path:** [http://localhost/dashboard/](http://localhost/dashboard/)
-
-Traefik acts as API gateway and load balancer.
-It's configured in the _docker-compose-prod.yml_ and picks up running containers automatically.
-Thus, it will recognize containers that are started or stopped while the system is already running.
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/Treaffik-UI-Ziwschenstand.png" width="80%">
-    <figcaption>Traefik Dashboard</figcaption>
-</figure>
-</div>
-
-## 2. Endpoints with Swagger-UI
-
-### Swagger UI with Traefik in Dev Mode
-
-Traefik is a powerful reverse proxy and load balancer that can automatically discover and manage services. 
-In development mode, Traefik comes with built-in support for Swagger UI, a popular tool for visualizing and interacting with APIs.
-Once Traefik is running in dev-mode, you can access the Swagger UI by navigating to the following URL in your web browser:
-
-> **Path:**  http://localhost:8080/q/dev-ui/io.quarkus.quarkus-smallrye-openapi/swagger-ui
-
-In the following you can see all the endpoints of our services:
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/login-service.png" width="80%">
-    <figcaption>Endpoints of Login-Service</figcaption>
-</figure>
-</div>
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/Depot-Service.png" width="80%">
-    <figcaption>Endpoints of Depot-Service</figcaption>
-</figure>
-</div>
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/transaction-service.png" width="80%">
-    <figcaption>Endpoints of Transaction-Service</figcaption>
-</figure>
-</div>
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/customer-infomation-service.png" width="80%">
-    <figcaption>Endpoints of Customer-Information-Service</figcaption>
-</figure>
-</div>
-
-<div style="text-align: center;">
-<figure>
-    <img src="images/support-service.png" width="80%">
-    <figcaption>Endpoints of Support-Service</figcaption>
-</figure>
-</div>
-
-
-### 2. Jaeger UI / Tracing
-
-If started with the **_-t_** flag, have a look at the Jaeger UI.
-
-> **Path:** [http://localhost/tracing](http://localhost/tracing)
-
-Jaeger is our OpenTelemetry compliant service that collects tracing information from all services comprising our system.
-With that data, one is able to examine how requests _move_ through the system, gather insights about processing times as
-well as errors that happen along the way.
-
-<div style="text-align: center;">
+<ul>
+  <li>Start in the root directory of this project.</li>
+  <li>Run this shell script:
+    <ul>
+      <li>Linux/Mac: 
+        <pre><code>sh run.sh</code></pre>
+      </li>
+      <li>Windows: 
+        <pre><code>./run.sh</code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>Press `y/yes` to build the entire project:</li>
+</ul>
 
 <figure>
-    <img src="assets/images/screen_jaeger_trace_list.png" width="80%">
-    <figcaption>Jaeger main screen showing captured traces</figcaption>
+    <img src="images/deployment/run-sh-1.png" width="80%">
 </figure>
+
+<ul>
+  <li>After the build finishes, press `5` to run all docker-compose files:</li>
+</ul>
 
 <figure>
-    <img src="assets/images/screen_jaeger_trace_graph.png" width="80%">
-    <figcaption>Jaeger showing a trace graph, e.g. the dependencies between different spans</figcaption>
+    <img src="images/deployment/run-sh-2.png" width="80%">
 </figure>
+
+<ul>
+  <li>Now we can see the services running:</li>
+</ul>
 
 <figure>
-    <img src="assets/images/screen_jaeger_span_info.png" width="80%">
-    <figcaption>Jaeger showing detail of a trace & its spans</figcaption>
+    <img src="images/deployment/docker-services.png" width="80%">
 </figure>
 
-</div>
+<ul>
+  <li>Go to the browser: <a href="http://localhost/dashboard/" target="_blank">http://localhost/dashboard/</a></li>
+</ul>
 
-### 3. Prometheus / Metrics
-
-If started with the **_-m_** flag, have a look at Prometheus, the system that aggregates metric data from all services (
-e.g. our own Quarkus services, databases, Traefik and, yes, Prometheus itself).
-
-> **Path:** [http://localhost/prometheus](http://localhost/prometheus)
-
-<div style="text-align: center;">
-    <figure>
-        <img src="assets/images/screen_prometheus_graph.png" width="80%">
-        <figcaption>Prometheus showing bytes used by the JVM</figcaption>
-    </figure>
-</div>
-
-### 4. Grafana / Metrics Dashboards
-
-If started with the **_-mui_** flag, Grafana is available.
-
-> **Path:** [http://localhost/metrics-ui-service](http://localhost/metrics-ui-service)
-
-Upon first access, login with *admin:admin*, you are then asked to provide a new password.
-
-Grafana needs to connect to a *data source*; this will be Prometheus in our case. Select the appropriate option at the
-main page and enter `http://metrics-service:9090/metrics-service` under *Connection*. Afterward, you are able to build
-dashboards showing the data imported from Prometheus. This can be really time-consuming; luckily, on can import
-pre-configured dashboards. Some useful ones are the following:
-
--
-Quarkus: [https://grafana.com/grafana/dashboards/14370-jvm-quarkus-micrometer-metrics/](https://grafana.com/grafana/dashboards/14370-jvm-quarkus-micrometer-metrics/)
-- Traefik: [https://grafana.com/grafana/dashboards/4475-traefik/](https://grafana.com/grafana/dashboards/4475-traefik/)
--
-Jaeger: [https://grafana.com/grafana/dashboards/12535-jaeger-all-in-one/](https://grafana.com/grafana/dashboards/12535-jaeger-all-in-one/)
--
-Prometheus: [https://grafana.com/grafana/dashboards/3662-prometheus-2-0-overview/](https://grafana.com/grafana/dashboards/3662-prometheus-2-0-overview/)
--
-cAdvisor: [https://grafana.com/grafana/dashboards/11600-docker-container/](https://grafana.com/grafana/dashboards/11600-docker-container/)
-
-Beside metric data from Prometheus, Grafana can also connect to your databases to create dashboards that show the nature
-of your data.
-
-<div style="text-align: center;">
+<ul>
+  <li>Insert these credentials:
+    <ul>
+      <pre><code>user</code></pre>
+      <pre><code>123</code></pre>
+    </ul>
+  </li>
+  <li>Here is the dashboard on PROD:</li>
+</ul>
 
 <figure>
-    <img src="assets/images/screen_grafana_metrics_explorer.png" width="80%">
-    <figcaption>Grafana Metrics Explorer</figcaption>
+    <img src="images/deployment/traefik-dashboard.png" width="80%">
 </figure>
+
+<ul>
+  <li>To initialize the database with data needed in the app, run (linux wsl oder terminal required) :
+    <ul>
+      <li>Linux/Mac: 
+        <pre><code>sh project-script.sh</code></pre>
+      </li>
+      <li>Windows: 
+        <pre><code>./project-script.sh</code></pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+</details>
+
+## Connection-Backend-App
+
+<details>
+<summary>Connection-Backend-App</summary>
+
+<h3> Local Network-Design </h3>
+
+<p>To get the project running, you will need two devices:</p>
+<ul>
+    <li>A computer where the backend runs.</li>
+    <li>A computer or smartphone where the app runs.</li>
+</ul>
+<p> 
+The app connects to the backend via our Wi-Fi router using the IPv4 address assigned by the router to the server PC running the backend. 
+The backend operates within a Docker container on the host server computer. 
+This is further illustrated in the diagram below: 
+</p>
 
 <figure>
-    <img src="assets/images/screen_grafana_quarkus_dashboard.png" width="80%">
-    <figcaption>Grafana Quarkus Dashboard</figcaption>
+    <img src="images/deployment/Network-Design.png" width="80%">
+    <figcaption>Local Network-Design to connect the App with the Backend </figcaption>
 </figure>
 
-<figure>
-    <img src="assets/images/screen_grafana_jaeger_dashboard.png" width="80%">
-    <figcaption>Grafana Jaeger Dashboard</figcaption>
-</figure>
+<h3> Establish App and Backend Connection </h3>
 
-</div>
-</div>
+<ol>
+    <li>Run the Backend on PROD, use the previous instructions.</li>
+    <li>After this, we need to enable port 80 on our host pc, where the backend runs :
+    <ul>
+      <li>Linux: 
+        <pre><code> sudo ufw allow 80/tcp</code></pre> 
+        or
+        <pre><code> sudo firewall-cmd --permanent --add-port=80/tcp </code></pre> 
+        <pre><code> sudo firewall-cmd --reload </code></pre> 
+      </li>
+      <li>Windows: 
+       <figure>
+            <img src="images/deployment/freigabe-port-80-windows-1.png" width="80%">
+            <figcaption> Use <code>Win + R</code> to open this windows </figcaption>
+        </figure>
+         <figure>
+            <img src="images/deployment/freigabe-port-80-windows-2.png" width="80%">
+            <figcaption> Click on <code>Eingehende Regel</code> and click on the left tab <code>Neue Regel</code></figcaption>
+        </figure>
+         <figure>
+            <img src="images/deployment/freigabe-port-80-windows-3.png" width="80%">
+            <figcaption> Follow the Port-Assistent </figcaption>
+        </figure>
+         <figure>
+            <img src="images/deployment/freigabe-port-80-windows-4.png" width="80%">
+            <figcaption> Now you can find your new rule and the port is available </figcaption>
+        </figure>
+      </li>
+    </ul>
+  </li>
+  <li>Now look for the IP-Address of the WLAN or LAN Adapter of your pc and remember it.:</li>
+    <ul>
+        <li>Linux: 
+            <pre><code> ifconfig </code></pre>
+        </li>
+        <li>Windows: 
+            <pre><code> ipconfig </code></pre>
+        </li>
+   </ul>
+   <li>Now we take the IP-Address from the instruction before and insert into our App-Files:</li>
+    <ul>
+        <figure>
+            <img src="images/deployment/android-manifest.png" width="80%">
+            <figcaption> Enable Internet Connection in the File <code>app/src/main/AndroidManifest.xml</code> </figcaption>
+        </figure>
+        <figure>
+            <img src="images/deployment/network-file.png" width="80%">
+            <figcaption> Insert the IP-Address in <code>res/xml/network_security_config.xml</code> </figcaption>
+        </figure>
+        <figure>
+            <img src="images/deployment/app-network.png" width="80%">
+            <figcaption> Insert the IP-Address in <code>app/src/main/java/de/fhe/ai/mc/app/di/Modules.kt</code></figcaption>
+        </figure>
+   </ul>
+    <li>Now go into the root folder of the Backend-Project and run (linux terminal required):
+    <ul>
+        <pre><code> sh project-script.sh </code></pre>
+        <p> 
+            This will create multiple http-requests and fill the database with data. So you can log in and use the functionality of the app. The login-credentials are: 
+        </p>
+        <p>Email:</p>
+        <pre><code> johndoe@example.com </code></pre>
+        <p>Password:</p>
+        <pre><code> 123 </code></pre>
+    </ul>
+</ol>
 
-## References
+<p align="right">(<a href="#top">back to top</a>)</p>
+</details>
 
-- Quarkus & Gradle: [https://quarkus.io/guides/gradle-tooling](https://quarkus.io/guides/gradle-tooling)
-- Quarkus Path
-  Resolution: [https://quarkus.io/blog/path-resolution-in-quarkus/](https://quarkus.io/blog/path-resolution-in-quarkus/)
-- GitLab CI/CD
-  Variables: [https://docs.gitlab.com/ee/ci/variables/predefined_variables.html](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html)
-- Build Docker in Docker in GitLab
-  CI/CD: [https://docs.gitlab.com/ee/ci/docker/using_docker_build.html](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html)
-- TestContainers in GitLab
-  CI/CD: [https://www.atomicjar.com/2023/01/running-testcontainers-tests-on-gitlab-ci/](https://www.atomicjar.com/2023/01/running-testcontainers-tests-on-gitlab-ci/)
-- Traefik Examples: [https://github.com/frigi83/traefik-examples](https://github.com/frigi83/traefik-examples)
-- GitLab CI/CD
-  Intro: [https://about.gitlab.com/blog/2020/12/10/basics-of-gitlab-ci-updated/](https://about.gitlab.com/blog/2020/12/10/basics-of-gitlab-ci-updated/)
-- GitLab CI/CD Gradle Build
-  Cache: [https://blog.jdriven.com/2021/11/reuse-gradle-build-cache-on-gitlab/](https://blog.jdriven.com/2021/11/reuse-gradle-build-cache-on-gitlab/)
+
+## DEV-UI
+
+<details>
+<summary> DEV-UI </summary>
+
+
+<ul>
+  <li><pre><code>http://localhost:8080/q/dev-ui/io.quarkus.quarkus-smallrye-openapi/swagger-ui</code></pre></li>
+  <li><pre><code>http://localhost:8080/q/dev-ui/io.quarkus.quarkus-kafka-client/topics</code></pre></li>
+  <li><pre><code>http://localhost:8080/dashboard/#/</code></pre></li>
+</ul>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+</details>
+
+## Quarkus-UI in PROD
+
+<details>
+<summary> Quarkus-UI in PROD </summary>
+
+<ul>
+  <li><pre><code>http://localhost/dashboard/#/</code></pre></li>
+</ul>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+</details>
+
+## Prometheus & Grafana in PROD
+
+<details>
+<summary> Prometheus & Grafana in PROD </summary>
+
+<ul>
+  <li>Traefik-Dashboard: <pre><code>http://localhost/dashboard/</code></pre></li>
+  <li>Prometheus: <pre><code>http://localhost/prometheus</code></pre></li>
+  <li>Grafana: <pre><code>http://localhost/metrics-ui-service/login</code></pre></li>
+  <li>Jaeger-Tracing: <pre><code>http://localhost/tracing/search</code></pre></li>
+</ul>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+</details>
+
+
+
