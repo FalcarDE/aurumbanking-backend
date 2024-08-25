@@ -156,7 +156,13 @@ This is further illustrated in the diagram below:
     <li>Now go into the root folder of the Backend-Project and run (linux terminal required):
     <ul>
         <pre><code> sh project-script.sh </code></pre>
-        <p> This will create http-request and fill the database with data. So you can login the app and use the functionality of the app. </p>
+        <p> 
+            This will create multiple http-requests and fill the database with data. So you can log in and use the functionality of the app. The login-credentials are: 
+        </p>
+        <p>Email:</p>
+        <pre><code> johndoe@example.com </code></pre>
+        <p>Password:</p>
+        <pre><code> 123 </code></pre>
     </ul>
 </ol>
 
