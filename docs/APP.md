@@ -58,20 +58,7 @@ The <strong>Login Screen </strong> in the <strong> AurumBanking-App </strong> pr
 
 <p> In the following GIF, you can see the functional elements of the Overview Screen. It consists of the app scaffold with some shortcut icons below, which allow the user to quickly access certain pages. </p>
 
-<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
 
-<figure>
-    <img src="images/app/overview-screen/Overview-Darkmode.gif" width="80%">
-    <figcaption>Overview-Screen in Dark-Mode</figcaption>
-</figure>
-
-<figure>
-    <img src="https://drive.google.com/uc?export=view&id=1xM_ptE4kPqgtDr1v0-ssB6kWvqkzev4J" width="80%">
-    <figcaption>Using the shortcut</figcaption>
-</figure>
-
-
-</div>
 
 <p> Below that is the Depot segment, which displays the current depot value. This value is fetched and updated every 3 seconds. </p>
 
@@ -85,18 +72,10 @@ Transactions for the current day are always displayed in the center. </p>
 
 <p> In the following, you can see the Overview Screen in White Mode. </p>
 
-<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
-
 <figure>
     <img src="images/app/overview-screen/Overview-Whitemode-1.png" width="80%">
     <figcaption>Overview-Screen in White-Mode</figcaption>
 </figure>
-
-<figure>
-    <img src="images/app/overview-screen/Overview-Whitemode-2.png" width="80%">
-    <figcaption>Overview-Screen in White-Mode</figcaption>
-</figure>
-</div>
 
 <h3> Backend-Connection </h3>
 
