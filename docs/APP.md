@@ -54,12 +54,23 @@ The <strong>Login Screen </strong> in the <strong> AurumBanking-App </strong> pr
 <details>
 <summary> Overview-Screen </summary>
 
+<h3> Overview-Screen </h3>
+
 <p> In the following GIF, you can see the functional elements of the Overview Screen. It consists of the app scaffold with some shortcut icons below, which allow the user to quickly access certain pages. </p>
 
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+
 <figure>
-    <img src="images/app/overview-screen/Overview-Darkmode.gif" width="40%">
+    <img src="images/app/overview-screen/Overview-Darkmode.gif" width="80%">
     <figcaption>Overview-Screen in Dark-Mode</figcaption>
 </figure>
+
+<figure>
+    <img src="images/app/overview-screen/shorcut-overview.gif" width="80%">
+    <figcaption>Using the shortcut</figcaption>
+</figure>
+
+</div>
 
 <p> Below that is the Depot segment, which displays the current depot value. This value is fetched and updated every 3 seconds. </p>
 
@@ -85,6 +96,37 @@ Transactions for the current day are always displayed in the center. </p>
     <figcaption>Overview-Screen in White-Mode</figcaption>
 </figure>
 </div>
+
+<h3> Backend-Connection </h3>
+
+<p>The <strong>Overview-Screen</strong> use the code in 
+<code>OverviewViewModel</code> to connect to the backend services. 
+Here's a summary of what the methods do and how they interact with the backend:
+</p>
+
+    <h4>Methods</h4>
+    <ul>
+        <li>
+            <strong>getCurrentDepotValue</strong>: 
+            <p>Retrieves the current depot value for a given customer ID by making an API call through <code>DepotService</code>. The response is handled asynchronously. If successful, it returns the depot value to the UI; otherwise, it logs an error. This function is used by the Depot-Display section.</p>
+        </li>
+        <li>
+            <strong>getThreeLatestTransaction</strong>:
+            <p>Fetches the three most recent transactions for a specified depot ID using <code>TransactionService</code>. The method asynchronously processes the response, returning the transactions to the UI or logging an error if the request fails. This is used by the section <strong>Letzte Transaktionen</strong> in the Overview-Screen.</p>
+        </li>
+        <li>
+            <strong>getAllTransactionByDepotId</strong>:
+            <p>Retrieves all transactions for a given depot ID. It then filters these transactions to include only those within the last three days and the next three days. After filtering, it calculates daily totals from these transactions and sends the data back to the UI. This method utilizes <code>getThreeLastDaysAndFutureDays</code> to filter the transactions and <code>calculateDailyTotals</code> to compute the totals used in diagrams.</p>
+        </li>
+        <li>
+            <strong>calculateDailyTotals</strong>:
+            <p>Takes a list of transactions and groups them by date. For each date, it calculates the net total by adding or subtracting amounts based on the transaction type (income or outcome). It is used for generating the data needed for diagrams.</p>
+        </li>
+        <li>
+            <strong>getThreeLastDaysAndFutureDays</strong>:
+            <p>Filters transactions to include only those that occurred within the last three days and the next three days from the current date. This filtered list is then used in <code>getAllTransactionByDepotId</code>.</p>
+        </li>
+    </ul>
 
 </details>
 
