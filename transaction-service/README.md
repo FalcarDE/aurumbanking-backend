@@ -179,8 +179,8 @@ A data class used for Kafka messaging, representing key transaction details.
 ### Transaction Repository Implementation: important example
 
 
-@ApplicationScoped
-class TransactionRepositoryImp : PanacheRepositoryBase<TransactionEntityModel, Long>, TransactionInterfaceRepository {
+    @ApplicationScoped
+    class TransactionRepositoryImp : PanacheRepositoryBase<TransactionEntityModel, Long>, TransactionInterfaceRepository {
 
     override fun findAllTransactionByDepotId(id: Long): Uni<List<TransactionDomainModel>> {
         return list("depotId", id)
@@ -201,8 +201,11 @@ This method retrieves all transactions associated with a specified depot ID.
 
 - **Method Signature**: `findAllTransactionByDepotId(id: Long): Uni<List<TransactionDomainModel>>`
 - **Implementation**:
+
+
     - Uses a query to fetch all transactions where the `depotId` matches the given ID.
     - Converts the list of `TransactionEntityModel` into `TransactionDomainModel` using the `transactionListToDomain()` function.
+
 - **Return Type**: Returns a `Uni<List<TransactionDomainModel>>`, which provides a list of transactions in the domain model format.
 - **Usage**: Ideal for fetching a comprehensive list of transactions for a specific depot.
 
@@ -212,8 +215,11 @@ This method retrieves a single transaction identified by its unique ID.
 
 - **Method Signature**: `getTransactionById(id: Long): Uni<TransactionDomainModel>`
 - **Implementation**:
+
+
     - Finds a transaction by its ID using the `findById()` method.
     - Transforms the `TransactionEntityModel` to `TransactionDomainModel` if found.
+
 - **Return Type**: Returns a `Uni<TransactionDomainModel>`, representing the transaction in the domain model format.
 - **Usage**: Useful for fetching detailed information about a specific transaction.
 
@@ -223,7 +229,10 @@ This method deletes a transaction by its unique ID.
 
 - **Method Signature**: `deleteTransactionById(id: Long): Uni<Long>`
 - **Implementation**:
+
+
     - Executes a `DELETE` SQL statement to remove the transaction with the specified ID.
+
 - **Return Type**: Returns a `Uni<Long>`, which indicates the number of records deleted.
 - **Usage**: Utilized when there is a need to remove a specific transaction from the database.
 
@@ -274,8 +283,7 @@ The following REST endpoints provide functionalities for managing transactions w
 - **Endpoint**: `GET /getAllTransactionsByDepotId/{id}`
 - **Produces**: `application/json`
 - **Functionality**: Fetches all transactions associated with a specific depot ID.
-- **Path Parameter**:
-    - `id` (Long): The ID of the depot whose transactions are to be retrieved.
+- **Path Parameter**: `id` (Long): The ID of the depot whose transactions are to be retrieved.
 - **Return Type**: Returns a `Uni<RestResponse<List<TransactionDomainModel>>>`, representing the list of transactions in JSON format.
 - **Error Handling**: If transactions are found, they are returned in the response. If no transactions are found for the given ID, a `notFound` response is returned.
 
@@ -284,13 +292,14 @@ The following REST endpoints provide functionalities for managing transactions w
 - **Endpoint**: `POST /updateTransactionById`
 - **Consumes**: `application/json`
 - **Functionality**: Updates an existing transaction using the provided `TransactionDomainModel`.
-- **Request Body**:
-    - `TransactionDomainModel`: Contains the details of the transaction to be updated.
+- **Request Body**: `TransactionDomainModel`: Contains the details of the transaction to be updated.
 - **Return Type**: Returns a `Uni<RestResponse<Void>>`, indicating the result of the update operation.
 - **Behavior**:
-    - Checks if the transaction with the specified ID exists.
-    - If the transaction is found, it is updated, and a `created` response with the URI of the updated transaction is returned.
-    - If the transaction is not found, an error is returned indicating that the transaction does not exist.
+
+  - Checks if the transaction with the specified ID exists.
+  - If the transaction is found, it is updated, and a `created` response with the URI of the updated transaction is returned.
+  - If the transaction is not found, an error is returned indicating that the transaction does not exist.
+
 - **Error Handling**: In case of failure, such as if the transaction is not found, an appropriate error response is returned.
 
 #### Delete Transaction by ID
@@ -298,8 +307,7 @@ The following REST endpoints provide functionalities for managing transactions w
 - **Endpoint**: `DELETE /deleteTransactionBy/{id}`
 - **Produces**: `application/json`
 - **Functionality**: Deletes the transaction identified by the specified ID.
-- **Path Parameter**:
-    - `id` (Long): The ID of the transaction to be deleted.
+- **Path Parameter**: `id` (Long): The ID of the transaction to be deleted.
 - **Return Type**: Returns a `Uni<RestResponse<Void>>`, indicating the success of the deletion operation.
 - **Error Handling**: If the deletion operation is successful, a successful response is returned. If there is an issue, an appropriate error response is provided.
 
@@ -385,4 +393,3 @@ The `TransferViewModel` uses `viewModelScope` to manage coroutines. This ensures
 - **Trigger:**
 
   Feedback is provided immediately after the backend responds, based on the result of the transaction creation attempt.
-
