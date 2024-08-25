@@ -113,7 +113,44 @@ Here are some examples which metrics can be provided by Prometheus and can be sh
 
 <details>
 <summary> Login-Service </summary>
-
+    
+    <p>This dashboard provides a clear visualization of key performance metrics related to the login service, using Prometheus as the data source. Each panel is designed to monitor a specific aspect of the service, helping ensure reliability and performance optimization.</p>
+    
+    <h3> Panel 1: Sum Server Request By Second </h3>
+    
+    This line chart tracks the total number of GET requests per second on the login service. It helps monitor traffic patterns and identify potential issues, such as increased load that may require resource scaling.
+    
+    <div style="text-align: center;">
+        <figure>
+            <img src="images/grafana-dashboards/login-service/grafana-sum-of-request-second.png" width="70%">
+            <figcaption>Screenshot showing the total number of login requests per second</figcaption>
+        </figure>
+    
+    </div>
+    
+    <h3> Panel 2: Count of Server Requests Per Second </h3>
+    
+    This gauge displays the current number of server requests per second, helping to quickly assess the real-time load on the service.
+    
+    <div style="text-align: center;">
+        <figure>
+            <img src="images/grafana-dashboards/login-service/grafana-count-of-request-second.png" width="70%">
+            <figcaption>Screenshot showing the real-time count of server requests per second for the login service.</figcaption>
+        </figure>
+    
+    </div>
+    
+    <h3> Panel 3: Max of Server Requests by Second </h3>
+    
+    This line chart visualizes the maximum number of server requests per second over time for the login service. It helps identify peak request rates, enabling the monitoring of potential performance bottlenecks and ensuring that the service can handle traffic spikes effectively.
+    
+    <div style="text-align: center;">
+        <figure>
+            <img src="images/grafana-dashboards/login-service/grafana-max-of-request-second.png" width="70%">
+            <figcaption>Screenshot showing the maximum number of server requests per second for the login service.</figcaption>
+        </figure>
+    
+    </div>
 </details>
 
 ### Customer-Information-Service
@@ -130,8 +167,7 @@ Here are some examples which metrics can be provided by Prometheus and can be sh
 
 </details>
 
-### Transaction-Service
-
+## Transaction-Service
 <details>
 <summary> Transaction-Service </summary>
 
@@ -152,10 +188,10 @@ This gauge panel shows the maximum processing time for successful support reques
 
 <div style="text-align: center;">
 
-<figure>
-    <img src="images/grafana-dashboards/support-service/grafana-successfull-requests-max.png" width="70%">
-    <figcaption>Screenshot of the max duration for successful support requests</figcaption>
-</figure>
+    <figure>
+        <img src="images/grafana-dashboards/support-service/grafana-successfull-requests-max.png" width="70%">
+        <figcaption>Screenshot of the max duration for successful support requests</figcaption>
+    </figure>
 
 </div>
 
@@ -165,10 +201,10 @@ This timeseries panel visualizes the total number of support requests handled by
 
 <div style="text-align: center;">
 
-<figure>
-    <img src="images/grafana-dashboards/support-service/grafana-sum-of-requests-timeseries.png" width="70%">
-    <figcaption>Screenshot of the sum of support requests over time</figcaption>
-</figure>
+    <figure>
+        <img src="images/grafana-dashboards/support-service/grafana-sum-of-requests-timeseries.png" width="70%">
+        <figcaption>Screenshot of the sum of support requests over time</figcaption>
+    </figure>
 
 </div>
 
@@ -178,10 +214,10 @@ This timeseries panel tracks the maximum duration of HTTP 200 status requests ov
 
 <div style="text-align: center;">
 
-<figure>
-    <img src="images/grafana-dashboards/support-service/grafana-messaurement-of-max-request-time-200-timeseries.png" width="70%">
-    <figcaption>Screenshot of the max request time for HTTP 200 status requests</figcaption>
-</figure>
+    <figure>
+        <img src="images/grafana-dashboards/support-service/grafana-messaurement-of-max-request-time-200-timeseries.png" width="70%">
+        <figcaption>Screenshot of the max request time for HTTP 200 status requests</figcaption>
+    </figure>
 
 </div>
 
@@ -191,10 +227,10 @@ This panel measures the maximum request time for HTTP 200 status requests. It pr
 
 <div style="text-align: center;">
 
-<figure>
-    <img src="images/grafana-dashboards/support-service/grafana-messaurement-of-max-request-time-200.png" width="70%">
-    <figcaption>Screenshot of the max request time for HTTP 200 status requests</figcaption>
-</figure>
+    <figure>
+        <img src="images/grafana-dashboards/support-service/grafana-messaurement-of-max-request-time-200.png" width="70%">
+        <figcaption>Screenshot of the max request time for HTTP 200 status requests</figcaption>
+    </figure>
 
 </div>
 
@@ -203,11 +239,11 @@ This panel measures the maximum request time for HTTP 200 status requests. It pr
 This gauge panel tracks the duration of server connections in seconds. It is useful for identifying potential issues with connection handling in the support service, particularly if connection times begin to increase unexpectedly, potentially leading to timeouts or degraded service quality.
 
 <div style="text-align: center;">
-
-<figure>
-    <img src="images/grafana-dashboards/support-service/grafana-duration-of-server-connections-in-seconds.png" width="70%">
-    <figcaption>Screenshot of the duration of server connections</figcaption>
-</figure>
+    
+    <figure>
+        <img src="images/grafana-dashboards/support-service/grafana-duration-of-server-connections-in-seconds.png" width="70%">
+        <figcaption>Screenshot of the duration of server connections</figcaption>
+    </figure>
 
 </div>
 
@@ -215,9 +251,6 @@ This gauge panel tracks the duration of server connections in seconds. It is use
 This dashboard offers essential metrics to monitor the performance and reliability of the support service. By keeping track of request times, connection durations, and overall service load, you can ensure that the support service remains responsive and scalable, identifying and addressing potential bottlenecks or performance degradations in a timely manner.
 
 </details>
-
-
-
 
 
 

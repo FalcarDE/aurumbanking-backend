@@ -88,11 +88,217 @@ Transactions for the current day are always displayed in the center. </p>
 
 </details>
 
+
+
 ## Depot-Screen
+
+<details>
+<summary>Depot-Screen</summary>
+</details>
 
 ## Transaction-Screen
 
+<details>
+<summary>Transaction-Screen</summary>
+
+<h3>Overview</h3>
+
+<p> The <strong>Transaction Overview</strong> screen in the <strong>AurumBanking</strong> app allows users to choose between different types of transactions. The interface is designed for ease of use, allowing users to perform standard, international, or permanent transactions. </p>
+
+<div style="text-align: center;">
+
+    <figure>
+        <img src="images/app/transaction-screen/transaction-option-view.png" width="40%">
+        <figcaption>Screenshot of the main transaction view</figcaption>
+    </figure>
+
+</div>
+
+<h4>Transaction Options</h4>
+
+<ul>
+    <li><strong>Standard Transfer</strong>:  
+        This option allows users to perform a regular domestic bank transfer.
+    </li>
+    <li><strong>International Transfer</strong>:  
+        Users can choose this option to send money to an account in a different country.
+    </li>
+    <li><strong>Permanent Order</strong>:  
+        This option lets users set up a permanent order, which will regularly send a specified amount of money to a designated account.
+    </li>
+</ul>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+
+    <figure style="margin: 10px;">
+        <img src="images/app/transaction-screen/transaction-standart-transaction-screen.png" width="100%">
+        <figcaption>Screenshot of the standard transaction screen</figcaption>
+    </figure>
+
+    <figure style="margin: 10px;">
+        <img src="images/app/transaction-screen/transaction-international-transaction-screen.png" width="100%">
+        <figcaption>Screenshot of the international transaction screen</figcaption>
+    </figure>
+
+    <figure style="margin: 10px;">
+        <img src="images/app/transaction-screen/transaction-permanent-transaction.png" width="100%">
+        <figcaption>Screenshot of the permanent transaction screen</figcaption>
+    </figure>
+
+</div>
+
+<h3>Standard Transfer</h3>
+
+<p> The <code>StandardTransferScreen</code> is specifically designed for domestic transfers. It offers a straightforward form where users can enter the necessary details to complete their transaction. </p>
+
+<h4>Key Features</h4>
+
+<ul>
+    <li><strong>Recipient</strong>: Users must enter the name of the person or entity they are transferring money to.</li>
+    <li><strong>IBAN</strong>: The International Bank Account Number (IBAN) of the recipient is required for the transaction.</li>
+    <li><strong>BIC</strong>: The Bank Identifier Code (BIC) is another crucial piece of information for ensuring the transfer reaches the correct destination.</li>
+    <li><strong>Amount</strong>: Users specify the amount they wish to transfer.</li>
+    <li><strong>Purpose</strong>: An optional field where users can describe the reason for the transfer.</li>
+    <li><strong>Execution Date</strong>: Users can select the date on which they want the transaction to be executed. This is particularly useful for scheduling future payments.</li>
+</ul>
+
+<h4>Validation and Error Handling</h4>
+
+<ul>
+    <li> The screen includes robust validation to ensure that all required fields are correctly filled out before the user can proceed.</li>
+    <li> If a field is incorrectly filled or left blank, the user receives immediate feedback via highlighted fields and an error message.</li>
+    <li> This validation process is crucial for preventing errors that could delay or fail the transaction.</li>
+</ul>
+
+<h4>Form Submission</h4>
+
+<ul>
+    <li> Once all required fields are validated, the user can submit the form to initiate the transfer.</li>
+    <li> If the submission is successful, the user is redirected to a confirmation screen, affirming that their transaction is being processed.</li>
+    <li> In case of a failure, a clear error message is displayed, allowing the user to understand what went wrong and take corrective action.</li>
+</ul>
+
+<h4>Edit and Review Mode</h4>
+
+<ul>
+    <li> Allows users to review and edit input details before final submission.</li>
+</ul>
+
+
+<h3>International Transfer</h3>
+
+<p> The <code>International Transfer</code> screen is tailored for cross-border transactions, requiring additional input: </p>
+
+<h4>Key Features</h4>
+
+<ul>
+    <li><strong>Country</strong>: Users must select the country to which they are transferring money.</li>
+    <li><strong>Recipient</strong>: Users enter the name of the person or entity they are transferring money to.</li>
+    <li><strong>IBAN</strong>: The International Bank Account Number (IBAN) of the recipient, which is crucial for the transaction.</li>
+    <li><strong>BIC</strong>: The Bank Identifier Code (BIC) necessary to route the transfer to the correct bank.</li>
+    <li><strong>Amount</strong>: Users specify the amount they wish to transfer.</li>
+    <li><strong>Purpose</strong>: An optional field where users can describe the reason for the transfer.</li>
+    <li><strong>Execution Date</strong>: The date on which the transaction is to be executed. This field is required and allows for future scheduling.</li>
+</ul>
+
+<h4>State Management</h4>
+
+<ul>
+    <li><strong>Editable State</strong>: The screen includes a toggle for editing mode, allowing users to either review or modify the details before confirming the transaction.</li>
+    <li><strong>Error Handling</strong>: The <code>validateInput</code> function checks all fields for correctness, highlighting any issues directly in the UI by changing the border color of the problematic input fields.</li>
+    <li><strong>Snackbar Notifications</strong>: If a user tries to submit the form with errors or if the transaction fails, a Snackbar message appears to inform the user.</li>
+</ul>
+
+<h4>Transaction Logic</h4>
+
+<ul>
+    <li><strong>Form Validation</strong>: Before submitting, the form is validated to ensure that all required fields are filled out. This is managed by checking the state of each input field and applying necessary validation rules.</li>
+    <li><strong>ViewModel Interaction</strong>: The <code>TransferViewModel</code> handles the logic of creating and submitting a new transaction request. If the request is successful, the user is navigated to a success screen; otherwise, an error message is displayed via Snackbar.</li>
+    <li><strong>Navigation</strong>: Upon successful validation and submission, the screen navigates the user to the <code>SuccessfulTransaction</code> route.</li>
+</ul>
+
+
+<h3>Permanent Order Transfer</h3>
+
+<h4>Function Definition</h4>
+
+<p> The <code>Permanent Order</code> screen allows users to set up recurring transactions. </p>
+
+<h4>Key Features</h4>
+
+<ul>
+    <li><strong>Country</strong>: Stores the selected country for the transfer. Defaults to "Deutschland".</li>
+    <li><strong>Recipient</strong>: Stores the name of the recipient of the transfer.</li>
+    <li><strong>IBAN</strong>: Stores the IBAN (International Bank Account Number) of the recipient.</li>
+    <li><strong>BIC</strong>: Stores the BIC (Bank Identifier Code) of the recipient's bank.</li>
+    <li><strong>Amount</strong>: Stores the amount of money to be transferred.</li>
+    <li><strong>Purpose</strong>: Stores the purpose or reference of the transfer.</li>
+    <li><strong>First Execution Date</strong>: Stores the date for the first execution of the transfer.</li>
+    <li><strong>Last Execution Date</strong>: Stores the date for the last execution of the transfer.</li>
+    <li><strong>Transaction Classification</strong>: Stores the classification of the transaction, defaulted to "Dauerauftrag" (standing order).</li>
+</ul>
+
+<h4>State Management and Validation</h4>
+
+<ul>
+    <li><strong>isEditable</strong>: Controls whether the input fields are editable.</li>
+    <li><strong>showSnackbar</strong>: Controls the visibility of the Snackbar for displaying messages.</li>
+    <li><strong>snackbarMessage</strong>: Stores the message to be displayed in the Snackbar.</li>
+    <li><strong>errorFields</strong>: Keeps track of the fields that have validation errors.</li>
+</ul>
+
+<h4>User Interface Elements</h4>
+
+<ul>
+    <li><strong>TransferInteractionScreenBar</strong>: A custom app bar that provides options to toggle edit mode and confirm the transaction.</li>
+    <li><strong>OutlinedTextField</strong>: Used for input fields like recipient, country, IBAN, BIC, amount, and purpose.</li>
+    <li><strong>DateChoiceButton</strong>: Custom button to select the first and last execution dates.</li>
+    <li><strong>CreateBackOrEditButton</strong>: A button that either allows users to go back or toggle the edit mode.</li>
+    <li><strong>CreateConfirmSendButton</strong>: A button that confirms the transaction and sends the data to the ViewModel for processing.</li>
+</ul>
+
+
+<h3>Handling Incomplete or Invalid Form Inputs</h3>
+
+<p> In the transfer interaction screen, proper validation of user inputs is crucial to ensure that all required fields are completed and valid before proceeding. When a user attempts to submit the form with incomplete or invalid information, the system performs a series of checks. </p>
+
+<h4>Process Overview</h4>
+
+<ul>
+    <li>Validation Check: The system checks all required fields to verify their completeness. This includes fields such as country, recipient, IBAN, BIC, amount, purpose, and execution dates.</li>
+    <li>Error Notification: If any fields are empty or invalid, the user is notified through a snackbar message. This message typically prompts the user to correct the missing or incorrect information.</li>
+    <li>UI Feedback: The interface provides visual feedback to guide the user in correcting the errors. This often involves highlighting the problematic fields or displaying specific error messages.</li>
+</ul>
+
+
+<h3>Screens in White Mode</h3>
+
+<p> The app offers the option to switch to White Mode, providing a bright and clear user interface. </p>
+
+<div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+
+    <figure style="margin: 10px;">
+        <img src="images/app/transaction-screen/transaction-standard-transaction-screen-whitemode.png" width="100%">
+        <figcaption>Screenshot of the standard transaction screen in Whitemode</figcaption>
+    </figure>
+
+    <figure style="margin: 10px;">
+        <img src="images/app/transaction-screen/transaction-international-transaction-screen-check-entries-whitemode.png" width="100%">
+        <figcaption>Screenshot of the international transaction screen in Whitemode</figcaption>
+    </figure>
+
+    <figure style="margin: 10px;">
+        <img src="images/app/transaction-screen/transaction-permanent-transaction-screen-with-calendar-whitemode.png" width="100%">
+        <figcaption>Screenshot of the permanent transaction screen in Whitemode</figcaption>
+    </figure>
+
+</div>
+
+</details>
+
+
 ## Support-Screen
+
 <details>
 <summary>Support Screen </summary>
 
@@ -100,10 +306,10 @@ Transactions for the current day are always displayed in the center. </p>
 
 <div style="text-align: center;">
 
-<figure>
-    <img src="images/app/support-screen/support_main_view.png" width="40%">
-    <figcaption>Screenshot of the main support view</figcaption>
-</figure>
+    <figure>
+        <img src="images/app/support-screen/support_main_view.png" width="40%">
+        <figcaption>Screenshot of the main support view</figcaption>
+    </figure>
 
 </div>
 
@@ -277,7 +483,8 @@ The user can tap <strong>OK</strong> to dismiss the error and return to the form
 </details>
 
 
-## Settings Screen 
+
+## Settings-Screen
 
 <details>
 <summary> Settings Screen </summary>
@@ -286,15 +493,15 @@ The user can tap <strong>OK</strong> to dismiss the error and return to the form
 
 <div style="display: flex; justify-content: center;">
 
-<figure style="margin-right: 20px;">
-    <img src="images/app/settings-screen/settings-option-screen.png" width="60%">
-    <figcaption>Screenshot of the settings option screen</figcaption>
-</figure>
-
-<figure>
-    <img src="images/app/settings-screen/settings-option-screen-whitemode.png" width="60%">
-    <figcaption>Screenshot of the settings option screen in white mode</figcaption>
-</figure>
+    <figure style="margin-right: 20px;">
+        <img src="images/app/settings-screen/settings-option-screen.png" width="60%">
+        <figcaption>Screenshot of the settings option screen</figcaption>
+    </figure>
+    
+    <figure>
+        <img src="images/app/settings-screen/settings-option-screen-whitemode.png" width="60%">
+        <figcaption>Screenshot of the settings option screen in white mode</figcaption>
+    </figure>
 
 </div>
 
@@ -326,10 +533,10 @@ The user can tap <strong>OK</strong> to dismiss the error and return to the form
 <h3> Change To Whitemode Screen </h3>
 <div style="text-align: center;">
 
-<figure>
-    <img src="images/app/settings-screen/settings-whitemode-screen-record.gif" width="40%">
-    <figcaption>gif of changing to whitemode</figcaption>
-</figure>
+    <figure>
+        <img src="images/app/settings-screen/settings-whitemode-screen-record.gif" width="40%">
+        <figcaption>gif of changing to whitemode</figcaption>
+    </figure>
 
 </div>
 
@@ -344,7 +551,7 @@ The user can tap <strong>OK</strong> to dismiss the error and return to the form
 
 <h3> Change Password Screen in AurumBanking App </h3>
 
-    <div style="display: flex; justify-content: center;">
+<div style="display: flex; justify-content: center;">
     
     <figure style="margin-right: 20px;">
         <img src="images/app/settings-screen/settings-new-password-screen.png" width="60%">
@@ -356,7 +563,7 @@ The user can tap <strong>OK</strong> to dismiss the error and return to the form
         <figcaption>Screenshot of the new password screen in white mode</figcaption>
     </figure>
     
-    </div>
+</div>
 
 <h4> Change Password Screen in AurumBanking App </h4>
 
@@ -386,7 +593,7 @@ The user can tap <strong>OK</strong> to dismiss the error and return to the form
 
 <h3> Personal Data Screen in AurumBanking App </h3>
 
-    <div style="display: flex; justify-content: center;">
+<div style="display: flex; justify-content: center;">
     
     <figure style="margin-right: 20px;">
         <img src="images/app/settings-screen/settings-personal-data-screen.png" width="60%">
@@ -398,7 +605,7 @@ The user can tap <strong>OK</strong> to dismiss the error and return to the form
         <figcaption>Screenshot of settings personal data in whitemode</figcaption>
     </figure>
     
-    </div>
+</div>
 
 
 
